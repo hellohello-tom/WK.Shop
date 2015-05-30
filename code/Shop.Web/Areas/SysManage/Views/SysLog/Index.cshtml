@@ -1,0 +1,118 @@
+﻿@using Shop.Common;
+@model MySoft.Data.IDataPage<IList<Shop.Model.SysLog>>
+
+<form id="pagerForm" method="post" action="/SysManage/SysLog/Index">
+	<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
+	<input type="hidden" name="numPerPage" value="@Model.PageSize" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SysManage/SysLog/Index" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>日志标题：</label>
+				<input type="text" name="Title" onkeypress ="showKeyPress()" value="@ViewBag.Title"/>
+			</li>
+            <li>
+				<label>日志级别：</label>
+                <select name="Level" id="SysManage_SysLog_Index_level" value="@ViewBag.Level">
+                    <option value="">全部</option>
+                    <option value="DEBUG">DEBUG</option>
+                    <option value="INFO">INFO</option>
+                    <option value="WARN">WARN</option>
+                    <option value="ERROR">ERROR</option>
+                    <option value="FATAL">FATAL</option>
+                </select>
+                <script type="text/javascript">
+                    $("#SysManage_SysLog_Index_level").val("@ViewBag.Level");
+                </script>
+			</li>
+			<li>
+				<label>日志内容：</label>
+				<input type="text" name="Content" value="@ViewBag.Content"/>
+			</li>
+            <li>
+				<label>时间：</label>
+				<input type="text" name="BeginTime" value="@ViewBag.BeginTime" class="date" dateFmt="yyyy-MM-dd HH:mm:ss" readonly="true"/>
+			</li>
+            <li>
+				<label>至</label>
+				<input type="text" name="EndTime" value="@ViewBag.EndTime" class="date" dateFmt="yyyy-MM-dd HH:mm:ss" readonly="true"/>
+			</li>
+            <li style="padding-left:10px; padding-top:0px; height:25px;">  
+                 <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">
+                                    检索</button></div>
+                 </div>
+            </li>
+		</ul>
+		
+		@*<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>*@
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/SysManage/SysLog/DeleteList" class="delete"><span>批量删除</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="150">日志标题</th>
+				<th width="50">级别</th>
+				<th width="100">访问者IP</th>
+				<th width="100">请求页面</th>
+				<th width="300">日志内容</th>
+				<th width="50">记录人</th>
+				<th width="160">记录时间</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+        @foreach (var m in Model.DataSource)
+		{
+			 	<tr target="SysLog_ids" rel="@m.Id">
+					<td align="center"><input name="ids" value="@m.Id" type="checkbox"></td>
+					<td>@m.Title</td>
+					<td>@m.Level</td>
+					<td>@m.IP</td>
+					<td>@m.Referrer</td>
+					<td title="@m.Content">@m.Content.Left(50,"…")</td>
+					<td>@m.AddUser</td>
+					<td>@m.AddTime</td>
+					
+					<td>
+                         <a title="日志详情"  rel="SysManage_SysLog_Show" target="navTab" href="/SysManage/SysLog/Show/@m.Id" class="btnView">查看</a> 
+						<a title="确认删除?" target="ajaxTodo" href="/SysManage/SysLog/Delete/@m.Id" class="btnDel">删除</a>
+					</td>
+				</tr>
+	    }
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+				@foreach (string pageSize in "10,20,50,100".Split(','))
+                {
+                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
+                }
+			</select>
+			<span>条，共 @Model.RowCount 条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="@Model.RowCount" numPerPage="@Model.PageSize" pageNumShown="10" currentPage="@Model.CurrentPageIndex"></div>
+
+	</div>
+</div>

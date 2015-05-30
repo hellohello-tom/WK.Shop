@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "河南省公路设计企业信用评价";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="/Content/login/login_new.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/login/demo.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/Scripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/Content/login/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="/Content/login/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $(".i-text").focus(function () {
+                $(this).addClass('h-light');
+            });
+
+            $(".i-text").focusout(function () {
+                $(this).removeClass('h-light');
+            });
+
+            $("#username").focus(function () {
+                var username = $(this).val();
+                if (username == '输入账号') {
+                    $(this).val('');
+                }
+            });
+
+            $("#username").focusout(function () {
+                var username = $(this).val();
+                if (username == '') {
+                    $(this).val('输入账号');
+                }
+            });
+
+            $("#password").focus(function () {
+                var username = $(this).val();
+                if (username == '') {
+                    $(this).val('输入密码');
+                }
+            });
+
+            $("#yzm").focus(function () {
+                var username = $(this).val();
+                if (username == '输入验证码') {
+                    $(this).val('');
+                }
+            });
+
+            $("#yzm").focusout(function () {
+                var username = $(this).val();
+                if (username == '') {
+                    $(this).val('输入验证码');
+                }
+            });
+            $(".registerform").Validform({
+                tiptype: function (msg, o, cssctl) {
+                    var objtip = $(".error-box");
+                    cssctl(objtip, o.type);
+                    objtip.text(msg);
+                } //,ajaxPost: true
+
+            });
+
+            bodyH();
+
+        });
+        //登录界面居中显示 2013-12-25 黄现伟
+        function bodyH() {
+            var b = $(".wrapH").height();
+            var w = $(window).height();
+            var p = (w - b) / 2 + "px";
+
+            if (w > b) {
+                $("body").css({ "padding-top": p });
+
+            } else {
+                $("body").css({ "padding-top": 0 });
+            }
+        }
+        $(window).resize(function () {
+            bodyH();
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapH">
+        <div class="header">
+            <h1 class="headerLogo">
+                <a title="后台管理系统" target="_blank" href="/"><strong>@ViewBag.Title</strong> <small>credit
+                    assessment of Henan Highway Design enterprise</small></a></h1>
+            <div class="headerNav">
+            </div>
+        </div>
+        <div class="banner">
+            <div class="login-aside">
+                <div id="o-box-up">
+                </div>
+                <div id="o-box-down" style="table-layout: fixed;">
+                    <div class="error-box">
+                    </div>
+                    <form class="registerform" action="/Login/Login" method="post">
+                    <div class="fm-item">
+                        <label for="logonId" class="form-label">
+                            系统登录：</label>
+                        <input type="text" value="" maxlength="100" id="username" name="username" class="i-text"
+                            datatype="*1-20" nullmsg="请输入账号！" errormsg="用户名至少1个字符,最多20个字符！" />
+                        <div class="ui-form-explain">
+                        </div>
+                    </div>
+                    <div class="fm-item">
+                        <label for="logonId" class="form-label">
+                            登录密码：</label>
+                        <input type="password" maxlength="100" id="password" name="password" class="i-text"
+                            datatype="*1-20" errormsg="密码范围在1~20位之间！" nullmsg="请输入密码！" />
+                        <div class="ui-form-explain">
+                        </div>
+                    </div>
+                    <div class="fm-item pos-r">
+                        <label for="logonId" class="form-label">
+                            验证码</label>
+                        <input type="text" value="" name="code" maxlength="4" id="yzm" style="float: left;
+                            margin-right: 10px;" class="i-text yzm" nullmsg="请输入验证码！" />
+                        <div class="ui-form-explain">
+                            <img src="/Tools/VerifyCode" alt="" width="115" height="40" id="verifyCode" title="看不清？点击更换验证码"
+                                style="cursor: pointer;" /></div>
+                    </div>
+                    <div class="fm-item">
+                        <label for="logonId" class="form-label">
+                        </label>
+                        <input type="submit" value="提交" tabindex="4" id="send-btn" class="btn-login" />
+                        <div class="ui-form-explain">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="bd">
+                <ul>
+                    <li style="background: url(/Content/login/themes/theme-pic1.jpg) #004293 center 0 no-repeat;">
+                    </li>
+                    @*<li style="background: url(/Content/login/themes/theme-pic2.jpg) #BCE0FF center 0 no-repeat;"></li>*@
+                </ul>
+            </div>
+            <div class="hd">
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">            jQuery(".banner").slide({ titCell: ".hd ul", mainCell: ".bd ul", effect: "fold", autoPlay: true, autoPage: true, trigger: "click" });</script>
+        <div class="banner-shadow">
+            <div class="footer">
+                <p>
+                    Copyright &copy; @DateTime.Now.ToString("yyyy") <a target="_blank" href="http://www.kingroad.com.cn">
+                        www.kingroad.com.cn</a> All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        //更换验证码
+        $("#verifyCode").click(function () {
+            $(this).attr("src", $(this).attr("src") + "?_=" + new Date().getTime());
+        });
+
+        @if (TempData["msg"] != null)
+        { 
+    @:$(".error-box").text("@TempData["msg"].ToString()");
+    }
+    });
+</script>

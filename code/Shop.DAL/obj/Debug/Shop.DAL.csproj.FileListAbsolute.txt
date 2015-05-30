@@ -1,0 +1,26 @@
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.DAL.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.DAL.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.Common.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.Log.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.Model.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\MySoft.Data.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\log4net.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.Common.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.Log.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\bin\Debug\KR.DesignCredit.Model.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\obj\Debug\Shop.DAL.csprojResolveAssemblyReference.cache
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\obj\Debug\KR.DesignCredit.DAL.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.DAL\obj\Debug\KR.DesignCredit.DAL.pdb
+D:\百度云同步盘\Git\code\Shop.DAL\obj\Debug\Shop.DAL.csprojResolveAssemblyReference.cache
+D:\百度云同步盘\Git\code\Shop.DAL\obj\Debug\KR.DesignCredit.DAL.dll
+D:\百度云同步盘\Git\code\Shop.DAL\obj\Debug\KR.DesignCredit.DAL.pdb
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.DAL.dll
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.DAL.pdb
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.Common.dll
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.Log.dll
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.Model.dll
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\MySoft.Data.dll
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\log4net.dll
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.Common.pdb
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.Log.pdb
+D:\百度云同步盘\Git\code\Shop.DAL\bin\Debug\KR.DesignCredit.Model.pdb

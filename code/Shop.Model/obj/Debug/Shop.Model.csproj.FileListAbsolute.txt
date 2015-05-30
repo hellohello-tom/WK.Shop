@@ -1,0 +1,8 @@
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\KR.DesignCredit.Model.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\KR.DesignCredit.Model.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\MySoft.Data.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\System.Web.Mvc.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\System.Web.Mvc.xml
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\zh-Hans\System.Web.Mvc.resources.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\obj\Debug\KR.DesignCredit.Model.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\obj\Debug\KR.DesignCredit.Model.pdb

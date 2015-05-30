@@ -1,0 +1,175 @@
+﻿@{
+    
+}
+@using Shop.BLL
+@using Shop.Model
+@using Shop.Common
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>河南省公路设计企业信用评价信息公示</title>
+    <link href="/Content/web/css/krui-v1.0.css" rel="stylesheet" type="text/css">
+    <link href="/Content/web/css/layout.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="/Content/web/css/krui-ie.css">
+<![endif]-->
+    @*页面自定义CSS*@
+    @RenderSection("Css", required: false)
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="/Content/web/js/html5shiv.js"></script>
+<script type="text/javascript" src="/Content/web/js/respond.min.js"></script>
+<![endif]-->
+    <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-powerSwitch-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $(".main-nav li").hoverClass("hover");
+            if ($.validator.unobtrusive) { $.validator.unobtrusive.parse(document); }
+            $("#newsSlideBtn a").powerSwitch({
+                autoTime: 4000,
+                animation: "translate",
+                classAdd: "news_slide_on",
+                classRemove: "news_slide_a",
+                classPrefix: "mod_",
+                container: $("#newsSlideBox"),
+                onSwitch: function (slide) {
+                    slide.find("img").each(function () {
+                        if (!this.src) {
+                            this.src = $(this).attr("data-src");
+                        }
+                    });
+                }
+            });
+
+            $("#work-tab-A li").powerSwitch({
+                eventType: "hover",
+                classAdd: "act"
+            });
+
+            $("#work-tab-B li").powerSwitch({
+                eventType: "hover",
+                classAdd: "act"
+            });
+
+
+
+        });
+
+
+        $(document).keypress(function (event) {
+            if (event.keyCode == 13) {
+                validate();
+            }
+        });
+
+        function validate() {
+            var password = $("#PassWord_Layout").val();
+            var username = $("#UserName_Layout").val();
+            if (password == "" && username != "") {
+                $("#PassWord_Layout").focus();
+            }
+            if (password == "" || username == "") {
+                $("#spanShowNull").html();
+                $("#spanShowNull").html("用户名或密码不能为空！");
+            } else {
+                $("#loginForm").submit();
+            }
+
+        }
+
+    </script>
+    <style type="text/css">
+        .input {
+            line-height: 25px;
+        }
+    </style>
+    @*页面自定义JS*@
+    @RenderSection("Js", required: false)
+</head>
+<body>
+    <div class="layout">
+        <div class="header">
+            <div class="logo">
+                <a href="/">@ViewBag.Title</a>
+            </div>
+            <div class="main-nav-con">
+                <ul class="main-nav">
+                    <li class="nobg w80"><a href="/Home/Index">首页</a></li>
+                    <li><a href="/NewsList/Index/1">通知公告</a></li>
+                    <li><a href="/NewsList/Index/2">政策法规</a></li>
+                    <li><a href="/NewsList/ProjectList">项目信息</a></li>
+                    <li><a href="/NewsContent/CreditLevel">信用等级</a></li>
+                </ul>
+                <div class="dateTime">
+                    <i class="time-icon"></i><span>
+                        @DateTime.Now.Year
+                        年
+                        @DateTime.Now.Month
+                        月
+                        @DateTime.Now.Day
+                        日</span>
+                    @{
+                        string weekstr = DateTime.Now.DayOfWeek.ToString();
+                        switch (weekstr)
+                        {
+                            case "Monday": weekstr = "星期一"; break;
+                            case "Tuesday": weekstr = "星期二"; break;
+                            case "Wednesday": weekstr = "星期三"; break;
+                            case "Thursday": weekstr = "星期四"; break;
+                            case "Friday": weekstr = "星期五"; break;
+                            case "Saturday": weekstr = "星期六"; break;
+                            case "Sunday": weekstr = "星期日"; break;
+                        }
+                    }
+                    <span>@weekstr</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt10">
+            <div class="col-fx-14">
+                @RenderBody()
+            </div>
+            <div class="col-fx-6">
+                @using (Html.BeginForm("Login", "Register", null, FormMethod.Post, new { @id = "loginForm" }))
+                {
+                    <div class="mod-login mb10 h118">
+                        <div class="title-con">
+                            <div class="title">
+                                登录<small id="spanShowNull" data-valmsg-replace="true" class="text-tips ml10" style="font-weight: normal;">@TempData["msg"]</small>
+                            </div>
+                            <div class="more">
+                                <a href="/Register/Register/">注册></a>
+                            </div>
+                        </div>
+                        <div class="mod-login-info">
+                            <ul class="list-none">
+                                <li>
+                                    <label class="input-txt user">
+                                        用户名</label>
+                                    <input id="UserName_Layout" class="input" type="text" value="" name="UserName" data-val-required="用户名不能为空！"
+                                        data-val="true" placeholder="请输入用户名" />
+                                </li>
+                                <li>
+                                    <label class="input-txt userPs">
+                                        密码</label>
+                                    <input id="PassWord_Layout" class="input" type="password" value="" name="PassWord"
+                                        data-val-required="密码不能为空！" data-val="true" placeholder="请输入密码" />
+                                </li>
+                            </ul>
+                            <div class="login-btn">
+                                <a id="btnSubmit" onclick="validate()" class="btn btn-success btn-lg">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

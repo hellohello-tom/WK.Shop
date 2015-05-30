@@ -1,0 +1,16 @@
+D:\KR.project\HighwayDesignEvaluationSystem\trunk\code\KR.DesignCredit.Log\bin\Debug\KR.DesignCredit.Log.dll
+D:\KR.project\HighwayDesignEvaluationSystem\trunk\code\KR.DesignCredit.Log\bin\Debug\KR.DesignCredit.Log.pdb
+D:\KR.project\HighwayDesignEvaluationSystem\trunk\code\KR.DesignCredit.Log\bin\Debug\log4net.dll
+D:\KR.project\HighwayDesignEvaluationSystem\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.dll
+D:\KR.project\HighwayDesignEvaluationSystem\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.pdb
+D:\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\bin\Debug\KR.DesignCredit.Log.dll
+D:\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\bin\Debug\KR.DesignCredit.Log.pdb
+D:\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\bin\Debug\log4net.dll
+D:\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.dll
+D:\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.pdb
+D:\百度云同步盘\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\bin\Debug\KR.DesignCredit.Log.dll
+D:\百度云同步盘\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\bin\Debug\KR.DesignCredit.Log.pdb
+D:\百度云同步盘\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\bin\Debug\log4net.dll
+D:\百度云同步盘\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.csprojResolveAssemblyReference.cache
+D:\百度云同步盘\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.dll
+D:\百度云同步盘\KR.project\设计信用评价外网\trunk\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.pdb

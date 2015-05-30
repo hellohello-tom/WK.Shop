@@ -1,0 +1,212 @@
+﻿@model Shop.Model.SysSiteConfig
+@{
+    ViewBag.Title = "SysSiteConfig_Create";
+}
+<script type="text/javascript">
+    //水印照片上传成功回调
+    function SysManage_SysSiteConfig_UploadComplete(event, response, status) {
+        if (status) {
+            var json = eval("(" + response + ")");
+            $("#WatermarkPicPath").val(json.data.newFileName);
+        }
+    }
+</script>
+<div class="pageContent">
+    @using (Html.BeginForm("Save", "SysSiteConfig", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+    {
+        <div class="pageFormContent ">
+            <div class="tabs" currentindex="0" eventtype="click">
+                <div class="tabsHeader">
+                    <div class="tabsHeaderContent">
+                        <ul>
+                            <li><a href="javascript:;"><span>基本信息</span></a></li>
+                            <li><a href="javascript:;"><span>附件信息</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tabsContent" layouth="90">
+                    <div>
+                        <dl>
+                            <dt>网站名称</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.WebName)
+                                @Html.ValidationMessageFor(model => model.WebName)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>联系电话</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.WebTel)
+                                @Html.ValidationMessageFor(model => model.WebTel)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>联系地址</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebAddr)
+                                @Html.ValidationMessageFor(model => model.WebAddr)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>网站分享</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebShare)&nbsp;(可以是HTML代码)
+                                @Html.ValidationMessageFor(model => model.WebShare)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>网站备案号</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebCrod)
+                                @Html.ValidationMessageFor(model => model.WebCrod)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>版权信息</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebCopy) &nbsp;(可以是HTML代码)
+                                @Html.ValidationMessageFor(model => model.WebCopy)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>首页标题SEO</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebTitle, new { rows = "3" })
+                                @Html.ValidationMessageFor(model => model.WebTitle)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>关键字SEO</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebKeyword, new { rows = "3" })
+                                @Html.ValidationMessageFor(model => model.WebKeyword)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>网站敏感字符</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.SensitiveWord, new { rows = "5" })
+                                @Html.ValidationMessageFor(model => model.SensitiveWord)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>页面描述SEO</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebDescription, new { rows = "5" })
+                                @Html.ValidationMessageFor(model => model.WebDescription)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>网站统计</dt>
+                            <dd>
+                                @Html.TextAreaFor(model => model.WebCountCode, new { rows = "5" }) &nbsp;(可以是HTML代码)
+                                @Html.ValidationMessageFor(model => model.WebCountCode)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div>
+                        <dl>
+                            <dt>附件目录</dt>
+                            <dd>
+                                @Html.TextBoxFor(m => m.AttachPath, new Dictionary<string, object> { { "readonly", "true" } })
+                                @Html.ValidationMessageFor(model => model.AttachPath)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>文件类型</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.AttachExtension)
+                                @Html.ValidationMessageFor(model => model.AttachExtension)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>文件大小</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.AttachSize)&nbsp;KB
+                                @Html.ValidationMessageFor(model => model.AttachSize)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>图片类型</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.AttachImgExtension)
+                                @Html.ValidationMessageFor(model => model.AttachImgExtension)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>图片大小</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.AttachImgSize)&nbsp;KB
+                                @Html.ValidationMessageFor(model => model.AttachImgSize)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>图片宽度</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.AttachImgWidth)&nbsp;PX
+                                @Html.ValidationMessageFor(model => model.AttachImgWidth)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>图片高度</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.AttachImgHeight)&nbsp;PX
+                                @Html.ValidationMessageFor(model => model.AttachImgHeight)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>缩略图宽度</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.ThumbnailWidth)&nbsp;PX
+                                @Html.ValidationMessageFor(model => model.ThumbnailWidth)
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>缩略图高度</dt>
+                            <dd>
+                                @Html.EditorFor(model => model.ThumbnailHeight)&nbsp;PX
+                                @Html.ValidationMessageFor(model => model.ThumbnailHeight)
+                            </dd>
+                        </dl>
+                        @* <dl>
+                            <dt>水印图片路径</dt>
+                            <dd>
+                                @Html.EditorFor(m => m.WatermarkPicPath, new { @name = "WatermarkPicPath", @id = "WatermarkPicPath" })
+                                <input id="SysManage_SysSiteConfig_Create_File" type="file" name="filedata" uploaderoption="{
+			                                        uploader:'@Shop.Web.BaseData.SiteConfig.ImgFileServer/Upload/SingleFile?isImage=1',
+			                                        fileSizeLimit:'@ViewBag.FileSize+KB',
+                                                    fileTypeExts:'*.png',
+			                                        auto:true,
+			                                        multi:false,
+                                                    onUploadSuccess:SysManage_SysSiteConfig_UploadComplete
+		                                        }" />
+                            </dd>
+                        </dl>*@
+                        <dl>
+                            @Html.HiddenFor(model => model.Id)
+                        </dl>
+                    </div>
+                </div>
+                <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">
+                                保存</button></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">
+                                关闭</button></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+            </div>
+        </div>
+        
+    }
+</div>

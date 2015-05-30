@@ -1,0 +1,138 @@
+﻿@using Shop.Common
+@model MySoft.Data.IDataPage<IList<Shop.Model.SysDicType>>
+@{
+    ViewBag.Title = "SysDicType_Index";
+}
+<form id="pagerForm" method="post" action="/SysManage/SysDic/Index">
+<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
+<input type="hidden" name="numPerPage" value="@Model.PageSize" />
+<input type="hidden" name="orderField" value="" />
+<input type="hidden" name="orderDirection" value="" />
+</form>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SysManage/SysDic/Index" method="post">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>
+                    编码：</label>
+                <input type="text" name="code" onkeypress ="showKeyPress()" value="@ViewBag.Code"/>
+            </li>
+            <li>
+                <label>
+                    名称：</label>
+                <input type="text" name="name" onkeypress ="showKeyPress()" value="@ViewBag.Name"/>
+            </li>
+            <li>
+                <label>
+                    状态：</label>
+                <select id="status" name="enabled" class="combox">
+                    <option value="-1">全部</option>
+                    <option value="1" selected="selected">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+                @if (ViewBag.Enabled != null)
+                {            
+                    <script type="text/javascript">
+                        $("#status", navTab.getCurrentPanel()).val("@ViewBag.Enabled");
+                    </script>
+                }
+            </li>
+
+           <li style="padding-left:10px; padding-top:0px; height:25px;">  
+                 <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">
+                                    检索</button></div>
+                 </div>
+            </li>
+        </ul>
+     @*   <div class="subBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">
+                                检索</button></div>
+                    </div>
+                </li>
+            </ul>
+        </div>*@
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="/SysManage/SysDic/Create/" target="navTab" rel="System_SysDic_Create">
+                <span>添加</span></a></li>
+            <li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/SysManage/SysDic/DeleteList"
+                class="delete"><span>批量删除</span></a></li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layouth="112">
+        <thead>
+            <tr>
+                <th width="30">
+                    <input type="checkbox" group="ids" class="checkboxCtrl">
+                </th>
+                <th width="20%">
+                    编码
+                </th>
+                <th width="20%">
+                    名称
+                </th>
+                <th width="20%">
+                    状态
+                </th>
+                <th width="20%">
+                    备注
+                </th>
+                <th width="100">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.DataSource)
+            {
+                <tr target="SysDic_ids" rel="@m.Id">
+                    <td style=" text-align:center">
+                        <input name="ids" value="@m.Id"  type="checkbox">
+                    </td>
+                    <td title="@m.Code">@m.Code.Left(25, "…")
+                    </td>
+                    <td title="@m.Name">@m.Name.Left(25, "…")
+                    </td>
+                    <td>
+                        @(m.IsEnabled == 1 ? "启用" : "禁用")
+                    </td>
+                    <td title="@m.Remark">@m.Remark.Left(25, "...")
+                    </td>
+                    <td>
+                        <div style="width: 100px">
+                            <a title="选项明细"  rel="SysManage_SysDic_DetailIndex" target="navTab" href="/SysManage/SysDic/DetailIndex/@m.Id" class="btnView">
+                                选项明细</a> <a title="编辑模块信息" rel="System_SysDic_Create" target="navTab" href="/SysManage/SysDic/Create/@m.Id" class="btnEdit">
+                                    编辑</a> <a title="确认删除?" target="ajaxTodo" href="/SysManage/SysDic/Delete/@m.Id" class="btnDel">
+                                        删除</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages">
+            <span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                @foreach (string pageSize in "10,20,50,100".Split(','))
+                {
+                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
+                }
+            </select>
+            <span>条，共 @Model.RowCount 条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="@Model.RowCount" numPerPage="@Model.PageSize" pageNumShown="10" currentPage="@Model.CurrentPageIndex">
+        </div>
+    </div>
+</div>

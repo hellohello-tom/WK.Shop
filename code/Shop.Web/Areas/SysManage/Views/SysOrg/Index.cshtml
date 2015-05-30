@@ -1,0 +1,124 @@
+﻿@using Shop.Common
+@model MySoft.Data.IDataPage<IList<Shop.Model.SysOrg>>
+@{
+    ViewBag.Title = "SysOrg_Index";
+}
+
+<form id="pagerForm" method="post" action="/SysManage/SysOrg/Index">
+	<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
+	<input type="hidden" name="numPerPage" value="@Model.PageSize" />
+	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SysManage/SysOrg/Index" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+                <label>
+                    名称：</label>
+                <input type="text" name="Name" value="@ViewBag.Name"/>
+            </li>
+            <li>
+                <label>
+                    状态：</label>
+                <select id="status" name="enabled" class="combox">
+                    <option value="-1" selected="selected">全部</option>
+                    <option value="1" >启用</option>
+                    <option value="0">禁用</option>
+                </select>
+                @if (ViewBag.Enabled != null)
+                {            
+                    <script type="text/javascript">
+                        $("#status", navTab.getCurrentPanel()).val("@ViewBag.Enabled");
+                    </script>
+                }
+            </li>
+            <li style="padding-left:10px; padding-top:0px; height:25px;">  
+                 <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">
+                                    检索</button></div>
+                 </div>
+            </li>
+		</ul>
+		
+		@*<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>*@
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="/SysManage/SysOrg/Create" target="navTab" rel="SysManage_SysOrg_Create"><span>添加</span></a></li>
+
+			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/SysManage/SysOrg/DeleteList" class="delete"><span>批量删除</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr>
+				<th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="300">名称</th>
+                <th width="100">是否为主管单位</th>
+				<th width="100">层级</th>
+				<th width="100">排序号</th>
+				<th width="100">备注</th>
+				<th width="100">状态</th>
+				<th width="70">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+        @foreach (var m in Model.DataSource)
+        {
+			 	<tr target="SysOrg_ids" rel="@m.Id">
+					<td align="center"><input name="ids" value="@m.Id" type="checkbox"></td>
+					<td>
+                    @if (m.Level == 1)
+                    {
+                       <div>@m.Name</div>
+                    }
+                    else if (m.Level == 2)
+                    {
+                        <div style="padding-left:10px;">┗@m.Name</div>
+                    }
+                    else if (m.Level >= 3)
+                    {
+                        <div style="padding-left:@((m.Level - 2) * 20 + 10)px;">┗@m.Name</div>
+                    }
+                    </td>
+                    <td>@(m.IsManager == 1 ? "是" : "否")</td>
+					<td>@m.Level</td>
+					<td>@m.OrderNum</td>
+					<td title="@m.Remark">@m.Remark.Left(10, "…")</td>
+					<td>@(m.Enabled == 1 ? "启用" : "禁用")</td>
+					
+					<td>
+						 <a title="添加子项信息" rel="SysManage_SysOrg_Create" target="navTab" href="/SysManage/SysOrg/Create/?parentId=@m.Id" class="btnAdd">添加子项</a>
+                        <a title="编辑组织机构信息" rel="SysManage_SysOrg_Edit" target="navTab" href="/SysManage/SysOrg/Create/@m.Id" class="btnEdit">编辑</a>
+						<a title="确认删除?" target="ajaxTodo" href="/SysManage/SysOrg/Delete/@m.Id" class="btnDel">删除</a>
+					</td>
+				</tr>
+        }
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+				@foreach (string pageSize in "10,20,50,100".Split(','))
+    {
+                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
+    }
+			</select>
+			<span>条，共 @Model.RowCount 条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="@Model.RowCount" numPerPage="@Model.PageSize" pageNumShown="10" currentPage="@Model.CurrentPageIndex"></div>
+
+	</div>
+</div>

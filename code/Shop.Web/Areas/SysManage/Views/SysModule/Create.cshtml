@@ -1,0 +1,91 @@
+﻿@model Shop.Model.SysModule
+@{
+    ViewBag.Title = "SysModule_Create";
+}
+<div class="page-header">
+    <h4>
+        模块</h4>
+</div>
+<div class="pageContent">
+    @using (Html.BeginForm("Create", "SysModule", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+    {
+        <div class="pageFormContent " layouth="140">
+            <dl>
+                <dt>父级</dt>
+                <dd>
+                    @Html.DisplayFor(m => m.ParentName)
+                    @Html.HiddenFor(m => m.ParentId)
+                </dd>
+            </dl>
+            <dl>
+                <dt>编码</dt>
+                <dd>
+                    @Html.EditorFor(m => m.Code)
+                    @Html.ValidationMessageFor(m => m.Code)
+                </dd>
+            </dl>
+            <dl>
+                <dt>名称</dt>
+                <dd>
+                    @Html.EditorFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </dd>
+            </dl>
+            <dl>
+                <dt>URL</dt>
+                <dd>
+                    @Html.EditorFor(m => m.Url)
+                    @Html.ValidationMessageFor(m => m.Url)
+                </dd>
+            </dl>
+            <dl>
+                <dt>状态</dt>
+                <dd>
+                    @Html.RadioButtonFor(m => m.Enabled, 1)启用
+                    @Html.RadioButtonFor(m => m.Enabled, 0)停用
+                    @Html.ValidationMessageFor(m => m.Enabled)
+                </dd>
+            </dl>
+            <dl>
+                <dt>显示到菜单</dt>
+                <dd>
+                    @Html.RadioButtonFor(m => m.IsShow, 1) 是
+                    @Html.RadioButtonFor(m => m.IsShow, 0) 否
+                    @Html.ValidationMessageFor(m => m.IsShow)
+                </dd>
+            </dl>
+            <dl>
+                <dt>排序号</dt>
+                <dd>
+                    @Html.EditorFor(m => m.OrderNum)
+                    @Html.ValidationMessageFor(m => m.OrderNum)
+                </dd>
+            </dl>
+            <dl>
+                <dt>备注</dt>
+                <dd>
+                    @Html.TextAreaFor(m => m.Remark)
+                    @Html.ValidationMessageFor(m => m.Remark)
+                </dd>
+            </dl>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">
+                                保存</button></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">
+                                关闭</button></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    }
+</div>

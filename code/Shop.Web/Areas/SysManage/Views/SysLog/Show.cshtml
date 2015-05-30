@@ -1,0 +1,65 @@
+﻿@model Shop.Model.SysLog
+@{
+    ViewBag.Title = "SysLog_Create";
+}
+<div class="page-header">
+    <h4>
+        日志详情</h4>
+</div>
+<div class="pageContent">
+    <div class="pageFormContent " layouth="140">
+        <dl>
+            <dt>日志标题</dt>
+            <dd>
+                @Html.DisplayFor(m => m.Title)
+            </dd>
+        </dl>
+        <dl>
+            <dt>级别</dt>
+            <dd>
+                @Html.DisplayFor(m => m.Level)
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问者IP</dt>
+            <dd>
+                @Html.DisplayFor(m => m.IP)
+            </dd>
+        </dl>
+        <dl>
+            <dt>请求页面</dt>
+            <dd>
+                @Html.DisplayFor(m => m.Referrer)
+            </dd>
+        </dl>
+        <dl>
+            <dt>日志内容</dt>
+            <dd>
+                @Html.TextAreaFor(m => m.Content, new { @readonly = "readonly", @style = "width:100%;height:200px;" })
+            </dd>
+        </dl>
+        <dl>
+            <dt>记录人</dt>
+            <dd>
+                @Html.DisplayFor(m => m.AddUser)
+            </dd>
+        </dl>
+        <dl>
+            <dt>记录时间</dt>
+            <dd>
+                @Html.DisplayFor(m => m.AddTime)
+            </dd>
+        </dl>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button type="button" class="close">
+                            关闭</button></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

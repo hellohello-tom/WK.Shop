@@ -1,0 +1,141 @@
+﻿@model MySoft.Data.IDataPage<IList<Shop.Model.SysAdmin>>
+@{
+    ViewBag.Title = "SysAdmin_Index";
+}
+<form id="pagerForm" method="post" action="/SysManage/SysAdmin/Index">
+<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
+<input type="hidden" name="numPerPage" value="@Model.PageSize" />
+<input type="hidden" name="orderField" value="" />
+<input type="hidden" name="orderDirection" value="" />
+</form>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SysManage/SysAdmin/Index"
+    method="post">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>
+                    用户名：</label>
+                <input type="text" name="username" onkeypress ="showKeyPress()" value="@ViewBag.UserName"/>
+            </li>
+            <li>
+                <label>
+                    姓名：</label>
+                <input type="text" name="realname" onkeypress ="showKeyPress()" value="@ViewBag.RealName"/>
+            </li>
+            <li>
+                <label>
+                    角色：</label>
+                @Html.DropDownList("role", new SelectList(ViewBag.RoleList, "Id", "Name"), "所有角色", new { @class = "combox" })
+            </li>
+            <li>
+                <label>
+                    状态：</label>
+                <select id="status" name="enabled" class="combox">
+                    <option value="-1">全部</option>
+                    <option value="1" selected="selected">启用</option>
+                    <option value="0">停用</option>
+                </select>
+                @if (ViewBag.Enabled != null)
+                {            
+                    <script type="text/javascript">
+                        $("#status", navTab.getCurrentPanel()).val("@ViewBag.Enabled");
+                    </script>
+                }
+            </li>
+            <li style="padding-left: 10px; padding-top: 0px; height: 25px;">
+                <div class="buttonActive">
+                    <div class="buttonContent">
+                        <button type="submit">
+                            检索</button></div>
+                </div>
+            </li>
+        </ul>
+        @*	
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>*@
+    </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            @Html.RightsButton("SysManage_SysAdmin_Create", "<li><a class=\"add\" href=\"/SysManage/SysAdmin/Create\" target=\"navTab\" rel=\"System_SysAdmin_Create\"><span>添加</span></a></li>")
+            @Html.RightsButton("SysManage_SysAdmin_Delete", "<li><a title=\"确实要删除这些记录吗?\" target=\"selectedTodo\" rel=\"ids\" href=\"/SysManage/SysAdmin/DeleteList\" class=\"delete\"><span>批量删除</span></a></li>")
+        </ul>
+    </div>
+    <table class="table" width="100%" layouth="110">
+        <thead>
+            <tr>
+                <th width="30">
+                    <input type="checkbox" group="ids" class="checkboxCtrl">
+                </th>
+                <th width="150">
+                    用户名
+                </th>
+                <th width="100">
+                    姓名
+                </th>
+                <th width="200">
+                    所属角色
+                </th>
+                <th width="70">
+                    登录次数
+                </th>
+                <th width="70">
+                    是否启用
+                </th>
+                <th width="150">
+                    最后一次登录
+                </th>
+                <th width="70">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.DataSource)
+            {
+                <tr target="SysAdmin_ids" rel="@m.Id">
+                    <td align="center">
+                        <input name="ids" value="@m.Id" type="checkbox">
+                    </td>
+                    <td>@m.UserName
+                    </td>
+                    <td>@m.RealName
+                    </td>
+                    <td>@m.RoleNames
+                    </td>
+                    <td>@m.LoginTimes
+                    </td>
+                    <td>@(m.Enabled == 1 ? "启用" : "停用")
+                    </td>
+                    <td>@m.LastLoginIP [@m.LastLoginTime]
+                    </td>
+                    <td>
+                        @Html.RightsButton("SysManage_SysAdmin_Create",
+                        "<a title=\"编辑管理员信息\" rel=\"SysManage_SysAdmin_Edit\" target=\"navTab\" href=\"/SysManage/SysAdmin/Create/" + m.Id + "\" class=\"btnEdit\">编辑</a>")
+                        @Html.RightsButton("SysManage_SysAdmin_Delete", "<a title=\"确认删除?\" target=\"ajaxTodo\" href=\"/SysManage/SysAdmin/Delete/" + m.Id + "\" class=\"btnDel\">删除</a>")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages">
+            <span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                @foreach (string pageSize in "10,20,50,100".Split(','))
+                {
+                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
+                }
+            </select>
+            <span>条，共 @Model.RowCount 条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="@Model.RowCount" numPerPage="@Model.PageSize" pageNumShown="10" currentPage="@Model.CurrentPageIndex">
+        </div>
+    </div>
+</div>

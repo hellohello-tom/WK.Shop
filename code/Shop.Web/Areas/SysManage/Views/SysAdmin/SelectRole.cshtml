@@ -1,0 +1,57 @@
+﻿@model List<Shop.Model.SysRole>
+@using Shop.Common;
+<div class="pageHeader">
+	<form method="post" action="/SysManage/SysAdmin/SelectRole" onsubmit="return dwzSearch(this, 'dialog');">
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>编码：</label>
+				<input type="text" name="code" value="@ViewBag.Code"/>
+			</li>
+			<li>
+				<label>名称：</label>
+				<input type="text" name="name" value="@ViewBag.Name"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+				
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+<div class="pageFormContent" layoutH="120">
+	<table class="table" targetType="dialog"  width="100%">
+		<thead>
+			<tr>
+				<th width="30"><input type="checkbox" class="checkboxCtrl" group="selectRole" /></th>
+				<th width="100">角色编码</th>
+				<th width="100">角色名称</th>
+                <th width="200">备注</th>
+			</tr>
+		</thead>
+		<tbody>
+        @{string checkRoleIds = ViewBag.CheckRoleIds;}
+         @foreach (var m in Model)
+         {
+			<tr>
+				<td><input type="checkbox" @(checkRoleIds.Contains("," + m.Id + ",") ? "checked='checked'" : "")  name="selectRole" value="{Id:'@m.Id', Name:'@m.Name'}"/></td>
+				<td>@m.Code</td>
+				<td>@m.Name</td>
+                <td>@m.Remark.Left(200, "…")</td>
+			</tr>
+         }
+		</tbody>
+	</table>
+    </div>
+	<div class="formBar">
+		<ul>
+        <li><div class="buttonActive"><div class="buttonContent">
+        <button type="button" multLookup="selectRole" warn="请选择角色！">确定</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button class="close" type="button">关闭</button></div></div></li>
+		</ul>
+	</div>
+</div>

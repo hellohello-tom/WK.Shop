@@ -1,0 +1,69 @@
+﻿@model Shop.Model.SysDicType
+@{
+    ViewBag.Title = "Create";
+}
+<h2>
+</h2>
+<div class="pageContent">
+    @using (Html.BeginForm("Create", "SysDic", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+    {
+        <div class="pageFormContent " layouth="80">
+            <dl>
+            </dl>
+            <dl>
+                <dt>编码</dt>
+                <dd>
+                    @Html.EditorFor(m => m.Code)
+                    @Html.ValidationMessageFor(m => m.Code)
+                </dd>
+            </dl>
+            <dl>
+                <dt>名称</dt>
+                <dd>
+                    @Html.EditorFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </dd>
+            </dl>
+            <dl>
+                <dt>状态</dt>
+                <dd>
+                    @Html.RadioButtonFor(m => m.IsEnabled, 1, new { @checked = "checked" })启用
+                    @Html.RadioButtonFor(m => m.IsEnabled, 0)禁用
+                    @Html.ValidationMessageFor(m => m.IsEnabled)
+                </dd>
+            </dl>
+            <dl>
+                <dt>排序号</dt>
+                <dd>
+                    @Html.EditorFor(m => m.OrderNum)
+                    @Html.ValidationMessageFor(m => m.OrderNum)
+                </dd>
+            </dl>
+            <dl>
+                <dt>备注</dt>
+                <dd>
+                    @Html.TextAreaFor(m => m.Remark)
+                    @Html.ValidationMessageFor(m => m.Remark)
+                </dd>
+            </dl>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">
+                                保存</button></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">
+                                关闭</button></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    }
+</div>

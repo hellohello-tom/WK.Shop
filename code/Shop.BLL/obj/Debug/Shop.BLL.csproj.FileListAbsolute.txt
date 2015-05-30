@@ -1,0 +1,32 @@
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.BLL.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.BLL.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\Aspose.Cells.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.Common.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.DAL.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.Log.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.Model.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\MySoft.Data.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\log4net.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.Common.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.DAL.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.Log.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\bin\Debug\KR.DesignCredit.Model.pdb
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\obj\Debug\Shop.BLL.csprojResolveAssemblyReference.cache
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\obj\Debug\KR.DesignCredit.BLL.dll
+D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.BLL\obj\Debug\KR.DesignCredit.BLL.pdb
+D:\百度云同步盘\Git\code\Shop.BLL\obj\Debug\Shop.BLL.csprojResolveAssemblyReference.cache
+D:\百度云同步盘\Git\code\Shop.BLL\obj\Debug\KR.DesignCredit.BLL.dll
+D:\百度云同步盘\Git\code\Shop.BLL\obj\Debug\KR.DesignCredit.BLL.pdb
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.BLL.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.BLL.pdb
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\Aspose.Cells.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.Common.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.DAL.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.Log.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.Model.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\MySoft.Data.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\log4net.dll
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.Common.pdb
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.DAL.pdb
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.Log.pdb
+D:\百度云同步盘\Git\code\Shop.BLL\bin\Debug\KR.DesignCredit.Model.pdb
