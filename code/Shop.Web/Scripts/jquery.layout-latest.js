@@ -1,6 +1,6 @@
 ﻿/*
 * jquery.layout 1.2.0
-* hello world
+*
 * Copyright (c) 2008 
 *   Fabrizio Balliano (http://www.fabrizioballiano.net)
 *   Kevin Dalman (http://allpro.net)
