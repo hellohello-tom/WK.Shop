@@ -9,7 +9,7 @@ namespace Shop.Log
     /// <summary>
     /// 日志帮助类
     /// 
-    /// ThinkWang 
+    /// Tom.Team 
     /// 2014-3-29
     /// </summary>
     public  class Logger

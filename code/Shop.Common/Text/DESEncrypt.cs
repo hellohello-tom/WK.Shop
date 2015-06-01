@@ -9,7 +9,7 @@ namespace Shop.Common
     /// <summary>
     /// 数据加密 解密类
     /// 
-    /// ThinkWang
+    /// Tom.Team
     /// 2012-1-26
     /// </summary>
     public static class DESEncrypt
@@ -21,7 +21,7 @@ namespace Shop.Common
         /// <returns></returns>
         public static string Decrypt(string sText)
         {
-            return Decrypt(sText, "ThinkWang");
+            return Decrypt(sText, "Tom.Team");
         }
         /// <summary>
         /// 解密
@@ -82,7 +82,7 @@ namespace Shop.Common
         /// <returns></returns>
         public static string Encrypt(string sText)
         {
-            return Encrypt(sText, "ThinkWang");
+            return Encrypt(sText, "Tom.Team");
         }
         /// <summary>
         /// 加密

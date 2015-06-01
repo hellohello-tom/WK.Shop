@@ -9,7 +9,7 @@ namespace Shop.Common
     /// <summary>
     /// 字符串操作帮助类
     /// 
-    /// ThinkWang
+    /// Tom.Team
     /// 2012-1-26
     /// </summary>
     public static class StringExtension

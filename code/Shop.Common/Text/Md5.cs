@@ -9,7 +9,7 @@ namespace Shop.Common
     /// <summary>
     ///  MD5加密
     /// 
-    /// ThinkWang
+    /// Tom.Team
     /// 2012-1-26
     /// </summary>
     public static class Md5
@@ -37,7 +37,7 @@ namespace Shop.Common
         /// <returns></returns>
         public static string Encrypt(string s, int length)
         {
-            return Encrypt(s, length, "ThinkWang");
+            return Encrypt(s, length, "Tom.Team");
         }
         /// <summary>
         /// MD5加密字符串32位

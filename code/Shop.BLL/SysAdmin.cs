@@ -2,7 +2,7 @@
 //  All Rights Reserved , Copyright (C) 2014 , Team.
 //
 //  名    称：SysAdmin 业务逻辑层
-//  作    者：ThinkWang
+//  作    者：Tom.Team
 //  添加时间：2014-03-06 17:23:24
 // ==========================================================================
 using System;

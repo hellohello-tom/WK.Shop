@@ -2,7 +2,7 @@
 //  All Rights Reserved , Copyright (C) 2014 , Team.
 //
 //  名    称：SysModule Model
-//  作    者：ThinkWang
+//  作    者：Tom.Team
 //  添加时间：2014-10-20 11:33:52
 // ==========================================================================
 using System;

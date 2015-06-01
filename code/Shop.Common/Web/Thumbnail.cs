@@ -11,7 +11,7 @@ namespace Shop.Common
     /// <summary>
     /// 缩略图帮助类
     /// 
-    /// ThinkWang 
+    /// Tom.Team 
     /// 2014-4-1
     /// </summary>
     public class Thumbnail
@@ -370,7 +370,7 @@ namespace Shop.Common
                         }
                     }
                     else
-                    { //如果 图片本来就小于缩略图尺寸，不生成缩略图 ThinkWang 2014-7-9
+                    { //如果 图片本来就小于缩略图尺寸，不生成缩略图 Tom.Team 2014-7-9
                         originalImage.Save(newFileName);
                         return;
                     }

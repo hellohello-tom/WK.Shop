@@ -10,11 +10,11 @@ namespace Shop.Common
 {
     /// <summary>
     ///  采集器类
-    ///  ThinkWang
+    ///  Tom.Team
     ///  2012-4-27
     ///  
     ///  添加对http代理的支持
-    ///  ThinkWang
+    ///  Tom.Team
     ///  2013-8-26
     /// </summary>
     public class Spider
@@ -76,7 +76,7 @@ namespace Shop.Common
 		
         /// <summary>
         /// 获取网页的html
-        /// CreatUser：ThinkWang
+        /// CreatUser：Tom.Team
         /// CreatTime：2012-4-26
         /// 
         /// 添加对https(ssl协议)的支持
@@ -84,11 +84,11 @@ namespace Shop.Common
         /// EidtTime：2012-6-12
         /// 
         /// 修改为自动判断编码
-        /// EditUser：ThinkWang
+        /// EditUser：Tom.Team
         /// EditTime：2012-10-7
         /// 
         /// 添加decode参数，如果此参数为空时，自动判断编码
-        /// EditUser：ThinkWang
+        /// EditUser：Tom.Team
         /// EditTime：2012-12-8
         /// 
         /// 删除 方法签名中的 cookie，只能通过属性传递cookie参数。

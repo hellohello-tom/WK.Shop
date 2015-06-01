@@ -9,7 +9,7 @@ namespace Shop.Common
     /// <summary>
     /// WEB帮助类
     /// 
-    /// ThinkWang
+    /// Tom.Team
     /// 2014-3-10
     /// </summary>
      public class WebHandle

@@ -10,7 +10,7 @@ namespace Shop.Common
     /// <summary>
     ///  session帮助类
     ///  
-    /// ThinkWang
+    /// Tom.Team
     /// 2014-3-6
     /// </summary>
     public class SessionHelper

@@ -2,7 +2,7 @@
 //  All Rights Reserved , Copyright (C) 2014 , Team.
 //
 //  名    称：SysSiteConfig Model
-//  作    者：ThinkWang
+//  作    者：Tom.Team
 //  添加时间：2014-04-11 16:21:01
 // ==========================================================================
 using System;

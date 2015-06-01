@@ -11,7 +11,7 @@ namespace Shop.Common
     /// <summary>
     /// 验证码帮助类
     /// 
-    /// ThinkWang 
+    /// Tom.Team 
     /// 2014-3-4
     /// </summary>
     public class VerifyCodeHelper

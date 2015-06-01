@@ -2,7 +2,7 @@
 //  All Rights Reserved , Copyright (C) 2014 , Team.
 //
 //  名    称：SysSiteConfig 业务逻辑层
-//  作    者：ThinkWang
+//  作    者：Tom.Team
 //  添加时间：2014-03-20 10:23:40
 // ==========================================================================
 using System;

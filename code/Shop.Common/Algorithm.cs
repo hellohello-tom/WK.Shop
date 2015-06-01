@@ -9,7 +9,7 @@ namespace Shop.Common
     /// <summary>
     /// 信用评价管理 公共算法类
     /// 
-    /// ThinkWang
+    /// Tom.Team
     /// 2014-11-18
     /// </summary>
     public class Algorithm

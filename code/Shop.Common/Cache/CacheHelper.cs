@@ -10,7 +10,7 @@ namespace Shop.Common
     /// <summary>
     /// 缓存帮助类
     /// 
-    /// ThinkWang
+    /// Tom.Team
     /// 2014-3-4
     /// </summary>
     public class CacheHelper

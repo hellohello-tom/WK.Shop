@@ -6,7 +6,7 @@ namespace Shop.Common
     /// <summary>
     /// web.config操作类
     ///
-    /// ThinkWang
+    /// Tom.Team
     /// 2014-3-6
     /// </summary>
     public sealed class ConfigHelper

@@ -11,7 +11,7 @@ namespace Shop.Common
     /// <summary>
     /// 图片水印处理类
     /// 
-    /// ThinkWang 
+    /// Tom.Team 
     /// 2014-4-1
     /// </summary>
     public class WaterMark
