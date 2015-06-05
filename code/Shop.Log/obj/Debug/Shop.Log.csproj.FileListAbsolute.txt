@@ -3,3 +3,8 @@ D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Log\bin\Debug\KR.
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Log\bin\Debug\log4net.dll
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.dll
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Log\obj\Debug\KR.DesignCredit.Log.pdb
+E:\TomShop\branches\TopIc\code\Shop.Log\bin\Debug\Shop.Log.dll
+E:\TomShop\branches\TopIc\code\Shop.Log\bin\Debug\Shop.Log.pdb
+E:\TomShop\branches\TopIc\code\Shop.Log\bin\Debug\log4net.dll
+E:\TomShop\branches\TopIc\code\Shop.Log\obj\Debug\Shop.Log.dll
+E:\TomShop\branches\TopIc\code\Shop.Log\obj\Debug\Shop.Log.pdb

@@ -8,8 +8,8 @@
     <ProjectGuid>{9DC956A3-B85F-4EF8-9A76-16D397C502C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KR.DesignCredit.Common</RootNamespace>
-    <AssemblyName>KR.DesignCredit.Common</AssemblyName>
+    <RootNamespace>Shop.Common</RootNamespace>
+    <AssemblyName>Shop.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

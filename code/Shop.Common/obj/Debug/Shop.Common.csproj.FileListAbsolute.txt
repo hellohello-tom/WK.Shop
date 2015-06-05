@@ -2,3 +2,8 @@ D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Common\bin\Debug\
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Common\bin\Debug\KR.DesignCredit.Common.pdb
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Common\obj\Debug\KR.DesignCredit.Common.dll
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Common\obj\Debug\KR.DesignCredit.Common.pdb
+E:\TomShop\branches\TopIc\code\Shop.Common\bin\Debug\Shop.Common.dll
+E:\TomShop\branches\TopIc\code\Shop.Common\bin\Debug\Shop.Common.pdb
+E:\TomShop\branches\TopIc\code\Shop.Common\obj\Debug\Shop.Common.csprojResolveAssemblyReference.cache
+E:\TomShop\branches\TopIc\code\Shop.Common\obj\Debug\Shop.Common.dll
+E:\TomShop\branches\TopIc\code\Shop.Common\obj\Debug\Shop.Common.pdb

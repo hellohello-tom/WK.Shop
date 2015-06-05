@@ -6,3 +6,8 @@ D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\S
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\bin\Debug\zh-Hans\System.Web.Mvc.resources.dll
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\obj\Debug\KR.DesignCredit.Model.dll
 D:\百度云同步盘\Git for window\Shop\code\KR.DesignCredit.Model\obj\Debug\KR.DesignCredit.Model.pdb
+E:\TomShop\branches\TopIc\code\Shop.Model\bin\Debug\Shop.Model.dll
+E:\TomShop\branches\TopIc\code\Shop.Model\bin\Debug\Shop.Model.pdb
+E:\TomShop\branches\TopIc\code\Shop.Model\bin\Debug\MySoft.Data.dll
+E:\TomShop\branches\TopIc\code\Shop.Model\obj\Debug\Shop.Model.dll
+E:\TomShop\branches\TopIc\code\Shop.Model\obj\Debug\Shop.Model.pdb

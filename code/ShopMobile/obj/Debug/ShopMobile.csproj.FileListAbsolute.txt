@@ -31,3 +31,46 @@ D:\百度云同步盘\Git for window\Shop\code\ShopMobile\bin\zh-Hans\System.Web
 D:\百度云同步盘\Git for window\Shop\code\ShopMobile\obj\Debug\ShopMobile.csprojResolveAssemblyReference.cache
 D:\百度云同步盘\Git for window\Shop\code\ShopMobile\obj\Debug\ShopMobile.dll
 D:\百度云同步盘\Git for window\Shop\code\ShopMobile\obj\Debug\ShopMobile.pdb
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\ShopMobile.dll.config
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\ShopMobile.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\ShopMobile.pdb
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\Antlr3.Runtime.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\EntityFramework.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\Microsoft.Web.Infrastructure.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\Newtonsoft.Json.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Net.Http.Formatting.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Http.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Http.WebHost.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Mvc.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Optimization.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Providers.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Razor.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.WebPages.Deployment.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.WebPages.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.WebPages.Razor.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\WebGrease.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\EntityFramework.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\Newtonsoft.Json.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Net.Http.Formatting.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Http.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Http.WebHost.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Mvc.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.Razor.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.WebPages.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.WebPages.Deployment.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\System.Web.WebPages.Razor.xml
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\EntityFramework.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.Http.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.Http.WebHost.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.Mvc.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.Optimization.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.Providers.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.Razor.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.WebPages.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\obj\Debug\ShopMobile.csprojResolveAssemblyReference.cache
+E:\TomShop\branches\TopIc\code\ShopMobile\obj\Debug\ShopMobile.dll
+E:\TomShop\branches\TopIc\code\ShopMobile\obj\Debug\ShopMobile.pdb

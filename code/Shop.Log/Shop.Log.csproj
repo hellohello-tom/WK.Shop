@@ -8,8 +8,8 @@
     <ProjectGuid>{6338C302-50A6-44CA-80EE-674B1C380EDB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KR.DesignCredit.Log</RootNamespace>
-    <AssemblyName>KR.DesignCredit.Log</AssemblyName>
+    <RootNamespace>Shop.Log</RootNamespace>
+    <AssemblyName>Shop.Log</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

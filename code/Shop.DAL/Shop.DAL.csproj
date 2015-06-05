@@ -8,8 +8,8 @@
     <ProjectGuid>{760C6123-65CA-4B9A-85C8-59E1AD7C2304}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KR.DesignCredit.DAL</RootNamespace>
-    <AssemblyName>KR.DesignCredit.DAL</AssemblyName>
+    <RootNamespace>Shop.DAL</RootNamespace>
+    <AssemblyName>Shop.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
