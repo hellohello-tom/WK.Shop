@@ -1,0 +1,81 @@
+﻿@model Shop.Model.Commodity
+@{
+    ViewBag.Title = "Commodity_Create";
+}
+<h2 class="contentTitle">[Commodity]</h2>
+<div class="pageContent">
+@using (Html.BeginForm("Create","Commodity", FormMethod.Post,new Dictionary<string,object>(){ { "class",""},{"onsubmit","return validateCallback(this,navTabAjaxDone);"}})) {
+    <div class="pageFormContent nowrap" layoutH="97">	
+		<dl>
+		<dt>商品名称</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_Name)
+		          @Html.ValidationMessageFor(m => m.Commodity_Name)
+		</dd>
+	</dl>
+		<dl>
+		<dt>提醒</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_Remind)
+		          @Html.ValidationMessageFor(m => m.Commodity_Remind)
+		</dd>
+	</dl>
+		<dl>
+		<dt>原价</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_CostPrice)
+		          @Html.ValidationMessageFor(m => m.Commodity_CostPrice)
+		</dd>
+	</dl>
+		<dl>
+		<dt>折扣系数</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_Discount)
+		          @Html.ValidationMessageFor(m => m.Commodity_Discount)
+		</dd>
+	</dl>
+		<dl>
+		<dt>剩余数量</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_ResidueCount)
+		          @Html.ValidationMessageFor(m => m.Commodity_ResidueCount)
+		</dd>
+	</dl>
+		<dl>
+		<dt>备注</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_Remark)
+		          @Html.ValidationMessageFor(m => m.Commodity_Remark)
+		</dd>
+	</dl>
+		<dl>
+		<dt>创建时间</dt>
+		<dd>
+		
+		 @Html.TextBoxFor(m => m.Commodity_CreateTime, new { @class = "date", @readonly = "true" })<a class="inputDateButton" href="javascript:;">选择</a>
+		          @Html.ValidationMessageFor(m => m.Commodity_CreateTime)
+		</dd>
+	</dl>
+		<dl>
+		<dt>创建人</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_User)
+		          @Html.ValidationMessageFor(m => m.Commodity_User)
+		</dd>
+	</dl>
+		<dl>
+		<dt>是否删除</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Commodity_IsDel)
+		          @Html.ValidationMessageFor(m => m.Commodity_IsDel)
+		</dd>
+	</dl>
+	    </div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+}
+</div>

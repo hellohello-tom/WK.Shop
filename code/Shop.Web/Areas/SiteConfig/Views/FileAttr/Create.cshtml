@@ -1,0 +1,102 @@
+﻿@model Shop.Model.FileAttr
+@{
+    ViewBag.Title = "FileAttr_Create";
+}
+<h2 class="contentTitle">[FileAttr]</h2>
+<div class="pageContent">
+@using (Html.BeginForm("Create","FileAttr", FormMethod.Post,new Dictionary<string,object>(){ { "class",""},{"onsubmit","return validateCallback(this,navTabAjaxDone);"}})) {
+    <div class="pageFormContent nowrap" layoutH="97">	
+		<dl>
+		<dt>关联业务标示</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_BussinessCode)
+		          @Html.ValidationMessageFor(m => m.FileAttr_BussinessCode)
+		</dd>
+	</dl>
+		<dl>
+		<dt>业务Id</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_BussinessId)
+		          @Html.ValidationMessageFor(m => m.FileAttr_BussinessId)
+		</dd>
+	</dl>
+		<dl>
+		<dt>文件名称</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_Name)
+		          @Html.ValidationMessageFor(m => m.FileAttr_Name)
+		</dd>
+	</dl>
+		<dl>
+		<dt>后缀名</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_Ext)
+		          @Html.ValidationMessageFor(m => m.FileAttr_Ext)
+		</dd>
+	</dl>
+		<dl>
+		<dt>文件大小</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_Size)
+		          @Html.ValidationMessageFor(m => m.FileAttr_Size)
+		</dd>
+	</dl>
+		<dl>
+		<dt>文件路径</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_Path)
+		          @Html.ValidationMessageFor(m => m.FileAttr_Path)
+		</dd>
+	</dl>
+		<dl>
+		<dt>文件MD5</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_MD5)
+		          @Html.ValidationMessageFor(m => m.FileAttr_MD5)
+		</dd>
+	</dl>
+		<dl>
+		<dt>压缩路径</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_CompressPath)
+		          @Html.ValidationMessageFor(m => m.FileAttr_CompressPath)
+		</dd>
+	</dl>
+		<dl>
+		<dt>排序</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_Sort)
+		          @Html.ValidationMessageFor(m => m.FileAttr_Sort)
+		</dd>
+	</dl>
+		<dl>
+		<dt>创建人</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_User)
+		          @Html.ValidationMessageFor(m => m.FileAttr_User)
+		</dd>
+	</dl>
+		<dl>
+		<dt>创建时间</dt>
+		<dd>
+		
+		 @Html.TextBoxFor(m => m.FileAttr_CreateTime, new { @class = "date", @readonly = "true" })<a class="inputDateButton" href="javascript:;">选择</a>
+		          @Html.ValidationMessageFor(m => m.FileAttr_CreateTime)
+		</dd>
+	</dl>
+		<dl>
+		<dt>是否删除</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.FileAttr_IsDel)
+		          @Html.ValidationMessageFor(m => m.FileAttr_IsDel)
+		</dd>
+	</dl>
+	    </div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+}
+</div>

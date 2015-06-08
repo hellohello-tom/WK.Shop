@@ -1,0 +1,38 @@
+﻿@model Shop.Model.Config
+@{
+    ViewBag.Title = "Config_Create";
+}
+<h2 class="contentTitle">[Config]</h2>
+<div class="pageContent">
+@using (Html.BeginForm("Create","Config", FormMethod.Post,new Dictionary<string,object>(){ { "class",""},{"onsubmit","return validateCallback(this,navTabAjaxDone);"}})) {
+    <div class="pageFormContent nowrap" layoutH="97">	
+		<dl>
+		<dt>名称</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Config_Name)
+		          @Html.ValidationMessageFor(m => m.Config_Name)
+		</dd>
+	</dl>
+		<dl>
+		<dt>样式</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Config_Syle)
+		          @Html.ValidationMessageFor(m => m.Config_Syle)
+		</dd>
+	</dl>
+		<dl>
+		<dt>底部样式</dt>
+		<dd>
+				  @Html.TextBoxFor(m => m.Config_Footer)
+		          @Html.ValidationMessageFor(m => m.Config_Footer)
+		</dd>
+	</dl>
+	    </div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+}
+</div>

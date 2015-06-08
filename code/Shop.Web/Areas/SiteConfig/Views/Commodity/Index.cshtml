@@ -1,0 +1,101 @@
+﻿@model MySoft.Data.IDataPage<IList<Shop.Model.Commodity>>
+@{
+    ViewBag.Title = "Commodity_Index";
+}
+
+<form id="pagerForm" method="post" action="/[area]/Commodity/Index">
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
+	<input type="hidden" name="numPerPage" value="@Model.PageSize" />
+	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/[area]/Commodity/Index" method="post">
+	<div class="searchBar">
+		<ul class="searchContent">
+			@*<li>
+				<label>姓名：</label>
+				<input type="text" name="keywords" value="@ViewBag.Keywords"/>
+			</li>*@
+			  <li style="padding-left:10px; padding-top:0px; height:25px;">  
+                 <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">
+                                    检索</button></div>
+                 </div>
+            </li>
+		</ul>
+		
+		@*<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+				<li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
+			</ul>
+		</div>*@
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="/[area]/Commodity/Create" target="navTab" rel="[area]_Commodity_Create"><span>添加</span></a></li>
+
+			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/[area]/Commodity/DeleteList" class="delete"><span>批量删除</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="112">
+		<thead>
+			<tr>
+				<th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="100">商品名称</th>
+				<th width="100">提醒</th>
+				<th width="100">原价</th>
+				<th width="100">折扣系数</th>
+				<th width="100">剩余数量</th>
+				<th width="100">备注</th>
+				<th width="100">创建时间</th>
+				<th width="100">创建人</th>
+				<th width="100">是否删除</th>
+				<th width="70">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+        @foreach (var m in Model.DataSource)
+		{
+			 	<tr target="Commodity_ids" rel="@m.Id">
+					<td><input name="ids" value="@m.Id" type="checkbox"></td>
+					<td>@m.Commodity_Name</td>
+					<td>@m.Commodity_Remind</td>
+					<td>@m.Commodity_CostPrice</td>
+					<td>@m.Commodity_Discount</td>
+					<td>@m.Commodity_ResidueCount</td>
+					<td>@m.Commodity_Remark</td>
+					<td>@m.Commodity_CreateTime</td>
+					<td>@m.Commodity_User</td>
+					<td>@m.Commodity_IsDel</td>
+					
+					<td>
+						<a title="编辑[Commodity]信息" rel="[area]_Commodity_Edit" target="navTab" href="/[area]/Commodity/Create/@m.Id" class="btnEdit">编辑</a>
+						<a title="确认删除?" target="ajaxTodo" href="/[area]/Commodity/Delete/@m.Id" class="btnDel">删除</a>
+					</td>
+				</tr>
+	    }
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+				@foreach (string pageSize in "10,20,50,100".Split(','))
+                {
+                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
+                }
+			</select>
+			<span>条，共 @Model.RowCount 条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="@Model.RowCount" numPerPage="@Model.PageSize" pageNumShown="10" currentPage="@Model.CurrentPageIndex"></div>
+
+	</div>
+</div>
