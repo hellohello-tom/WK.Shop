@@ -581,6 +581,7 @@
     <Content Include="Areas\SiteConfig\Views\FileAttr\Create.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Navigation\Create.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Tag\Create.cshtml" />
+    <Content Include="Areas\SiteConfig\Views\Tag\SelectNavigation.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\DatePicker\calendar.js" />
     <Content Include="Scripts\DatePicker\config.js" />

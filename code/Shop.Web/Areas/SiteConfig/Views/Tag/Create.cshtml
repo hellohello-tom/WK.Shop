@@ -2,15 +2,18 @@
 @{
     ViewBag.Title = "Tag_Create";
 }
-<h2 class="contentTitle">[Tag]</h2>
+<h2 class="contentTitle">标签信息</h2>
 <div class="pageContent">
     @using (Html.BeginForm("Create", "Tag", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
     {
-        <div class="pageFormContent nowrap" layouth="97">
+        <div class="pageFormContent" layouth="140">
             <dl>
-                <dt>导航ID</dt>
+                <dt>手机导航</dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.Tag_NavigationId)
+                    @Html.HiddenFor(m => m.Tag_NavigationId, new { dataField = "selectModule.Id" })
+                    <input type="text" readonly="readonly" class="required" datafield="selectModule.Name" value="@ViewBag.NavigationName " />
+                    <a class="btnLook" href="/SiteConfig/Tag/SelectNavigation/?navigationId={ModuleIds}"
+                       lookupgroup="selectModule">选择模块</a>
                     @Html.ValidationMessageFor(m => m.Tag_NavigationId)
                 </dd>
             </dl>
@@ -33,28 +36,6 @@
                 <dd>
                     @Html.TextBoxFor(m => m.Tag_Sort)
                     @Html.ValidationMessageFor(m => m.Tag_Sort)
-                </dd>
-            </dl>
-            <dl>
-                <dt>创建时间</dt>
-                <dd>
-
-                    @Html.TextBoxFor(m => m.Tag_CreateTime, new { @class = "date", @readonly = "true" })<a class="inputDateButton" href="javascript:;">选择</a>
-                    @Html.ValidationMessageFor(m => m.Tag_CreateTime)
-                </dd>
-            </dl>
-            <dl>
-                <dt>创建人</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.Tag_User)
-                    @Html.ValidationMessageFor(m => m.Tag_User)
-                </dd>
-            </dl>
-            <dl>
-                <dt>是否删除</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.Tag_IsDel)
-                    @Html.ValidationMessageFor(m => m.Tag_IsDel)
                 </dd>
             </dl>
         </div>

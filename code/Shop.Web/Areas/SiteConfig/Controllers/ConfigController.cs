@@ -17,7 +17,7 @@ using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
 
-namespace Shop.Areas.SiteConfig.Controllers
+namespace Shop.Web.Areas.SiteConfig.Controllers
 {
 	/// <summary>
 	/// Config控制器

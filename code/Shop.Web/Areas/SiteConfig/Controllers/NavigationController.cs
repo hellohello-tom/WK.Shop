@@ -17,7 +17,7 @@ using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
 
-namespace Shop.Areas.SiteConfig.Controllers
+namespace Shop.Web.Areas.SiteConfig.Controllers
 {
 	/// <summary>
 	/// Navigation控制器
@@ -31,13 +31,13 @@ namespace Shop.Areas.SiteConfig.Controllers
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page)
+        public ActionResult Index(DWZPageInfo page,string name="")
         {
         	#region 搜索条件
-            WhereClip where = null;
-            //if (!string.IsNullOrEmpty(name))
-            //    where &= Navigation._.Name.Like("%" + name + "%");
-            //ViewBag.Name = name;
+            WhereClip where = Navigation._.Navigation_IsDel == false;
+            if (!string.IsNullOrEmpty(name))
+                where &= Navigation._.Navigation_Name.Like("%" + name + "%");
+            ViewBag.Name = name;
             #endregion
             
             var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
@@ -75,9 +75,15 @@ namespace Shop.Areas.SiteConfig.Controllers
 			DWZCallbackInfo callback=null;
 
             if (model.Id > 0)//修改
-                flag=bll.Update(model);
+                flag = bll.Update(model);
             else//添加
-                flag=bll.Add(model)>0;
+            {
+                model.Navigation_Type = (int)Theme.Materials;
+                model.Navigation_IsDel = false;
+                model.Navigation_User = UserContext.CurUserInfo.Id;
+                model.Navigation_CreateTime = DateTime.Now;
+                flag = bll.Add(model) > 0;
+            }
 
             if (flag)
 				callback = DWZMessage.Success();

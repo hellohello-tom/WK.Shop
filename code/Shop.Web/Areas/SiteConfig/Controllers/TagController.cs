@@ -16,8 +16,9 @@ using Shop.Model;
 using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
+using System.Text;
 
-namespace Shop.Areas.SiteConfig.Controllers
+namespace Shop.Web.Areas.SiteConfig.Controllers
 {
 	/// <summary>
 	/// Tag控制器
@@ -25,26 +26,50 @@ namespace Shop.Areas.SiteConfig.Controllers
 	public class TagController:Controller
 	{	     
 		private readonly TagBLL bll=new TagBLL();
+        private readonly NavigationBLL navigationBLL = new NavigationBLL();
 	
 		/// <summary>
         /// 分页列表
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page)
+        public ActionResult Index(DWZPageInfo page,string tagName ="")
         {
         	#region 搜索条件
             WhereClip where = null;
-            //if (!string.IsNullOrEmpty(name))
-            //    where &= Tag._.Name.Like("%" + name + "%");
-            //ViewBag.Name = name;
+            if (!string.IsNullOrEmpty(tagName))
+                where &= Tag._.Tag_Name.Like("%" + tagName + "%");
+            ViewBag.Name = tagName;
             #endregion
             
             var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
             
             return View(usersPage);
         }
-        
+
+        public ActionResult SelectNavigation(int navigationId=0)
+        {
+            //----导航列表
+            var navigationList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false);
+
+            StringBuilder sbHtml = new StringBuilder();
+            var firstModuleList = navigationList.FindAll(x => x.Navigation_Type == (int)Theme.Materials).OrderByDescending(x => x.Navigation_Sort);//第一级
+
+            //第1级
+            sbHtml.AppendFormat("<ul class='tree  expand treeCheck'>");
+            foreach (var root in firstModuleList)
+            {
+                sbHtml.AppendFormat("<li><a href='javascript:;' {0} tname='selectModule' tvalue='{{\"Id\":\"{1}\",\"Name\":\"{2}\"}}' >{2}</a></li>",
+                                           navigationList.Count(x => x.Id == navigationId) > 0 ? "checked='checked'" : "",
+                                            root.Id,
+                                            root.Navigation_Name);
+            }
+            sbHtml.Append("</ul>");
+            ViewBag.NavigationHtml = sbHtml.ToString();
+
+            return View();
+        }
+
         #region  添加 编辑
         /// <summary>
         /// 添加 编辑页面
@@ -55,6 +80,7 @@ namespace Shop.Areas.SiteConfig.Controllers
             if (id > 0)
             {
                 Model.Tag model = bll.GetModel(id);
+                ViewBag.NavigationName = navigationBLL.GetModel(model.Tag_NavigationId).Navigation_Name;
                 return View(model);
             }
             else

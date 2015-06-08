@@ -46,7 +46,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 导航名称
         /// </summary>
-		[StringLength(10,ErrorMessage="*")]		
+        [Required(ErrorMessage="必填")]		[StringLength(10,ErrorMessage="最长不可超过10位")]		
         public string Navigation_Name
         {
             get{ return _Navigation_Name; }
@@ -60,7 +60,8 @@ namespace Shop.Model{
 		/// <summary>
 		/// 排序
         /// </summary>
-		[RegularExpression("-?\\d+", ErrorMessage = "*")]		
+        [Required(ErrorMessage = "必填")]		[RegularExpression("-?\\d+", ErrorMessage = "请输入正整数")]		
+        [Range(1,999,ErrorMessage="请输入1~999之间")]
         public int Navigation_Sort
         {
             get{ return _Navigation_Sort; }
