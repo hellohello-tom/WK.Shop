@@ -977,6 +977,7 @@
     <Content Include="Scripts\xheditor\xheditor_skin\vista\img\wmp.gif" />
     <Content Include="Scripts\xheditor\xheditor_skin\vista\img\wordimg.gif" />
     <Content Include="Scripts\xheditor\xheditor_skin\vista\ui.css" />
+    <Content Include="Scripts\zepto\zepto.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

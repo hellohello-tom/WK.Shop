@@ -75,7 +75,7 @@ namespace Shop.Web
 
                 //菜单模块
                 var bllModule = new SysModuleBLL();
-                if (user.UserName.ToLower() == "kingroad")
+                if (user.UserName.ToLower() == "tom")
                 {
                     user.ModuleList = bllModule.GetList(SysModule._.Enabled == 1, SysModule._.OrderNum.Asc);
                 }
