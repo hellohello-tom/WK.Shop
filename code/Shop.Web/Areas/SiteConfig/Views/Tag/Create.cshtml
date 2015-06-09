@@ -28,6 +28,15 @@
                 <dt>标签图片</dt>
                 <dd>
                     @Html.TextBoxFor(m => m.Tag_ImagePath)
+                    <input id="SiteConfig_Tag_Create_UploadImg" type="file" name="filedata" 
+                    uploaderoption="{
+                    script:'Upload/SingleFile?isImage=1',
+                    fileSizeLimit:'@ViewBag.FileSize+KB',
+                    fileTypeExts:'*.png',
+                    auto:true,
+                    multi:false,
+                    onUploadSuccess:SiteConfig_Tag_Create_UploadComplete
+                    }" />
                     @Html.ValidationMessageFor(m => m.Tag_ImagePath)
                 </dd>
             </dl>

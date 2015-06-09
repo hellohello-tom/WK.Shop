@@ -581,7 +581,6 @@
     <Content Include="Areas\SiteConfig\Views\FileAttr\Create.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Navigation\Create.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Tag\Create.cshtml" />
-    <Content Include="Areas\SiteConfig\Views\Tag\SelectNavigation.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\DatePicker\calendar.js" />
     <Content Include="Scripts\DatePicker\config.js" />
@@ -651,7 +650,6 @@
     <Content Include="Scripts\dwz\src\speedup.js" />
     <Content Include="Scripts\html5shiv-min.js" />
     <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.4.js" />
     <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

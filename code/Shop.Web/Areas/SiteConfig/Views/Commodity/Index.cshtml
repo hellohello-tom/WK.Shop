@@ -4,7 +4,6 @@
 }
 
 <form id="pagerForm" method="post" action="/SiteConfig/Commodity/Index">
-	<input type="hidden" name="pageNum" value="1" />
 	<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
 	<input type="hidden" name="numPerPage" value="@Model.PageSize" />
 	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
