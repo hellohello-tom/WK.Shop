@@ -3,7 +3,7 @@
 //
 //  名    称：Commodity Model
 //  作    者：cat
-//  添加时间：2015-06-09 12:48:38
+//  添加时间：2015-06-09 20:06:01
 // ==========================================================================
 using System;
 //引用
@@ -22,12 +22,14 @@ namespace Shop.Model
     {
         #region 私有变量
         private int _Id;
+        private int _Commodity_TagId;
         private string _Commodity_Name;
         private string _Commodity_Remind;
         private decimal _Commodity_CostPrice;
         private decimal _Commodity_Discount;
         private int _Commodity_ResidueCount;
         private string _Commodity_Remark;
+        private string _Commodity_ImagePath;
         private string _Commodity_Content;
         private DateTime? _Commodity_CreateTime;
         private int _Commodity_User;
@@ -46,6 +48,21 @@ namespace Shop.Model
             {
                 OnPropertyValueChange(_.Id, _Id, value);
                 _Id = value;
+            }
+        }
+
+        /// <summary>
+        /// 标签Id
+        /// </summary>
+
+        [RegularExpression("-?\\d+", ErrorMessage = "*")]
+        public int Commodity_TagId
+        {
+            get { return _Commodity_TagId; }
+            set
+            {
+                OnPropertyValueChange(_.Commodity_TagId, _Commodity_TagId, value);
+                _Commodity_TagId = value;
             }
         }
 
@@ -140,6 +157,21 @@ namespace Shop.Model
         }
 
         /// <summary>
+        /// 默认展示图片
+        /// </summary>
+
+        [StringLength(500, ErrorMessage = "*")]
+        public string Commodity_ImagePath
+        {
+            get { return _Commodity_ImagePath; }
+            set
+            {
+                OnPropertyValueChange(_.Commodity_ImagePath, _Commodity_ImagePath, value);
+                _Commodity_ImagePath = value;
+            }
+        }
+
+        /// <summary>
         /// 图文详情
         /// </summary>		
         public string Commodity_Content
@@ -229,12 +261,14 @@ namespace Shop.Model
         {
             return new Field[] {         
             					_.Id,
+								_.Commodity_TagId,
 								_.Commodity_Name,
 								_.Commodity_Remind,
 								_.Commodity_CostPrice,
 								_.Commodity_Discount,
 								_.Commodity_ResidueCount,
 								_.Commodity_Remark,
+								_.Commodity_ImagePath,
 								_.Commodity_Content,
 								_.Commodity_CreateTime,
 								_.Commodity_User,
@@ -248,12 +282,14 @@ namespace Shop.Model
         {
             return new object[] {
             					_Id,
+								_Commodity_TagId,
 								_Commodity_Name,
 								_Commodity_Remind,
 								_Commodity_CostPrice,
 								_Commodity_Discount,
 								_Commodity_ResidueCount,
 								_Commodity_Remark,
+								_Commodity_ImagePath,
 								_Commodity_Content,
 								_Commodity_CreateTime,
 								_Commodity_User,
@@ -269,6 +305,11 @@ namespace Shop.Model
             if ((false == reader.IsDBNull(_.Id)))
             {
                 this._Id = reader.GetInt32(_.Id);
+            }
+
+            if ((false == reader.IsDBNull(_.Commodity_TagId)))
+            {
+                this._Commodity_TagId = reader.GetInt32(_.Commodity_TagId);
             }
 
             if ((false == reader.IsDBNull(_.Commodity_Name)))
@@ -299,6 +340,11 @@ namespace Shop.Model
             if ((false == reader.IsDBNull(_.Commodity_Remark)))
             {
                 this._Commodity_Remark = reader.GetString(_.Commodity_Remark);
+            }
+
+            if ((false == reader.IsDBNull(_.Commodity_ImagePath)))
+            {
+                this._Commodity_ImagePath = reader.GetString(_.Commodity_ImagePath);
             }
 
             if ((false == reader.IsDBNull(_.Commodity_Content)))
@@ -353,6 +399,11 @@ namespace Shop.Model
             public static Field Id = new Field<Commodity>("Id");
 
             /// <summary>
+            /// 标签Id -  数据类型:int
+            /// </summary>
+            public static Field Commodity_TagId = new Field<Commodity>("Commodity_TagId");
+
+            /// <summary>
             /// 商品名称 -  数据类型:string
             /// </summary>
             public static Field Commodity_Name = new Field<Commodity>("Commodity_Name");
@@ -381,6 +432,11 @@ namespace Shop.Model
             /// 备注 -  数据类型:string
             /// </summary>
             public static Field Commodity_Remark = new Field<Commodity>("Commodity_Remark");
+
+            /// <summary>
+            /// 默认展示图片 -  数据类型:string
+            /// </summary>
+            public static Field Commodity_ImagePath = new Field<Commodity>("Commodity_ImagePath");
 
             /// <summary>
             /// 图文详情 -  数据类型:string
