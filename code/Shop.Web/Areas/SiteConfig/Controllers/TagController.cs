@@ -33,40 +33,38 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page,string tagName ="")
+        public ActionResult Index(DWZPageInfo page, string tagName = "", int navigationId=0)
         {
         	#region 搜索条件
             WhereClip where = null;
             if (!string.IsNullOrEmpty(tagName))
                 where &= Tag._.Tag_Name.Like("%" + tagName + "%");
+            if (navigationId > 0)
+                where &= Tag._.Tag_NavigationId == navigationId;
             ViewBag.Name = tagName;
+            ViewBag.NavigationId = navigationId;
             #endregion
-            
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
+
+            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Tag._.Tag_Sort.Desc);
             
             return View(usersPage);
         }
 
+        /// <summary>
+        /// 选择导航
+        /// </summary>
+        /// <param name="navigationId"></param>
+        /// <returns></returns>
         public ActionResult SelectNavigation(int navigationId=0)
         {
             //----导航列表
             var navigationList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false);
 
             StringBuilder sbHtml = new StringBuilder();
-            var firstModuleList = navigationList.FindAll(x => x.Navigation_Type == (int)Theme.Materials).OrderByDescending(x => x.Navigation_Sort);//第一级
-
-            //第1级
-            sbHtml.AppendFormat("<ul class='tree  expand treeCheck'>");
-            foreach (var root in firstModuleList)
-            {
-                sbHtml.AppendFormat("<li><a href='javascript:;' {0} tname='selectModule' tvalue='{{\"Id\":\"{1}\",\"Name\":\"{2}\"}}' >{2}</a></li>",
-                                           navigationList.Count(x => x.Id == navigationId) > 0 ? "checked='checked'" : "",
-                                            root.Id,
-                                            root.Navigation_Name);
-            }
-            sbHtml.Append("</ul>");
-            ViewBag.NavigationHtml = sbHtml.ToString();
-
+            var sourceList = navigationList.Where(x => x.Navigation_Type == (int)Theme.Materials)
+                .OrderByDescending(x => x.Navigation_Sort).ToList() 
+                as List<Navigation>;
+            ViewBag.NavigationList = sourceList;
             return View();
         }
 
@@ -75,19 +73,20 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// 添加 编辑页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create(int id=0)
+        public ActionResult Create(int id = 0)
         {
+            Model.Tag model = bll.GetModel(id) ?? new Tag();
             if (id > 0)
             {
-                Model.Tag model = bll.GetModel(id);
                 ViewBag.NavigationName = navigationBLL.GetModel(model.Tag_NavigationId).Navigation_Name;
-                return View(model);
             }
             else
             {
-                return View();
+                model.Tag_Sort = 1;
+                model.Tag_ImagePath = "/Content/web/images/NoPicture.png";
             }
-        } 
+            return View(model);
+        }
         
         /// <summary>
         /// 添加 编辑操作
@@ -101,13 +100,18 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
 			DWZCallbackInfo callback=null;
 
             if (model.Id > 0)//修改
-                flag=bll.Update(model);
+                flag = bll.Update(model);
             else//添加
-                flag=bll.Add(model)>0;
+            {
+                model.Tag_CreateTime = DateTime.Now;
+                model.Tag_IsDel = false;
+                model.Tag_User = UserContext.CurUserInfo.Id;
+                flag = bll.Add(model) > 0;
+            }
 
             if (flag)
-				callback = DWZMessage.Success();
-			else
+                callback = DWZMessage.Success("操作成功", "SiteConfig_Tag", true);
+            else
                 callback = DWZMessage.Faild();
 
              return Json(callback);

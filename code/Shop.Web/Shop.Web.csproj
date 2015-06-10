@@ -133,6 +133,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
+    <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Common\Controllers\UploadController.cs" />
     <Compile Include="Areas\Phone\PhoneAreaRegistration.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\CommodityController.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\ConfigController.cs" />
@@ -529,6 +531,7 @@
     <Content Include="Content\web\images\image020.gif" />
     <Content Include="Content\web\images\login-input-icon.png" />
     <Content Include="Content\web\images\menu_nav_line.png" />
+    <Content Include="Content\web\images\NoPicture.png" />
     <Content Include="Content\web\images\pn_s.png" />
     <Content Include="Content\web\images\title_bg.png" />
     <Content Include="Content\web\images\title_bg2.png" />
@@ -581,7 +584,18 @@
     <Content Include="Areas\SiteConfig\Views\FileAttr\Create.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Navigation\Create.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Tag\Create.cshtml" />
+    <Content Include="Areas\Common\Views\Web.config" />
+    <Content Include="Resource\css\site.less" />
+    <Content Include="Resource\fonts\Linearicons-Free.eot" />
+    <Content Include="Resource\fonts\Linearicons-Free.ttf" />
+    <Content Include="Resource\fonts\Linearicons-Free.woff" />
+    <Content Include="Resource\fonts\Linearicons-Free.woff2" />
+    <Content Include="Areas\SiteConfig\Views\Tag\SelectNavigation.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Resource\css\lnr-font.css" />
+    <Content Include="Resource\css\site.css" />
+    <Content Include="Resource\fonts\Linearicons-Free.svg" />
+    <Content Include="Resource\Html\index.html" />
     <Content Include="Scripts\DatePicker\calendar.js" />
     <Content Include="Scripts\DatePicker\config.js" />
     <Content Include="Scripts\DatePicker\lang\en.js" />
@@ -997,6 +1011,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Common\Models\" />
+    <Folder Include="Areas\Common\Views\Shared\" />
     <Folder Include="Areas\Phone\Controllers\" />
     <Folder Include="Areas\Phone\Models\" />
     <Folder Include="Areas\Phone\Views\Shared\" />

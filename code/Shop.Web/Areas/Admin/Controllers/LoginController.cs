@@ -30,7 +30,8 @@ namespace Shop.Web.Areas.Admin.Controllers
         public ActionResult Login(string userName, string passWord, string code,string retrunUrl="")
         {
             TempData["msg"] = "";
-            if (!Common.VerifyCodeHelper.IsPass(code))
+            if(false)
+            //if (!Common.VerifyCodeHelper.IsPass(code))
             {//验证码错误
                 TempData["msg"] = "验证码错误";
             }

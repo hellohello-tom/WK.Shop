@@ -13,10 +13,10 @@
 	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SiteConfig/Commodity/Index" method="post">
 	<div class="searchBar">
 		<ul class="searchContent">
-			@*<li>
-				<label>姓名：</label>
-				<input type="text" name="keywords" value="@ViewBag.Keywords"/>
-			</li>*@
+			<li>
+				<label>商品名称：</label>
+				<input type="text" name="name" value="@ViewBag.Name"/>
+			</li>
 			  <li style="padding-left:10px; padding-top:0px; height:25px;">  
                  <div class="buttonActive">
                             <div class="buttonContent">
@@ -25,13 +25,6 @@
                  </div>
             </li>
 		</ul>
-		
-		@*<div class="subBar">
-			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-				<li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
-			</ul>
-		</div>*@
 	</div>
 	</form>
 </div>
@@ -54,8 +47,6 @@
 				<th width="100">剩余数量</th>
 				<th width="100">备注</th>
 				<th width="100">创建时间</th>
-				<th width="100">创建人</th>
-				<th width="100">是否删除</th>
 				<th width="70">操作</th>
 			</tr>
 		</thead>
@@ -71,11 +62,9 @@
 					<td>@m.Commodity_ResidueCount</td>
 					<td>@m.Commodity_Remark</td>
 					<td>@m.Commodity_CreateTime</td>
-					<td>@m.Commodity_User</td>
-					<td>@m.Commodity_IsDel</td>
 					
 					<td>
-						<a title="编辑[Commodity]信息" rel="SiteConfig_Commodity_Edit" target="navTab" href="/SiteConfig/Commodity/Create/@m.Id" class="btnEdit">编辑</a>
+						<a title="编辑商品信息" rel="SiteConfig_Commodity_Edit" target="navTab" href="/SiteConfig/Commodity/Create/@m.Id" class="btnEdit">编辑</a>
 						<a title="确认删除?" target="ajaxTodo" href="/SiteConfig/Commodity/Delete/@m.Id" class="btnDel">删除</a>
 					</td>
 				</tr>

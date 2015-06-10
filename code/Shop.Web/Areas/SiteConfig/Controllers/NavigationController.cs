@@ -39,8 +39,8 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
                 where &= Navigation._.Navigation_Name.Like("%" + name + "%");
             ViewBag.Name = name;
             #endregion
-            
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
+
+            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Navigation._.Navigation_Sort.Desc);
             
             return View(usersPage);
         }
@@ -86,8 +86,8 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             }
 
             if (flag)
-				callback = DWZMessage.Success();
-			else
+                callback = DWZMessage.Success("操作成功", "SiteConfig_Navigation", true);
+            else
                 callback = DWZMessage.Faild();
 
              return Json(callback);

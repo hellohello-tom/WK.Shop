@@ -63,6 +63,7 @@
                     <td>@m.Navigation_Sort</td>
                     <td>@m.Navigation_CreateTime</td>
                     <td>
+                        <a title="标签管理" rel="SiteConfig_Tag" target="navTab" href="/SiteConfig/Tag/Index?navigationId=@m.Id" class="btnView">查看旗下标签</a>
                         <a title="编辑导航信息" rel="SiteConfig_Navigation_Edit" target="navTab" href="/SiteConfig/Navigation/Create/@m.Id" class="btnEdit">编辑</a>
                         <a title="确认删除?" target="ajaxTodo" href="/SiteConfig/Navigation/Delete/@m.Id" class="btnDel">删除</a>
                     </td>

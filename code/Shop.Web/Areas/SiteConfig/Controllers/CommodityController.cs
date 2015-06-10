@@ -31,17 +31,19 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page)
+        public ActionResult Index(DWZPageInfo page,string name="",int tagId=0)
         {
         	#region 搜索条件
             WhereClip where = null;
-            //if (!string.IsNullOrEmpty(name))
-            //    where &= Commodity._.Name.Like("%" + name + "%");
-            //ViewBag.Name = name;
+            if (!string.IsNullOrEmpty(name))
+                where &= Commodity._.Commodity_Name.Like("%" + name + "%");
+            if (tagId > 0)
+                where &= Commodity._.Commodity_TagId == tagId;
+            ViewBag.TagId = tagId;
+            ViewBag.Name = name;
             #endregion
-            
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
-            
+            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where,
+                Commodity._.Commodity_CreateTime.Desc);
             return View(usersPage);
         }
         
@@ -69,6 +71,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(Model.Commodity model)
         {
             bool flag = false;

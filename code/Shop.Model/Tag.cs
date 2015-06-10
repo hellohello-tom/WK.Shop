@@ -47,7 +47,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 导航ID
         /// </summary>
-		[RegularExpression("-?\\d+", ErrorMessage = "*")]		
+        [Required(ErrorMessage="请选择导航")]		[RegularExpression("-?\\d+", ErrorMessage = "*")]		
         public int Tag_NavigationId
         {
             get{ return _Tag_NavigationId; }
@@ -61,7 +61,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 标签名称
         /// </summary>
-		[StringLength(10,ErrorMessage="*")]		
+        [Required(ErrorMessage = "必填")]		[StringLength(10,ErrorMessage="长度不可超过10个字符")]		
         public string Tag_Name
         {
             get{ return _Tag_Name; }
@@ -74,8 +74,7 @@ namespace Shop.Model{
 				
 		/// <summary>
 		/// 标签图片
-        /// </summary>
-		[StringLength(500,ErrorMessage="*")]		
+        /// </summary>		[StringLength(500,ErrorMessage="*")]		
         public string Tag_ImagePath
         {
             get{ return _Tag_ImagePath; }
@@ -89,7 +88,9 @@ namespace Shop.Model{
 		/// <summary>
 		/// 排序
         /// </summary>
-		[RegularExpression("-?\\d+", ErrorMessage = "*")]		
+        [Required(ErrorMessage = "必填")]
+        [Range(1, 999, ErrorMessage = "1~999之间")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
         public int Tag_Sort
         {
             get{ return _Tag_Sort; }

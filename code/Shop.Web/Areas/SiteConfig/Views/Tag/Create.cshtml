@@ -2,18 +2,38 @@
 @{
     ViewBag.Title = "Tag_Create";
 }
+<script type="text/javascript">
+    function SiteConfig_Tag_Create_UploadComplete(event, response, status) {
+        if (status) {
+            var json = eval("(" + response + ")");
+            if (json.status == 1) {
+                alertMsg.correct(json.msg);
+                $('#Tag_ImagePath').val(json.data.thumbnailFileName);
+                $('#imgTag').attr('src', json.data.thumbnailFileName);
+            }
+            else {
+                alertMsg.error(json.msg);
+            }
+        }
+    }
+</script>
 <h2 class="contentTitle">标签信息</h2>
 <div class="pageContent">
     @using (Html.BeginForm("Create", "Tag", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
     {
+        @Html.HiddenFor(x=>x.Id)
+        @Html.HiddenFor(x => x.Tag_CreateTime)
+        @Html.HiddenFor(x => x.Tag_IsDel)
+        @Html.HiddenFor(x => x.Tag_User)
         <div class="pageFormContent" layouth="140">
             <dl>
                 <dt>手机导航</dt>
                 <dd>
-                    @Html.HiddenFor(m => m.Tag_NavigationId, new { dataField = "selectModule.Id" })
-                    <input type="text" readonly="readonly" class="required" datafield="selectModule.Name" value="@ViewBag.NavigationName " />
-                    <a class="btnLook" href="/SiteConfig/Tag/SelectNavigation/?navigationId={ModuleIds}"
-                       lookupgroup="selectModule">选择模块</a>
+                    @Html.HiddenFor(m => m.Tag_NavigationId, new { dataField = "selectNavigation.Id" })
+                    <input type="text" readonly="readonly" class="required" datafield="selectNavigation.NavigationName" value="@Model.Tag_Name" />
+                    <a href="/SiteConfig/Tag/SelectNavigation" class="btnLook" lookupgroup="selectNavigation">
+                        选择评定内容
+                    </a>
                     @Html.ValidationMessageFor(m => m.Tag_NavigationId)
                 </dd>
             </dl>
@@ -27,17 +47,18 @@
             <dl>
                 <dt>标签图片</dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.Tag_ImagePath)
-                    <input id="SiteConfig_Tag_Create_UploadImg" type="file" name="filedata" 
-                    uploaderoption="{
-                    script:'Upload/SingleFile?isImage=1',
-                    fileSizeLimit:'@ViewBag.FileSize+KB',
-                    fileTypeExts:'*.png',
+                    @Html.HiddenFor(m => m.Tag_ImagePath, new { @readonly="readonly"})
+                    <input id="SiteConfig_Tag_Create_UploadImg" type="file" name="filedata"
+                           uploaderoption="{
+                           uploader:'/Common/Upload/SingleFile?isReOriginal=1',
+                    fileSizeLimit:'@Shop.Web.BaseData.SiteConfig.AttachSize KB',
+                    fileTypeExts:'*.png;*.gif;*.jpg',
                     auto:true,
                     multi:false,
                     onUploadSuccess:SiteConfig_Tag_Create_UploadComplete
-                    }" />
+                           }" />
                     @Html.ValidationMessageFor(m => m.Tag_ImagePath)
+                    <img src="@Model.Tag_ImagePath" id="imgTag" style="width:140px;height:140px"/>
                 </dd>
             </dl>
             <dl>

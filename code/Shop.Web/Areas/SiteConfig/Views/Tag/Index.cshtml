@@ -4,10 +4,10 @@
 }
 
 <form id="pagerForm" method="post" action="/SiteConfig/Tag/Index">
-    <input type="hidden" name="pageNum" value="1" />
     <input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
     <input type="hidden" name="numPerPage" value="@Model.PageSize" />
     <input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+    <input type="hidden" name="navigationId" value="@ViewBag.NavigationId"/>
 </form>
 <div class="pageHeader">
     <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SiteConfig/Tag/Index" method="post">
@@ -55,11 +55,12 @@
                 <tr target="Tag_ids" rel="@m.Id">
                     <td><input name="ids" value="@m.Id" type="checkbox"></td>
                     <td>@m.Tag_Name</td>
-                    <td><image src="@m.Tag_ImagePath" /></td>
+                    <td><image src="@m.Tag_ImagePath" style="width:80px;height:80px" /></td>
                     <td>@m.Tag_Sort</td>
                     <td>@m.Tag_CreateTime</td>
                     <td>
-                        <a title="编辑[Tag]信息" rel="SiteConfig_Tag_Edit" target="navTab" href="/SiteConfig/Tag/Create/@m.Id" class="btnEdit">编辑</a>
+                        <a title="商品管理" rel="SiteConfig_Commodity" target="navTab" href="/SiteConfig/Commodity/Index?tagId=@m.Id" class="btnView">查看旗下商品</a>
+                        <a title="编辑标签信息" rel="SiteConfig_Tag_Edit" target="navTab" href="/SiteConfig/Tag/Create/@m.Id" class="btnEdit">编辑</a>
                         <a title="确认删除?" target="ajaxTodo" href="/SiteConfig/Tag/Delete/@m.Id" class="btnDel">删除</a>
                     </td>
                 </tr>
