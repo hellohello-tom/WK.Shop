@@ -16,6 +16,7 @@ using Shop.Model;
 using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
+using System.IO;
 
 namespace Shop.Web.Areas.SiteConfig.Controllers
 {
@@ -25,7 +26,8 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
 	public class CommodityController:Controller
 	{	     
 		private readonly CommodityBLL bll=new CommodityBLL();
-	
+        private readonly TagBLL _tagBLL = new TagBLL();
+        private readonly FileAttrBLL _fileAttrBLL = new FileAttrBLL();
 		/// <summary>
         /// 分页列表
         /// </summary>
@@ -52,19 +54,110 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// 添加 编辑页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create(int id=0)
+        public ActionResult Create(int id = 0)
         {
+            Model.Commodity model = bll.GetModel(id) ?? new Commodity();
             if (id > 0)
             {
-                Model.Commodity model = bll.GetModel(id);
-                return View(model);
+                ViewBag.TagName = _tagBLL.GetModel(model.Commodity_TagId).Tag_Name;
+            }
+            ViewBag.FileAttrList = _fileAttrBLL.GetList(FileAttr._.FileAttr_IsDel == false
+                && FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessId != 0
+                && FileAttr._.FileAttr_BussinessCode == BizCode.Commodity.ToString(),
+                FileAttr._.FileAttr_CreateTime.Desc);
+            return View(model);
+        }
+
+        public ActionResult SelectTag()
+        {
+            //----导航列表
+            var tagList = _tagBLL.GetList(Tag._.Tag_IsDel == false);
+            var sourceList = tagList.OrderByDescending(x => x.Tag_CreateTime).ToList()
+                as List<Tag>;
+            ViewBag.TagList = sourceList;
+            return View();
+        }
+
+        /// <summary>
+        /// 删除附件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteFile(int id)
+        {
+            DWZCallbackInfo callback = null;
+            var fileModel = _fileAttrBLL.GetModel(id);
+            if (_fileAttrBLL.Delete(id))
+            {
+                callback = DWZMessage.Success("删除成功!");
+                System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
             }
             else
+                callback = DWZMessage.Faild("删除失败!");
+
+            return Json(callback);
+        }
+
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="newFileName">保存在服务端的路径包含文件名</param>
+        /// <param name="originalFileName">上传前的文件名</param>
+        /// <returns></returns>
+        public ActionResult AddPic(string newFileName, string originalFileName)
+        {
+            var statusCode = DWZStatusCode.Error.ToString();
+            var msg = string.Empty;
+            var id = 0;
+            try
             {
-                return View();
+                var serverPath = Server.MapPath(newFileName);
+                if (System.IO.File.Exists(serverPath))
+                {
+                    using (var fileInfo = System.IO.File.OpenRead(serverPath))
+                    {
+                        if (fileInfo.Length > 0)
+                        {
+                            var fileModel = new FileAttr
+                            {
+                                FileAttr_CreateTime = DateTime.Now,
+                                FileAttr_Path = newFileName,
+                                FileAttr_Name = originalFileName,
+                                FileAttr_Size = Convert.ToInt32(fileInfo.Length),
+                                FileAttr_BussinessCode = BizCode.Commodity.ToString(),
+                                FileAttr_IsDel = false,
+                                FileAttr_User = UserContext.CurUserInfo.Id,
+                                FileAttr_Ext = Path.GetExtension(serverPath),
+                                FileAttr_Sort = 0
+                            };
+                            id = _fileAttrBLL.Add(fileModel);
+                            if (id > 0)
+                            {
+                                statusCode = DWZStatusCode.Ok.ToString();
+                            }
+                            else
+                            {
+                                msg = originalFileName + "数据插入失败";
+                            }
+                        }
+                        else
+                        {
+                            msg = originalFileName + "文件字节长度为0";
+                        }
+                    }
+                }
+                else
+                {
+                    msg = originalFileName + "文件不存在";
+                }
             }
-        } 
-        
+            catch (Exception ex)
+            {
+                msg = originalFileName + ex.Message;
+            }
+            return Json(new { statusCode = statusCode, msg = msg, id = id });
+        }
+
         /// <summary>
         /// 添加 编辑操作
         /// </summary>
@@ -72,22 +165,34 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Model.Commodity model)
+        public ActionResult Create(Model.Commodity model, int[] imageIds)
         {
             bool flag = false;
-			DWZCallbackInfo callback=null;
+            DWZCallbackInfo callback = DWZMessage.Faild();
+            if (ModelState.IsValid)
+            {
+                if (imageIds.Length <= 0)
+                {
+                    model.Commodity_ImagePath = "/Content/web/images/NoPicture.png";
+                }
+                if (model.Id > 0)//修改
+                {
+                    flag = bll.Update(model, imageIds);
+                }
+                else//添加
+                {
+                    model.Commodity_CreateTime = DateTime.Now;
+                    model.Commodity_User = UserContext.CurUserInfo.Id;
+                    model.Commodity_IsDel = false;
+                    flag = bll.Add(model, imageIds) > 0;
+                }
 
-            if (model.Id > 0)//修改
-                flag=bll.Update(model);
-            else//添加
-                flag=bll.Add(model)>0;
-
-            if (flag)
-				callback = DWZMessage.Success();
-			else
-                callback = DWZMessage.Faild();
-
-             return Json(callback);
+                if (flag)
+                    callback = DWZMessage.Success();
+                else
+                    callback = DWZMessage.Faild();
+            }
+            return Json(callback);
         }
         #endregion
         

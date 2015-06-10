@@ -22,8 +22,27 @@ namespace Shop.BLL {
 	public partial class CommodityBLL : BLLBase<Commodity>
 	{	     
 		private readonly CommodityDAL dal=new CommodityDAL();
-	
-		
-   
+        
+        /// <summary>
+        /// 将上传的图片列表批量更新到数据库中
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="imageIds"></param>
+        /// <returns></returns>
+        public bool Update(Commodity model, int[] imageIds)
+        {
+            return dal.Update(model, imageIds);
+        }
+
+        /// <summary>
+        /// 将上传的图片列表批量更新到数据库中
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="imageIds"></param>
+        /// <returns></returns>
+        public int Add(Commodity model, int[] imageIds)
+        {
+            return dal.Add(model, imageIds);
+        }
 	}
 }

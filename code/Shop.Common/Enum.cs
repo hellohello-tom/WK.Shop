@@ -17,4 +17,15 @@ namespace Shop.Common
         /// </summary>
         Store=1
     }
+
+    /// <summary>
+    /// 业务标示
+    /// </summary>
+    public enum BizCode
+    {
+        /// <summary>
+        /// 商品
+        /// </summary>
+        Commodity=0
+    }
 }

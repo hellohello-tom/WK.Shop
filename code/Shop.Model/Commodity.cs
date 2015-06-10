@@ -54,8 +54,7 @@ namespace Shop.Model
         /// <summary>
         /// 标签Id
         /// </summary>
-
-        [RegularExpression("-?\\d+", ErrorMessage = "*")]
+        [Required(ErrorMessage="请选择商品标签")]
         public int Commodity_TagId
         {
             get { return _Commodity_TagId; }
@@ -69,8 +68,8 @@ namespace Shop.Model
         /// <summary>
         /// 商品名称
         /// </summary>
-
-        [StringLength(50, ErrorMessage = "*")]
+        [Required(ErrorMessage = "必填")]
+        [StringLength(50, ErrorMessage = "字符不能超过50个")]
         public string Commodity_Name
         {
             get { return _Commodity_Name; }
@@ -84,8 +83,7 @@ namespace Shop.Model
         /// <summary>
         /// 提醒
         /// </summary>
-
-        [StringLength(500, ErrorMessage = "*")]
+        [StringLength(200, ErrorMessage = "字符不能超过200个")]
         public string Commodity_Remind
         {
             get { return _Commodity_Remind; }
@@ -99,8 +97,9 @@ namespace Shop.Model
         /// <summary>
         /// 原价
         /// </summary>
-
-        [RegularExpression("-?\\d{1,9}(.\\d{1,0})?", ErrorMessage = "*")]
+         [Required(ErrorMessage = "必填")]
+         [Range(0.02, 100000.00, ErrorMessage = "价格范围0.02元~10万元")]
+         [RegularExpression(@"^(([1-9]+[0-9]*)|0)(\.\d{1,2})?$", ErrorMessage = "请输入正确价格，最多保留两位小数")]
         public decimal Commodity_CostPrice
         {
             get { return _Commodity_CostPrice; }
@@ -114,8 +113,7 @@ namespace Shop.Model
         /// <summary>
         /// 折扣系数
         /// </summary>
-
-        [RegularExpression("-?\\d{1,9}(.\\d{1,0})?", ErrorMessage = "*")]
+         [RegularExpression(@"^(([1-9]{1}[0-9]{0,1}))$", ErrorMessage = "请输入1~99正整数，例如85折为85")]
         public decimal Commodity_Discount
         {
             get { return _Commodity_Discount; }
@@ -129,8 +127,9 @@ namespace Shop.Model
         /// <summary>
         /// 剩余数量
         /// </summary>
-
-        [RegularExpression("-?\\d+", ErrorMessage = "*")]
+         [Required(ErrorMessage = "必填")]
+         [Range(0, 100000, ErrorMessage = "0~100000之间")]
+         [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
         public int Commodity_ResidueCount
         {
             get { return _Commodity_ResidueCount; }
@@ -145,7 +144,7 @@ namespace Shop.Model
         /// 备注
         /// </summary>
 
-        [StringLength(500, ErrorMessage = "*")]
+        [StringLength(500, ErrorMessage = "不能超过500个字符")]
         public string Commodity_Remark
         {
             get { return _Commodity_Remark; }
@@ -159,8 +158,6 @@ namespace Shop.Model
         /// <summary>
         /// 默认展示图片
         /// </summary>
-
-        [StringLength(500, ErrorMessage = "*")]
         public string Commodity_ImagePath
         {
             get { return _Commodity_ImagePath; }

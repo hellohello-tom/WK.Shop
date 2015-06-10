@@ -126,10 +126,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
@@ -591,6 +589,7 @@
     <Content Include="Resource\fonts\Linearicons-Free.woff" />
     <Content Include="Resource\fonts\Linearicons-Free.woff2" />
     <Content Include="Areas\SiteConfig\Views\Tag\SelectNavigation.cshtml" />
+    <Content Include="Areas\SiteConfig\Views\Commodity\SelectTag.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\lnr-font.css" />
     <Content Include="Resource\css\site.css" />
@@ -696,8 +695,6 @@
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\uploadify\cancel.png" />
     <Content Include="Scripts\uploadify\Change Log.txt" />
@@ -991,7 +988,6 @@
     <Content Include="Scripts\xheditor\xheditor_skin\vista\img\wordimg.gif" />
     <Content Include="Scripts\xheditor\xheditor_skin\vista\ui.css" />
     <Content Include="Scripts\zepto\zepto.min.js" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

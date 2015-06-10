@@ -1,81 +1,171 @@
 ﻿@model Shop.Model.Commodity
 @{
     ViewBag.Title = "Commodity_Create";
+    var fileAttrList = ViewBag.FileAttrList as List<Shop.Model.FileAttr>;
 }
-<h2 class="contentTitle">[Commodity]</h2>
+<script type="text/javascript">
+    function SiteConfig_Commodity_Create_UploadComplete(event, response, status) {
+        if (status) {
+            var json = eval("(" + response + ")");
+            if (json.status == 1) {
+                $.post("/SiteConfig/Commodity/AddPic", { "newFileName": json.data.newFileName, "originalFileName": json.data.originalFileName }, function (data) {
+                    if (data.statusCode == "Ok") {
+                        alertMsg.correct(json.msg);
+                        $('#fileAttrTable tbody tr:last').before('<tr><td>' + json.data.originalFileName + '<input type="hidden" value=' + data.id + ' name="imageIds"/></td><td><img src=' + json.data.newFileName + ' style="width:90px;height:90px" /></td><td><a style="font-size: 12px; margin-left: 3px" title="删除" href="javascript:;" onclick="SiteConfig_Commodity_Create_DeleteFile(this,'+data.id+');">删除</a></td></tr>');
+                    }
+                    else {
+                        console.log(data.msg);
+                        alertMsg.error(data.msg);
+                    }
+                });
+            }
+            else {
+                console.log(json.msg);
+                alertMsg.error(json.msg);
+            }
+        }
+    }
+
+    function SiteConfig_Commodity_Create_DeleteFile(btn,id) {
+        $.post("/SiteConfig/Commodity/DeleteFile", { "id": id }, function (data) {
+            if (data.statusCode == "200") {
+                alertMsg.correct(data.message);
+                $(btn).closest('tr').remove();
+            }
+            else {
+                console.log(data.message);
+                alertMsg.error(data.message);
+            }
+        });
+    }
+</script>
+<h2 class="contentTitle">商品管理</h2>
 <div class="pageContent">
-@using (Html.BeginForm("Create","Commodity", FormMethod.Post,new Dictionary<string,object>(){ { "class",""},{"onsubmit","return validateCallback(this,navTabAjaxDone);"}})) {
-    <div class="pageFormContent nowrap" layoutH="97">	
-		<dl>
-		<dt>商品名称</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_Name)
-		          @Html.ValidationMessageFor(m => m.Commodity_Name)
-		</dd>
-	</dl>
-		<dl>
-		<dt>提醒</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_Remind)
-		          @Html.ValidationMessageFor(m => m.Commodity_Remind)
-		</dd>
-	</dl>
-		<dl>
-		<dt>原价</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_CostPrice)
-		          @Html.ValidationMessageFor(m => m.Commodity_CostPrice)
-		</dd>
-	</dl>
-		<dl>
-		<dt>折扣系数</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_Discount)
-		          @Html.ValidationMessageFor(m => m.Commodity_Discount)
-		</dd>
-	</dl>
-		<dl>
-		<dt>剩余数量</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_ResidueCount)
-		          @Html.ValidationMessageFor(m => m.Commodity_ResidueCount)
-		</dd>
-	</dl>
-		<dl>
-		<dt>备注</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_Remark)
-		          @Html.ValidationMessageFor(m => m.Commodity_Remark)
-		</dd>
-	</dl>
-		<dl>
-		<dt>创建时间</dt>
-		<dd>
-		
-		 @Html.TextBoxFor(m => m.Commodity_CreateTime, new { @class = "date", @readonly = "true" })<a class="inputDateButton" href="javascript:;">选择</a>
-		          @Html.ValidationMessageFor(m => m.Commodity_CreateTime)
-		</dd>
-	</dl>
-		<dl>
-		<dt>创建人</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_User)
-		          @Html.ValidationMessageFor(m => m.Commodity_User)
-		</dd>
-	</dl>
-		<dl>
-		<dt>是否删除</dt>
-		<dd>
-				  @Html.TextBoxFor(m => m.Commodity_IsDel)
-		          @Html.ValidationMessageFor(m => m.Commodity_IsDel)
-		</dd>
-	</dl>
-	    </div>
-		<div class="formBar">
-			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
-				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
-			</ul>
-		</div>
-}
+    @using (Html.BeginForm("Create", "Commodity", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+    {
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.Commodity_CreateTime)
+        @Html.HiddenFor(x => x.Commodity_IsDel)
+        @Html.HiddenFor(x => x.Commodity_User)
+        <div class="pageFormContent" layouth="140">
+            <dl>
+                <dt>商品图片</dt>
+                <dd>
+                    <input id="SiteConfig_Commodity_Create_UploadImg" type="file" name="filedata"
+                           uploaderoption="{
+                           uploader:'/Common/Upload/SingleFile?isReOriginal=1',
+                    fileSizeLimit:'@Shop.Web.BaseData.SiteConfig.AttachSize KB',
+                    fileTypeExts:'*.png;*.gif;*.jpg',
+                    auto:true,
+                    multi:false,
+                    onUploadSuccess:SiteConfig_Commodity_Create_UploadComplete
+                    }" />
+                    <table id="fileAttrTable" width="100%" class="list">
+                        <thead style="font-weight: bold">
+                            <tr>
+                                <td>
+                                    文件名称
+                                </td>
+                                <td>
+                                    文件大小
+                                </td>
+                                <td>
+                                    操作
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var f in fileAttrList)
+                            {
+                                <tr>
+                                    <td>
+                                        @f.FileAttr_Name
+                                        <input type="hidden" name="imageIds"/>
+                                    </td>
+                                    <td>
+                                        <img src="@f.FileAttr_Path" style="width:90px;height:90px" />
+                                    </td>
+                                    <td>
+                                        <a style='font-size: 12px; margin-left: 3px' title='删除' href="javascript:;" onclick="SiteConfig_Commodity_Create_DeleteFile(this,@f.Id);">
+                                            删除
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            <tr style="display:none"><td colspan="3"></td></tr>
+                        </tbody>
+                    </table>
+                </dd>
+            </dl>
+            <dl>
+                <dt>商品标签</dt>
+                <dd>
+                    @Html.HiddenFor(m => m.Commodity_TagId, new { dataField = "selectTag.Id" })
+                    <input type="text" readonly="readonly" class="required" datafield="selectTag.TagName" value="@ViewBag.TagName" />
+                    <a href="/SiteConfig/Commodity/SelectTag" class="btnLook" lookupgroup="selectTag">
+                        选择评定内容
+                    </a>
+                    @Html.ValidationMessageFor(m => m.Commodity_TagId)
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>商品名称</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Commodity_Name)
+                    @Html.ValidationMessageFor(m => m.Commodity_Name)
+                </dd>
+            </dl>
+            <dl>
+                <dt>提醒</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Commodity_Remind)
+                    @Html.ValidationMessageFor(m => m.Commodity_Remind)
+                </dd>
+            </dl>
+            <dl>
+                <dt>原价</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Commodity_CostPrice)
+                    @Html.ValidationMessageFor(m => m.Commodity_CostPrice)
+                </dd>
+            </dl>
+            <dl>
+                <dt>折扣系数</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Commodity_Discount)
+                    @Html.ValidationMessageFor(m => m.Commodity_Discount)
+                </dd>
+            </dl>
+            <dl>
+                <dt>剩余数量</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Commodity_ResidueCount)
+                    @Html.ValidationMessageFor(m => m.Commodity_ResidueCount)
+                </dd>
+            </dl>
+            <dl>
+                <dt>备注</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Commodity_Remark)
+                    @Html.ValidationMessageFor(m => m.Commodity_Remark)
+                </dd>
+            </dl>
+            <dl>
+                <dt>图文详情</dt>
+                <dd>
+                    <div class="unit">
+                        @Html.TextAreaFor(m => m.Commodity_Content, new { rows = "16", cols = "100", @class = "editor", tools = "Cut,Copy,|,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,|,Align,List,Outdent,Indent,|,Fullscreen,Emot,Table,Hr" })
+                    </div>
+
+                </dd>
+            </dl>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+            </ul>
+        </div>
+    }
 </div>

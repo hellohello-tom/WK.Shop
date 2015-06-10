@@ -30,7 +30,7 @@
                 <dt>手机导航</dt>
                 <dd>
                     @Html.HiddenFor(m => m.Tag_NavigationId, new { dataField = "selectNavigation.Id" })
-                    <input type="text" readonly="readonly" class="required" datafield="selectNavigation.NavigationName" value="@Model.Tag_Name" />
+                    <input type="text" readonly="readonly" class="required" datafield="selectNavigation.NavigationName" value="@ViewBag.NavigationName" />
                     <a href="/SiteConfig/Tag/SelectNavigation" class="btnLook" lookupgroup="selectNavigation">
                         选择评定内容
                     </a>

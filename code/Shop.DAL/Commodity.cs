@@ -13,14 +13,62 @@ using System.Text;
 using Shop.Model;
 using MySoft.Data;
 
-namespace Shop.DAL  
+namespace Shop.DAL
 {
-	/// <summary>
-	/// Commodity数据访问层
-	/// </summary>
-	public partial class CommodityDAL : DALBase<Commodity>
-	{
-   		
-   		
-	}
+    /// <summary>
+    /// Commodity数据访问层
+    /// </summary>
+    public partial class CommodityDAL : DALBase<Commodity>
+    {
+
+        public bool Update(Commodity model, int[] imageIds)
+        {
+            var trans = DB.BeginTrans();
+            try
+            {
+                model.Attach();
+                if (imageIds.Length > 0)
+                {
+                    trans.Update<FileAttr>(FileAttr._.FileAttr_BussinessId, model.Id, FileAttr._.Id.In(imageIds));
+                }
+                trans.Save(model);
+                trans.Commit();
+                return true;
+            }
+            catch
+            {
+                trans.Rollback();
+                return false;
+            }
+            finally
+            {
+                trans.Dispose();
+            }
+        }
+
+        public int Add(Commodity model, int[] imageIds)
+        {
+            int id = 0;
+            var trans = DB.BeginTrans();
+            try
+            {
+                InsertCreator ic = InsertCreator.NewCreator().SetEntity<Commodity>(model);
+                trans.Excute(ic, out id);
+                if (imageIds.Length > 0)
+                {
+                    trans.Update<FileAttr>(FileAttr._.FileAttr_BussinessId, id, FileAttr._.Id.In(imageIds));
+                }
+                trans.Commit();
+            }
+            catch
+            {
+                trans.Rollback();
+            }
+            finally
+            {
+                trans.Dispose();
+            }
+            return id;
+        }
+    }
 }
