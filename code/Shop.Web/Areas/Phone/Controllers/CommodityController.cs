@@ -104,18 +104,22 @@ namespace Shop.Web.Areas.Phone.Controllers
 
             return View(commodity);
         }
+
         /// <summary>
         /// 药品详情图片页
         /// </summary>
         /// <param name="id">关联药品Id</param>
+        /// <param name="bCode">关联商品代码</param>
         /// <returns></returns>
-        public ActionResult CommodityImgList(int id)
+        public ActionResult CommodityImgList(int id,string bCode="Commodity")
         {
             #region 搜索条件
 
             WhereClip where = FileAttr._.FileAttr_IsDel == false;
+            
             if (id > 0)
                 where &= FileAttr._.FileAttr_BussinessId == id;
+            where &= FileAttr._.FileAttr_BussinessCode == bCode;
             OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
 
             #endregion
