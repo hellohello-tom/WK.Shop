@@ -56,6 +56,7 @@
         @Html.HiddenFor(x => x.Commodity_CreateTime)
         @Html.HiddenFor(x => x.Commodity_IsDel)
         @Html.HiddenFor(x => x.Commodity_User)
+        @Html.HiddenFor(x => x.Commodity_Sales)
         <div class="pageFormContent" layouth="140">
             <dl>
                 <dt>商品图片</dt>
@@ -135,6 +136,14 @@
                 <dd>
                     @Html.TextBoxFor(m => m.Commodity_Name)
                     @Html.ValidationMessageFor(m => m.Commodity_Name)
+                </dd>
+            </dl>
+
+
+            <dl>
+                <dt>销量</dt>
+                <dd>
+                    @Model.Commodity_Sales
                 </dd>
             </dl>
             <dl>

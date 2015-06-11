@@ -3,7 +3,7 @@
 //
 //  名    称：Commodity Model
 //  作    者：cat
-//  添加时间：2015-06-09 20:06:01
+//  添加时间：2015-06-11 13:04:50
 // ==========================================================================
 using System;
 //引用
@@ -24,6 +24,7 @@ namespace Shop.Model
         private int _Id;
         private int _Commodity_TagId;
         private string _Commodity_Name;
+        private int _Commodity_Sales;
         private string _Commodity_Remind;
         private decimal _Commodity_CostPrice;
         private decimal _Commodity_Discount;
@@ -54,7 +55,8 @@ namespace Shop.Model
         /// <summary>
         /// 标签Id
         /// </summary>
-        [Required(ErrorMessage="请选择商品标签")]
+
+        [RegularExpression("-?\\d+", ErrorMessage = "*")]
         public int Commodity_TagId
         {
             get { return _Commodity_TagId; }
@@ -81,9 +83,24 @@ namespace Shop.Model
         }
 
         /// <summary>
-        /// 提醒
+        /// 销量
         /// </summary>
-        [StringLength(200, ErrorMessage = "字符不能超过200个")]
+
+
+        public int Commodity_Sales
+        {
+            get { return _Commodity_Sales; }
+            set
+            {
+                OnPropertyValueChange(_.Commodity_Sales, _Commodity_Sales, value);
+                _Commodity_Sales = value;
+            }
+        }
+
+        /// <summary>
+        /// 提醒
+        /// </summary>		
+                [StringLength(200, ErrorMessage = "字符不能超过200个")]
         public string Commodity_Remind
         {
             get { return _Commodity_Remind; }
@@ -97,9 +114,9 @@ namespace Shop.Model
         /// <summary>
         /// 原价
         /// </summary>
-         [Required(ErrorMessage = "必填")]
-         [Range(0.02, 100000.00, ErrorMessage = "价格范围0.02元~10万元")]
-         [RegularExpression(@"^(([1-9]+[0-9]*)|0)(\.\d{1,2})?$", ErrorMessage = "请输入正确价格，最多保留两位小数")]
+        [Required(ErrorMessage = "必填")]
+        [Range(0.02, 100000.00, ErrorMessage = "价格范围0.02元~10万元")]
+        [RegularExpression(@"^(([1-9]+[0-9]*)|0)(\.\d{1,2})?$", ErrorMessage = "请输入正确价格，最多保留两位小数")]
         public decimal Commodity_CostPrice
         {
             get { return _Commodity_CostPrice; }
@@ -113,7 +130,7 @@ namespace Shop.Model
         /// <summary>
         /// 折扣系数
         /// </summary>
-         [RegularExpression(@"^(([1-9]{1}[0-9]{0,1}))$", ErrorMessage = "请输入1~99正整数，例如85折为85")]
+ [RegularExpression(@"^(([1-9]{1}[0-9]{0,1}))$", ErrorMessage = "请输入1~99正整数，例如85折为85")]
         public decimal? Commodity_Discount
         {
             get { return _Commodity_Discount; }
@@ -127,9 +144,9 @@ namespace Shop.Model
         /// <summary>
         /// 剩余数量
         /// </summary>
-         [Required(ErrorMessage = "必填")]
-         [Range(0, 100000, ErrorMessage = "0~100000之间")]
-         [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
+ [Required(ErrorMessage = "必填")]
+ [Range(0, 100000, ErrorMessage = "0~100000之间")]
+ [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
         public int Commodity_ResidueCount
         {
             get { return _Commodity_ResidueCount; }
@@ -142,9 +159,8 @@ namespace Shop.Model
 
         /// <summary>
         /// 备注
-        /// </summary>
-
-        [StringLength(500, ErrorMessage = "不能超过500个字符")]
+        /// </summary>		
+                [StringLength(500, ErrorMessage = "不能超过500个字符")]
         public string Commodity_Remark
         {
             get { return _Commodity_Remark; }
@@ -158,6 +174,8 @@ namespace Shop.Model
         /// <summary>
         /// 默认展示图片
         /// </summary>
+
+        [StringLength(500, ErrorMessage = "*")]
         public string Commodity_ImagePath
         {
             get { return _Commodity_ImagePath; }
@@ -184,6 +202,8 @@ namespace Shop.Model
         /// <summary>
         /// 创建时间
         /// </summary>
+
+        [Required(ErrorMessage = "*")]
 
         [RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]
         public DateTime? Commodity_CreateTime
@@ -213,7 +233,9 @@ namespace Shop.Model
 
         /// <summary>
         /// 是否删除
-        /// </summary>		
+        /// </summary>
+
+        [Required(ErrorMessage = "*")]
         public bool Commodity_IsDel
         {
             get { return _Commodity_IsDel; }
@@ -260,6 +282,7 @@ namespace Shop.Model
             					_.Id,
 								_.Commodity_TagId,
 								_.Commodity_Name,
+								_.Commodity_Sales,
 								_.Commodity_Remind,
 								_.Commodity_CostPrice,
 								_.Commodity_Discount,
@@ -281,6 +304,7 @@ namespace Shop.Model
             					_Id,
 								_Commodity_TagId,
 								_Commodity_Name,
+								_Commodity_Sales,
 								_Commodity_Remind,
 								_Commodity_CostPrice,
 								_Commodity_Discount,
@@ -312,6 +336,11 @@ namespace Shop.Model
             if ((false == reader.IsDBNull(_.Commodity_Name)))
             {
                 this._Commodity_Name = reader.GetString(_.Commodity_Name);
+            }
+
+            if ((false == reader.IsDBNull(_.Commodity_Sales)))
+            {
+                this._Commodity_Sales = reader.GetInt32(_.Commodity_Sales);
             }
 
             if ((false == reader.IsDBNull(_.Commodity_Remind)))
@@ -404,6 +433,11 @@ namespace Shop.Model
             /// 商品名称 -  数据类型:string
             /// </summary>
             public static Field Commodity_Name = new Field<Commodity>("Commodity_Name");
+
+            /// <summary>
+            /// 字段名:Commodity_Sales -  数据类型:int
+            /// </summary>
+            public static Field Commodity_Sales = new Field<Commodity>("Commodity_Sales");
 
             /// <summary>
             /// 提醒 -  数据类型:string

@@ -62,7 +62,7 @@
                             var keyword = $(this).html();
                             hideSearchTips();
                             $("[name=keyword]").val(keyword);
-                            location.href = "/Phone/Commodity/CommodityList?search=" + keyword;
+                            location.href = "/Phone/Commodity/CommodityList?search=" + keyword + "&tagId=0";
                         })
                     } else {
                         hideSearchTips();
