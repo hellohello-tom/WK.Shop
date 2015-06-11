@@ -159,6 +159,11 @@ a:active {
   color: #fff;
   position: fixed;
   width: 100%;
+  z-index: 3;
+}
+.header h2 {
+  font-size: 1.25rem;
+  padding: 0 50px;
 }
 .header .goback,
 .header .ico-search,
@@ -188,13 +193,13 @@ a:active {
   transform: rotate(-45deg);
 }
 [data-theme=skin1] .header {
-  background: #0cc;
+  background: #0FB3B3;
 }
 [data-theme=skin2] .header {
-  background: #47b;
+  background: #7B2EA8;
 }
 [data-theme=skin3] .header {
-  background: #345;
+  background: #547393;
 }
 .pro {
   padding: 3rem 0;
@@ -318,7 +323,6 @@ header.s {
 }
 .pro-wrapper {
   padding: 5px;
-  padding-bottom: 3rem;
 }
 .pro-wrapper .pro-item {
   float: left;
