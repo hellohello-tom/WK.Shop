@@ -77,12 +77,17 @@ namespace Shop.Web.Areas.Phone.Controllers
             WhereClip where = Commodity._.Commodity_IsDel == false;
             if (tagId > 0)
                 where &= Commodity._.Commodity_TagId == tagId;
-            if (string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search))
             {
                 where &= (Commodity._.Commodity_Name.Like("%" + search + "%") || Commodity._.Commodity_Content.Like("%" + search + "%")
                 || Commodity._.Commodity_Remind.Like("%" + search + "%"));
             }
-            OrderByClip order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
+            OrderByClip order = new OrderByClip("Commodity_CreateTime Desc");
+            if (!string.IsNullOrEmpty(pi.SortOrder)&&!string.IsNullOrEmpty(pi.SortName))
+            {
+                order = order&new OrderByClip(pi.SortName + " " + pi.SortOrder);
+            }
+            
             #endregion
             var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
             return View("Partial/CommodityItemList", commodityList);

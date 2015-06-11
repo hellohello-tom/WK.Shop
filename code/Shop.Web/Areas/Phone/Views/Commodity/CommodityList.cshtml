@@ -4,16 +4,26 @@
 }
 
 <input id="tag-id" type="hidden" value="@ViewBag.TagId" />
-
+<div id="commodity-list"></div>
 
 
 <footer>
     <script type="text/javascript">
-
-        var loadCommodityList=function(tagId,where,order) {
-
+        var pageNum=1, numPerPage=100, sortName='', sortOrder='',seacch='';
+        var loadCommodityList = function (tagId, pageNum, numPerPage, sortName, sortOrder) {
+            $.ajax({
+                url: "/Phone/Commodity/CommodityItemList",
+                data: { 'tagId': tagId, 'PageNum': pageNum, 'NumPerPage': numPerPage, 'sortName': sortName, 'sortOrder': sortOrder,'seacch':seacch },
+                success:function(data) {
+                    $('#commodity-list').html(data).show(500);
+                }
+            });
         }
 
         var defTagid = $('#tag-id').val();
+
+        $(function() {
+            loadCommodityList(defTagid, pageNum, numPerPage, sortName, sortOrder);
+        });
     </script>
 </footer>

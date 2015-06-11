@@ -1,1 +1,5 @@
-﻿
+﻿@model List<Shop.Model.Commodity>
+@foreach (var comm in Model)
+{
+    <p>@comm.Commodity_Name</p>
+}
