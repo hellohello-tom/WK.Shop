@@ -15,6 +15,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         private readonly NavigationBLL navigationBLL = new NavigationBLL();
         private readonly TagBLL tagBll = new TagBLL();
         private readonly CommodityBLL commodityBll = new CommodityBLL();
+        private readonly FileAttrBLL fileAttrBll = new FileAttrBLL();
         /// <summary>
         /// 药店首页
         /// </summary>
@@ -91,6 +92,36 @@ namespace Shop.Web.Areas.Phone.Controllers
             #endregion
             var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
             return View("Partial/CommodityItemList", commodityList);
+        }
+        /// <summary>
+        /// 药品详情页
+        /// </summary>
+        /// <param name="id">药品Id</param>
+        /// <returns></returns>
+        public ActionResult CommodityDeatil(int id)
+        {
+            var commodity = commodityBll.GetModelByCache(id);
+
+            return View(commodity);
+        }
+        /// <summary>
+        /// 药品详情图片页
+        /// </summary>
+        /// <param name="id">关联药品Id</param>
+        /// <returns></returns>
+        public ActionResult CommodityImgList(int id)
+        {
+            #region 搜索条件
+
+            WhereClip where = FileAttr._.FileAttr_IsDel == false;
+            if (id > 0)
+                where &= FileAttr._.FileAttr_BussinessId == id;
+            OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
+
+            #endregion
+
+            var imgList = fileAttrBll.GetList(where, order);
+            return View("Partial/ImgList", imgList);
         }
     }
 }

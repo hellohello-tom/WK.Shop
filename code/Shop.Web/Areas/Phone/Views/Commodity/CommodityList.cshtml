@@ -8,22 +8,27 @@
 
 
 <footer>
-    <script type="text/javascript">
-        var pageNum=1, numPerPage=100, sortName='', sortOrder='',seacch='';
-        var loadCommodityList = function (tagId, pageNum, numPerPage, sortName, sortOrder) {
-            $.ajax({
-                url: "/Phone/Commodity/CommodityItemList",
-                data: { 'tagId': tagId, 'PageNum': pageNum, 'NumPerPage': numPerPage, 'sortName': sortName, 'sortOrder': sortOrder,'seacch':seacch },
-                success:function(data) {
-                    $('#commodity-list').html(data).show(500);
-                }
+    @section Js
+    {
+        <script type="text/javascript">
+            var para = {};
+            para.pageNum = 1, para.numPerPage = 100, para.sortName = '', para.sortOrder = '', para.seacch = '';
+            var loadCommodityList = function (para) {
+                $.ajax({
+                    url: "/Phone/Commodity/CommodityItemList",
+                    data: para,
+                    success: function (data) {
+                        $('#commodity-list').html(data).show(500);
+                    }
+                });
+            }
+
+            var defaultTagId = $('#tag-id').val();
+            para.tagId = defaultTagId;
+            $(function () {
+                loadCommodityList(para);
             });
-        }
+        </script>
+    }
 
-        var defTagid = $('#tag-id').val();
-
-        $(function() {
-            loadCommodityList(defTagid, pageNum, numPerPage, sortName, sortOrder);
-        });
-    </script>
 </footer>

@@ -1,0 +1,10 @@
+﻿@model Shop.Model.Commodity
+@{
+    ViewBag.Title = "药品详情";
+    Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Commodity_Name</h2>
+@Html.Action("CommodityImgList", new { id = @Model.Id })
+<div >@Html.Raw(Model.Commodity_Content)</div>
+

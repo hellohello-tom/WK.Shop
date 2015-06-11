@@ -30,6 +30,13 @@ namespace Shop.Web.Areas.Phone
             );
 
             context.MapRoute(
+                "Phone_yaoDeatil",
+                "yaodian/detail/{Id}",
+                new { Controller = "Commodity", action = "CommodityDeatil", Id = UrlParameter.Optional },
+                yaodianArea
+            );
+
+            context.MapRoute(
                 "Phone_default",
                 "Phone/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },

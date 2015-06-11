@@ -1,5 +1,6 @@
 ﻿@model List<Shop.Model.Commodity>
 @foreach (var comm in Model)
 {
-    <p>@comm.Commodity_Name</p>
+    <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
+        <p>@comm.Commodity_Name</p></a>
 }
