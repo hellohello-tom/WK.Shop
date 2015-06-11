@@ -11,6 +11,7 @@ namespace Shop.Web.Areas.Phone.Controllers
 {
     public class CommodityController : Controller
     {
+
         private readonly NavigationBLL navigationBLL = new NavigationBLL();
         private readonly TagBLL tagBll = new TagBLL();
         private readonly CommodityBLL commodityBll = new CommodityBLL();
