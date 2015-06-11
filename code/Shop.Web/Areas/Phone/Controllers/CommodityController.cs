@@ -54,14 +54,22 @@ namespace Shop.Web.Areas.Phone.Controllers
 
             return View("Partial/TagList", tagList);
         }
+
         /// <summary>
         /// 药品列表页
         /// </summary>
         /// <param name="tagId"></param>
+        /// <param name="search"></param>
         /// <returns></returns>
-        public ActionResult CommodityList(int tagId)
+        public ActionResult CommodityList(int tagId,string search="")
         {
             ViewBag.TagId = tagId;
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                ViewBag.SearchTitle = "搜索结果";
+                ViewBag.Search = search;
+            }
+            
             return View();
         }
 
@@ -82,7 +90,7 @@ namespace Shop.Web.Areas.Phone.Controllers
                 where &= Commodity._.Commodity_TagId == tagId;
             if (!string.IsNullOrEmpty(search))
             {
-                where &= (Commodity._.Commodity_Name.Like("%" + search + "%") || Commodity._.Commodity_Content.Like("%" + search + "%")
+                where &=  WhereClip.Bracket(Commodity._.Commodity_Name.Like("%" + search + "%") || Commodity._.Commodity_Content.Like("%" + search + "%")
                 || Commodity._.Commodity_Remind.Like("%" + search + "%"));
             }
             OrderByClip order = new OrderByClip("Commodity_CreateTime Desc");
@@ -99,10 +107,13 @@ namespace Shop.Web.Areas.Phone.Controllers
             var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
             if (notId != 0)
             {
+                //返回关联药品
                 return View("Partial/RelatedCommodityList", commodityList);
             }
+            //返回该tag下的所有药品
             return View("Partial/CommodityItemList", commodityList);
         }
+
         /// <summary>
         /// 药品详情页
         /// </summary>

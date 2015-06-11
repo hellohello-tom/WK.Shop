@@ -1,9 +1,10 @@
 ﻿@{
-    ViewBag.Title = "药品列表";
+    ViewBag.Title = ViewBag.SearchTitle ?? "药品列表";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 
-<input id="tag-id" type="hidden" value="@ViewBag.TagId" />
+<input id="tag-id" type="hidden" value="@ViewBag.TagId"/>
+<input id="search-key" type="hidden" value="@ViewBag.Search" />
 <div id="commodity-list"></div>
 
 
@@ -24,7 +25,9 @@
             }
 
             var defaultTagId = $('#tag-id').val();
+            var searchKey = $('#search-key').val().trim();
             para.tagId = defaultTagId;
+            para.seacch = searchKey;
             $(function () {
                 loadCommodityList(para);
             });
