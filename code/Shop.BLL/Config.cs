@@ -19,7 +19,7 @@ namespace Shop.BLL {
 	/// <summary>
 	/// Config业务逻辑层
 	/// </summary>
-	public partial class ConfigBLL : BLLBase<Config>
+	public partial class ConfigBLL 
 	{	     
 		private readonly ConfigDAL dal=new ConfigDAL();
 	

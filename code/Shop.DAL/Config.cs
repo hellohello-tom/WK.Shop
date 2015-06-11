@@ -18,7 +18,7 @@ namespace Shop.DAL
 	/// <summary>
 	/// Config数据访问层
 	/// </summary>
-	public partial class ConfigDAL : DALBase<Config>
+	public partial class ConfigDAL
 	{
    		
    		

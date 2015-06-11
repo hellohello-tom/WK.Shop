@@ -579,6 +579,8 @@
     <Content Include="Resource\css\site.css" />
     <Content Include="Resource\fonts\Linearicons-Free.svg" />
     <Content Include="Resource\Html\index.html" />
+    <Content Include="Scripts\bootstrap\typeahead\bootstrap-typeahead.js" />
+    <Content Include="Scripts\bootstrap\typeahead\css\typeahead.js-bootstrap.css" />
     <Content Include="Scripts\DatePicker\calendar.js" />
     <Content Include="Scripts\DatePicker\config.js" />
     <Content Include="Scripts\DatePicker\lang\en.js" />
