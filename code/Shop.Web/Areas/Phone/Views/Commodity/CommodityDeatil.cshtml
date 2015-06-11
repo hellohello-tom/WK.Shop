@@ -5,6 +5,11 @@
 }
 
 <h2>@Model.Commodity_Name</h2>
+<!--药品图片列表-->
 @Html.Action("CommodityImgList", new { id = @Model.Id })
+
+<!--药品详情-->
 <div >@Html.Raw(Model.Commodity_Content)</div>
 
+<!--相关药品列表-->
+@Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, notId = Model.Id })

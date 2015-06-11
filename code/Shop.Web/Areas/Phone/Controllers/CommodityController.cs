@@ -64,14 +64,16 @@ namespace Shop.Web.Areas.Phone.Controllers
             ViewBag.TagId = tagId;
             return View();
         }
+
         /// <summary>
         /// 药品列表项
         /// </summary>
         /// <param name="tagId"></param>
         /// <param name="pi"></param>
         /// <param name="search"></param>
+        /// <param name="notId">药品详情页（猜你喜欢的药品本身Id）</param>
         /// <returns></returns>
-        public ActionResult CommodityItemList(int tagId, DWZPageInfo pi, string search)
+        public ActionResult CommodityItemList(int tagId, DWZPageInfo pi, string search,int notId=0)
         {
             #region 搜索条件
 
@@ -88,9 +90,17 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 order = order&new OrderByClip(pi.SortName + " " + pi.SortOrder);
             }
+            if (notId!=0)
+            {
+                where &= Commodity._.Id != notId;
+            }
             
             #endregion
             var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
+            if (notId != 0)
+            {
+                return View("Partial/RelatedCommodityList", commodityList);
+            }
             return View("Partial/CommodityItemList", commodityList);
         }
         /// <summary>
