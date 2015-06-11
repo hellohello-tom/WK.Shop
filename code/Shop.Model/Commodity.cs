@@ -114,13 +114,13 @@ namespace Shop.Model
         /// 折扣系数
         /// </summary>
          [RegularExpression(@"^(([1-9]{1}[0-9]{0,1}))$", ErrorMessage = "请输入1~99正整数，例如85折为85")]
-        public decimal Commodity_Discount
+        public decimal? Commodity_Discount
         {
             get { return _Commodity_Discount; }
             set
             {
                 OnPropertyValueChange(_.Commodity_Discount, _Commodity_Discount, value);
-                _Commodity_Discount = value;
+                _Commodity_Discount = value.Value;
             }
         }
 

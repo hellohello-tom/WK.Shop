@@ -3,15 +3,17 @@
     ViewBag.Title = "Commodity_Create";
     var fileAttrList = ViewBag.FileAttrList as List<Shop.Model.FileAttr>;
 }
+
 <script type="text/javascript">
+    //上传图片保存至服务端
     function SiteConfig_Commodity_Create_UploadComplete(event, response, status) {
         if (status) {
             var json = eval("(" + response + ")");
             if (json.status == 1) {
-                $.post("/SiteConfig/Commodity/AddPic", { "newFileName": json.data.newFileName, "originalFileName": json.data.originalFileName }, function (data) {
+                $.post("/Common/Upload/AddPic", { "newFileName": json.data.newFileName, "originalFileName": json.data.originalFileName }, function (data) {
                     if (data.statusCode == "Ok") {
                         alertMsg.correct(json.msg);
-                        $('#fileAttrTable tbody tr:last').before('<tr><td>' + json.data.originalFileName + '<input type="hidden" value=' + data.id + ' name="imageIds"/></td><td><img src=' + json.data.newFileName + ' style="width:90px;height:90px" /></td><td><a style="font-size: 12px; margin-left: 3px" title="删除" href="javascript:;" onclick="SiteConfig_Commodity_Create_DeleteFile(this,'+data.id+');">删除</a></td></tr>');
+                        $('#fileAttrTable tbody tr:last').before('<tr><td>' + json.data.originalFileName + '<input type="hidden" value=' + data.id + ' name="imageIds"/></td><td><img src=' + json.data.newFileName + ' style="width:90px;height:90px" /></td><td><a style="font-size: 12px; margin-left: 3px" title="删除" href="javascript:;" onclick="SiteConfig_Commodity_Create_DeleteFile(this,' + data.id + ');">删除</a><a style="font-size: 12px; margin-left: 3px" title="设置默认图片" href="javascript:;" onclick="SiteConfig_Commodity_Create_SetDefaultImg(this);">默认图片</a></td></tr>');
                     }
                     else {
                         console.log(data.msg);
@@ -26,8 +28,9 @@
         }
     }
 
-    function SiteConfig_Commodity_Create_DeleteFile(btn,id) {
-        $.post("/SiteConfig/Commodity/DeleteFile", { "id": id }, function (data) {
+    //删除图片
+    function SiteConfig_Commodity_Create_DeleteFile(btn, id) {
+        $.post("/Common/Upload/DeleteFile", { "id": id }, function (data) {
             if (data.statusCode == "200") {
                 alertMsg.correct(data.message);
                 $(btn).closest('tr').remove();
@@ -37,6 +40,12 @@
                 alertMsg.error(data.message);
             }
         });
+    }
+    //设置默认图片
+    function SiteConfig_Commodity_Create_SetDefaultImg(btn) {
+        var src = $(btn).closest('tr').find('img').attr('src');
+        $('#imgCommodity').attr('src', src);
+        $('#Commodity_ImagePath').val(src);
     }
 </script>
 <h2 class="contentTitle">商品管理</h2>
@@ -50,10 +59,10 @@
         <div class="pageFormContent" layouth="140">
             <dl>
                 <dt>商品图片</dt>
-                <dd>
+                <dd style="width:500px">
                     <input id="SiteConfig_Commodity_Create_UploadImg" type="file" name="filedata"
                            uploaderoption="{
-                           uploader:'/Common/Upload/SingleFile?isReOriginal=1',
+                           uploader:'/Common/Upload/SingleFile?isReOriginal=1&isThumbnail=1',
                     fileSizeLimit:'@Shop.Web.BaseData.SiteConfig.AttachSize KB',
                     fileTypeExts:'*.png;*.gif;*.jpg',
                     auto:true,
@@ -63,7 +72,7 @@
                     <table id="fileAttrTable" width="100%" class="list">
                         <thead style="font-weight: bold">
                             <tr>
-                                <td>
+                                <td width="200px">
                                     文件名称
                                 </td>
                                 <td>
@@ -80,7 +89,7 @@
                                 <tr>
                                     <td>
                                         @f.FileAttr_Name
-                                        <input type="hidden" name="imageIds"/>
+                                        <input type="hidden" name="imageIds" />
                                     </td>
                                     <td>
                                         <img src="@f.FileAttr_Path" style="width:90px;height:90px" />
@@ -88,6 +97,9 @@
                                     <td>
                                         <a style='font-size: 12px; margin-left: 3px' title='删除' href="javascript:;" onclick="SiteConfig_Commodity_Create_DeleteFile(this,@f.Id);">
                                             删除
+                                        </a>
+                                        <a style="font-size: 12px; margin-left: 3px" title="设置默认图片" href="javascript:;" onclick="SiteConfig_Commodity_Create_SetDefaultImg(this);">
+                                        默认图片
                                         </a>
                                     </td>
                                 </tr>
@@ -97,6 +109,15 @@
                     </table>
                 </dd>
             </dl>
+            <dl>
+                <dt>商品默认图片</dt>
+                <dd>
+                    @Html.HiddenFor(m =>m.Commodity_ImagePath)
+                    <img src="@Model.Commodity_ImagePath" id="imgCommodity" style="width:140px;height:140px" />
+                    @Html.ValidationMessageFor(m => m.Commodity_ImagePath)
+                </dd>
+            </dl>
+
             <dl>
                 <dt>商品标签</dt>
                 <dd>
@@ -147,7 +168,7 @@
             <dl>
                 <dt>备注</dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.Commodity_Remark)
+                    @Html.TextAreaFor(m => m.Commodity_Remark, new { rows = "10", cols = "100" })
                     @Html.ValidationMessageFor(m => m.Commodity_Remark)
                 </dd>
             </dl>

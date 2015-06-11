@@ -1,6 +1,9 @@
-﻿using Shop.Common;
+﻿using Shop.BLL;
+using Shop.Common;
+using Shop.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +13,8 @@ namespace Shop.Web.Areas.Common.Controllers
     [AuthorizeType(NeedLogin = false)]
     public class UploadController : Controller
     {
+        private FileAttrBLL _fileAttrBLL = new FileAttrBLL();
+
         /// <summary>
         /// 上传单文件
         /// </summary>
@@ -104,6 +109,93 @@ namespace Shop.Web.Areas.Common.Controllers
                 }
             }
             return Json(errMsg);
+        }
+
+
+        /// <summary>
+        /// 删除附件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteFile(int id)
+        {
+            DWZCallbackInfo callback = null;
+            var fileModel = _fileAttrBLL.GetModel(id);
+            if (fileModel.FileAttr_User == UserContext.CurUserInfo.Id)
+            {
+                if (_fileAttrBLL.Delete(id))
+                {
+                    callback = DWZMessage.Success("删除成功!");
+                    System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
+                }
+                else
+                    callback = DWZMessage.Faild("删除失败!");
+            }
+            else
+            {
+                callback = DWZMessage.Faild("您没有权限删除他人文件!");
+            }
+            return Json(callback);
+        }
+
+        /// <summary>
+        /// 将已经保存在服务端的图片存入数据库
+        /// </summary>
+        /// <param name="newFileName">保存在服务端的路径包含文件名</param>
+        /// <param name="originalFileName">上传前的文件名</param>
+        /// <returns></returns>
+        public ActionResult AddPic(string newFileName, string originalFileName)
+        {
+            var statusCode = DWZStatusCode.Error.ToString();
+            var msg = string.Empty;
+            var id = 0;
+            try
+            {
+                var serverPath = Server.MapPath(newFileName);
+                if (System.IO.File.Exists(serverPath))
+                {
+                    using (var fileInfo = System.IO.File.OpenRead(serverPath))
+                    {
+                        if (fileInfo.Length > 0)
+                        {
+                            var fileModel = new FileAttr
+                            {
+                                FileAttr_CreateTime = DateTime.Now,
+                                FileAttr_Path = newFileName,
+                                FileAttr_Name = originalFileName,
+                                FileAttr_Size = Convert.ToInt32(fileInfo.Length),
+                                FileAttr_BussinessCode = BizCode.Commodity.ToString(),
+                                FileAttr_IsDel = false,
+                                FileAttr_User = UserContext.CurUserInfo.Id,
+                                FileAttr_Ext = Path.GetExtension(serverPath),
+                                FileAttr_Sort = 0
+                            };
+                            id = _fileAttrBLL.Add(fileModel);
+                            if (id > 0)
+                            {
+                                statusCode = DWZStatusCode.Ok.ToString();
+                            }
+                            else
+                            {
+                                msg = originalFileName + "数据插入失败";
+                            }
+                        }
+                        else
+                        {
+                            msg = originalFileName + "文件字节长度为0";
+                        }
+                    }
+                }
+                else
+                {
+                    msg = originalFileName + "文件不存在";
+                }
+            }
+            catch (Exception ex)
+            {
+                msg = originalFileName + ex.Message;
+            }
+            return Json(new { statusCode = statusCode, msg = msg, id = id });
         }
     }
 }

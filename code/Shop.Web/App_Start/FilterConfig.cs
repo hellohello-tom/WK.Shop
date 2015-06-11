@@ -7,6 +7,7 @@ namespace Shop.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new AuthorizeFilter());
             filters.Add(new HandleErrorAttribute());
         }
     }

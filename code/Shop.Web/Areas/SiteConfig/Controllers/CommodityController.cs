@@ -61,6 +61,12 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             {
                 ViewBag.TagName = _tagBLL.GetModel(model.Commodity_TagId).Tag_Name;
             }
+            else
+            {
+                model.Commodity_ImagePath = "/Content/web/images/NoPicture.png";
+                model.Commodity_CostPrice = 1;
+                model.Commodity_ResidueCount = 0;
+            }
             ViewBag.FileAttrList = _fileAttrBLL.GetList(FileAttr._.FileAttr_IsDel == false
                 && FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessId != 0
                 && FileAttr._.FileAttr_BussinessCode == BizCode.Commodity.ToString(),
@@ -78,85 +84,6 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             return View();
         }
 
-        /// <summary>
-        /// 删除附件
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult DeleteFile(int id)
-        {
-            DWZCallbackInfo callback = null;
-            var fileModel = _fileAttrBLL.GetModel(id);
-            if (_fileAttrBLL.Delete(id))
-            {
-                callback = DWZMessage.Success("删除成功!");
-                System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
-            }
-            else
-                callback = DWZMessage.Faild("删除失败!");
-
-            return Json(callback);
-        }
-
-        /// <summary>
-        /// 上传图片
-        /// </summary>
-        /// <param name="newFileName">保存在服务端的路径包含文件名</param>
-        /// <param name="originalFileName">上传前的文件名</param>
-        /// <returns></returns>
-        public ActionResult AddPic(string newFileName, string originalFileName)
-        {
-            var statusCode = DWZStatusCode.Error.ToString();
-            var msg = string.Empty;
-            var id = 0;
-            try
-            {
-                var serverPath = Server.MapPath(newFileName);
-                if (System.IO.File.Exists(serverPath))
-                {
-                    using (var fileInfo = System.IO.File.OpenRead(serverPath))
-                    {
-                        if (fileInfo.Length > 0)
-                        {
-                            var fileModel = new FileAttr
-                            {
-                                FileAttr_CreateTime = DateTime.Now,
-                                FileAttr_Path = newFileName,
-                                FileAttr_Name = originalFileName,
-                                FileAttr_Size = Convert.ToInt32(fileInfo.Length),
-                                FileAttr_BussinessCode = BizCode.Commodity.ToString(),
-                                FileAttr_IsDel = false,
-                                FileAttr_User = UserContext.CurUserInfo.Id,
-                                FileAttr_Ext = Path.GetExtension(serverPath),
-                                FileAttr_Sort = 0
-                            };
-                            id = _fileAttrBLL.Add(fileModel);
-                            if (id > 0)
-                            {
-                                statusCode = DWZStatusCode.Ok.ToString();
-                            }
-                            else
-                            {
-                                msg = originalFileName + "数据插入失败";
-                            }
-                        }
-                        else
-                        {
-                            msg = originalFileName + "文件字节长度为0";
-                        }
-                    }
-                }
-                else
-                {
-                    msg = originalFileName + "文件不存在";
-                }
-            }
-            catch (Exception ex)
-            {
-                msg = originalFileName + ex.Message;
-            }
-            return Json(new { statusCode = statusCode, msg = msg, id = id });
-        }
 
         /// <summary>
         /// 添加 编辑操作
@@ -188,7 +115,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
                 }
 
                 if (flag)
-                    callback = DWZMessage.Success();
+                    callback = DWZMessage.Success("操作成功", "SiteConfig_Commodity", true);
                 else
                     callback = DWZMessage.Faild();
             }

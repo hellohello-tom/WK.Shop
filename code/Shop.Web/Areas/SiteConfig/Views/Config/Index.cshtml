@@ -1,88 +1,79 @@
-﻿@model MySoft.Data.IDataPage<IList<Shop.Model.Config>>
+﻿@model Shop.Model.Config
 @{
-    ViewBag.Title = "Config_Index";
+    ViewBag.Title = "Commodity_Create";
+    var fileAttrList = ViewBag.FileAttrList as List<Shop.Model.FileAttr>;
 }
 
-<form id="pagerForm" method="post" action="/SiteConfig/Config/Index">
-	<input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
-	<input type="hidden" name="numPerPage" value="@Model.PageSize" />
-	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
-</form>
+<script type="text/javascript">
+    //上传图片保存至服务端
+    function SiteConfig_Commodity_Create_UploadComplete(event, response, status) {
+        if (status) {
+            var json = eval("(" + response + ")");
+            if (json.status == 1) {
+                $.post("/Common/Upload/AddPic", { "newFileName": json.data.newFileName, "originalFileName": json.data.originalFileName }, function (data) {
+                    if (data.statusCode == "Ok") {
+                        alertMsg.correct(json.msg);
+                        $('#fileAttrTable tbody tr:last').before('<tr><td>' + json.data.originalFileName + '<input type="hidden" value=' + data.id + ' name="imageIds"/></td><td><img src=' + json.data.newFileName + ' style="width:90px;height:90px" /></td><td><a style="font-size: 12px; margin-left: 3px" title="删除" href="javascript:;" onclick="SiteConfig_Commodity_Create_DeleteFile(this,' + data.id + ');">删除</a><a style="font-size: 12px; margin-left: 3px" title="设置默认图片" href="javascript:;" onclick="SiteConfig_Commodity_Create_SetDefaultImg(this);">默认图片</a></td></tr>');
+                    }
+                    else {
+                        console.log(data.msg);
+                        alertMsg.error(data.msg);
+                    }
+                });
+            }
+            else {
+                console.log(json.msg);
+                alertMsg.error(json.msg);
+            }
+        }
+    }
 
-<div class="pageHeader">
-	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/SiteConfig/Config/Index" method="post">
-	<div class="searchBar">
-		<ul class="searchContent">
-			@*<li>
-				<label>姓名：</label>
-				<input type="text" name="keywords" value="@ViewBag.Keywords"/>
-			</li>*@
-			  <li style="padding-left:10px; padding-top:0px; height:25px;">  
-                 <div class="buttonActive">
-                            <div class="buttonContent">
-                                <button type="submit">
-                                    检索</button></div>
-                 </div>
-            </li>
-		</ul>
-		
-		@*<div class="subBar">
-			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-				<li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
-			</ul>
-		</div>*@
-	</div>
-	</form>
-</div>
+    //删除图片
+    function SiteConfig_Commodity_Create_DeleteFile(btn, id) {
+        $.post("/Common/Upload/DeleteFile", { "id": id }, function (data) {
+            if (data.statusCode == "200") {
+                alertMsg.correct(data.message);
+                $(btn).closest('tr').remove();
+            }
+            else {
+                console.log(data.message);
+                alertMsg.error(data.message);
+            }
+        });
+    }
+    //设置默认图片
+    function SiteConfig_Commodity_Create_SetDefaultImg(btn) {
+        var src = $(btn).closest('tr').find('img').attr('src');
+        $('#imgCommodity').attr('src', src);
+        $('#Commodity_ImagePath').val(src);
+    }
+</script>
+<h2 class="contentTitle">商品管理</h2>
 <div class="pageContent">
-	<div class="panelBar">
-		<ul class="toolBar">
-			<li><a class="add" href="/SiteConfig/Config/Create" target="navTab" rel="SiteConfig_Config_Create"><span>添加</span></a></li>
-
-			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/SiteConfig/Config/DeleteList" class="delete"><span>批量删除</span></a></li>
-		</ul>
-	</div>
-	<table class="table" width="100%" layoutH="112">
-		<thead>
-			<tr>
-				<th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-				<th width="100">名称</th>
-				<th width="100">样式</th>
-				<th width="100">底部样式</th>
-				<th width="70">操作</th>
-			</tr>
-		</thead>
-		<tbody>
-        @foreach (var m in Model.DataSource)
-		{
-			 	<tr target="Config_ids" rel="@m.Id">
-					<td><input name="ids" value="@m.Id" type="checkbox"></td>
-					<td>@m.Config_Name</td>
-					<td>@m.Config_Syle</td>
-					<td>@m.Config_Footer</td>
-					
-					<td>
-						<a title="编辑[Config]信息" rel="SiteConfig_Config_Edit" target="navTab" href="/SiteConfig/Config/Create/@m.Id" class="btnEdit">编辑</a>
-						<a title="确认删除?" target="ajaxTodo" href="/SiteConfig/Config/Delete/@m.Id" class="btnDel">删除</a>
-					</td>
-				</tr>
-	    }
-		</tbody>
-	</table>
-	<div class="panelBar">
-		<div class="pages">
-			<span>显示</span>
-			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-				@foreach (string pageSize in "10,20,50,100".Split(','))
-                {
-                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
-                }
-			</select>
-			<span>条，共 @Model.RowCount 条</span>
-		</div>
-		
-		<div class="pagination" targetType="navTab" totalCount="@Model.RowCount" numPerPage="@Model.PageSize" pageNumShown="10" currentPage="@Model.CurrentPageIndex"></div>
-
-	</div>
+    @using (Html.BeginForm("Create", "Config", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+    {
+        @Html.HiddenFor(x => x.Id)
+        <div class="pageFormContent" layouth="140">           
+            <dl>
+                <dt>网站样式</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Config_Syle)
+                    @Html.ValidationMessageFor(m => m.Config_Syle)
+                </dd>
+            </dl>
+            <dl>
+                <dt>页脚信息</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Config_Footer)
+                    @Html.ValidationMessageFor(m => m.Config_Footer)
+                </dd>
+            </dl>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+            </ul>
+        </div>
+    }
 </div>

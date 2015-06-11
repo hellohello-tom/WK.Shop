@@ -50,11 +50,11 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// 添加 编辑页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create(int id=0)
+        public ActionResult Create()
         {
-            if (id > 0)
+            if (1 > 0)
             {
-                Model.Config model = bll.GetModel(id);
+                Model.Config model = bll.GetModel(1);
                 return View(model);
             }
             else

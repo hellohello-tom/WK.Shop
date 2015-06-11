@@ -28,6 +28,11 @@ namespace Shop.Web
 
             #region 当前action是否需要进行权限判断
             string strArea = (filterContext.RouteData.Values["area"] ?? filterContext.RouteData.DataTokens["area"] ?? "").ToString();
+            //手机访问不用验证登录权限
+            if (strArea.ToLower().Contains("phone"))
+            {
+                return;
+            }
             string strController = (filterContext.RouteData.Values["controller"] ?? filterContext.RouteData.DataTokens["controller"] ?? "").ToString();
             string strAction = (filterContext.RouteData.Values["action"] ?? filterContext.RouteData.DataTokens["action"] ?? "").ToString();
 
@@ -73,9 +78,6 @@ namespace Shop.Web
             {
                 if (!authorizeType.NeedAuthorize)
                     return;
-
-                return;
-#warning 暂时不判断权限
                 #region 如果登录了 判断有没有权限
                 var authCode = string.Empty;
                 if (!string.IsNullOrEmpty(strArea))
