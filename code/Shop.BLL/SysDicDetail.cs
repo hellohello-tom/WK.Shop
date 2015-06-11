@@ -51,6 +51,16 @@ namespace Shop.BLL {
         {
             return dal.GetSysModel(cityName);
         }
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public bool AddList(List<SysDicDetail> list)
+        {
+            return dal.AddList(list);
+        }
    
 	}
 }

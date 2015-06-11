@@ -113,6 +113,7 @@
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\UploadController.cs" />
     <Compile Include="Areas\Phone\Controllers\CommodityController.cs" />
+    <Compile Include="Areas\Phone\Controllers\SearchController.cs" />
     <Compile Include="Areas\Phone\PhoneAreaRegistration.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\CommodityController.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\ConfigController.cs" />
@@ -579,6 +580,7 @@
     <Content Include="Areas\Phone\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Phone\Views\Commodity\CommodityDeatil.cshtml" />
     <Content Include="Areas\Phone\Views\Commodity\Partial\ImgList.cshtml" />
+    <Content Include="Areas\Phone\Views\Search\Index.cshtml" />
     <Content Include="Areas\Phone\Views\Commodity\Partial\RelatedCommodityList.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\lnr-font.css" />

@@ -77,6 +77,38 @@ namespace Shop.DAL
         {
             return DB.From<SysDicDetail>().Where(SysDicDetail._.Name==cityName).ToSingle();
         }
-   
+
+        /// <summary>
+        /// 批量插入数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public bool AddList(List<SysDicDetail> list)
+        {
+            var trans = DB.BeginTrans();
+            try
+            {
+                foreach (var item in list)
+                {
+                    if (!trans.Exists<SysDicDetail>(SysDicDetail._.Name == item.Name))
+                    {
+                        item.Detach();
+                        trans.Save(item);
+                    }
+                }
+                trans.Commit();
+                return true;
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+                return false;
+            }
+            finally
+            {
+                trans.Dispose();
+            }
+        }
+
 	}
 }
