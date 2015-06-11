@@ -133,6 +133,7 @@
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\UploadController.cs" />
+    <Compile Include="Areas\Phone\Controllers\CommodityController.cs" />
     <Compile Include="Areas\Phone\PhoneAreaRegistration.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\CommodityController.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\ConfigController.cs" />
@@ -456,6 +457,7 @@
     <Content Include="Content\login\login_new.css" />
     <Content Include="Content\login\themes\theme-pic1.jpg" />
     <Content Include="Content\login\Validform_v5.3.2_min.js" />
+    <Content Include="Content\settings\siteConfig.xml" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -590,6 +592,11 @@
     <Content Include="Resource\fonts\Linearicons-Free.woff2" />
     <Content Include="Areas\SiteConfig\Views\Tag\SelectNavigation.cshtml" />
     <Content Include="Areas\SiteConfig\Views\Commodity\SelectTag.cshtml" />
+    <Content Include="Areas\Phone\Views\Commodity\CommodityList.cshtml" />
+    <Content Include="Areas\Phone\Views\Commodity\Index.cshtml" />
+    <Content Include="Areas\Phone\Views\Commodity\Partial\CommodityItemList.cshtml" />
+    <Content Include="Areas\Phone\Views\Commodity\Partial\NavList.cshtml" />
+    <Content Include="Areas\Phone\Views\Commodity\Partial\TagList.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\lnr-font.css" />
     <Content Include="Resource\css\site.css" />
@@ -1011,7 +1018,6 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Common\Views\Shared\" />
-    <Folder Include="Areas\Phone\Controllers\" />
     <Folder Include="Areas\Phone\Models\" />
     <Folder Include="Areas\Phone\Views\Shared\" />
     <Folder Include="Areas\SiteConfig\Models\" />

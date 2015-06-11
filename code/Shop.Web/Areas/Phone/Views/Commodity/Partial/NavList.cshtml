@@ -1,0 +1,11 @@
+﻿@model List<Shop.Model.Navigation>
+<aside class="pro-cat">
+    <ul>
+        @foreach (var nav in Model)
+        {
+             <li class=on onclick="loadTagList(@nav.Id)">@nav.Navigation_Name</li>
+        }
+    </ul>
+</aside>
+
+<input id="navid" type="hidden" value="@ViewBag.NavId" />

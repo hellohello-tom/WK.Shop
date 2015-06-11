@@ -1,0 +1,10 @@
+﻿@model List<Shop.Model.Tag>
+@foreach (var tag in Model)
+{
+    <li>
+        <a href="/yaodian/list/@tag.Id" class=on>
+            <img src="@tag.Tag_ImagePath" alt="@tag.Tag_Name">
+            <div class="pro-name">@tag.Tag_Name</div>
+        </a>
+    </li>
+}
