@@ -31,7 +31,13 @@
     {
         <script type="text/javascript">
 
-            var loadTagList = function (navId) {
+            var loadTagList = function (navId, self) {
+                if (self) {
+                    var $self = $(self);
+                    $self.addClass('on').siblings().removeClass('on');
+                } else {
+                    $('.nav-item li').eq(0).addClass('on');
+                }
                 $.ajax({
                     url: '/phone/Commodity/TagList',
                     data: { "navId": navId },

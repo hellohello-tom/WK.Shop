@@ -1,9 +1,9 @@
 ﻿@model List<Shop.Model.Navigation>
 <aside class="pro-cat">
-    <ul>
+    <ul class="nav-item">
         @foreach (var nav in Model)
         {
-             <li class=on onclick="loadTagList(@nav.Id)">@nav.Navigation_Name</li>
+             <li class='nav-item' onclick="loadTagList(@nav.Id,this)">@nav.Navigation_Name</li>
         }
     </ul>
 </aside>
