@@ -36,11 +36,14 @@
     transform+_: rotate(@r);
 }
 
-.trs(@prop: all, @time: .5s, @tf: linear) {
-    -webkit-transition: @prop @time @tf;
-    transition: @prop @time @tf;
+.trans(@prop: all, @time: .5s, @tf: linear) {
+    -webkit-transition+_: @arguments;
+    transition+_: @arguments;
 }
-
+.trans-trf(@time:.3s,@tf:linear){
+    -webkit-transtion+_:-webkit-transform @time @tf;
+    transition+_:transform @time @tf;
+}
 .thc(@c: rgba(0, 0, 0, 0.1)) {
     -webkit-tap-highlight-color: @c;
 }
@@ -432,10 +435,14 @@ header.s {
             }
         }
     }
+    .up i{
+            .trf-rot(-180deg);
+        }
     i {
         margin: 3px;
         vertical-align: -1px;
         color: #555;
+        .trans-trf();
     }
 }
 

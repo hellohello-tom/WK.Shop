@@ -316,10 +316,16 @@ header.s {
 .order a.on i {
   color: #ea2f53;
 }
+.order .up i {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
 .order i {
   margin: 3px;
   vertical-align: -1px;
   color: #555;
+  -webkit-transtion: -webkit-transform 0.3s linear;
+  transition: transform 0.3s linear;
 }
 .pro-wrapper {
   padding: 5px;
