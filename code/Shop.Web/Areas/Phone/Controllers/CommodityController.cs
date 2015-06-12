@@ -63,7 +63,12 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <returns></returns>
         public ActionResult CommodityList(int tagId,string search="")
         {
-            ViewBag.TagId = tagId;
+            if (tagId>0)
+            {
+                ViewBag.TagId = tagId;
+                ViewBag.Tag = tagBll.GetModelByCache(tagId);
+            }
+            
             if (!string.IsNullOrWhiteSpace(search))
             {
                 ViewBag.SearchTitle = "搜索结果";
@@ -87,7 +92,10 @@ namespace Shop.Web.Areas.Phone.Controllers
 
             WhereClip where = Commodity._.Commodity_IsDel == false;
             if (tagId > 0)
+            {
                 where &= Commodity._.Commodity_TagId == tagId;
+            }
+                
             if (!string.IsNullOrEmpty(search))
             {
                 where &=  WhereClip.Bracket(Commodity._.Commodity_Name.Like("%" + search + "%") || Commodity._.Commodity_Content.Like("%" + search + "%")

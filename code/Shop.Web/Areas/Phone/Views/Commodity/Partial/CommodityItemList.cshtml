@@ -1,6 +1,14 @@
 ﻿@model List<Shop.Model.Commodity>
 @foreach (var comm in Model)
 {
-    <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
-        <p>@comm.Commodity_Name</p></a>
+        <dd class=pro-item>
+            <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
+                <img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name" title="@comm.Commodity_Name">
+                <p class="pro-info">@comm.Commodity_Name</p>
+                <p class="that-price color-light ft12">
+                    <del>原价：¥@comm.Commodity_CostPrice</del>
+                </p>
+                <p class="this-price "><span class="sales fr ft12">@(comm.Commodity_Discount)折</span><span class="this-price">¥@(comm.Commodity_CostPrice*comm.Commodity_Discount)</span></p>
+            </a>
+        </dd>
 }
