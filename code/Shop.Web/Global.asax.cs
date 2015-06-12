@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.Log;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,35 @@ namespace Shop.Web
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            if (!HttpContext.Current.IsCustomErrorEnabled) return;
+            //记录异常
+            var ex = Server.GetLastError();
+            var httpEx = ex as HttpException;
+            if (httpEx.GetHttpCode() == 500)
+            {
+                Logger.Fatal(ex);
+                Server.ClearError();
+            }
+            else if (httpEx.GetHttpCode() == 404)
+            {
+                Logger.Warn("文件不存在", ex);
+                Server.ClearError();
+            }
+            //跳转错误友好提示页面
+            HttpContext.Current.Response.Clear();
+            if (Request.Url.ToString().Contains("Phone"))
+            {
+                HttpContext.Current.Response.Redirect("/PhoneError");
+            }
+            else
+            {
+                HttpContext.Current.Response.Redirect("/Error");
+            }
+            HttpContext.Current.Response.End();
         }
     }
 }

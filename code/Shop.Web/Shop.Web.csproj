@@ -498,6 +498,7 @@
     <Content Include="Content\web\images\base_z20f65d.png" />
     <Content Include="Content\web\images\base_z20f65d_ie6.png" />
     <Content Include="Content\web\images\broadcast_16.png" />
+    <Content Include="Content\web\images\error.png" />
     <Content Include="Content\web\images\head_bg_280.jpg" />
     <Content Include="Content\web\images\image002.gif" />
     <Content Include="Content\web\images\image004.gif" />
@@ -1002,6 +1003,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\PhoneError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

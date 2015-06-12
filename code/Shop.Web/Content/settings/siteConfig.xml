@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ConfigName>1234</ConfigName>
-  <PhoneStyle>skin1</PhoneStyle>
+  <PhoneStyle>skin2</PhoneStyle>
   <Footer>333</Footer>
 </Config>
