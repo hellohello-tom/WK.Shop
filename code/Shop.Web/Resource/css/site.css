@@ -249,12 +249,23 @@ a:active {
 }
 header.s {
   position: static;
+  display: -webkit-flex;
+  display: flex;
+}
+header.s .goback {
+  position: relative;
+}
+header.s form {
+  -webkit-flex: 1;
+  flex: 1;
 }
 .search-box {
   position: relative;
   padding-left: 10px;
   width: 100%;
   z-index: 23;
+  -webkit-flex: 1;
+  flex: 1;
 }
 .search-box .s-section {
   position: relative;
@@ -352,6 +363,7 @@ header.s {
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-height: 3em;
 }
 .pro-wrapper .pro-item a .sales {
   background: #ea2f53;

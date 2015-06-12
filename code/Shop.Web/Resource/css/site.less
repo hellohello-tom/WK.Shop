@@ -368,6 +368,13 @@ a:active {
 
 header.s {
     position: static;
+    .dis-flex;
+    .goback{
+        position: relative;
+    }
+    form{
+        .flex();
+    }
 }
 
 .search-box {
@@ -375,6 +382,7 @@ header.s {
     padding-left: 10px;
     width: 100%;
     z-index: 23;
+    .flex();
     .s-section {
         position: relative;
         .flex(1);
@@ -465,6 +473,7 @@ header.s {
             }
             .pro-info {
                 .mul-line();
+                min-height: 3em;
             }
             .sales {
                 background: @o-color;
