@@ -25,7 +25,7 @@ namespace Shop.Web.Areas.Phone
             context.MapRoute(
                 "Phone_yaoList",
                 "yaodian/list/{tagId}",
-                new { Controller = "Commodity", action = "CommodityList", tagId = UrlParameter.Optional },
+                new { Controller = "Commodity", action = "CommodityList", tagId = 0 },
                 yaodianArea
             );
 
