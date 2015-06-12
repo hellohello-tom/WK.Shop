@@ -3,6 +3,7 @@
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 <header class="tc header s">
+    <a href='javascript' class="goback" onclick="go.history(-1);"></a>
     @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post))
     {
         <div class="search-box dis-flex">

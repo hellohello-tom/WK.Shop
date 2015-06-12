@@ -70,7 +70,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             ViewBag.FileAttrList = _fileAttrBLL.GetList(FileAttr._.FileAttr_IsDel == false
                 && FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessId != 0
                 && FileAttr._.FileAttr_BussinessCode == BizCode.Commodity.ToString(),
-                FileAttr._.FileAttr_CreateTime.Desc);
+                FileAttr._.Id.Desc);
             return View(model);
         }
 
