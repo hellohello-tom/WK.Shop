@@ -124,7 +124,10 @@ textarea:focus {
   padding-right: 5px;
 }
 img {
+  width: auto;
+  height: auto;
   max-width: 100%;
+  max-height: 100%;
 }
 html {
   font-size: 100%;
@@ -351,11 +354,16 @@ header.s form {
   display: block;
   padding: 5px;
 }
-.pro-wrapper .pro-item a img {
-  width: 100%;
+.pro-wrapper .pro-item a .img-wrapper {
+  display: table-cell;
+  width: 5555px;
   height: 150px;
-  padding: 5px;
   border: 1px solid #ddd;
+  vertical-align: middle;
+  text-align: center;
+}
+.pro-wrapper .pro-item a img {
+  vertical-align: middle;
 }
 .pro-wrapper .pro-item a .pro-info {
   display: -webkit-box;
@@ -363,13 +371,107 @@ header.s form {
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: 3em;
+  height: 3em;
 }
 .pro-wrapper .pro-item a .sales {
   background: #ea2f53;
   color: #fff;
   padding: 0 6px;
   border-radius: 3px;
+}
+.pro-detail {
+  position: relative;
+}
+.pro-detail > section {
+  border-bottom: 1px solid #ddd;
+}
+.pro-detail .pd-img {
+  background: #f2f2f2;
+  overflow: hidden;
+}
+.pro-detail .pd-img ul {
+  width: 500%;
+  height: 150px;
+  overflow: hidden;
+}
+.pro-detail .pd-img ul li {
+  float: left;
+  width: 20%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  text-align: center;
+}
+.pro-detail .img-nav {
+  text-align: center;
+  position: absolute;
+  top: 130px;
+  width: 100%;
+}
+.pro-detail .img-nav span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 100%;
+  margin: 0 5px;
+}
+.pro-detail .img-nav span.on {
+  background: orange;
+}
+.pd-info {
+  line-height: 1.75;
+  padding: 5px 10px;
+  word-break: break-all;
+}
+.pd-info .name {
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+.pd-info .declare {
+  color: orange;
+}
+.pd-info .price {
+  margin-top: 5px;
+}
+.pd-info .remain {
+  margin-right: 10px;
+}
+.pd-come {
+  padding: 10px;
+  line-height: 1.75;
+}
+.pd-come a {
+  color: #2C83E7;
+}
+.guess {
+  padding: 0 10px;
+}
+.guess h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.guess .pro-wrapper {
+  padding: 0;
+}
+.guess .pro-wrapper .pro-item {
+  width: 31%;
+  margin-right: 3%;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.guess .pro-wrapper .pro-item:nth-child(3n+3) {
+  margin-right: 0;
+}
+.guess .pro-wrapper .pro-item a .img-wrapper {
+  height: 100px;
+  padding: 2px;
+}
+.guess .pro-wrapper .pro-item p {
+  text-align: left;
 }
 .this-price {
   color: #ea2f53;
