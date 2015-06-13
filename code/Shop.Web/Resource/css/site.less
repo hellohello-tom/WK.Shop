@@ -17,6 +17,7 @@
 }
 
 .flex-center(){
+    .dis-flex();
     justify-content:center;
     align-items:center;
 }
@@ -53,7 +54,7 @@
     -webkit-tap-highlight-color: @c;
 }
 
-.am(@an: an, @time: 1s, @tf: linear) {
+.am(@an: an, @time: 1s, @tf: linear,@ic:1,@ad:normal) {
     -webkit-animation: @arguments;
     animation: @arguments;
 }
@@ -358,7 +359,7 @@ a:active {
                 padding: 5px;
                 img {
                     width: 100%;
-                    height: 65px;
+                    height: 75px;
                 }
                 .pro-name {
                     white-space: nowrap;
@@ -513,7 +514,6 @@ header.s {
                 float: left;
                 width: 20%;
                 height: 100%;
-                .dis-flex();
                 .flex-center();
                 padding: 0 8px;
                 text-align: center;
@@ -592,6 +592,54 @@ header.s {
     }
 }
 
+.error{
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    .trf-tsl(0,-50%);
+    background: #eee;
+    padding: 10px 0;
+    h1{
+        font-size: 100px;
+    }
+    p{
+        font-size: 1.25rem;
+        text-shadow: 0 1px #fff;
+    }
+    .am{
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        box-shadow: 0 0 5px #ccc;
+        .am(ftr,5s,linear,infinite,alternate)
+    }
+    .gohome{
+        position: absolute;
+        left: 10%;
+        width: 80%;
+        padding: 5px 10px;
+        .br(4px);
+        background: @o-color;
+        color: #fff;
+        margin-top: 30px;
+        text-shadow: none;
+    }
+}
+
+@-webkit-keyframes ftr{
+    100%{
+        left: 100%;
+        opacity: .2;
+    }
+}
+@keyframes ftr{
+    100%{
+        left: 100%;
+        opacity: .2;
+    }
+}
 .this-price {
     color: @o-color;
 }

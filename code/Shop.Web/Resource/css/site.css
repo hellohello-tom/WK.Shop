@@ -239,7 +239,7 @@ a:active {
 }
 .pro .pro-sub-cat li a img {
   width: 100%;
-  height: 65px;
+  height: 75px;
 }
 .pro .pro-sub-cat li a .pro-name {
   white-space: nowrap;
@@ -472,6 +472,55 @@ header.s form {
 }
 .guess .pro-wrapper .pro-item p {
   text-align: left;
+}
+.error {
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  background: #eee;
+  padding: 10px 0;
+}
+.error h1 {
+  font-size: 100px;
+}
+.error p {
+  font-size: 1.25rem;
+  text-shadow: 0 1px #fff;
+}
+.error .am {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  box-shadow: 0 0 5px #ccc;
+  -webkit-animation: ftr 5s linear infinite alternate;
+  animation: ftr 5s linear infinite alternate;
+}
+.error .gohome {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: #ea2f53;
+  color: #fff;
+  margin-top: 30px;
+  text-shadow: none;
+}
+@-webkit-keyframes ftr {
+  100% {
+    left: 100%;
+    opacity: .2;
+  }
+}
+@keyframes ftr {
+  100% {
+    left: 100%;
+    opacity: .2;
+  }
 }
 .this-price {
   color: #ea2f53;
