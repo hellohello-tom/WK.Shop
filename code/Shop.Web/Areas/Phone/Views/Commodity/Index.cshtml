@@ -8,38 +8,39 @@
     <h2>科室找药</h2>
     <a href="/yaodian/search" class='ico-search'><i class="fa fa-search"></i></a>
 </header>
-    <div class="main pro">
-        @Html.Action("NavList");
+<div class="main pro">
+    @Html.Action("NavList");
 
-        <article class='pro-sub-cat clearfix tc'>
-            <ul class="tag-list">
-                @*Js加载*@
-            </ul>
-        </article>
-    </div>
-    @section Js
+    <article class='pro-sub-cat clearfix tc'>
+        <ul class="tag-list">
+            <!--Js加载-->
+            @*@Html.Action("TagList", "Commodity", new { navId =""});*@
+        </ul>
+    </article>
+</div>
+@section Js
     {
-        <script type="text/javascript">
 
-            var loadTagList = function (navId, self) {
-                if (self) {
-                    var $self = $(self);
-                    $self.addClass('on').siblings().removeClass('on');
-                } else {
-                    $('.nav-item li').eq(0).addClass('on');
-                }
-                $.ajax({
-                    url: '/phone/Commodity/TagList',
-                    data: { "navId": navId },
-                    success: function (data) {
-                        $('.tag-list').html(data);
-                    }
-                });
+    <script type="text/javascript">
+        var loadTagList = function (navId, self) {
+            if (self) {
+                var $self = $(self);
+                $self.addClass('on').siblings().removeClass('on');
+            } else {
+                $('.nav-item li').eq(0).addClass('on');
             }
-            var defNavId = $('#navid').val();
-
-            $(function () {
-                loadTagList(defNavId);
+            $.ajax({
+                url: '/phone/Commodity/TagList',
+                data: { "navId": navId },
+                success: function (data) {
+                    $('.tag-list').html(data);
+                }
             });
-        </script>
-    }
+        }
+        var defNavId = $('#navid').val();
+
+        $(function () {
+            loadTagList(defNavId);
+        });
+    </script>
+}
