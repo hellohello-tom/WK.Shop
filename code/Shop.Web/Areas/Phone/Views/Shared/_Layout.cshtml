@@ -1,7 +1,7 @@
-﻿@using Shop.Model
-@using Shop.Common
+﻿@using Shop.Common.Config
+@using Shop.Model
 @{
-    var configModel = SerializationHelper.Load(typeof(Config), Server.MapPath("/Content/settings/siteConfig.xml")) as Config;
+    var configModel = XmlConfigHelper.ReadXml<Config>(Server.MapPath("/Content/settings/siteConfig.xml"));
 }
 <!DOCTYPE html>
 <html lang="zh-CN">

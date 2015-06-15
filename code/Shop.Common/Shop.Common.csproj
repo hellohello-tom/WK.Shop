@@ -36,6 +36,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,8 +48,10 @@
     <Compile Include="Cache\CacheHelper.cs" />
     <Compile Include="Cache\CookieHelper.cs" />
     <Compile Include="Cache\SessionHelper.cs" />
+    <Compile Include="Config\CacheHelper.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Config\SerializationHelper.cs" />
+    <Compile Include="Config\XmlConfigHelper.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Net\Spider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
