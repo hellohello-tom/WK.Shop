@@ -1,5 +1,15 @@
 ﻿@model List<Shop.Model.Commodity>
-@foreach (var comm in Model)
+<dl class="pro-wrapper clearfix">
+    @foreach (var comm in Model)
 {
-    <p>@comm.Commodity_Name</p>
+    <dd class=pro-item>
+        <a href="javascript:;">
+            <section class=img-wrapper><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
+            <p class="pro-info">@comm.Commodity_Name</p>
+            <p class=" color-light">
+                <span>¥@(comm.Commodity_CostPrice*comm.Commodity_Discount)</span>
+            </p>
+        </a>
+    </dd>
 }
+</dl>

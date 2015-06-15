@@ -1,5 +1,9 @@
 ﻿@model List<Shop.Model.FileAttr>
-@foreach (var img in Model)
-{
-    <li> <img src="@img.FileAttr_Path" /></li>
-}
+<section class="pd-img">
+    <ul class="img">
+        @foreach (var img in Model)
+        {
+            <li><img src="@img.FileAttr_Path" height="440" width="440" alt="@img.FileAttr_Name"></li>
+        }
+    </ul>
+</section>

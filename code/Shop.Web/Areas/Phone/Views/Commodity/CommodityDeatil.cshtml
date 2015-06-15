@@ -1,15 +1,45 @@
 ﻿@model Shop.Model.Commodity
 @{
+    var commodity = Model;
     ViewBag.Title = "药品详情";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Commodity_Name</h2>
-<!--药品图片列表-->
-@Html.Action("CommodityImgList", new { id = @Model.Id })
+<header class="tc header">
+    <a href='javascript:history.go(-1);' class="goback"></a>
+    <h2>@commodity.Commodity_Name</h2>
+</header>
+<div class="main pro">
+    <article class="pro-detail">
+        <!--药品图片列表-->
+        @Html.Action("CommodityImgList", new { id = @Model.Id })
 
-<!--药品详情-->
-<div >@Html.Raw(Model.Commodity_Content)</div>
+        <div class="img-nav">
+            <span></span>
+            <span></span>
+            <span class=on></span>
+            <span></span>
+            <span></span>
+        </div>
+        <section class="pd-info">
+            <h2 class="name">@commodity.Commodity_Name</h2>
+            <p class="declare">@commodity.Commodity_Remind</p>
+            <p class="price">
+                <span class="fr remain">剩余：<span class="this-price">@commodity.Commodity_ResidueCount</span>件</span>
+                抢购价：<span class="this-price">¥@(commodity.Commodity_CostPrice*commodity.Commodity_Discount)</span>
+                <del class='that-price color-light ft12'>原价：¥@commodity.Commodity_CostPrice</del>
+            </p>
+        </section>
+        <ul class=pd-come>
+            <li>@commodity.Commodity_Remark</li>
+            <li>联系电话：<a href="tel:010-5555-5555">010-5555-5555</a></li>
+            <li>联系微信：<span>******</span></li>
+        </ul>
+    </article>
+    <article class='guess'>
+        <h3>猜你还喜欢</h3>
+        <!--相关药品列表-->
+        @Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, PageNum = 1, NumPerPage=20, notId = Model.Id })
+    </article>
+</div>
 
-<!--相关药品列表-->
-@Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, notId = Model.Id })
