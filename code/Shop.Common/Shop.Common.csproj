@@ -48,7 +48,6 @@
     <Compile Include="Cache\CacheHelper.cs" />
     <Compile Include="Cache\CookieHelper.cs" />
     <Compile Include="Cache\SessionHelper.cs" />
-    <Compile Include="Config\CacheHelper.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Config\SerializationHelper.cs" />
     <Compile Include="Config\XmlConfigHelper.cs" />
