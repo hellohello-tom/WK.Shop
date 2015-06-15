@@ -305,6 +305,10 @@ header.s form {
 .search-box .btn-s {
   margin: 10px;
 }
+.loadmore {
+  width: 80%;
+  margin: 10px 0;
+}
 .order {
   background: #eee;
 }
