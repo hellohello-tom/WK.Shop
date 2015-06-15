@@ -16,9 +16,16 @@ namespace Shop.Web.Areas.Phone
         {
             var yaodianArea = new[] { "Shop.Web.Areas.Phone.Controllers" };
             context.MapRoute(
+                "Phone_commodity",
+                "yaodian/commodity",
+                new { Controller = "Commodity", action = "Index" },
+                yaodianArea
+            );
+
+            context.MapRoute(
                 "Phone_yaodian",
                 "yaodian",
-                new { Controller = "Commodity", action = "Index" },
+                new { Controller = "Main", action = "Index" },
                 yaodianArea
             );
 

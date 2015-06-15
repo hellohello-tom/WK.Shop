@@ -35,7 +35,7 @@ a {
     text-indent: -9999em;
     width: 160px;
     height: 42px;
-    background: url(logo.png) no-repeat;
+    background: url(images/login.jpg) no-repeat;
 }
 
 .login-form .col {

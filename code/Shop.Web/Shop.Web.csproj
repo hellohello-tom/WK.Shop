@@ -113,6 +113,7 @@
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\UploadController.cs" />
     <Compile Include="Areas\Phone\Controllers\CommodityController.cs" />
+    <Compile Include="Areas\Phone\Controllers\MainController.cs" />
     <Compile Include="Areas\Phone\Controllers\SearchController.cs" />
     <Compile Include="Areas\Phone\PhoneAreaRegistration.cs" />
     <Compile Include="Areas\SiteConfig\Controllers\CommodityController.cs" />
@@ -432,6 +433,12 @@
     <Content Include="Content\login\images\dot-def.png" />
     <Content Include="Content\login\images\login-btn.png" />
     <Content Include="Content\login\images\logo.gif" />
+    <Content Include="Content\login\images\login.jpg" />
+    <Content Include="Content\login\images\Phone\wx2_index_05.png" />
+    <Content Include="Content\login\images\Phone\wx2_index_06.png" />
+    <Content Include="Content\login\images\Phone\wx2_index_07.png" />
+    <Content Include="Content\login\images\Phone\wx2_index_08.png" />
+    <Content Include="Content\login\images\Phone\new-index-logo_03.png" />
     <Content Include="Content\login\jquery.SuperSlide.js" />
     <Content Include="Content\login\login.css" />
     <Content Include="Content\login\login_new.css" />
@@ -586,6 +593,7 @@
     <Content Include="Resource\fonts\fontawesome-webfont.woff" />
     <Content Include="Resource\fonts\fontawesome-webfont.woff2" />
     <Content Include="Resource\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Phone\Views\Main\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
     <Content Include="Resource\Html\error.html" />

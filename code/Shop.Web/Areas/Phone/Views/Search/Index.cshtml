@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "查找药品";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 <header class="tc header s">
-    <a href='javascript' class="goback" onclick="go.history(-1);"></a>
+    <a href='javascript:;' class="goback" onclick="history.go(-1);"></a>
     @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post,new{@class=""}))
     {
         <div class="search-box dis-flex">
