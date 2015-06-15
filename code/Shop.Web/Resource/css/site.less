@@ -265,6 +265,54 @@ a:active {
     .br(3px);
 }
 
+.home{
+    background: url("@{imgpath}/bg.jpg") no-repeat 50% 0/100%;
+    padding: 15px 10px;
+    .logo{
+        img{
+            height: 90px;
+        }
+    }
+    .s-link{
+        a{
+            .dis-b();
+            background: #fff url("@{imgpath}/s.png") no-repeat 6px 49%;
+            -webkit-background-size: 16px;
+            background-size: 16px;
+            padding: 8px 0 8px 30px;
+            margin: 5px 0;
+            .tl;
+            .br();
+        }
+    }
+    .cat{
+        a{
+            margin-top: 10px;
+            .flex();
+            padding-top: 40px;
+            font-size: 1rem;
+            text-shadow: 1px 1px 5px #000;
+            color: #fff;
+            background-position: 50% 2px;
+            background-repeat: no-repeat;
+            -webkit-background-size: 40px;
+            background-size: 40px;
+        }
+        .zhao{
+            background-image: url("@{imgpath}/zhao.png");
+        }
+        .yao{
+            background-image: url("@{imgpath}/yao.png");
+        }
+        .man{
+            background-image: url("@{imgpath}/man.png");
+        }
+        .woman{
+            background-image: url("@{imgpath}/woman.png");
+        }
+    }
+}
+
 .header {
     height: 3rem;
     line-height: 3rem;

@@ -149,6 +149,49 @@ a:active {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
+.home {
+  background: url("../images/bg.jpg") no-repeat 50% 0%;
+  padding: 15px 10px;
+}
+.home .logo img {
+  height: 90px;
+}
+.home .s-link a {
+  display: block;
+  background: #ffffff url("../images/s.png") no-repeat 6px 49%;
+  -webkit-background-size: 16px;
+  background-size: 16px;
+  padding: 8px 0 8px 30px;
+  margin: 5px 0;
+  text-align: left;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.home .cat a {
+  margin-top: 10px;
+  -webkit-flex: 1;
+  flex: 1;
+  padding-top: 40px;
+  font-size: 1rem;
+  text-shadow: 1px 1px 5px #000;
+  color: #fff;
+  background-position: 50% 2px;
+  background-repeat: no-repeat;
+  -webkit-background-size: 40px;
+  background-size: 40px;
+}
+.home .cat .zhao {
+  background-image: url("../images/zhao.png");
+}
+.home .cat .yao {
+  background-image: url("../images/yao.png");
+}
+.home .cat .man {
+  background-image: url("../images/man.png");
+}
+.home .cat .woman {
+  background-image: url("../images/woman.png");
+}
 .header,
 .footer {
   height: 3rem;

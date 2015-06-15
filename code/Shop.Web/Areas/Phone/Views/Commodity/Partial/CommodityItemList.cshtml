@@ -5,7 +5,7 @@
     {
         <dd class=pro-item>
             <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
-                <img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name" title="@comm.Commodity_Name">
+                <section class="img-wrapper"<img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name" title="@comm.Commodity_Name"></section>
                 <p class="pro-info">@comm.Commodity_Name</p>
                 <p class="that-price color-light ft12">
                     <del>原价：¥@comm.Commodity_CostPrice.ToString("F")</del>
