@@ -4,7 +4,12 @@
     ViewBag.Title = "药品详情";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
-
+@section Head
+{
+    <link href='@Url.Content("~/Scripts/plugin/swiper/css/swiper.min.css")' rel="stylesheet" />
+    <script src='@Url.Content("~/Scripts/plugin/swiper/js/swiper3.0.8.min.js")'></script>
+    <script src='@Url.Content("~/Scripts/plugin/picturePreview/js/jquery.picturePreview.js")'></script>
+}
 <header class="tc header">
     <a href='javascript:history.go(-1);' class="goback"></a>
     <h2>@commodity.Commodity_Name</h2>
@@ -26,8 +31,8 @@
             <p class="declare">@commodity.Commodity_Remind</p>
             <p class="price">
                 <span class="fr remain">剩余：<span class="this-price">@commodity.Commodity_ResidueCount</span>件</span>
-                抢购价：<span class="this-price">¥@(commodity.Commodity_CostPrice*commodity.Commodity_Discount)</span>
-                <del class='that-price color-light ft12'>原价：¥@commodity.Commodity_CostPrice</del>
+                抢购价：<span class="this-price">¥@(Convert.ToDecimal(commodity.Commodity_CostPrice * commodity.Commodity_Discount / 10).ToString("F"))</span>
+                <del class='that-price color-light ft12'>原价：¥@commodity.Commodity_CostPrice.ToString("F")</del>
             </p>
         </section>
         <ul class=pd-come>
@@ -39,7 +44,33 @@
     <article class='guess'>
         <h3>猜你还喜欢</h3>
         <!--相关药品列表-->
-        @Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, PageNum = 1, NumPerPage=20, notId = Model.Id })
+        @Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, PageNum = 1, NumPerPage = 20, notId = Model.Id })
     </article>
 </div>
+@section Js
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var mySwiper = new Swiper('.swiper-container', {
+                preloadImages: false,
+                autoplay: 1500,
+                // 如果需要分页器
+                pagination: '.swiper-pagination',
 
+                // 如果需要前进后退按钮
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+                // 如果需要滚动条
+                // scrollbar: '.swiper-scrollbar'
+            });
+
+
+        });
+
+
+        $('.mainContaine-mask').hide();
+        $('.pd-img li[data-src]').not('.swiper-slide-duplicate').picturePreview();
+
+    </script>
+}

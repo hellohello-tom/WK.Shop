@@ -62,6 +62,7 @@
         var searchData=function(self) {
             if (self) {
                 var $self = $(self);
+                //确定排序规则
                 if ($self.hasClass('on')) {
                     if ($self.hasClass('up')) {
                         $self.removeClass('up').addClass('down');
@@ -74,7 +75,7 @@
                     $self.addClass('on').addClass('up').siblings().removeClass('on');
                     para.sortOrder = 'Asc';
                 }
-
+                //确定排序字段
                 if ($self.hasClass('tag-price')) {
                     para.sortName = 'Commodity_CostPrice';
                 } else if ($self.hasClass('tag-discount')) {

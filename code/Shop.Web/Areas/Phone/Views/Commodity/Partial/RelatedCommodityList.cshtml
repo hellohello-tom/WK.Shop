@@ -7,7 +7,7 @@
             <section class=img-wrapper><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
             <p class="pro-info">@comm.Commodity_Name</p>
             <p class=" color-light">
-                <span>¥@(comm.Commodity_CostPrice*comm.Commodity_Discount)</span>
+                <span>¥@(Convert.ToDecimal(comm.Commodity_CostPrice * comm.Commodity_Discount/10).ToString("F"))</span>
             </p>
         </a>
     </dd>

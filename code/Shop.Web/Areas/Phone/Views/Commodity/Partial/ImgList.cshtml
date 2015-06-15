@@ -1,9 +1,18 @@
 ﻿@model List<Shop.Model.FileAttr>
-<section class="pd-img">
-    <ul class="img">
+<section class="pd-img swiper-container">
+    <ul class="img swiper-wrapper">
         @foreach (var img in Model)
         {
-            <li><img src="@img.FileAttr_Path" height="440" width="440" alt="@img.FileAttr_Name"></li>
+            <li class="swiper-slide" data-src="@img.FileAttr_Path"><img src="@img.FileAttr_Path" height="440" width="440" alt="@img.FileAttr_Name"></li>
         }
     </ul>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- 如果需要滚动条 -->
+    <div class="swiper-scrollbar"></div>
 </section>
