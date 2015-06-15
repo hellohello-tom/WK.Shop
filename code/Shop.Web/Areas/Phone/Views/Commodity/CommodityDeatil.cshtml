@@ -1,4 +1,5 @@
-﻿@model Shop.Model.Commodity
+﻿@using Shop.Web.ViewModel
+@model Shop.Model.Commodity
 @{
     var commodity = Model;
     ViewBag.Title = "药品详情";
@@ -37,6 +38,8 @@
         </section>
         <ul class=pd-come>
             <li>@commodity.Commodity_Remark</li>
+            <li>联系电话：<a href="tel:@ApplicationConfigs.GetConfigInfo.Tel">@ApplicationConfigs.GetConfigInfo.Tel</a></li>
+            <li>联系微信：<span>@ApplicationConfigs.GetConfigInfo.WeiXin</span></li>
         </ul>
     </article>
     <article class='guess'>
