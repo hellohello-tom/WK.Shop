@@ -52,7 +52,7 @@
 <div class="pageContent">
     @using (Html.BeginForm("Create", "Config", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
     {
-        <div class="pageFormContent" layouth="140">           
+        <div class="pageFormContent" layouth="140">
             <dl>
                 <dt>网站名称</dt>
                 <dd>
@@ -71,6 +71,18 @@
                 <dt>页脚信息</dt>
                 <dd>
                     @Html.TextBoxFor(m => m.Footer)
+                </dd>
+            </dl>
+            <dl>
+                <dt>联系电话</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Tel)
+                </dd>
+            </dl>
+            <dl>
+                <dt>微信号</dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.WeiXin)
                 </dd>
             </dl>
         </div>

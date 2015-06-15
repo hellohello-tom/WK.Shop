@@ -28,7 +28,16 @@ namespace Shop.Model{
         /// 页脚信息
         /// </summary>
         public string Footer { get; set; }
-   
+
+        /// <summary>
+        /// 联系电话
+        /// </summary>
+        public string Tel { get; set; }
+
+        /// <summary>
+        /// 服务微信
+        /// </summary>
+        public string WeiXin { get; set; }
 	}
 }
 
