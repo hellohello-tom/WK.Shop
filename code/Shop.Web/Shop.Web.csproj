@@ -588,9 +588,12 @@
     <Content Include="Resource\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
+    <Content Include="Resource\Html\error.html" />
     <Content Include="Resource\Html\index.html" />
+    <Content Include="Resource\Html\pro_detail.html" />
     <Content Include="Resource\Html\search.html" />
     <Content Include="Resource\Html\s_result.html" />
+    <Content Include="Resource\images\ex1.gif" />
     <Content Include="Resource\images\s.png" />
     <Content Include="Scripts\bootstrap\typeahead\bootstrap-typeahead.js" />
     <Content Include="Scripts\bootstrap\typeahead\css\typeahead.js-bootstrap.css" />

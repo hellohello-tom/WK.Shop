@@ -4,7 +4,7 @@
 }
 <header class="tc header s">
     <a href='javascript' class="goback" onclick="go.history(-1);"></a>
-    @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post))
+    @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post,new{@class=""}))
     {
         <div class="search-box dis-flex">
             <div class="s-section">
