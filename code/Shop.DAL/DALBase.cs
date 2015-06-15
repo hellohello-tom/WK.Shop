@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Configuration;
 using Shop.Model;
 using MySoft.Data;
 using System.Data;
+using System.Web;
 
 namespace Shop.DAL
 {
@@ -32,7 +33,9 @@ namespace Shop.DAL
                     {
                         if (_db == null)
                         {
-                            _db = new DbSession("MssqlConn");
+                            string conStr = string.Format(ConfigurationManager.ConnectionStrings["MssqlConn"].ConnectionString, HttpRuntime.AppDomainAppPath);
+                            DbProvider provider = ProviderFactory.CreateDbProvider(ProviderType.SQLite, conStr);
+                            _db = new DbSession(provider);
                         }
                     }
                 }

@@ -177,7 +177,7 @@
             <dl>
                 <dt>备注</dt>
                 <dd>
-                    @Html.TextAreaFor(m => m.Commodity_Remark, new { rows = "10", cols = "100" })
+                    @Html.TextAreaFor(m => m.Commodity_Remark, new { rows = "16", cols = "100", @class = "editor", tools = "Cut,Copy,|,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,|,Align,List,Outdent,Indent,|,Fullscreen,Emot,Table,Hr" })
                     @Html.ValidationMessageFor(m => m.Commodity_Remark)
                 </dd>
             </dl>

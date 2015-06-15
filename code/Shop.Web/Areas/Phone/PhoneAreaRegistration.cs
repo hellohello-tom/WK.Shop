@@ -21,7 +21,7 @@ namespace Shop.Web.Areas.Phone
                 new { Controller = "Commodity", action = "Index" },
                 yaodianArea
             );
-
+            
             context.MapRoute(
                 "Phone_yaodian",
                 "yaodian",

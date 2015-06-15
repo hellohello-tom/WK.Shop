@@ -44,9 +44,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\MySoft.Data.dll</HintPath>
     </Reference>
+    <Reference Include="MySoft.Data.SQLite, Version=2.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MySoft.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
