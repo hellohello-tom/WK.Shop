@@ -163,7 +163,7 @@
             <dl>
                 <dt>折扣系数</dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.Commodity_Discount)
+                    @Html.TextBoxFor(m => m.Commodity_Discount, new { placeholder = "为空表示不打折" })
                     @Html.ValidationMessageFor(m => m.Commodity_Discount)
                 </dd>
             </dl>
@@ -185,7 +185,7 @@
                 <dt>图文详情</dt>
                 <dd>
                     <div class="unit">
-                        @Html.TextAreaFor(m => m.Commodity_Content, new { rows = "16", cols = "100", @class = "editor", tools = "Cut,Copy,|,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,|,Align,List,Outdent,Indent,|,Fullscreen,Emot,Table,Hr" })
+                        @Html.TextAreaFor(m => m.Commodity_Content, new { rows = "50", cols = "100", @class = "editor", tools = "Cut,Copy,|,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,|,Align,List,Outdent,Indent,|,Fullscreen,Emot,Table,Hr" })
                     </div>
 
                 </dd>

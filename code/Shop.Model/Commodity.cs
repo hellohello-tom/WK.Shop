@@ -100,7 +100,7 @@ namespace Shop.Model
         /// <summary>
         /// 提醒
         /// </summary>		
-                [StringLength(200, ErrorMessage = "字符不能超过200个")]
+        [StringLength(200, ErrorMessage = "字符不能超过200个")]
         public string Commodity_Remind
         {
             get { return _Commodity_Remind; }
@@ -130,7 +130,7 @@ namespace Shop.Model
         /// <summary>
         /// 折扣系数
         /// </summary>
- [RegularExpression(@"^(([1-9]{1}[0-9]{0,1}))$", ErrorMessage = "请输入1~99正整数，例如85折为85")]
+        [RegularExpression(@"^([1-9])(\.\d{1})?$", ErrorMessage = "请输入正确的折扣，最多保留一位小数")]
         public decimal? Commodity_Discount
         {
             get { return _Commodity_Discount; }
@@ -144,9 +144,9 @@ namespace Shop.Model
         /// <summary>
         /// 剩余数量
         /// </summary>
- [Required(ErrorMessage = "必填")]
- [Range(0, 100000, ErrorMessage = "0~100000之间")]
- [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
+        [Required(ErrorMessage = "必填")]
+        [Range(0, 100000, ErrorMessage = "0~100000之间")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
         public int Commodity_ResidueCount
         {
             get { return _Commodity_ResidueCount; }
@@ -160,7 +160,7 @@ namespace Shop.Model
         /// <summary>
         /// 备注
         /// </summary>		
-                [StringLength(500, ErrorMessage = "不能超过500个字符")]
+        [StringLength(500, ErrorMessage = "不能超过500个字符")]
         public string Commodity_Remark
         {
             get { return _Commodity_Remark; }
