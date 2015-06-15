@@ -18,6 +18,7 @@ using MySoft.Data;
 using Shop.Web;
 using System.IO;
 using System.Xml.Serialization;
+using Shop.Web.ViewModel;
 
 namespace Shop.Web.Areas.SiteConfig.Controllers
 {
@@ -35,8 +36,9 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var configModel = SerializationHelper.Load(typeof(Config), Server.MapPath("/Content/settings/siteConfig.xml")) as Config;
-            return View(configModel);
+           var configModel = ApplicationConfigs.GetConfigInfo;
+             //= SerializationHelper.Load(typeof(Config), Server.MapPath("/Content/settings/siteConfig.xml")) as Config;
+           return View(configModel);
         }
 
         
@@ -56,6 +58,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
                 if (ModelState.IsValid)
                 {
                     SerializationHelper.Save(model, Server.MapPath("/Content/settings/siteConfig.xml"));
+                    ApplicationConfigs.GetConfigInfo = model;
                     callback = DWZMessage.Success();
                 }
             }

@@ -1,7 +1,7 @@
 ﻿@using Shop.Common.Config
 @using Shop.Model
 @{
-    var configModel = XmlConfigHelper.ReadXml<Config>(Server.MapPath("/Content/settings/siteConfig.xml"));
+    var configModel = Shop.Web.ViewModel.ApplicationConfigs.GetConfigInfo;
 }
 <!DOCTYPE html>
 <html lang="zh-CN">
