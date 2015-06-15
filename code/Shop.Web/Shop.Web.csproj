@@ -705,8 +705,11 @@
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\plugin\picturePreview\css\touchTouch.min.css" />
     <Content Include="Scripts\plugin\picturePreview\css\touchTouch.css" />
+    <Content Include="Scripts\plugin\picturePreview\js\zepto.picturePreview.min.js" />
     <Content Include="Scripts\plugin\picturePreview\js\jquery.picturePreview.js" />
+    <Content Include="Scripts\plugin\picturePreview\js\zepto.touchTouch.min.js" />
     <Content Include="Scripts\plugin\picturePreview\js\jquery.touchTouch.js" />
     <Content Include="Scripts\plugin\swiper\css\swiper.min.css" />
     <Content Include="Scripts\plugin\swiper\js\swiper.js" />
