@@ -31,4 +31,5 @@ var goTop = function () {
 window.onload = goTop();
 var goTop = function () {
     window.scrollTo(0, 0);
+    return false;
 };

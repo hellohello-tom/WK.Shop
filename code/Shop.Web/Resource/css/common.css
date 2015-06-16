@@ -32,4 +32,4 @@
 
 /*»Øµ½¶¥²¿*/
 
-.go-top-btn {width: 45px;height: 52.5px;position: fixed;right: 10px;bottom: 50px;background: url(/Resource/images/top.png) no-repeat center;background-size: 100%;}
+.go-top-btn {width: 45px;height: 52.5px;position: fixed;right: 10px;bottom: 50px;background: url(/Resource/images/top.png) no-repeat center;background-size: 100%;z-index: 9999}

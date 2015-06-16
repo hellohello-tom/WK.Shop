@@ -1,4 +1,5 @@
-﻿@using Shop.Web.ViewModel
+﻿@using Shop.Model
+@using Shop.Web.ViewModel
 @model Shop.Model.Commodity
 @{
     var commodity = Model;
@@ -11,7 +12,7 @@
     <script src='@Url.Content("~/Scripts/plugin/swiper/js/swiper3.0.8.min.js")'></script>
     <script src='@Url.Content("~/Scripts/plugin/picturePreview/js/zepto.picturePreview.min.js")'></script>
 }
- 
+
 <header class="tc header">
     <a href='javascript:history.go(-1);' class="goback"></a>
     <h2>@commodity.Commodity_Name</h2>
@@ -19,7 +20,8 @@
 <div class="main pro">
     <article class="pro-detail">
         <!--药品图片列表-->
-        @Html.Action("CommodityImgList", new { id = @Model.Id })
+        @*@Html.Action("CommodityImgList", new { id = @Model.Id })*@
+        @Html.Partial("Partial/ImgList", ViewBag.ImgList as List<FileAttr>)
 
         <div class="img-nav">
             <span></span>
@@ -42,6 +44,18 @@
             <li>联系电话：<a href="tel:@ApplicationConfigs.GetConfigInfo.Tel">@ApplicationConfigs.GetConfigInfo.Tel</a></li>
             <li>联系微信：<span>@ApplicationConfigs.GetConfigInfo.WeiXin</span></li>
         </ul>
+        <!--图文详情-->
+        <section class="intro">
+            <h3 class=intro-title><span>向下滚动，查看图文详情</span></h3>
+            <div class="intro-text">
+                @Html.Raw(commodity.Commodity_Content)
+            </div>
+            <div class="intro-img tc">
+                <!--内容药品图片列表-->
+                @*@Html.Partial("Partial/CImgList", ViewBag.ImgList as List<FileAttr>)*@
+
+            </div>
+        </section>
     </article>
     <article class='guess'>
         <h3>猜你还喜欢</h3>
@@ -52,13 +66,13 @@
 @section Js
 {
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var mySwiper = new Swiper('.swiper-container', {
                 preloadImages: false,
                 autoplay: 1500,
                 // 如果需要分页器
                 pagination: '.swiper-pagination',
-
+                preventLinksPropagation : false
                 // 如果需要前进后退按钮
                 //nextButton: '.swiper-button-next',
                 //prevButton: '.swiper-button-prev',
@@ -66,14 +80,12 @@
                 // 如果需要滚动条
                 // scrollbar: '.swiper-scrollbar'
             });
-
-
+            
         });
 
 
         $('.mainContaine-mask').hide();
         $('.pd-img li[data-src]').not('.swiper-slide-duplicate').picturePreview();
-
 
     </script>
 }

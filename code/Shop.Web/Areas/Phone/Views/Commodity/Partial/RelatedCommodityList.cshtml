@@ -1,34 +1,25 @@
 ﻿@model List<Shop.Model.Commodity>
-<div class="img-wrapper" id="test1">
-    <ul class="pro-wrapper clearfix">
+<div class="swiper-container" id="guessing">
+    <ul class="pro-wrapper clearfix swiper-wrapper">
         @{var i = 1;}
         @foreach (var comm in Model)
         {
             if (i == 1 || i % 3 == 1)
             {
-                @Html.Raw("<li class=pro-item>")
+                @Html.Raw("<li class='pro-item swiper-slide'>")
             }
-            <a class="atest" href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
+            <a  href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
                 <section class=img-wrapper><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
                 <p class="pro-info">@comm.Commodity_Name</p>
                 <p class=" color-light">
                     <span class="this-price ">¥@(Convert.ToDecimal(comm.Commodity_CostPrice * comm.Commodity_Discount / 10).ToString("F"))</span>
                 </p>
             </a>
-            if (i % 3 == 0 || i+1>=Model.Count)
+            if (i % 3 == 0 || i + 1 > Model.Count)
             {
                 @Html.Raw("</li>")
             }
             i++;
-            }
+        }
     </ul>
 </div>
-
-    <script type="text/javascript">
-        Zepto(function () {
-            debugger;
-            $("#test1").jdSlider({ lineNum: 2, fitToScreen: true })
-        });
-
-
-    </script>

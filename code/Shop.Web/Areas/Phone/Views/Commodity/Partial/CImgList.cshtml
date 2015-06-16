@@ -1,0 +1,5 @@
+﻿@model List<Shop.Model.FileAttr>
+@foreach (var img in Model)
+{
+    <section class=img-item><img src="@img.FileAttr_Path" alt="@img.FileAttr_Name"></section>
+}

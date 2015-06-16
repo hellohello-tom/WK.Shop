@@ -606,6 +606,7 @@
     <Content Include="Resource\fonts\FontAwesome.otf" />
     <Content Include="Areas\Phone\Views\Main\Index.cshtml" />
     <Content Include="Areas\Phone\Views\Warn\Error.cshtml" />
+    <Content Include="Areas\Phone\Views\Commodity\Partial\CImgList.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
@@ -733,6 +734,7 @@
     <Content Include="Scripts\plugin\picturePreview\js\jquery.picturePreview.js" />
     <Content Include="Scripts\plugin\picturePreview\js\zepto.touchTouch.min.js" />
     <Content Include="Scripts\plugin\picturePreview\js\jquery.touchTouch.js" />
+    <Content Include="Scripts\plugin\slider.js" />
     <Content Include="Scripts\plugin\swiper\css\swiper.min.css" />
     <Content Include="Scripts\plugin\swiper\js\swiper.js" />
     <Content Include="Scripts\plugin\swiper\js\swiper3.0.8.min.js" />

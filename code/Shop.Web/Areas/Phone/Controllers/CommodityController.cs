@@ -143,6 +143,19 @@ namespace Shop.Web.Areas.Phone.Controllers
                 return Redirect(string.Format("/PhoneError?title={0}&msg={1}", "未找到", "你要找的药品不存在"));
              
             }
+            #region 搜索条件
+
+            WhereClip where = FileAttr._.FileAttr_IsDel == false;
+
+            if (id > 0)
+                where &= FileAttr._.FileAttr_BussinessId == id;
+            where &= FileAttr._.FileAttr_BussinessCode == "Commodity";
+            OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
+
+            #endregion
+
+            var imgList = fileAttrBll.GetList(where, order);
+            ViewBag.ImgList = imgList;
             return View(commodity);
         }
 
@@ -150,9 +163,10 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// 药品详情图片页
         /// </summary>
         /// <param name="id">关联药品Id</param>
+        /// <param name="cimg"></param>
         /// <param name="bCode">关联商品代码</param>
         /// <returns></returns>
-        public ActionResult CommodityImgList(int id,string bCode="Commodity")
+        public ActionResult CommodityImgList(int id,bool cimg=false,string bCode="Commodity")
         {
             #region 搜索条件
 
@@ -166,6 +180,10 @@ namespace Shop.Web.Areas.Phone.Controllers
             #endregion
 
             var imgList = fileAttrBll.GetList(where, order);
+            if (cimg)
+            {
+                return View("Partial/CImgList", imgList);
+            }
             return View("Partial/ImgList", imgList);
         }
     }
