@@ -432,6 +432,7 @@ header.s form {
   -webkit-line-clamp: 2;
   overflow: hidden;
   height: 3em;
+  margin: 2px 0;
 }
 .pro-wrapper .pro-item a .sales {
   background: #ea2f53;
@@ -493,7 +494,8 @@ header.s form {
   font-weight: 400;
   font-size: 1.125rem;
 }
-.pd-info .declare {
+.pd-info .declare,
+.intro .intro-text table .title {
   color: #f66;
 }
 .pd-info .price {
@@ -572,6 +574,20 @@ header.s form {
 .intro .intro-text {
   padding: 10px;
   line-height: 1.75;
+}
+.intro .intro-text table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+}
+.intro .intro-text table td {
+  border: 1px solid #ddd;
+  padding: 3px;
+}
+.intro .intro-text table td:first-child {
+  white-space: nowrap;
+}
+.intro .intro-text table tr:nth-child(odd) td {
+  background: #eee;
 }
 .intro .intro-img {
   padding: 10px;

@@ -536,6 +536,7 @@ header.s {
             .pro-info {
                 .mul-line();
                 height: 3em;
+                margin: 2px 0;
             }
             .sales {
                 background: @o-color;
@@ -674,6 +675,24 @@ header.s {
     .intro-text{
         padding: 10px;
         line-height: 1.75;
+        table{
+            border:1px solid #ccc;
+            border-collapse: collapse;
+            .title{
+                &:extend(.pd-info .declare);
+            }
+            td{
+                border:1px solid #ddd;
+                padding: 3px;
+                &:first-child{
+                    white-space: nowrap;
+                }
+
+            }
+            tr:nth-child(odd) td{
+                    background: #eee;
+                }
+        }
     }
     .intro-img{
         padding: 10px;
