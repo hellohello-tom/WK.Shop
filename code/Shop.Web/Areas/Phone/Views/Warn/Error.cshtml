@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
+}
+<div class="error tc">
+    <h1>@ViewBag.Title</h1>
+    <p>@ViewBag.Msg</p>
+    <p>
+        <span class="this-price" id="sec">5</span>秒后将自动返回首页
+    </p>
+
+    <p class="am"></p>
+    <p>
+        <a href="/yaodian" class="gohome">点击可直接返回首页</a>
+    </p>
+</div>
+@section Js
+{
+    <script>
+        var s = document.getElementById("sec"), _start = 5;
+        setInterval(function() {
+            s.innerText = _start--;
+            if (_start==0) {
+                window.location.href = "/yaodian";
+            }
+
+        }, 1e3);
+    </script>
+}

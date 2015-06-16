@@ -62,8 +62,13 @@
                       
                       
                     } else {
-                        //搜索
-                        $('.commodity-list').html(data).show(500);
+                        if (data) {
+                            //搜索
+                            $('.commodity-list').html(data).show(500);
+                        } else {
+                            window.location.href = "/PhoneError?title=" + escape("未找到") + "&msg=" + escape("暂时未找到药品");
+                        }
+                       
                     }
                     
                 }

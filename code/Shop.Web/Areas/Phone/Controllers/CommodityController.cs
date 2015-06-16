@@ -115,9 +115,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             
             #endregion
             var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
-            if (commodityList == null) return null;
-
-            if (string.Equals("Commodity_CostPrice",pi.SortName))//如果是价格排序 要按照折后价进行排序
+            if (commodityList!=null&&string.Equals("Commodity_CostPrice", pi.SortName))//如果是价格排序 要按照折后价进行排序
             {
                 commodityList = string.IsNullOrEmpty(pi.SortOrder) || pi.SortOrder.ToLower() == "asc"
                     ? commodityList.OrderBy(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList()
@@ -140,7 +138,11 @@ namespace Shop.Web.Areas.Phone.Controllers
         public ActionResult CommodityDeatil(int id)
         {
             var commodity = commodityBll.GetModelByCache(id);
-
+            if (commodity==null)
+            {
+                return Redirect(string.Format("/PhoneError?title={0}&msg={1}", "未找到", "你要找的药品不存在"));
+             
+            }
             return View(commodity);
         }
 

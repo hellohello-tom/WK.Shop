@@ -51,6 +51,13 @@ namespace Shop.Web.Areas.Phone
             );
 
             context.MapRoute(
+                "Phone_Error",
+                "PhoneError",
+                new { Controller = "Warn", action = "Error" },
+                yaodianArea
+            );
+
+            context.MapRoute(
                 "Phone_default",
                 "Phone/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
