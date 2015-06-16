@@ -42,6 +42,20 @@ textarea:focus {
   margin-bottom: 0;
   border-radius: 3px;
 }
+.btn-block {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-weight: 400;
+  margin-bottom: 0;
+  border-radius: 3px;
+  width: 100%;
+  margin: 10px;
+}
 .btn-able {
   background: #c00!important;
   color: #fff!important;
@@ -253,7 +267,7 @@ a:active {
   position: fixed;
   top: 3rem;
   bottom: 3rem;
-  width: 25%;
+  width: 10em;
   background: #eee;
   overflow-x: hidden;
 }
@@ -262,13 +276,14 @@ a:active {
   border-width: 0 1px 1px 0;
   line-height: 1.75;
   padding: 8px 5px 8px 10px;
+  word-break: break-all;
 }
 .pro .pro-cat li.on {
   background: #fff;
   border-right-color: #fff;
 }
 .pro .pro-sub-cat {
-  margin-left: 25%;
+  margin-left: 10em;
   padding: 10px;
 }
 .pro .pro-sub-cat li {
@@ -386,8 +401,8 @@ header.s form {
   margin: 3px;
   vertical-align: -1px;
   color: #555;
-  -webkit-transtion: -webkit-transform 0.3s linear;
-  transition: transform 0.3s linear;
+  -webkit-transtion: -webkit-transform 0.3s ease-in;
+  transition: transform 0.3s ease-in;
 }
 .pro-wrapper {
   padding: 5px;
@@ -499,19 +514,24 @@ header.s form {
 }
 .guess h3 {
   font-size: 1rem;
-  margin-bottom: 8px;
+  margin: 8px 0;
+}
+.guess .img-wrapper {
+  height: 180px;
+  overflow: hidden;
 }
 .guess .pro-wrapper {
   padding: 0;
+  width: 500%;
 }
 .guess .pro-wrapper .pro-item {
-  width: 31%;
-  margin-right: 3%;
+  width: 20%;
   margin-bottom: 8px;
   text-align: center;
 }
-.guess .pro-wrapper .pro-item:nth-child(3n+3) {
-  margin-right: 0;
+.guess .pro-wrapper .pro-item a {
+  float: left;
+  width: 33.33333333%;
 }
 .guess .pro-wrapper .pro-item a .img-wrapper {
   height: 100px;
@@ -520,10 +540,47 @@ header.s form {
 .guess .pro-wrapper .pro-item p {
   text-align: left;
 }
+.intro h3 {
+  background: #eee;
+  color: #888;
+  font-weight: 400;
+  margin: 5px 0;
+  position: relative;
+  height: 2.75em;
+  text-shadow: 0 1px  #fff;
+}
+.intro h3 span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #eee;
+  padding: 0 30px;
+  z-index: 2;
+  white-space: nowrap;
+}
+.intro h3:before {
+  content: "";
+  height: 1px;
+  background: #aaa;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+.intro .intro-text {
+  padding: 10px;
+  line-height: 1.75;
+}
+.intro .intro-img {
+  padding: 10px;
+}
 .error {
   position: absolute;
   top: 35%;
   width: 100%;
+  max-width: 640px;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
   background: #eee;
