@@ -126,10 +126,11 @@ html {
   font-size: 100%;
 }
 body {
-  margin: 0;
+  margin: 0 auto;
   background: #fff;
   color: #333;
   font: 87.5%/1.5 "Helvetica Neue", Helvetica, 'Microsoft Yahei', Arial, sans-serif;
+  max-width: 640px;
 }
 *,
 *:before,
@@ -200,6 +201,7 @@ a:active {
   color: #fff;
   position: fixed;
   width: 100%;
+  max-width: 640px;
   z-index: 3;
 }
 .header h2 {
