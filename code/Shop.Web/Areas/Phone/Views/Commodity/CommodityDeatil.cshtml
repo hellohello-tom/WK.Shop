@@ -47,14 +47,22 @@
         <!--图文详情-->
         <section class="intro">
             <h3 class=intro-title><span>向下滚动，查看图文详情</span></h3>
-            <div class="intro-text">
-                @Html.Raw(commodity.Commodity_Content)
-            </div>
-            <div class="intro-img tc">
-                <!--内容药品图片列表-->
-                @*@Html.Partial("Partial/CImgList", ViewBag.ImgList as List<FileAttr>)*@
+            @if (!string.IsNullOrEmpty(commodity.Commodity_Content))
+            {
+                <div class="intro-text">
+                    @Html.Raw(commodity.Commodity_Content)
+                </div>
+            }
+            else
+            {
+                <div class="intro-img tc">
+                    <!--内容药品图片列表-->
+                    @Html.Partial("Partial/CImgList", ViewBag.ImgList as List<FileAttr>)
 
-            </div>
+                </div>
+            }
+
+
         </section>
     </article>
     <article class='guess'>
@@ -72,7 +80,7 @@
                 autoplay: 1500,
                 // 如果需要分页器
                 pagination: '.swiper-pagination',
-                preventLinksPropagation : false
+                preventLinksPropagation: false
                 // 如果需要前进后退按钮
                 //nextButton: '.swiper-button-next',
                 //prevButton: '.swiper-button-prev',
@@ -85,7 +93,7 @@
                 preloadImages: false,
                 autoplay: 3000
             });
-            
+
         });
 
 
