@@ -275,7 +275,7 @@ a:active {
     padding: 15px 10px;
     .logo{
         img{
-            height: 90px;
+            height: 85px;
         }
     }
     .s-link{
@@ -294,6 +294,8 @@ a:active {
         a{
             margin-top: 10px;
             .flex();
+            float: left;
+            width: 25%;
             padding-top: 40px;
             font-size: 1rem;
             text-shadow: 1px 1px 5px #000;
@@ -426,6 +428,7 @@ header.s {
     }
     form{
         .flex();
+        width: 100%;
     }
 }
 
@@ -563,9 +566,14 @@ header.s {
                 float: left;
                 width: 10%;
                 height: 100%;
-                .flex-center();
                 padding: 0 8px;
                 text-align: center;
+                .img-wrapper{
+                    display: table-cell;
+                    width: 5000px;
+                    height: 150px;
+                    vertical-align: middle;
+                }
             }
         }
     }
@@ -645,7 +653,7 @@ header.s {
 }
 .intro{
     h3{
-        background: #eee;
+        background: #f2f2f2;
         color:#888;
         font-weight: 400;
         margin: 5px 0;
@@ -657,7 +665,7 @@ header.s {
             top: 50%;
             left: 50%;
             .trf-tsl(-50%,-50%);
-            background: #eee;
+            background: #f2f2f2;
             padding: 0 30px;
             z-index: 2;
             white-space: nowrap;
@@ -676,7 +684,7 @@ header.s {
         padding: 10px;
         line-height: 1.75;
         table{
-            border:1px solid #ccc;
+            border:1px solid #ddd;
             border-collapse: collapse;
             .title{
                 &:extend(.pd-info .declare);
@@ -690,7 +698,7 @@ header.s {
 
             }
             tr:nth-child(odd) td{
-                    background: #eee;
+                    background: #f2f2f2;
                 }
         }
     }
@@ -756,6 +764,8 @@ header.s {
         height: 100%;
         a {
             .flex();
+            float: left;
+            width: 25%;
             color: #999;
             padding-top: 13px;
             position: relative;

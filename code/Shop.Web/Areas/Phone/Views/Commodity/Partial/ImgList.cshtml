@@ -3,7 +3,7 @@
     <ul class="img swiper-wrapper">
         @foreach (var img in Model)
         {
-            <li class="swiper-slide" data-src="@img.FileAttr_Path"><img src="@img.FileAttr_Path" height="440" width="440" alt="@img.FileAttr_Name"></li>
+            <li class="swiper-slide" data-src="@img.FileAttr_Path"><span class="img-wrapper"><img src="@img.FileAttr_Path" height="440" width="440" alt="@img.FileAttr_Name"></span></li>
         }
     </ul>
     <!-- 如果需要分页器 -->

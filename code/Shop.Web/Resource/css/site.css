@@ -169,7 +169,7 @@ a:active {
   padding: 15px 10px;
 }
 .home .logo img {
-  height: 90px;
+  height: 85px;
 }
 .home .s-link a {
   display: block;
@@ -186,6 +186,8 @@ a:active {
   margin-top: 10px;
   -webkit-flex: 1;
   flex: 1;
+  float: left;
+  width: 25%;
   padding-top: 40px;
   font-size: 1rem;
   text-shadow: 1px 1px 5px #000;
@@ -318,6 +320,7 @@ header.s .goback {
 header.s form {
   -webkit-flex: 1;
   flex: 1;
+  width: 100%;
 }
 .search-box {
   position: relative;
@@ -460,12 +463,14 @@ header.s form {
   float: left;
   width: 10%;
   height: 100%;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0 8px;
   text-align: center;
+}
+.pro-detail .pd-img ul li .img-wrapper {
+  display: table-cell;
+  width: 5000px;
+  height: 150px;
+  vertical-align: middle;
 }
 .pro-detail .img-nav {
   text-align: center;
@@ -543,7 +548,7 @@ header.s form {
   text-align: left;
 }
 .intro h3 {
-  background: #eee;
+  background: #f2f2f2;
   color: #888;
   font-weight: 400;
   margin: 5px 0;
@@ -557,7 +562,7 @@ header.s form {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  background: #eee;
+  background: #f2f2f2;
   padding: 0 30px;
   z-index: 2;
   white-space: nowrap;
@@ -576,7 +581,7 @@ header.s form {
   line-height: 1.75;
 }
 .intro .intro-text table {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-collapse: collapse;
 }
 .intro .intro-text table td {
@@ -587,7 +592,7 @@ header.s form {
   white-space: nowrap;
 }
 .intro .intro-text table tr:nth-child(odd) td {
-  background: #eee;
+  background: #f2f2f2;
 }
 .intro .intro-img {
   padding: 10px;
@@ -653,6 +658,8 @@ header.s form {
 .footer .nav a {
   -webkit-flex: 1;
   flex: 1;
+  float: left;
+  width: 25%;
   color: #999;
   padding-top: 13px;
   position: relative;
