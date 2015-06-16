@@ -11,6 +11,28 @@
     <script src='@Url.Content("~/Scripts/plugin/swiper/js/swiper3.0.8.min.js")'></script>
     <script src='@Url.Content("~/Scripts/plugin/picturePreview/js/zepto.picturePreview.min.js")'></script>
 }
+<style>
+    .scroll_div {
+        width: 600px;
+        height: 49px;
+        margin: 0 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        background: #ffffff;
+    }
+
+        .scroll_div img {
+            width: 120px;
+            height: 49px;
+            border: 0;
+            margin: auto 8px;
+        }
+
+    #scroll_begin, #scroll_end, #scroll_begin ul, #scroll_end ul, #scroll_begin ul li, #scroll_end ul li {
+        display: inline;
+    }
+    /* 设置ul和li横排 */
+</style> 
 <header class="tc header">
     <a href='javascript:history.go(-1);' class="goback"></a>
     <h2>@commodity.Commodity_Name</h2>
@@ -59,8 +81,8 @@
                 pagination: '.swiper-pagination',
 
                 // 如果需要前进后退按钮
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
+                //nextButton: '.swiper-button-next',
+                //prevButton: '.swiper-button-prev',
 
                 // 如果需要滚动条
                 // scrollbar: '.swiper-scrollbar'
@@ -72,6 +94,7 @@
 
         $('.mainContaine-mask').hide();
         $('.pd-img li[data-src]').not('.swiper-slide-duplicate').picturePreview();
+
 
     </script>
 }

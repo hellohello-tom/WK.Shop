@@ -113,6 +113,14 @@ namespace Shop.Web.Areas.Phone.Controllers
             
             #endregion
             var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
+            if (commodityList == null) return null;
+
+            if (string.Equals("Commodity_CostPrice",pi.SortName))//如果是价格排序 要按照折后价进行排序
+            {
+                commodityList = pi.SortOrder.ToLower() == "asc"
+                    ? commodityList.OrderBy(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList()
+                    : commodityList.OrderByDescending(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList();
+            }
             if (notId != 0)
             {
                 //返回关联药品

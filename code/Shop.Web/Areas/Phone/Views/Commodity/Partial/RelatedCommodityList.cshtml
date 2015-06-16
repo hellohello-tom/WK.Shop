@@ -1,15 +1,15 @@
 ﻿@model List<Shop.Model.Commodity>
-<dl class="pro-wrapper clearfix">
+<ul class="pro-wrapper clearfix">
     @foreach (var comm in Model)
-{
-    <dd class=pro-item>
-        <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
-            <section class=img-wrapper><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
-            <p class="pro-info">@comm.Commodity_Name</p>
-            <p class=" color-light">
-                <span class="this-price ">¥@(Convert.ToDecimal(comm.Commodity_CostPrice * comm.Commodity_Discount / 10).ToString("F"))</span>
-            </p>
-        </a>
-    </dd>
-}
-</dl>
+    {
+        <li class=pro-item>
+            <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
+                <section class=img-wrapper><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
+                <p class="pro-info">@comm.Commodity_Name</p>
+                <p class=" color-light">
+                    <span class="this-price ">¥@(Convert.ToDecimal(comm.Commodity_CostPrice * comm.Commodity_Discount / 10).ToString("F"))</span>
+                </p>
+            </a>
+        </li>
+    }
+</ul>
