@@ -267,7 +267,7 @@ a:active {
   position: fixed;
   top: 3rem;
   bottom: 3rem;
-  width: 10em;
+  width: 7em;
   background: #eee;
   overflow-x: hidden;
 }
@@ -283,7 +283,7 @@ a:active {
   border-right-color: #fff;
 }
 .pro .pro-sub-cat {
-  margin-left: 10em;
+  margin-left: 7em;
   padding: 10px;
 }
 .pro .pro-sub-cat li {
