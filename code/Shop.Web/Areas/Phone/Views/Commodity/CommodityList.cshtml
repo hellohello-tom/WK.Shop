@@ -47,9 +47,19 @@
                 data: para,
                 success: function (data) {
                     if (isloadMore) {
-                        //加载更多 就追加
-                        $('.loadmoreDiv').remove();
-                        $('.commodity-list').append(data).show(500);
+                        if (data) {//有数据
+                            //加载更多 就追加
+                            $('.loadmoreDiv').remove();
+                            $('.commodity-list').append(data).show(500);
+                        } else {//没有数据
+                            $('.loadmoreDiv').remove();
+                            $('.commodity-list').append('<div class="tc loadmoreDiv"><a href="javascript:void(0);" class="btn loadmore">已加载全部数据</a></div>');
+                            setTimeout(function() {
+                                $('.loadmoreDiv').hide();
+                            }, 1500);
+                            
+                        }
+                      
                       
                     } else {
                         //搜索
@@ -102,7 +112,7 @@
         }
 
         var loadMore=function() {
-            var self = $('.order a[class=on]');
+            var self = $('.order').find('.on');
             para.pageNum += 1;
             searchData(self, true);
         }
