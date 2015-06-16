@@ -1,5 +1,5 @@
 ﻿@model List<Shop.Model.Commodity>
-<div class="swiper-container-guess" id="guessing">
+<div class="swiper-container-guess img-wrapper" id="guessing">
     <ul class="pro-wrapper clearfix swiper-wrapper">
         @{var i = 1;}
         @foreach (var comm in Model)
@@ -8,8 +8,8 @@
             {
                 @Html.Raw("<li class='pro-item swiper-slide'>")
             }
-            <a  href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
-                <section class=img-wrapper><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
+            <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
+                <section class='img-wrapper'><img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name"></section>
                 <p class="pro-info">@comm.Commodity_Name</p>
                 <p class=" color-light">
                     <span class="this-price ">¥@(Convert.ToDecimal(comm.Commodity_CostPrice * comm.Commodity_Discount / 10).ToString("F"))</span>
