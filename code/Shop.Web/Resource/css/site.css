@@ -570,7 +570,7 @@ header.s form {
 .intro h3:before {
   content: "";
   height: 1px;
-  background: #aaa;
+  background: #ccc;
   position: absolute;
   top: 50%;
   left: 0;
@@ -583,6 +583,7 @@ header.s form {
 .intro .intro-text table {
   border: 1px solid #ddd;
   border-collapse: collapse;
+  width: 100%;
 }
 .intro .intro-text table td {
   border: 1px solid #ddd;
