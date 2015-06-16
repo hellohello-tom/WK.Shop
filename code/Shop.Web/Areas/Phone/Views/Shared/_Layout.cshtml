@@ -12,19 +12,35 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href='@Url.Content("~/resource/css/font-awesome.min.css")' />
     <link rel="stylesheet" href='@Url.Content("~/resource/css/site.css")' />
+    <link rel="stylesheet" href='@Url.Content("~/resource/css/common.css")' />
     <script type="text/javascript" src='@Url.Content("~/Scripts/zepto/zepto.min.js")'></script>
+    <script type="text/javascript" src='@Url.Content("~/Scripts/site.js")'></script>
+
     @RenderSection("Head", false)
 </head>
 <body data-theme='@configModel.PhoneStyle'>
     @RenderBody()
     <footer class="footer">
         <div class="dis-flex nav tc">
-            <a href='@Url.RouteUrl("Phone_yaodian")' class="on"><i class="fa fa-home"></i><p>首页</p></a>
-            <a href="javascript:;"><i class="fa fa-gift"></i><p>98券</p></a>
-            <a href="javascript:;"><i class="fa fa-shopping-cart"></i><p>购物车标</p></a>
-            <a href="javascript:;"><i class="fa fa-user"></i><p>我的（会员标）</p></a>
+            <a href='@Url.RouteUrl("Phone_yaodian")' class="on">
+                <i class="fa fa-home"></i>
+                <p>首页</p>
+            </a>
+            <a href="javascript:;">
+                <i class="fa fa-gift"></i>
+                <p>98券</p>
+            </a>
+            <a href="javascript:;">
+                <i class="fa fa-shopping-cart"></i>
+                <p>购物车标</p>
+            </a>
+            <a href="javascript:;">
+                <i class="fa fa-user"></i>
+                <p>我的（会员标）</p>
+            </a>
         </div>
     </footer>
+    <div class="go-top-btn" id="goTop" onclick="goTop();" style="display: none"></div>
 </body>
 @RenderSection("Js", false)
 </html>

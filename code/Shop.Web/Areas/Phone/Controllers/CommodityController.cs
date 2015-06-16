@@ -119,7 +119,7 @@ namespace Shop.Web.Areas.Phone.Controllers
 
             if (string.Equals("Commodity_CostPrice",pi.SortName))//如果是价格排序 要按照折后价进行排序
             {
-                commodityList = pi.SortOrder.ToLower() == "asc"
+                commodityList = string.IsNullOrEmpty(pi.SortOrder) || pi.SortOrder.ToLower() == "asc"
                     ? commodityList.OrderBy(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList()
                     : commodityList.OrderByDescending(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList();
             }

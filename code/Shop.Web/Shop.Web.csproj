@@ -619,6 +619,7 @@
     <Content Include="Resource\images\logo.png" />
     <Content Include="Resource\images\man.png" />
     <Content Include="Resource\images\s.png" />
+    <Content Include="Resource\images\top.png" />
     <Content Include="Resource\images\woman.png" />
     <Content Include="Resource\images\yao.png" />
     <Content Include="Resource\images\zhao.png" />
