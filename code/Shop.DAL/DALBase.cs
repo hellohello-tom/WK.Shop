@@ -124,7 +124,7 @@ namespace Shop.DAL
         /// </summary>
         public T GetModel(int id)
         {
-            return GetModel(new WhereClip("id=@id", new SQLParameter("@id", id)));
+            return GetModel(new WhereClip("id=@id", new SQLParameter("@id", id))) ?? default(T);
         }
 
         /// <summary>

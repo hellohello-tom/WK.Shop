@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MySoft.Data;
 using Shop.BLL;
 using Shop.Model;
+using Shop.Common;
 
 namespace Shop.Web.Areas.Phone.Controllers
 {
@@ -30,8 +31,8 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <returns></returns>
         public ActionResult NavList()
         {
-            var navList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false, Navigation._.Navigation_Sort.Asc
-                && Navigation._.Navigation_CreateTime.Desc);
+            var navList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false && Navigation._.Navigation_Status == (int)Status.Show
+                , Navigation._.Navigation_Sort.Asc&& Navigation._.Navigation_CreateTime.Desc);
             var firstOrDefault = navList.FirstOrDefault();
             if (firstOrDefault != null) ViewBag.NavId = firstOrDefault.Id;
             return View("Partial/NavList", navList);
@@ -45,7 +46,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         public ActionResult TagList(DWZPageInfo pi, int navId)
         {
             #region 搜索条件
-            WhereClip where = Tag._.Tag_IsDel == false;
+            WhereClip where = Tag._.Tag_IsDel == false && Tag._.Tag_Status == (int)Status.Show;
             if (navId != 0)
                 where &= Tag._.Tag_NavigationId == navId;
             ViewBag.NavId = navId;
@@ -90,7 +91,8 @@ namespace Shop.Web.Areas.Phone.Controllers
         {
             #region 搜索条件
 
-            WhereClip where = Commodity._.Commodity_IsDel == false;
+            WhereClip where = Commodity._.Commodity_IsDel == false &&
+                WhereClip.Bracket(Commodity._.Commodity_Status == (int)Status.Show || Commodity._.Commodity_Status == (int)Status.View);
             if (tagId > 0)
             {
                 where &= Commodity._.Commodity_TagId == tagId;

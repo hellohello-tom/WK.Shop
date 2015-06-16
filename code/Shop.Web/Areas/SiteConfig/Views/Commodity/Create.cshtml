@@ -1,4 +1,5 @@
 ﻿@model Shop.Model.Commodity
+@using Shop.Common
 @{
     ViewBag.Title = "Commodity_Create";
     var fileAttrList = ViewBag.FileAttrList as List<Shop.Model.FileAttr>;
@@ -139,7 +140,15 @@
                 </dd>
             </dl>
 
-
+            <dl>
+                <dt>显示状态</dt>
+                <dd>
+                    <label>@Html.RadioButton("Commodity_Status", (int)Status.Show, (int)Status.Show == Model.Commodity_Status) 显示</label>
+                    <label>@Html.RadioButton("Commodity_Status", (int)Status.Hide, (int)Status.Hide == Model.Commodity_Status) 隐藏</label>
+                    <label>@Html.RadioButton("Commodity_Status", (int)Status.View, (int)Status.View == Model.Commodity_Status) 展示不出售</label>
+                    @Html.ValidationMessageFor(m => m.Commodity_Status)
+                </dd>
+            </dl>
             <dl>
                 <dt>销量</dt>
                 <dd>

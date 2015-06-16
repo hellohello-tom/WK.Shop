@@ -3,7 +3,7 @@
 //
 //  名    称：Commodity Model
 //  作    者：cat
-//  添加时间：2015-06-11 13:04:50
+//  添加时间：2015-06-16 10:33:24
 // ==========================================================================
 using System;
 //引用
@@ -32,6 +32,7 @@ namespace Shop.Model
         private string _Commodity_Remark;
         private string _Commodity_ImagePath;
         private string _Commodity_Content;
+        private int _Commodity_Status;
         private DateTime? _Commodity_CreateTime;
         private int _Commodity_User;
         private bool _Commodity_IsDel;
@@ -83,10 +84,10 @@ namespace Shop.Model
         }
 
         /// <summary>
-        /// 销量
+        /// 商品销量
         /// </summary>
 
-
+        [RegularExpression("-?\\d+", ErrorMessage = "*")]
         public int Commodity_Sales
         {
             get { return _Commodity_Sales; }
@@ -117,6 +118,7 @@ namespace Shop.Model
         [Required(ErrorMessage = "必填")]
         [Range(0.02, 100000.00, ErrorMessage = "价格范围0.02元~10万元")]
         [RegularExpression(@"^(([1-9]+[0-9]*)|0)(\.\d{1,2})?$", ErrorMessage = "请输入正确价格，最多保留两位小数")]
+        
         public decimal Commodity_CostPrice
         {
             get { return _Commodity_CostPrice; }
@@ -196,6 +198,19 @@ namespace Shop.Model
             {
                 OnPropertyValueChange(_.Commodity_Content, _Commodity_Content, value);
                 _Commodity_Content = value;
+            }
+        }
+
+        /// <summary>
+        /// 商品状态，0，上架，1，下架，2，展示
+        /// </summary>
+        public int Commodity_Status
+        {
+            get { return _Commodity_Status; }
+            set
+            {
+                OnPropertyValueChange(_.Commodity_Status, _Commodity_Status, value);
+                _Commodity_Status = value;
             }
         }
 
@@ -290,6 +305,7 @@ namespace Shop.Model
 								_.Commodity_Remark,
 								_.Commodity_ImagePath,
 								_.Commodity_Content,
+								_.Commodity_Status,
 								_.Commodity_CreateTime,
 								_.Commodity_User,
 								_.Commodity_IsDel};
@@ -312,6 +328,7 @@ namespace Shop.Model
 								_Commodity_Remark,
 								_Commodity_ImagePath,
 								_Commodity_Content,
+								_Commodity_Status,
 								_Commodity_CreateTime,
 								_Commodity_User,
 								_Commodity_IsDel};
@@ -376,6 +393,11 @@ namespace Shop.Model
             if ((false == reader.IsDBNull(_.Commodity_Content)))
             {
                 this._Commodity_Content = reader.GetString(_.Commodity_Content);
+            }
+
+            if ((false == reader.IsDBNull(_.Commodity_Status)))
+            {
+                this._Commodity_Status = reader.GetInt32(_.Commodity_Status);
             }
 
             if ((false == reader.IsDBNull(_.Commodity_CreateTime)))
@@ -473,6 +495,11 @@ namespace Shop.Model
             /// 图文详情 -  数据类型:string
             /// </summary>
             public static Field Commodity_Content = new Field<Commodity>("Commodity_Content");
+
+            /// <summary>
+            /// 字段名:Commodity_Status -  数据类型:int
+            /// </summary>
+            public static Field Commodity_Status = new Field<Commodity>("Commodity_Status");
 
             /// <summary>
             /// 创建时间 -  数据类型:DateTime

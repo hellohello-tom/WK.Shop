@@ -1,65 +1,36 @@
 ﻿@{
     Layout = null;
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta name="format-detection" content="telephone=no">
-    <title>顶正网上药店手机版</title>
-    <link rel="stylesheet" href="http://wap.7lk.com/min/7lk.php?b=assets/wap/css&f=wx2-index.css,wx2-common.css">
-</head>
-<body>
-    <section class="top-search-content">
-        <img class="top-logo-img" alt="顶正网上药店" title="顶正网上药店" src="/Content/login/images/Phone/new-index-logo_03.png">
-        <div class="top-search-input radius" onclick="window.location.href='/yaodian/search'">输入药品名称/疾病名称搜索</div>
-        <ul>
-            <li>
-                <a href="/yaodian/commodity" title="科室找药">
-                    <img src="/Content/login/images/Phone/wx2_index_06.png" alt="科室找药">
-                    科室找药
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;" title="π用药">
-                    <img src="/Content/login/images/Phone/wx2_index_05.png" alt="π用药">
-                    π用药
-                </a>
-            </li>
 
-            <li>
-                <a href="javascript:;" title="男标">
-                    <img src="/Content/login/images/Phone/wx2_index_07.png" alt="男标">
-                    男标
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;" title="妇标">
-                    <img src="/Content/login/images/Phone/wx2_index_08.png" alt="妇标">
-                    妇标
-                </a>
-            </li>
-        </ul>
-    </section>
-    <div class="toTop">
-        <a href="/yaodian/search" alt="首页" class="nav-icon nav-index on">
-            <i></i>
-            找药
-        </a>
-        <a href="javascript:;" class="nav-icon nav-sg">
-            <i></i>
-            98券
-        </a>
-        <a href="javascript:;" alt="首页" class="nav-icon nav-gwc ">
-            <i></i>
-            购物车标
-        </a>
-        <a href="javascript:;" alt="首页" class="nav-icon nav-grzx ">
-            <i></i>
-            我的（会员标）
-        </a>
-    </div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Resource/css/site.css" rel="stylesheet" />
+    <title>@Shop.Web.ViewModel.ApplicationConfigs.GetConfigInfo.ConfigName</title>
+</head>
+<body data-theme='skin1'>
+    <header class="home">
+        <div class="logo tc"><img src="/Resource/images/logo.png" height="217" width="189" alt=""></div>
+        <div class="s-link tc" onclick="window.location.href='/yaodian/search'"><a href="javascript:;">输入药品名称/疾病名称搜索</a></div>
+        <div class="cat dis-flex tc">
+            <a href="/yaodian/commodity" class=zhao>科室找药</a>
+            <a href="javascript:;" class=yao>π用药</a>
+            <a href="javascript:;" class=man>男标</a>
+            <a href="javascript:;" class=woman>妇标</a>
+        </div>
+    </header>
+    <footer class="footer">
+        <div class="dis-flex nav tc">
+            <a href="/yaodian/search" class=on><i class="fa fa-search"></i><p>找药</p></a>
+            <a href="javascript:;"><i class="fa fa-gift"></i><p>98券</p></a>
+            <a href="javascript:;"><i class="fa fa-shopping-cart"></i><p>购物车标</p></a>
+            <a href="javascript:;"><i class="fa fa-user"></i><p>我的（会员标）</p></a>
+        </div>
+    </footer>
 </body>
 </html>

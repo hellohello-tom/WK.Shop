@@ -28,4 +28,22 @@ namespace Shop.Common
         /// </summary>
         Commodity=0
     }
+
+    public enum Status
+    {
+        /// <summary>
+        /// 显示
+        /// </summary>
+        Show=0,
+
+        /// <summary>
+        /// 隐藏
+        /// </summary>
+        Hide=1,
+
+        /// <summary>
+        /// 展示
+        /// </summary>
+        View=2
+    }
 }

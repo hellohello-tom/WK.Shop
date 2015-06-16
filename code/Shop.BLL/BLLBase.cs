@@ -41,6 +41,17 @@ namespace Shop.BLL
         }
 
         /// <summary>
+        /// 批量更新部分字段
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public bool Update(Dictionary<Field, object> fields, WhereClip where)
+        {
+            return dalBase.Update(fields, where);
+        }
+
+        /// <summary>
         /// 更新一条数据
         /// </summary>	
         public bool Update(T model, bool isUpdateCache = false)

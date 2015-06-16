@@ -1,4 +1,5 @@
 ﻿@model Shop.Model.Navigation
+@using Shop.Common
 @{
     ViewBag.Title = "Navigation_Create";
 }
@@ -19,6 +20,14 @@
                 <dd>
                     @Html.TextBoxFor(m => m.Navigation_Sort)
                     @Html.ValidationMessageFor(m => m.Navigation_Sort)
+                </dd>
+            </dl>
+            <dl>
+                <dt>显示状态</dt>
+                <dd>
+                    <label>@Html.RadioButton("Navigation_Status", (int)Status.Show, (int)Status.Show == Model.Navigation_Status) 显示</label>
+                    <label>@Html.RadioButton("Navigation_Status", (int)Status.Hide, (int)Status.Hide == Model.Navigation_Status) 隐藏</label>
+                    @Html.ValidationMessageFor(m => m.Navigation_Status)
                 </dd>
             </dl>
         </div>

@@ -36,7 +36,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult Index(DWZPageInfo page, string tagName = "", int navigationId=0)
         {
         	#region 搜索条件
-            WhereClip where = null;
+            WhereClip where = Tag._.Tag_IsDel == false;
             if (!string.IsNullOrEmpty(tagName))
                 where &= Tag._.Tag_Name.Like("%" + tagName + "%");
             if (navigationId > 0)
@@ -82,6 +82,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             }
             else
             {
+                model.Tag_Status = 0;
                 model.Tag_Sort = 1;
                 model.Tag_ImagePath = "/Content/web/images/NoPicture.png";
             }
@@ -129,7 +130,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         {
             DWZCallbackInfo callback = null;
 
-            if (bll.Delete(id))
+            if (bll.Update(new Dictionary<Field, object> { { Tag._.Tag_IsDel, true } }, Tag._.Id == id))
                 callback = DWZMessage.Success("删除成功!");
             else
                 callback = DWZMessage.Faild("删除失败!");
@@ -146,10 +147,10 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult DeleteList(int[] ids)
         {
            DWZCallbackInfo callback = null;
-           
-            int count=bll.Delete(ids) ;
-            if (count > 0)
-                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", count));
+           if (bll.Update(new Dictionary<Field, object> { { Tag._.Tag_IsDel, true } }, Tag._.Id.In(ids)))
+           {
+               callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
+           }
             else
                 callback = DWZMessage.Faild("删除失败!");
 

@@ -34,7 +34,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult Index(DWZPageInfo page)
         {
         	#region 搜索条件
-            WhereClip where = null;
+            WhereClip where = FileAttr._.FileAttr_IsDel==false;
             //if (!string.IsNullOrEmpty(name))
             //    where &= FileAttr._.Name.Like("%" + name + "%");
             //ViewBag.Name = name;
@@ -98,9 +98,10 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult Delete(int id)
         {
             DWZCallbackInfo callback = null;
-
-            if (bll.Delete(id))
+            if (bll.Update(new Dictionary<Field, object> { { FileAttr._.FileAttr_IsDel, true } }, FileAttr._.Id == id))
                 callback = DWZMessage.Success("删除成功!");
+            //if (bll.Delete(id))
+            //    callback = DWZMessage.Success("删除成功!");
             else
                 callback = DWZMessage.Faild("删除失败!");
 
@@ -116,10 +117,13 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult DeleteList(int[] ids)
         {
            DWZCallbackInfo callback = null;
-           
-            int count=bll.Delete(ids) ;
-            if (count > 0)
-                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", count));
+           if (bll.Update(new Dictionary<Field, object> { { FileAttr._.FileAttr_IsDel, true } }, FileAttr._.Id.In(ids)))
+           {
+               callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
+           }
+            //int count=bll.Delete(ids) ;
+            //if (count > 0)
+            //    callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", count));
             else
                 callback = DWZMessage.Faild("删除失败!");
 

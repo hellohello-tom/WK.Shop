@@ -36,7 +36,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult Index(DWZPageInfo page,string name="",int tagId=0)
         {
         	#region 搜索条件
-            WhereClip where = null;
+            WhereClip where = Commodity._.Commodity_IsDel == false;
             if (!string.IsNullOrEmpty(name))
                 where &= Commodity._.Commodity_Name.Like("%" + name + "%");
             if (tagId > 0)
@@ -63,6 +63,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             }
             else
             {
+                model.Commodity_Status = 0;
                 model.Commodity_ImagePath = "/Content/web/images/NoPicture.png";
                 model.Commodity_CostPrice = 1;
                 model.Commodity_ResidueCount = 0;
@@ -134,7 +135,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         {
             DWZCallbackInfo callback = null;
 
-            if (bll.Delete(id))
+            if (bll.Update(new Dictionary<Field, object> { { Commodity._.Commodity_IsDel, true } }, Commodity._.Id == id))
                 callback = DWZMessage.Success("删除成功!");
             else
                 callback = DWZMessage.Faild("删除失败!");
@@ -150,14 +151,16 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         [HttpPost]
         public ActionResult DeleteList(int[] ids)
         {
-           DWZCallbackInfo callback = null;
-           
-            int count=bll.Delete(ids) ;
-            if (count > 0)
-                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", count));
+            DWZCallbackInfo callback = null;
+
+            if (bll.Update(new Dictionary<Field, object> { { Commodity._.Commodity_IsDel, true } }, Commodity._.Id.In(ids)))
+            {
+                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
+            }
+            //int count=bll.Delete(ids) ;
+            //if (count > 0)
             else
                 callback = DWZMessage.Faild("删除失败!");
-
             return Json(callback);
         }
         

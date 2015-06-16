@@ -52,13 +52,15 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <returns></returns>
         public ActionResult Create(int id=0)
         {
+            Model.Navigation model = bll.GetModel(id);
             if (id > 0)
             {
-                Model.Navigation model = bll.GetModel(id);
                 return View(model);
             }
             else
             {
+                model.Navigation_Sort = 1;
+                model.Navigation_Status = 0;
                 return View();
             }
         } 
@@ -105,7 +107,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         {
             DWZCallbackInfo callback = null;
 
-            if (bll.Delete(id))
+            if (bll.Update(new Dictionary<Field, object> { { Navigation._.Navigation_IsDel, true } }, Navigation._.Id == id))
                 callback = DWZMessage.Success("删除成功!");
             else
                 callback = DWZMessage.Faild("删除失败!");
@@ -122,10 +124,11 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult DeleteList(int[] ids)
         {
            DWZCallbackInfo callback = null;
-           
-            int count=bll.Delete(ids) ;
-            if (count > 0)
-                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", count));
+
+           if (bll.Update(new Dictionary<Field, object> { { Navigation._.Navigation_IsDel, true } }, Navigation._.Id.In(ids)))
+           {
+               callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
+           }
             else
                 callback = DWZMessage.Faild("删除失败!");
 
