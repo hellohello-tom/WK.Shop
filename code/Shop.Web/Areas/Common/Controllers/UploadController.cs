@@ -126,7 +126,12 @@ namespace Shop.Web.Areas.Common.Controllers
                 if (_fileAttrBLL.Delete(id))
                 {
                     callback = DWZMessage.Success("删除成功!");
-                    System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
+                    if (fileModel.FileAttr_Path.IndexOf("http://") < 0)
+                    {
+                        var serverPath = Server.MapPath(fileModel.FileAttr_Path);
+                        if (System.IO.File.Exists(serverPath))
+                            System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
+                    }
                 }
                 else
                     callback = DWZMessage.Faild("删除失败!");

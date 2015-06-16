@@ -32,7 +32,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         public ActionResult NavList()
         {
             var navList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false && Navigation._.Navigation_Status == (int)Status.Show
-                , Navigation._.Navigation_Sort.Asc&& Navigation._.Navigation_CreateTime.Desc);
+                , Navigation._.Navigation_Sort.Asc && Navigation._.Navigation_CreateTime.Desc);
             var firstOrDefault = navList.FirstOrDefault();
             if (firstOrDefault != null) ViewBag.NavId = firstOrDefault.Id;
             return View("Partial/NavList", navList);

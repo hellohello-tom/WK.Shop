@@ -43,10 +43,6 @@ namespace Shop.Web
             {
                 HttpContext.Current.Response.Redirect("/PhoneError");
             }
-            else
-            {
-                HttpContext.Current.Response.Redirect("/Error");
-            }
             HttpContext.Current.Response.End();
         }
     }
