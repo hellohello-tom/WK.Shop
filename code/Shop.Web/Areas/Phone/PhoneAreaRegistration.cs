@@ -24,7 +24,7 @@ namespace Shop.Web.Areas.Phone
             
             context.MapRoute(
                 "Phone_yaodian",
-                "yaodian",
+                "index.html",
                 new { Controller = "Main", action = "Index" },
                 yaodianArea
             );
