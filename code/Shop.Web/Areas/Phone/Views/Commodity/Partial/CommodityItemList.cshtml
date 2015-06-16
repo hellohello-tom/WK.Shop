@@ -5,14 +5,15 @@
     {
         <dd class=pro-item>
             <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
-                <section class="img-wrapper"<img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name" title="@comm.Commodity_Name"></section>
+                <section class="img-wrapper">
+                <img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name" title="@comm.Commodity_Name"></section>
                 <p class="pro-info">@comm.Commodity_Name</p>
                 <p class="that-price color-light ft12">
                     <del>原价：¥@comm.Commodity_CostPrice.ToString("F")</del>
                 </p>
-                <p class="this-price "><span class="sales fr ft12">@(comm.Commodity_Discount)折</span><span class="this-price">¥@(Convert.ToDecimal(comm.Commodity_CostPrice * comm.Commodity_Discount / 10).ToString("F"))</span></p>
+                <p class="this-price "><span class="sales fr ft12">@(comm.Commodity_Discount)折</span><span class="this-price">¥@(Convert.ToDecimal(comm.Commodity_CostPrice*comm.Commodity_Discount/10).ToString("F"))</span></p>
             </a>
         </dd>
     }
-    <dd ><a onclick="loadMore();">点击加载更多</a></dd>
+    <div class="tc loadmoreDiv"><a onclick="loadMore();" class="btn loadmore">点击加载更多</a></div>
 }

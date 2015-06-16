@@ -45,7 +45,7 @@
     <article class='guess'>
         <h3>猜你还喜欢</h3>
         <!--相关药品列表-->
-        @Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, PageNum = 1, NumPerPage = 20, notId = Model.Id })
+        @Html.Action("CommodityItemList", new { tagId = @Model.Commodity_TagId, PageNum = 1, NumPerPage = 12, notId = Model.Id })
     </article>
 </div>
 @section Js

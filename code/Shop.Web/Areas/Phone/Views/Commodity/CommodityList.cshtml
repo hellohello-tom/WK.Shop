@@ -11,7 +11,7 @@
         if (ViewBag.Tag != null)
         {
             var tag = ViewBag.Tag as Tag;
-            <a href='@Url.RouteUrl("Phone_yaodian")' class="goback"></a>
+            <a href='@Url.RouteUrl("Phone_commodity")' class="goback"></a>
             <h2>@tag.Tag_Name</h2>
         }
         else
@@ -48,6 +48,7 @@
                 success: function (data) {
                     if (isloadMore) {
                         //加载更多 就追加
+                        $('.loadmoreDiv').remove();
                         $('.commodity-list').append(data).show(500);
                       
                     } else {
