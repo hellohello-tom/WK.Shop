@@ -149,7 +149,7 @@ namespace Shop.Web.Areas.Phone.Controllers
 
             if (id > 0)
                 where &= FileAttr._.FileAttr_BussinessId == id;
-            where &= FileAttr._.FileAttr_BussinessCode == "Commodity";
+            where &= FileAttr._.FileAttr_BussinessCode == BizCode.Commodity.ToString();
             OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
 
             #endregion
@@ -166,7 +166,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <param name="cimg"></param>
         /// <param name="bCode">关联商品代码</param>
         /// <returns></returns>
-        public ActionResult CommodityImgList(int id,bool cimg=false,string bCode="Commodity")
+        public ActionResult CommodityImgList( int id, bool cimg = false, BizCode bCode = BizCode.Commodity )
         {
             #region 搜索条件
 
@@ -174,7 +174,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             
             if (id > 0)
                 where &= FileAttr._.FileAttr_BussinessId == id;
-            where &= FileAttr._.FileAttr_BussinessCode == bCode;
+            where &= FileAttr._.FileAttr_BussinessCode == bCode.ToString();
             OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
 
             #endregion
