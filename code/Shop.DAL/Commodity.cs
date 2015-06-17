@@ -7,6 +7,7 @@
 // ==========================================================================
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 //引用
@@ -77,14 +78,38 @@ namespace Shop.DAL
         /// </summary>
         /// <param name="where"></param>
         /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where = null, OrderByClip order = null)
+        public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where = null, OrderByClip order = null,int pageIndex=0,int pageSize=20)
         {
             var list = DB.From<Commodity>().Select(Commodity._.All, new Field("(select b.Commodity_Discount*b.Commodity_CostPrice from Commodity b where b.Id=Commodity.Id) as [price]"))
                 .Where(where)
                 .OrderBy(order)
-                .ToListPage(20, 1);
+                .ToListPage(pageSize, pageIndex);
             return list;
+        }
+
+
+        /// <summary>
+        /// 根据条件获取药品列表
+        /// </summary>
+        /// <param name="wc"></param>
+        /// <returns></returns>
+        public DataTable GetFlashSalesCommodityTableByCondition( WhereClip wc )
+        {
+            //QueryCreator qc = QueryCreator.NewCreator()
+            //    .From<Realtion>()
+            //    .Join<Commodity>(Realtion._.Realtion_CommodityId == Commodity._.Id)
+            //    .Join<FlashSales>(Realtion._.Realtion_SaleId == FlashSales._.Id)
+            //    .AddField(Commodity._.All)
+            //    .AddField(FlashSales._.FlashSales_Discount);
+            return DB.From<Realtion>()
+                .LeftJoin<Commodity>(Realtion._.Realtion_CommodityId == Commodity._.Id)
+                .LeftJoin<FlashSales>(Realtion._.Realtion_SaleId == FlashSales._.Id)
+                .Select(Commodity._.All, FlashSales._.FlashSales_Discount)
+                .Where(wc).OrderBy(FlashSales._.FlashSales_CreateTime.Desc).ToTable() as DataTable;
+
         }
     }
 }

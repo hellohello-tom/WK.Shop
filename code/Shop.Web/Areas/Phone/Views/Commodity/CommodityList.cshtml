@@ -87,7 +87,7 @@
             if (self) {
                 var $self = $(self);
                 //确定排序规则
-                if (!isLoadMore) {
+                if (!isLoadMore) {//加载更多
                     para.pageNum = 1;
                     if ($self.hasClass('on')) {
                         if ($self.hasClass('up')) {
@@ -99,6 +99,14 @@
                         }
                     } else {
                         $self.addClass('on').addClass('up').siblings().removeClass('on');
+                        para.sortOrder = 'Asc';
+                    }
+                } else {
+                    if ($self.hasClass('up')) {
+                        $self.removeClass('up').addClass('down');
+                        para.sortOrder = 'Desc';
+                    } else {
+                        $self.removeClass('down').addClass('up');
                         para.sortOrder = 'Asc';
                     }
                 }

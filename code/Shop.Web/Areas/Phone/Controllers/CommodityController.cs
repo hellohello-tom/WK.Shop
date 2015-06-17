@@ -43,7 +43,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <param name="pi"></param>
         /// <param name="navId"></param>
         /// <returns></returns>
-        public ActionResult TagList(DWZPageInfo pi, int navId)
+        public ActionResult TagList( DWZPageInfo pi, int navId )
         {
             #region 搜索条件
             WhereClip where = Menu._.Menu_IsDel == false && Menu._.Menu_Status == (int)Status.Show && Menu._.Menu_Type == MenuType.Tag.ToString();
@@ -62,20 +62,20 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <param name="tagId"></param>
         /// <param name="search"></param>
         /// <returns></returns>
-        public ActionResult CommodityList(int tagId,string search="")
+        public ActionResult CommodityList( int tagId, string search = "" )
         {
-            if (tagId>0)
+            if (tagId > 0)
             {
                 ViewBag.TagId = tagId;
                 ViewBag.Tag = menuBLL.GetModelByCache(tagId);
             }
-            
+
             if (!string.IsNullOrWhiteSpace(search))
             {
                 ViewBag.SearchTitle = "搜索结果";
                 ViewBag.Search = search;
             }
-            
+
             return View();
         }
 
@@ -87,8 +87,9 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <param name="search"></param>
         /// <param name="notId">药品详情页（猜你喜欢的药品本身Id）</param>
         /// <returns></returns>
-        public ActionResult CommodityItemList(int tagId, DWZPageInfo pi, string search,int notId=0)
+        public ActionResult CommodityItemList( int tagId, DWZPageInfo pi, string search, int notId = 0 )
         {
+            List<Commodity> commodityList;
             #region 搜索条件
 
             WhereClip where = Commodity._.Commodity_IsDel == false &&
@@ -97,30 +98,38 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 where &= Commodity._.Commodity_TagId == tagId;
             }
-                
+
             if (!string.IsNullOrEmpty(search))
             {
-                where &=  WhereClip.Bracket(Commodity._.Commodity_Name.Like("%" + search + "%") || Commodity._.Commodity_Content.Like("%" + search + "%")
-                || Commodity._.Commodity_Remind.Like("%" + search + "%"));
+                where &= WhereClip.Bracket(Commodity._.Commodity_Name.Like("%" + search + "%") || Commodity._.Commodity_Remind.Like("%" + search + "%"));
             }
             OrderByClip order = new OrderByClip("Commodity_CreateTime Desc");
-            if (!string.IsNullOrEmpty(pi.SortOrder)&&!string.IsNullOrEmpty(pi.SortName))
-            {
-                order = order&new OrderByClip(pi.SortName + " " + pi.SortOrder);
-            }
-            if (notId!=0)
+            //关联药品 不包含自己
+            if (notId != 0)
             {
                 where &= Commodity._.Id != notId;
             }
+            if (!string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName))
+            {
+                order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
+                if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
+                {
+                    order = new OrderByClip("price " + pi.SortOrder);
+                    commodityList = commodityBll.GetCommdityList(where, order,pi.PageNum,pi.NumPerPage).DataSource as List<Commodity>;
+                }
+                else //正常排序
+                {
+                    commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
+                }
+            }
+            else
+            {
+                commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
+            }
             
             #endregion
-            var commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
-            if (commodityList!=null&&string.Equals("Commodity_CostPrice", pi.SortName))//如果是价格排序 要按照折后价进行排序
-            {
-                commodityList = string.IsNullOrEmpty(pi.SortOrder) || pi.SortOrder.ToLower() == "asc"
-                    ? commodityList.OrderBy(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList()
-                    : commodityList.OrderByDescending(c => c.Commodity_CostPrice*c.Commodity_Discount).ToList();
-            }
+
+
             if (notId != 0)
             {
                 //返回关联药品
@@ -135,13 +144,13 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// </summary>
         /// <param name="id">药品Id</param>
         /// <returns></returns>
-        public ActionResult CommodityDeatil(int id)
+        public ActionResult CommodityDeatil( int id )
         {
             var commodity = commodityBll.GetModelByCache(id);
-            if (commodity==null)
+            if (commodity == null)
             {
                 return Redirect(string.Format("/PhoneError?title={0}&msg={1}", "未找到", "你要找的药品不存在"));
-             
+
             }
             #region 搜索条件
 
@@ -171,7 +180,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             #region 搜索条件
 
             WhereClip where = FileAttr._.FileAttr_IsDel == false;
-            
+
             if (id > 0)
                 where &= FileAttr._.FileAttr_BussinessId == id;
             where &= FileAttr._.FileAttr_BussinessCode == bCode.ToString();

@@ -45,16 +45,18 @@ namespace Shop.BLL {
             return dal.Add(model, imageIds);
         }
 
-        /// <summary>
-        /// 获取折扣过后的商品分页数据
-        /// 排序字段 price
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where=null ,OrderByClip order=null)
+	    /// <summary>
+	    /// 获取折扣过后的商品分页数据
+	    /// 排序字段 price
+	    /// </summary>
+	    /// <param name="where"></param>
+	    /// <param name="order"></param>
+	    /// <param name="pageIndex"></param>
+	    /// <param name="pageSize"></param>
+	    /// <returns></returns>
+	    public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where=null ,OrderByClip order=null,int pageIndex=0,int pageSize=20)
         {
-            return dal.GetCommdityList();
+            return dal.GetCommdityList(where,order,pageIndex,pageSize);
         }
         
 	}
