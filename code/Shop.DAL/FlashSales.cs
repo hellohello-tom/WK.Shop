@@ -20,7 +20,20 @@ namespace Shop.DAL
 	/// </summary>
 	public partial class FlashSalesDAL : DALBase<FlashSales>
 	{
-   		
-   		
+
+        /// <summary>
+        /// 根据条件获取闪购列表
+        /// </summary>
+        /// <param name="wc"></param>
+        /// <returns></returns>
+        public List<FlashSales> GetFlashSalesListByCondition( WhereClip wc )
+        {
+            return DB.From<FlashSales>()
+                 .LeftJoin<FileAttr>(FlashSales._.Id == FileAttr._.FileAttr_BussinessId)
+                 .Select(FlashSales._.All)
+                 .Where(wc).OrderBy(FlashSales._.FlashSales_CreateTime.Desc)
+                 .ToList() as List<FlashSales>;
+
+        }
 	}
 }

@@ -127,6 +127,7 @@
     <Compile Include="Areas\FlashSales\Controllers\RealtionController.cs" />
     <Compile Include="Areas\FlashSales\FlashSalesAreaRegistration.cs" />
     <Compile Include="Areas\Phone\Controllers\CommodityController.cs" />
+    <Compile Include="Areas\Phone\Controllers\FlashSalesController.cs" />
     <Compile Include="Areas\Phone\Controllers\MainController.cs" />
     <Compile Include="Areas\Phone\Controllers\SearchController.cs" />
     <Compile Include="Areas\Phone\Controllers\WarnController.cs" />
@@ -622,6 +623,7 @@
     <Content Include="Areas\FlashSales\Views\FlashSales\Create.cshtml" />
     <Content Include="Areas\FlashSales\Views\Menu\Create.cshtml" />
     <Content Include="Areas\FlashSales\Views\Realtion\Create.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Index.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />

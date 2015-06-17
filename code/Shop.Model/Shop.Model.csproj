@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Commodity.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Extension\FlashSales.cs" />
     <Compile Include="Extension\SysAdmin.cs" />
     <Compile Include="Extension\SysModule.cs" />
     <Compile Include="Extension\SysOrg.cs" />

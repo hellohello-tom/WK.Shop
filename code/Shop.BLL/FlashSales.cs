@@ -22,8 +22,16 @@ namespace Shop.BLL {
 	public partial class FlashSalesBLL : BLLBase<FlashSales>
 	{	     
 		private readonly FlashSalesDAL dal=new FlashSalesDAL();
-	
-		
+
+        /// <summary>
+        /// 根据条件获取数据 left SysDicType
+        /// </summary>
+        /// <param name="wc"></param>
+        /// <returns>数据列表</returns>
+        public List<FlashSales> GetlistByCondition( WhereClip wc )
+        {
+            return dal.GetFlashSalesListByCondition(wc);
+        }
    
 	}
 }
