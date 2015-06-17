@@ -690,6 +690,7 @@
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\Mobile\cuntdown.js" />
     <Content Include="Scripts\plugin\picturePreview\css\touchTouch.min.css" />
     <Content Include="Scripts\plugin\picturePreview\css\touchTouch.css" />
     <Content Include="Scripts\plugin\picturePreview\js\zepto.picturePreview.min.js" />
