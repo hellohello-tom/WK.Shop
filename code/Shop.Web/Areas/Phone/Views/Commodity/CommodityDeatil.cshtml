@@ -21,7 +21,7 @@
     <article class="pro-detail">
         <!--药品图片列表-->
         @*@Html.Action("CommodityImgList", new { id = @Model.Id })*@
-        @Html.Partial("Partial/ImgList", ViewBag.ImgList as List<FileAttr>)
+        @Html.Partial("Partial/ImgList", ((List<FileAttr>)ViewBag.ImgList).Take(8).ToList())
 
         <div class="img-nav">
             <span></span>
