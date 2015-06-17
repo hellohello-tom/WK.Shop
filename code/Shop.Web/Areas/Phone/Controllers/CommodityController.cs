@@ -46,7 +46,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         public ActionResult TagList(DWZPageInfo pi, int navId)
         {
             #region 搜索条件
-            WhereClip where = Menu._.Menu_IsDel == false && Menu._.Menu_Status == (int)Status.Show&&Menu._.Menu_Type==MenuType.Tag;
+            WhereClip where = Menu._.Menu_IsDel == false && Menu._.Menu_Status == (int)Status.Show && Menu._.Menu_Type == MenuType.Tag.ToString();
             if (navId != 0)
                 where &= Menu._.Menu_NavigationId == navId;
             ViewBag.NavId = navId;

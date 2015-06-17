@@ -10,9 +10,9 @@
     @{
         if (ViewBag.Tag != null)
         {
-            var tag = ViewBag.Tag as Tag;
+            var tag = ViewBag.Tag as Menu;
             <a href='@Url.RouteUrl("Phone_commodity")' class="goback"></a>
-            <h2>@tag.Tag_Name</h2>
+            <h2>@tag.Menu_Name</h2>
         }
         else
         {

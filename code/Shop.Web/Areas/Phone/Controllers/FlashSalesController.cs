@@ -26,12 +26,10 @@ namespace Shop.Web.Areas.Phone.Controllers
         {
             #region 搜索条件
 
-            WhereClip where = Menu._.Menu_IsDel == false && Menu._.Menu_Status == Status.Show&&Menu._.Menu_Type==MenuType.FlashSalues;
+            WhereClip where = Menu._.Menu_IsDel == false && Menu._.Menu_Status == (int)Status.Show&&Menu._.Menu_Type==MenuType.FlashSalues.ToString();
             #endregion
             var menuList = MenuBll.GetList(where, Menu._.Menu_Sort.Desc);
-            if  (menuList == null || menuList.Count<=0) return null;
             var firstOrDefault = menuList.FirstOrDefault();
-            
             if (firstOrDefault != null)
             {
                 int defalutMenuId = firstOrDefault.Id;
@@ -49,11 +47,21 @@ namespace Shop.Web.Areas.Phone.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 闪购药品详情
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CommodityDetail()
         {
             return View();
         }
-
+        /// <summary>
+        /// 网站首页 闪购导航项
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult FlashSalesItem()
+        {
+            return View();
+        }
     }
 }
