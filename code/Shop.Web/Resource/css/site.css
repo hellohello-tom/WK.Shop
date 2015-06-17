@@ -62,7 +62,8 @@ textarea:focus {
   background: #c00!important;
   color: #fff!important;
 }
-.btn-disable {
+.btn-disable,
+.disabled {
   background: #eee;
   color: #999!important;
   pointer-events: none;
@@ -216,8 +217,8 @@ a:active {
 }
 .header,
 .footer {
-  height: 3rem;
-  line-height: 3rem;
+  height: 44px;
+  line-height: 44px;
   background: #eee;
   color: #fff;
   position: fixed;
@@ -268,12 +269,12 @@ a:active {
   background: #547393;
 }
 .pro {
-  padding: 3rem 0;
+  padding: 44px 0;
 }
 .pro .pro-cat {
   position: fixed;
-  top: 3rem;
-  bottom: 3rem;
+  top: 44px;
+  bottom: 44px;
   width: 7em;
   background: #eee;
   overflow-x: hidden;
@@ -329,7 +330,6 @@ header.s form {
 }
 .search-box {
   position: relative;
-  padding-left: 10px;
   width: 100%;
   z-index: 23;
   -webkit-flex: 1;
@@ -355,7 +355,7 @@ header.s form {
 }
 .search-box .s-section ul {
   position: absolute;
-  top: 38px;
+  top: 36px;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -370,8 +370,12 @@ header.s form {
   margin-top: -1px;
   padding: 0 10px;
 }
+.search-box .s-section ul li:active {
+  background: rgba(0, 0, 0, 0.1);
+}
 .search-box .btn-s {
   margin: 10px;
+  margin-top: 8px;
 }
 .loadmore {
   width: 80%;
@@ -401,16 +405,19 @@ header.s form {
 .order a.on i {
   color: #ea2f53;
 }
+.order a:active {
+  background: rgba(0, 0, 0, 0.1);
+}
 .order .up i {
   -webkit-transform: rotate(-180deg);
   transform: rotate(-180deg);
 }
 .order i {
   margin: 3px;
-  vertical-align: -1px;
   color: #555;
-  -webkit-transtion: -webkit-transform 0.3s ease-in;
-  transition: transform 0.3s ease-in;
+  font-weight: 700;
+  -webkit-transtion: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
 }
 .pro-wrapper {
   padding: 5px;
@@ -505,7 +512,7 @@ header.s form {
   font-size: 1.125rem;
 }
 .pd-info .declare,
-.intro .intro-text table .title {
+.intro .intro-text table tr td.title {
   color: #f66;
 }
 .pd-info .price {
@@ -515,7 +522,7 @@ header.s form {
   margin-right: 10px;
 }
 .pd-come {
-  padding: 10px;
+  padding: 5px 10px;
   line-height: 1.75;
 }
 .pd-come a {
@@ -523,6 +530,7 @@ header.s form {
 }
 .guess {
   padding: 0 10px;
+  margin-bottom: 15px;
 }
 .guess h3 {
   font-size: 1rem;
@@ -590,6 +598,9 @@ header.s form {
   border-collapse: collapse;
   width: 100%;
 }
+.intro .intro-text table tr td.title {
+  white-space: normal;
+}
 .intro .intro-text table td {
   border: 1px solid #ddd;
   padding: 3px;
@@ -655,8 +666,16 @@ header.s form {
 .this-price {
   color: #ea2f53;
 }
+.go-top-btn {
+  right: 5px;
+  opacity: .8;
+}
 .footer {
   bottom: 0;
+  height: 49px;
+  line-height: 49px;
+  -webkit-box-shadow: 0 -1px 0 #dddddd;
+  box-shadow: 0 -1px 0 #dddddd;
 }
 .footer .nav {
   height: 100%;
@@ -667,7 +686,7 @@ header.s form {
   float: left;
   width: 25%;
   color: #999;
-  padding-top: 13px;
+  padding-top: 12px;
   position: relative;
 }
 .footer .nav a i {
