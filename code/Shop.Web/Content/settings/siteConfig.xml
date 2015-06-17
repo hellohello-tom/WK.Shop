@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ConfigName>顶正网上药品商城</ConfigName>
-  <PhoneStyle>skin3</PhoneStyle>
+  <ConfigName>润之林药品商城</ConfigName>
+  <PhoneStyle>skin2</PhoneStyle>
   <Footer>333</Footer>
   <Tel>15679259898</Tel>
   <WeiXin>dz98</WeiXin>

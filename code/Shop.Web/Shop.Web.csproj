@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -60,14 +64,11 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Optimization">
       <HintPath>..\Lib\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -111,6 +112,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -442,8 +444,10 @@
     <Content Include="Content\login\images\dot-black.png" />
     <Content Include="Content\login\images\dot-def.png" />
     <Content Include="Content\login\images\login-btn.png" />
+    <Content Include="Content\login\images\login.png" />
     <Content Include="Content\login\images\logo.gif" />
     <Content Include="Content\login\images\login.jpg" />
+    <Content Include="Content\login\images\Phone\logo.png" />
     <Content Include="Content\login\images\Phone\wx2_index_05.png" />
     <Content Include="Content\login\images\Phone\wx2_index_06.png" />
     <Content Include="Content\login\images\Phone\wx2_index_07.png" />
@@ -651,48 +655,6 @@
     <Content Include="Scripts\dwz\dwz.min.js" />
     <Content Include="Scripts\dwz\dwz.regional.zh.js" />
     <Content Include="Scripts\dwz\speedup.js" />
-    <Content Include="Scripts\dwz\src\additional-methods.js" />
-    <Content Include="Scripts\dwz\src\dwz.accordion.js" />
-    <Content Include="Scripts\dwz\src\dwz.ajax.js" />
-    <Content Include="Scripts\dwz\src\dwz.alertMsg.js" />
-    <Content Include="Scripts\dwz\src\dwz.barDrag.js" />
-    <Content Include="Scripts\dwz\src\dwz.checkbox.js" />
-    <Content Include="Scripts\dwz\src\dwz.combox.js" />
-    <Content Include="Scripts\dwz\src\dwz.contextmenu.js" />
-    <Content Include="Scripts\dwz\src\dwz.core.js" />
-    <Content Include="Scripts\dwz\src\dwz.cssTable.js" />
-    <Content Include="Scripts\dwz\src\dwz.database.js" />
-    <Content Include="Scripts\dwz\src\dwz.datepicker.js" />
-    <Content Include="Scripts\dwz\src\dwz.dialog.js" />
-    <Content Include="Scripts\dwz\src\dwz.dialogDrag.js" />
-    <Content Include="Scripts\dwz\src\dwz.drag.js" />
-    <Content Include="Scripts\dwz\src\dwz.effects.js" />
-    <Content Include="Scripts\dwz\src\dwz.history.js" />
-    <Content Include="Scripts\dwz\src\dwz.navTab.js" />
-    <Content Include="Scripts\dwz\src\dwz.pagination.js" />
-    <Content Include="Scripts\dwz\src\dwz.panel.js" />
-    <Content Include="Scripts\dwz\src\dwz.print.js" />
-    <Content Include="Scripts\dwz\src\dwz.regional.zh.js" />
-    <Content Include="Scripts\dwz\src\dwz.resize.js" />
-    <Content Include="Scripts\dwz\src\dwz.scrollCenter.js" />
-    <Content Include="Scripts\dwz\src\dwz.sortDrag.js" />
-    <Content Include="Scripts\dwz\src\dwz.stable.js" />
-    <Content Include="Scripts\dwz\src\dwz.switchEnv.js" />
-    <Content Include="Scripts\dwz\src\dwz.tab.js" />
-    <Content Include="Scripts\dwz\src\dwz.taskBar.js" />
-    <Content Include="Scripts\dwz\src\dwz.theme.js" />
-    <Content Include="Scripts\dwz\src\dwz.tree.js" />
-    <Content Include="Scripts\dwz\src\dwz.ui.js" />
-    <Content Include="Scripts\dwz\src\dwz.util.date.js" />
-    <Content Include="Scripts\dwz\src\dwz.util.number.js" />
-    <Content Include="Scripts\dwz\src\dwz.validate.method.js" />
-    <Content Include="Scripts\dwz\src\jquery-1.7.2.js" />
-    <Content Include="Scripts\dwz\src\jquery.bgiframe.js" />
-    <Content Include="Scripts\dwz\src\jquery.cookie.js" />
-    <Content Include="Scripts\dwz\src\jquery.easing.1.3.js" />
-    <Content Include="Scripts\dwz\src\jquery.validate.js" />
-    <Content Include="Scripts\dwz\src\jquery.validate.min.js" />
-    <Content Include="Scripts\dwz\src\speedup.js" />
     <Content Include="Scripts\global\dataWaiter.js" />
     <Content Include="Scripts\html5shiv-min.js" />
     <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
@@ -1062,6 +1024,7 @@
     <Folder Include="Areas\SysManage\Models\" />
     <Folder Include="Areas\SysManage\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\dwz\src\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shop.BLL\Shop.BLL.csproj">

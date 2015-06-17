@@ -24,8 +24,7 @@ namespace Shop.Web.ViewModel
                      HttpContext.Current.Server.MapPath("/Content/settings/siteConfig.xml")) as Config;
                     CacheHelper.Set("siteConfig", cofigModel);
                 }
-                return SerializationHelper.Load(typeof(Config), 
-                    HttpContext.Current.Server.MapPath("/Content/settings/siteConfig.xml")) as Config;
+                return cofigModel;
             }
             set
             {
