@@ -51,9 +51,12 @@
     <Compile Include="Extension\SysModule.cs" />
     <Compile Include="Extension\SysOrg.cs" />
     <Compile Include="FileAttr.cs" />
+    <Compile Include="FlashSales.cs" />
     <Compile Include="IModel.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Realtion.cs" />
     <Compile Include="SysAdmin.cs" />
     <Compile Include="SysDicDetail.cs" />
     <Compile Include="SysDicType.cs" />

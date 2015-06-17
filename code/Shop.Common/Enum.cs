@@ -19,7 +19,7 @@ namespace Shop.Common
     }
 
     /// <summary>
-    /// 业务标示
+    /// 业务标示（附件表用）
     /// </summary>
     public enum BizCode
     {
@@ -29,6 +29,9 @@ namespace Shop.Common
         Commodity=0
     }
 
+    /// <summary>
+    /// 状态
+    /// </summary>
     public enum Status
     {
         /// <summary>

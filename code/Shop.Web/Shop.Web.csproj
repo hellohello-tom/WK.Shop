@@ -122,6 +122,10 @@
     <Compile Include="Areas\Admin\Controllers\MainController.cs" />
     <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
     <Compile Include="Areas\Common\Controllers\UploadController.cs" />
+    <Compile Include="Areas\FlashSales\Controllers\FlashSalesController.cs" />
+    <Compile Include="Areas\FlashSales\Controllers\MenuController.cs" />
+    <Compile Include="Areas\FlashSales\Controllers\RealtionController.cs" />
+    <Compile Include="Areas\FlashSales\FlashSalesAreaRegistration.cs" />
     <Compile Include="Areas\Phone\Controllers\CommodityController.cs" />
     <Compile Include="Areas\Phone\Controllers\MainController.cs" />
     <Compile Include="Areas\Phone\Controllers\SearchController.cs" />
@@ -611,6 +615,13 @@
     <Content Include="Areas\Phone\Views\Main\Index.cshtml" />
     <Content Include="Areas\Phone\Views\Warn\Error.cshtml" />
     <Content Include="Areas\Phone\Views\Commodity\Partial\CImgList.cshtml" />
+    <Content Include="Areas\FlashSales\Views\Web.config" />
+    <Content Include="Areas\FlashSales\Views\Realtion\Index.cshtml" />
+    <Content Include="Areas\FlashSales\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\FlashSales\Views\FlashSales\Index.cshtml" />
+    <Content Include="Areas\FlashSales\Views\FlashSales\Create.cshtml" />
+    <Content Include="Areas\FlashSales\Views\Menu\Create.cshtml" />
+    <Content Include="Areas\FlashSales\Views\Realtion\Create.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
@@ -1019,6 +1030,8 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Common\Models\" />
     <Folder Include="Areas\Common\Views\Shared\" />
+    <Folder Include="Areas\FlashSales\Models\" />
+    <Folder Include="Areas\FlashSales\Views\Shared\" />
     <Folder Include="Areas\Phone\Models\" />
     <Folder Include="Areas\SiteConfig\Models\" />
     <Folder Include="Areas\SiteConfig\Views\Shared\" />
