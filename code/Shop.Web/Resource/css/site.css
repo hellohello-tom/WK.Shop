@@ -144,7 +144,7 @@ html {
 }
 body {
   margin: 0 auto;
-  background: #fff;
+  background: #f5f5f5;
   color: #333;
   font: 87.5%/1.5 "Helvetica Neue", Helvetica, 'Microsoft Yahei', Arial, sans-serif;
   max-width: 640px;
@@ -252,8 +252,8 @@ a:active {
 .header .goback:before {
   content: "";
   display: inline-block;
-  width: .75rem;
-  height: .75rem;
+  width: 12px;
+  height: 12px;
   border: 2px solid #fff;
   border-width: 2px 0 0 2px;
   -webkit-transform: rotate(-45deg);
@@ -268,8 +268,98 @@ a:active {
 [data-theme=skin3] .header {
   background: #547393;
 }
+.main article {
+  background: #fff;
+}
+.row h3 {
+  font-weight: 400;
+  font-size: 1.25rem;
+  border-bottom: 1px solid #ddd;
+}
+.row h3 a {
+  display: block;
+  padding: 8px 10px;
+  position: relative;
+}
+.row h3 .angle-right {
+  position: relative;
+}
+.row h3 .angle-right:after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #bbb;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: translate(0, -50%) rotate(-45deg);
+  transform: translate(0, -50%) rotate(-45deg);
+}
+.shangou h3 a .time {
+  display: inline-block;
+}
+.shangou h3 a .time span {
+  padding: 0 5px;
+  background: #888;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.shangou h3 a i.fa {
+  margin: 5px;
+  color: #f66;
+}
+.shangou .pro-wrapper {
+  padding: 0;
+}
+.shangou .pro-wrapper .pro-item {
+  width: 100%;
+  overflow: hidden;
+}
+.shangou .pro-wrapper .pro-item a {
+  float: left;
+  position: relative;
+  padding: 0;
+  width: 33.33333333%;
+  border: 1px solid #ddd;
+  border-width: 0 1px 1px 0;
+}
+.shangou .pro-wrapper .pro-item a .img-wrapper,
+.shangou .pro-wrapper .pro-item a p {
+  border: 0;
+  padding: 5px;
+}
+.shangou .pro-wrapper .pro-item a .img-wrapper {
+  height: 120px;
+}
+.shangou .pro-wrapper .pro-item a:before,
+.shangou .pro-wrapper .pro-item a:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.shangou .pro-wrapper .pro-item a:before {
+  border-style: solid;
+  border-color: #ea2f53 #ea2f53 transparent transparent;
+  border-width: 17px;
+}
+.shangou .pro-wrapper .pro-item a:after {
+  content: "HOT";
+  top: 4px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 .pro {
-  padding: 44px 0;
+  background: #fff;
+  padding: 44px 0 50px;
 }
 .pro .pro-cat {
   position: fixed;
@@ -383,10 +473,11 @@ header.s form {
 }
 .order {
   background: #eee;
+  overflow: hidden;
 }
 .order a {
-  -webkit-flex: 1;
-  flex: 1;
+  float: left;
+  width: 33.33333333%;
   padding: 10px;
   position: relative;
 }
@@ -418,6 +509,96 @@ header.s form {
   font-weight: 700;
   -webkit-transtion: -webkit-transform 0.4s ease;
   transition: transform 0.4s ease;
+}
+.withlogo img {
+  height: 30px;
+  margin-top: 7px;
+}
+.withlogo .bigword {
+  line-height: 1;
+  margin-top: 8px;
+}
+.withlogo .bigword p {
+  color: #eee;
+}
+hr {
+  margin: 0;
+  height: 1px;
+  border: 0;
+  background: #ddd;
+}
+.fs-cat {
+  background: #fff;
+  position: relative;
+  line-height: 36px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  font-size: 0;
+  border-bottom: 1px solid #ddd;
+}
+.fs-cat a {
+  display: inline-block;
+  font-size: 14px;
+  position: relative;
+  padding: 5px 10px;
+}
+.fs-cat a + a:before {
+  content: "";
+  width: 1px;
+  height: 1.4em;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -0.7em;
+  background: #ddd;
+}
+.fs-cat a.on {
+  color: #ff7400;
+}
+.fs-cat a.on:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #ff7400;
+}
+.fs-list {
+  padding: 10px 8px;
+}
+.fs-list .fl-item {
+  margin-bottom: 16px;
+}
+.fs-list .fl-item a {
+  display: block;
+}
+.fs-list .fl-item a .img-wrapper {
+  position: relative;
+  font-size: 0;
+}
+.fs-list .fl-item a .img-wrapper img {
+  width: 100%;
+}
+.fs-list .fl-item a .img-wrapper .time-wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 14px;
+  padding: 3px 10px;
+}
+.fs-list .fl-item a .img-wrapper .time-wrapper i {
+  margin-right: 5px;
+}
+.fs-list .fl-item .slogan {
+  background: #f5f5f5;
+  padding: 5px 10px;
+}
+.fs-list .fl-item .slogan .discount {
+  color: #ff7400;
 }
 .pro-wrapper {
   padding: 5px;
