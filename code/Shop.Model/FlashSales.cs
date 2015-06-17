@@ -48,7 +48,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 菜单ID
         /// </summary>
-		[RegularExpression("-?\\d+", ErrorMessage = "*")]		
+        [Required(ErrorMessage="请选择二级菜单")]		[RegularExpression("-?\\d+", ErrorMessage = "*")]		
         public int FlashSales_MenuId
         {
             get{ return _FlashSales_MenuId; }
@@ -62,7 +62,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 名称
         /// </summary>
-		[StringLength(10,ErrorMessage="*")]		
+        [Required(ErrorMessage="必填")]		[StringLength(10,ErrorMessage="字符不能超过10个")]		
         public string FlashSales_Name
         {
             get{ return _FlashSales_Name; }
@@ -76,7 +76,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 截止时间
         /// </summary>
-		[RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]		
+        [Required(ErrorMessage = "必填")]		[RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]		
         public DateTime? FlashSales_EndTime
         {
             get{ return _FlashSales_EndTime; }
@@ -90,7 +90,7 @@ namespace Shop.Model{
 		/// <summary>
 		/// 关键字
         /// </summary>
-		[StringLength(50,ErrorMessage="*")]		
+        [Required(ErrorMessage = "必填")]		[StringLength(10,ErrorMessage="字符不能超过10个")]		
         public string FlashSales_KeyWord
         {
             get{ return _FlashSales_KeyWord; }
@@ -104,7 +104,8 @@ namespace Shop.Model{
 		/// <summary>
 		/// 折扣
         /// </summary>
-		[RegularExpression("-?\\d{1,9}(.\\d{1,0})?", ErrorMessage = "*")]		
+        [Required(ErrorMessage="必填")]
+        [RegularExpression(@"^([1-9])(\.\d{1})?$", ErrorMessage = "请输入正确的折扣，最多保留一位小数")]
         public decimal FlashSales_Discount
         {
             get{ return _FlashSales_Discount; }

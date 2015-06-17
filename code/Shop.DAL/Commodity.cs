@@ -70,5 +70,21 @@ namespace Shop.DAL
             }
             return id;
         }
+
+        /// <summary>
+        /// 获取折扣过后的商品分页数据
+        /// 排序字段 price
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where = null, OrderByClip order = null)
+        {
+            var list = DB.From<Commodity>().Select(Commodity._.All, new Field("(select b.Commodity_Discount*b.Commodity_CostPrice from Commodity b where b.Id=Commodity.Id) as [price]"))
+                .Where(where)
+                .OrderBy(order)
+                .ToListPage(20, 1);
+            return list;
+        }
     }
 }

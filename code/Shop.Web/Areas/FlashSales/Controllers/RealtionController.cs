@@ -17,7 +17,7 @@ using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
 
-namespace Shop.Areas.FlashSales.Controllers
+namespace Shop.Web.Areas.FlashSales.Controllers
 {
 	/// <summary>
 	/// Realtion控制器

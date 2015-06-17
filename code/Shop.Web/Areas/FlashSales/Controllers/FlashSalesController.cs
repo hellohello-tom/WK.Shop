@@ -17,7 +17,7 @@ using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
 
-namespace Shop.Areas.FlashSales.Controllers
+namespace Shop.Web.Areas.FlashSales.Controllers
 {
 	/// <summary>
 	/// FlashSales控制器
@@ -25,23 +25,21 @@ namespace Shop.Areas.FlashSales.Controllers
 	public class FlashSalesController:Controller
 	{	     
 		private readonly FlashSalesBLL bll=new FlashSalesBLL();
-	
+        private readonly MenuBLL _menuBLL = new MenuBLL();
 		/// <summary>
         /// 分页列表
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page)
+        public ActionResult Index(DWZPageInfo page,string name="")
         {
         	#region 搜索条件
             WhereClip where = null;
-            //if (!string.IsNullOrEmpty(name))
-            //    where &= FlashSales._.Name.Like("%" + name + "%");
-            //ViewBag.Name = name;
+            if (!string.IsNullOrEmpty(name))
+                where &= Model.FlashSales._.FlashSales_Name.Contains(name);
+            ViewBag.Name = name;
             #endregion
-            
             var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
-            
             return View(usersPage);
         }
         
@@ -52,39 +50,89 @@ namespace Shop.Areas.FlashSales.Controllers
         /// <returns></returns>
         public ActionResult Create(int id=0)
         {
+            Model.FlashSales model = bll.GetModel(id);
             if (id > 0)
-            {
-                Model.FlashSales model = bll.GetModel(id);
-                return View(model);
-            }
-            else
-            {
-                return View();
-            }
-        } 
-        
+                ViewBag.MenuName = _menuBLL.GetModel(model.FlashSales_MenuId).Menu_Name;
+            return View(model);
+        }
+
+
+        /// <summary>
+        /// 选择二级菜单
+        /// </summary>
+        /// <param name="navigationId"></param>
+        /// <returns></returns>
+        public ActionResult SelectNavigation()
+        {
+            //----导航列表
+          var menuList =   _menuBLL.GetList(Menu._.Menu_IsDel == false
+                && Menu._.Menu_Type == MenuType.FlashSalues.ToString()
+                && Menu._.Menu_ParentId == 0, Menu._.Id.Desc);
+          return View(menuList);
+        }
+
+        /// <summary>
+        /// 选择特价商品
+        /// </summary>
+        /// <param name="navigationId"></param>
+        /// <returns></returns>
+        public ActionResult SelectCommdity(string commditys)
+        {
+            //string checkModuleIds = string.Format(",{0},", commditys.Trim(','));//已选择的模块
+
+            ////----模块列表
+            //var commdityList = moduleBll.GetList(SysModule._.Enabled == 1);
+
+            //StringBuilder sbHtml = new StringBuilder();
+            //var firstModuleList = moduleList.FindAll(x => x.ParentId == 0);//第一级
+            //List<Shop.Model.SysModule> childModuleList = null;//子级 临时变量
+
+            ////第1级
+            //sbHtml.AppendFormat("<ul class='tree  expand treeCheck'>");
+            //foreach (var root in firstModuleList)
+            //{
+            //    sbHtml.AppendFormat("<li><a href='javascript:;' {0} tname='selectModule' tvalue='{{\"Id\":\"{1}\",\"Name\":\"{2}\"}}' >{2}</a>{3}</li>",
+            //                               checkModuleIds.Contains("," + root.Id + ",") ? "checked='checked'" : "",
+            //                                root.Id,
+            //                                root.Name,
+            //                                GetChildHtml(moduleList, root.Id, checkModuleIds)
+            //                           );
+            //}
+            //sbHtml.Append("</ul>");
+            //ViewBag.ModuleHtml = sbHtml.ToString();
+
+            return View();
+
+            //----导航列表
+            var menuList = _menuBLL.GetList(Menu._.Menu_IsDel == false
+                  && Menu._.Menu_Type == MenuType.FlashSalues.ToString()
+                  && Menu._.Menu_ParentId == 0, Menu._.Id.Desc);
+            return View(menuList);
+        }
+
         /// <summary>
         /// 添加 编辑操作
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Model.FlashSales model)
+        public ActionResult Create(Model.FlashSales model, int[] commdityIds)
         {
             bool flag = false;
-			DWZCallbackInfo callback=null;
-
-            if (model.Id > 0)//修改
-                flag=bll.Update(model);
-            else//添加
-                flag=bll.Add(model)>0;
-
+            DWZCallbackInfo callback = null;
+            if (ModelState.IsValid)
+            {
+                if (model.Id > 0)//修改
+                    flag = bll.Update(model);
+                else//添加
+                    flag = bll.Add(model) > 0;
+            }
             if (flag)
-				callback = DWZMessage.Success();
-			else
+                callback = DWZMessage.Success();
+            else
                 callback = DWZMessage.Faild();
 
-             return Json(callback);
+            return Json(callback);
         }
         #endregion
         

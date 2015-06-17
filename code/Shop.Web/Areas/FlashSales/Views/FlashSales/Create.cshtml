@@ -1,5 +1,75 @@
-﻿@{
-    ViewBag.Title = "Create";
+﻿@model Shop.Model.FlashSales
+@{
+    ViewBag.Title = "FlashSales_Create";
 }
+<h2 class="contentTitle">特卖专场</h2>
+<div class="pageContent">
+    @using (Html.BeginForm("Create", "FlashSales", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+    {
+        @Html.HiddenFor(x=>x.Id)
+        @Html.HiddenFor(x => x.FlashSales_CreateTime)
+        @Html.HiddenFor(x => x.FlashSales_CreateUser)
+        @Html.HiddenFor(x => x.FlashSales_IsDel)
+    <div class="pageFormContent nowrap" layouth="140">
+        <dl>
+            <dt>手机导航</dt>
+            <dd>
+                @Html.HiddenFor(m => m.FlashSales_MenuId, new { dataField = "selectMenu.Id" })
+                <input type="text" readonly="readonly" class="required" datafield="selectMenu.MenuName" value="@ViewBag.MenuName" />
+                <a href="/FlashSales/FlashSales/SelectNavigation" class="btnLook" lookupgroup="selectMenu">
+                    二级菜单
+                </a>
+                @Html.ValidationMessageFor(m => m.FlashSales_MenuId)
+            </dd>
+        </dl>
+        <dl>
+            <dt>特价商品</dt>
+            <dd>
+                <div>
 
-<h2>Create</h2>
+                </div>
+                @Html.Hidden("commdityIds", new { dataField = "selectCommdity.Id" })
+                <input type="text" readonly="readonly" class="required" datafield="selectCommdity.Name"/>
+                <a href="/FlashSales/FlashSales/SelectNavigation" class="btnLook" lookupgroup="selectCommdity">
+                    选择二级菜单
+                </a>
+                @Html.ValidationMessageFor(m => m.FlashSales_MenuId)
+            </dd>
+        </dl>
+        <dl>
+            <dt>名称</dt>
+            <dd>
+                @Html.TextBoxFor(m => m.FlashSales_Name)
+                @Html.ValidationMessageFor(m => m.FlashSales_Name)
+            </dd>
+        </dl>
+        <dl>
+            <dt>截止时间</dt>
+            <dd>
+                @Html.TextBoxFor(m => m.FlashSales_EndTime, new { @class = "date", @readonly = "true" })<a class="inputDateButton" href="javascript:;">选择</a>
+                @Html.ValidationMessageFor(m => m.FlashSales_EndTime)
+            </dd>
+        </dl>
+        <dl>
+            <dt>关键字</dt>
+            <dd>
+                @Html.TextBoxFor(m => m.FlashSales_KeyWord)
+                @Html.ValidationMessageFor(m => m.FlashSales_KeyWord)
+            </dd>
+        </dl>
+        <dl>
+            <dt>折扣</dt>
+            <dd>
+                @Html.TextBoxFor(m => m.FlashSales_Discount)
+                @Html.ValidationMessageFor(m => m.FlashSales_Discount)
+            </dd>
+        </dl>
+    </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+            </ul>
+        </div>
+    }
+</div>

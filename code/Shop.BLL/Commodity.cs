@@ -44,5 +44,18 @@ namespace Shop.BLL {
         {
             return dal.Add(model, imageIds);
         }
+
+        /// <summary>
+        /// 获取折扣过后的商品分页数据
+        /// 排序字段 price
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where=null ,OrderByClip order=null)
+        {
+            return dal.GetCommdityList();
+        }
+        
 	}
 }

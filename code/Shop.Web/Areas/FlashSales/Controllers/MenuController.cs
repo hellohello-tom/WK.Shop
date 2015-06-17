@@ -17,7 +17,7 @@ using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
 
-namespace Shop.Areas.FlashSales.Controllers
+namespace Shop.Web.Areas.FlashSales.Controllers
 {
     /// <summary>
     /// Menu控制器
@@ -31,7 +31,7 @@ namespace Shop.Areas.FlashSales.Controllers
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page, string name)
+        public ActionResult Index(DWZPageInfo page, string name="")
         {
             #region 搜索条件
             //只去一级目录菜单
@@ -42,7 +42,7 @@ namespace Shop.Areas.FlashSales.Controllers
                 where &= Menu._.Menu_Name.Like("%" + name + "%");
             ViewBag.Name = name;
             #endregion
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
+            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Menu._.Id.Desc);
             return View(usersPage);
         }
 
@@ -91,7 +91,7 @@ namespace Shop.Areas.FlashSales.Controllers
                 }
             }
             if (flag)
-                callback = DWZMessage.Success();
+                callback = DWZMessage.Success("操作成功", "FlashSales_Menu", true);
             else
                 callback = DWZMessage.Faild();
 

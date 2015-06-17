@@ -23,6 +23,16 @@ namespace Shop.BLL {
 	{	     
 		private readonly FlashSalesDAL dal=new FlashSalesDAL();
 
+        public int Add(Model.FlashSales model, int[] commdityIds)
+        {
+            return dal.Add(model, commdityIds);
+        }
+
+        public bool Update(Model.FlashSales model, int[] commdityIds)
+        {
+            return dal.Update(model, commdityIds);
+        }
+
         /// <summary>
         /// 根据条件获取数据 left SysDicType
         /// </summary>
@@ -32,6 +42,5 @@ namespace Shop.BLL {
         {
             return dal.GetFlashSalesListByCondition(wc);
         }
-   
 	}
 }

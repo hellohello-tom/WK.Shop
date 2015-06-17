@@ -12,10 +12,10 @@
     <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/FlashSales/FlashSales/Index" method="post">
         <div class="searchBar">
             <ul class="searchContent">
-                @*<li>
-                        <label>姓名：</label>
-                        <input type="text" name="keywords" value="@ViewBag.Keywords"/>
-                    </li>*@
+                <li>
+                    <label>名称：</label>
+                    <input type="text" name="name" value="@ViewBag.Name" />
+                </li>
                 <li style="padding-left:10px; padding-top:0px; height:25px;">
                     <div class="buttonActive">
                         <div class="buttonContent">
@@ -41,14 +41,11 @@
         <thead>
             <tr>
                 <th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-                <th width="100">菜单ID</th>
                 <th width="100">名称</th>
                 <th width="100">截止时间</th>
                 <th width="100">关键字</th>
                 <th width="100">折扣</th>
-                <th width="100">创建人</th>
                 <th width="100">创建时间</th>
-                <th width="100">是否删除</th>
                 <th width="70">操作</th>
             </tr>
         </thead>
@@ -57,17 +54,13 @@
             {
                 <tr target="FlashSales_ids" rel="@m.Id">
                     <td><input name="ids" value="@m.Id" type="checkbox"></td>
-                    <td>@m.FlashSales_MenuId</td>
                     <td>@m.FlashSales_Name</td>
                     <td>@m.FlashSales_EndTime</td>
                     <td>@m.FlashSales_KeyWord</td>
-                    <td>@m.FlashSales_Discount</td>
-                    <td>@m.FlashSales_CreateUser</td>
+                    <td>@m.FlashSales_Discount</td>>
                     <td>@m.FlashSales_CreateTime</td>
-                    <td>@m.FlashSales_IsDel</td>
-
                     <td>
-                        <a title="编辑[FlashSales]信息" rel="FlashSales_FlashSales_Edit" target="navTab" href="/FlashSales/FlashSales/Create/@m.Id" class="btnEdit">编辑</a>
+                        <a title="编辑特卖专场信息" rel="FlashSales_FlashSales_Edit" target="navTab" href="/FlashSales/FlashSales/Create/@m.Id" class="btnEdit">编辑</a>
                         <a title="确认删除?" target="ajaxTodo" href="/FlashSales/FlashSales/Delete/@m.Id" class="btnDel">删除</a>
                     </td>
                 </tr>

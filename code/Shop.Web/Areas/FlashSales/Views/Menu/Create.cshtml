@@ -12,22 +12,22 @@
         @Html.HiddenFor(x => x.Menu_CreateUser)
         @Html.HiddenFor(x => x.Menu_Type)
         @Html.HiddenFor(x => x.Menu_ParentId)
-        <div class="pageFormContent nowrap" layouth="97">
-            <dl>
-                <dt>菜单名称</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.Menu_Name)
-                    @Html.ValidationMessageFor(m => m.Menu_Name)
-                </dd>
-            </dl>
-            <dl>
-                <dt>排序</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.Menu_Sort)
-                    @Html.ValidationMessageFor(m => m.Menu_Sort)
-                </dd>
-            </dl>
-        </div>
+    <div class="pageFormContent nowrap" layouth="140">
+        <dl>
+            <dt>菜单名称</dt>
+            <dd>
+                @Html.TextBoxFor(m => m.Menu_Name)
+                @Html.ValidationMessageFor(m => m.Menu_Name)
+            </dd>
+        </dl>
+        <dl>
+            <dt>排序</dt>
+            <dd>
+                @Html.TextBoxFor(m => m.Menu_Sort)
+                @Html.ValidationMessageFor(m => m.Menu_Sort)
+            </dd>
+        </dl>
+    </div>
         <div class="formBar">
             <ul>
                 <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
