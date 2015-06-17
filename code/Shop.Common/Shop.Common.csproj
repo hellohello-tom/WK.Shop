@@ -51,7 +51,7 @@
     <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Config\SerializationHelper.cs" />
     <Compile Include="Config\XmlConfigHelper.cs" />
-    <Compile Include="Enum.cs" />
+    <Compile Include="Enum\Enum.cs" />
     <Compile Include="Net\Spider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Text\DESEncrypt.cs" />

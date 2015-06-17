@@ -12,10 +12,10 @@
     <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/FlashSales/Menu/Index" method="post">
         <div class="searchBar">
             <ul class="searchContent">
-                @*<li>
-                        <label>姓名：</label>
-                        <input type="text" name="keywords" value="@ViewBag.Keywords"/>
-                    </li>*@
+                <li>
+                        <label>菜单名称：</label>
+                        <input type="text" name="name" value="@ViewBag.Name"/>
+                    </li>
                 <li style="padding-left:10px; padding-top:0px; height:25px;">
                     <div class="buttonActive">
                         <div class="buttonContent">
@@ -26,13 +26,6 @@
                     </div>
                 </li>
             </ul>
-
-            @*<div class="subBar">
-                    <ul>
-                        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-                        <li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
-                    </ul>
-                </div>*@
         </div>
     </form>
 </div>
@@ -48,13 +41,9 @@
         <thead>
             <tr>
                 <th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-                <th width="100">父ID</th>
                 <th width="100">菜单名称</th>
                 <th width="100">排序</th>
-                <th width="100">菜单类型</th>
-                <th width="100">创建人</th>
                 <th width="100">创建时间</th>
-                <th width="100">是否删除</th>
                 <th width="70">操作</th>
             </tr>
         </thead>
@@ -63,16 +52,11 @@
             {
                 <tr target="Menu_ids" rel="@m.Id">
                     <td><input name="ids" value="@m.Id" type="checkbox"></td>
-                    <td>@m.Menu_ParentId</td>
                     <td>@m.Menu_Name</td>
                     <td>@m.Menu_Sort</td>
-                    <td>@m.Menu_Type</td>
-                    <td>@m.Menu_User</td>
                     <td>@m.Menu_CreateTime</td>
-                    <td>@m.Menu_IsDel</td>
-
                     <td>
-                        <a title="编辑[Menu]信息" rel="FlashSales_Menu_Edit" target="navTab" href="/FlashSales/Menu/Create/@m.Id" class="btnEdit">编辑</a>
+                        <a title="编辑菜单信息" rel="FlashSales_Menu_Edit" target="navTab" href="/FlashSales/Menu/Create/@m.Id" class="btnEdit">编辑</a>
                         <a title="确认删除?" target="ajaxTodo" href="/FlashSales/Menu/Delete/@m.Id" class="btnDel">删除</a>
                     </td>
                 </tr>

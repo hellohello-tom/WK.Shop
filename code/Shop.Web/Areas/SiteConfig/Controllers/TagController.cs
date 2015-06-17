@@ -24,8 +24,8 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
 	/// Tag控制器
 	/// </summary>
 	public class TagController:Controller
-	{	     
-		private readonly TagBLL bll=new TagBLL();
+	{
+        private readonly MenuBLL bll = new MenuBLL();
         private readonly NavigationBLL navigationBLL = new NavigationBLL();
 	
 		/// <summary>
@@ -33,20 +33,20 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page, string tagName = "", int navigationId=0)
+        public ActionResult Index(DWZPageInfo page, string tagName = "", int navigationId = 0)
         {
-        	#region 搜索条件
-            WhereClip where = Tag._.Tag_IsDel == false;
+            #region 搜索条件
+            WhereClip where = Menu._.Menu_IsDel == false
+                && Menu._.Menu_Type == MenuType.Tag.ToString()
+                && Menu._.Menu_ParentId == 0;
             if (!string.IsNullOrEmpty(tagName))
-                where &= Tag._.Tag_Name.Like("%" + tagName + "%");
+                where &= Menu._.Menu_Name.Like("%" + tagName + "%");
             if (navigationId > 0)
-                where &= Tag._.Tag_NavigationId == navigationId;
+                where &= Menu._.Menu_NavigationId == navigationId;
             ViewBag.Name = tagName;
             ViewBag.NavigationId = navigationId;
             #endregion
-
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Tag._.Tag_Sort.Desc);
-            
+            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Menu._.Menu_Sort.Desc);
             return View(usersPage);
         }
 
@@ -59,8 +59,6 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         {
             //----导航列表
             var navigationList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false);
-
-            StringBuilder sbHtml = new StringBuilder();
             var sourceList = navigationList.Where(x => x.Navigation_Type == (int)Theme.Materials)
                 .OrderByDescending(x => x.Navigation_Sort).ToList() 
                 as List<Navigation>;
@@ -75,16 +73,17 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <returns></returns>
         public ActionResult Create(int id = 0)
         {
-            Model.Tag model = bll.GetModel(id) ?? new Tag();
+            Model.Menu model = bll.GetModel(id) ?? new Menu();
             if (id > 0)
             {
-                ViewBag.NavigationName = navigationBLL.GetModel(model.Tag_NavigationId).Navigation_Name;
+                ViewBag.NavigationName = navigationBLL.GetModel(model.Menu_NavigationId).Navigation_Name;
             }
             else
             {
-                model.Tag_Status = 0;
-                model.Tag_Sort = 1;
-                model.Tag_ImagePath = "/Content/web/images/NoPicture.png";
+                model.Menu_Status = (int)Status.Show;
+                model.Menu_Sort = 1;
+                model.Menu_ImgPath = "/Content/web/images/NoPicture.png";
+                model.Menu_Type = MenuType.Tag.ToString();
             }
             return View(model);
         }
@@ -95,21 +94,22 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Model.Tag model)
+        public ActionResult Create(Model.Menu model)
         {
             bool flag = false;
 			DWZCallbackInfo callback=null;
-
-            if (model.Id > 0)//修改
-                flag = bll.Update(model);
-            else//添加
+            if (ModelState.IsValid)
             {
-                model.Tag_CreateTime = DateTime.Now;
-                model.Tag_IsDel = false;
-                model.Tag_User = UserContext.CurUserInfo.Id;
-                flag = bll.Add(model) > 0;
+                if (model.Id > 0)//修改
+                    flag = bll.Update(model);
+                else//添加
+                {
+                    model.Menu_CreateTime = DateTime.Now;
+                    model.Menu_IsDel = false;
+                    model.Menu_CreateUser = UserContext.CurUserInfo.Id;
+                    flag = bll.Add(model) > 0;
+                }
             }
-
             if (flag)
                 callback = DWZMessage.Success("操作成功", "SiteConfig_Tag", true);
             else
@@ -130,7 +130,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         {
             DWZCallbackInfo callback = null;
 
-            if (bll.Update(new Dictionary<Field, object> { { Tag._.Tag_IsDel, true } }, Tag._.Id == id))
+            if (bll.Update(new Dictionary<Field, object> { { Menu._.Menu_IsDel, true } }, Menu._.Id == id))
                 callback = DWZMessage.Success("删除成功!");
             else
                 callback = DWZMessage.Faild("删除失败!");
@@ -146,11 +146,11 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         [HttpPost]
         public ActionResult DeleteList(int[] ids)
         {
-           DWZCallbackInfo callback = null;
-           if (bll.Update(new Dictionary<Field, object> { { Tag._.Tag_IsDel, true } }, Tag._.Id.In(ids)))
-           {
-               callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
-           }
+            DWZCallbackInfo callback = null;
+            if (bll.Update(new Dictionary<Field, object> { { Menu._.Menu_IsDel, true } }, Menu._.Id.In(ids)))
+            {
+                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
+            }
             else
                 callback = DWZMessage.Faild("删除失败!");
 

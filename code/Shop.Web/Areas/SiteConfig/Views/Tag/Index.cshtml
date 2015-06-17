@@ -1,4 +1,4 @@
-﻿@model MySoft.Data.IDataPage<IList<Shop.Model.Tag>>
+﻿@model MySoft.Data.IDataPage<IList<Shop.Model.Menu>>
 @{
     ViewBag.Title = "Tag_Index";
 }
@@ -54,10 +54,10 @@
             {
                 <tr target="Tag_ids" rel="@m.Id">
                     <td><input name="ids" value="@m.Id" type="checkbox"></td>
-                    <td>@m.Tag_Name</td>
-                    <td><image src="@m.Tag_ImagePath" style="width:80px;height:80px" /></td>
-                    <td>@m.Tag_Sort</td>
-                    <td>@m.Tag_CreateTime</td>
+                    <td>@m.Menu_Name</td>
+                    <td><image src="@m.Menu_ImgPath" style="width:80px;height:80px" /></td>
+                    <td>@m.Menu_Sort</td>
+                    <td>@m.Menu_CreateTime</td>
                     <td>
                         <a title="商品管理" rel="SiteConfig_Commodity" target="navTab" href="/SiteConfig/Commodity/Index?tagId=@m.Id" class="btnView">查看旗下商品</a>
                         <a title="编辑标签信息" rel="SiteConfig_Tag_Edit" target="navTab" href="/SiteConfig/Tag/Create/@m.Id" class="btnEdit">编辑</a>

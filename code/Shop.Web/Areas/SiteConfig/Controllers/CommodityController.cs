@@ -26,7 +26,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
 	public class CommodityController:Controller
 	{	     
 		private readonly CommodityBLL bll=new CommodityBLL();
-        private readonly TagBLL _tagBLL = new TagBLL();
+        private readonly MenuBLL _menuBLL = new MenuBLL();
         private readonly FileAttrBLL _fileAttrBLL = new FileAttrBLL();
 		/// <summary>
         /// 分页列表
@@ -59,7 +59,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             Model.Commodity model = bll.GetModel(id) ?? new Commodity();
             if (id > 0)
             {
-                ViewBag.TagName = _tagBLL.GetModel(model.Commodity_TagId).Tag_Name;
+                ViewBag.TagName = _menuBLL.GetModel(model.Commodity_TagId).Menu_Name;
             }
             else
             {
@@ -78,9 +78,9 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         public ActionResult SelectTag()
         {
             //----导航列表
-            var tagList = _tagBLL.GetList(Tag._.Tag_IsDel == false);
-            var sourceList = tagList.OrderByDescending(x => x.Tag_CreateTime).ToList()
-                as List<Tag>;
+            var tagList = _menuBLL.GetList(Menu._.Menu_IsDel == false);
+            var sourceList = tagList.OrderByDescending(x => x.Menu_CreateTime).ToList()
+                as List<Menu>;
             ViewBag.TagList = sourceList;
             return View();
         }

@@ -70,7 +70,6 @@
     <Compile Include="SysOrg.cs" />
     <Compile Include="SysRole.cs" />
     <Compile Include="SysSiteConfig.cs" />
-    <Compile Include="Tag.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shop.Common\Shop.Common.csproj">

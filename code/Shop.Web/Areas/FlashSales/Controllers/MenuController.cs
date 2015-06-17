@@ -19,75 +19,86 @@ using Shop.Web;
 
 namespace Shop.Areas.FlashSales.Controllers
 {
-	/// <summary>
-	/// Menu控制器
-	/// </summary>
-	public class MenuController:Controller
-	{	     
-		private readonly MenuBLL bll=new MenuBLL();
-	
-		/// <summary>
+    /// <summary>
+    /// Menu控制器
+    /// </summary>
+    public class MenuController : Controller
+    {
+        private readonly MenuBLL bll = new MenuBLL();
+
+        /// <summary>
         /// 分页列表
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page)
+        public ActionResult Index(DWZPageInfo page, string name)
         {
-        	#region 搜索条件
-            WhereClip where = null;
-            //if (!string.IsNullOrEmpty(name))
-            //    where &= Menu._.Name.Like("%" + name + "%");
-            //ViewBag.Name = name;
+            #region 搜索条件
+            //只去一级目录菜单
+            WhereClip where = Menu._.Menu_IsDel == false
+                && Menu._.Menu_Type == MenuType.FlashSalues.ToString()
+                && Menu._.Menu_ParentId == 0;
+            if (!string.IsNullOrEmpty(name))
+                where &= Menu._.Menu_Name.Like("%" + name + "%");
+            ViewBag.Name = name;
             #endregion
-            
             var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
-            
             return View(usersPage);
         }
-        
+
         #region  添加 编辑
         /// <summary>
         /// 添加 编辑页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Create(int id=0)
+        public ActionResult Create(int id = 0)
         {
+            Model.Menu model = bll.GetModel(id);
             if (id > 0)
             {
-                Model.Menu model = bll.GetModel(id);
-                return View(model);
             }
             else
             {
-                return View();
+                model.Menu_ParentId = 0;
+                model.Menu_Sort = 1;
             }
-        } 
-        
+            return View(model);
+        }
+
         /// <summary>
         /// 添加 编辑操作
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(Model.Menu model)
         {
             bool flag = false;
-			DWZCallbackInfo callback=null;
-
-            if (model.Id > 0)//修改
-                flag=bll.Update(model);
-            else//添加
-                flag=bll.Add(model)>0;
-
+            DWZCallbackInfo callback = null;
+            if (ModelState.IsValid)
+            {
+                if (model.Id > 0)//修改
+                    flag = bll.Update(model);
+                else//添加
+                {
+                    model.Menu_Type = MenuType.FlashSalues.ToString();
+                    model.Menu_ParentId = 0;
+                    model.Menu_CreateTime = DateTime.Now;
+                    model.Menu_CreateUser = UserContext.CurUserInfo.Id;
+                    model.Menu_IsDel = false;
+                    flag = bll.Add(model) > 0;
+                }
+            }
             if (flag)
-				callback = DWZMessage.Success();
-			else
+                callback = DWZMessage.Success();
+            else
                 callback = DWZMessage.Faild();
 
-             return Json(callback);
+            return Json(callback);
         }
         #endregion
-        
+
         #region 删除
         /// <summary>
         /// 删除单条
@@ -98,12 +109,10 @@ namespace Shop.Areas.FlashSales.Controllers
         public ActionResult Delete(int id)
         {
             DWZCallbackInfo callback = null;
-
-            if (bll.Delete(id))
+            if (bll.Update(new Dictionary<Field, object> { { Menu._.Menu_IsDel, true } }, Menu._.Id == id))
                 callback = DWZMessage.Success("删除成功!");
             else
                 callback = DWZMessage.Faild("删除失败!");
-
             return Json(callback);
         }
 
@@ -115,17 +124,18 @@ namespace Shop.Areas.FlashSales.Controllers
         [HttpPost]
         public ActionResult DeleteList(int[] ids)
         {
-           DWZCallbackInfo callback = null;
-           
-            int count=bll.Delete(ids) ;
-            if (count > 0)
-                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", count));
+            DWZCallbackInfo callback = null;
+
+            if (bll.Update(new Dictionary<Field, object> { { Menu._.Menu_IsDel, true } }, Menu._.Id.In(ids)))
+            {
+                callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
+            }
             else
                 callback = DWZMessage.Faild("删除失败!");
 
             return Json(callback);
         }
-        
+
         #endregion
-	}
+    }
 }

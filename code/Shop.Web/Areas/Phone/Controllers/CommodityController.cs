@@ -14,7 +14,7 @@ namespace Shop.Web.Areas.Phone.Controllers
     {
 
         private readonly NavigationBLL navigationBLL = new NavigationBLL();
-        private readonly TagBLL tagBll = new TagBLL();
+        private readonly MenuBLL menuBLL = new MenuBLL();
         private readonly CommodityBLL commodityBll = new CommodityBLL();
         private readonly FileAttrBLL fileAttrBll = new FileAttrBLL();
         /// <summary>
@@ -46,12 +46,12 @@ namespace Shop.Web.Areas.Phone.Controllers
         public ActionResult TagList(DWZPageInfo pi, int navId)
         {
             #region 搜索条件
-            WhereClip where = Tag._.Tag_IsDel == false && Tag._.Tag_Status == (int)Status.Show;
+            WhereClip where = Menu._.Menu_IsDel == false && Menu._.Menu_Status == (int)Status.Show;
             if (navId != 0)
-                where &= Tag._.Tag_NavigationId == navId;
+                where &= Menu._.Menu_NavigationId == navId;
             ViewBag.NavId = navId;
             #endregion
-            var tagList = tagBll.GetPageList(pi.NumPerPage, pi.PageNum, where).DataSource as List<Tag>;
+            var tagList = menuBLL.GetPageList(pi.NumPerPage, pi.PageNum, where).DataSource as List<Menu>;
 
             return View("Partial/TagList", tagList);
         }
@@ -67,7 +67,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             if (tagId>0)
             {
                 ViewBag.TagId = tagId;
-                ViewBag.Tag = tagBll.GetModelByCache(tagId);
+                ViewBag.Tag = menuBLL.GetModelByCache(tagId);
             }
             
             if (!string.IsNullOrWhiteSpace(search))

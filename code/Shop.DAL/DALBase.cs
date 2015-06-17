@@ -116,7 +116,7 @@ namespace Shop.DAL
         /// </summary>
         public T GetModel(WhereClip where)
         {
-            return DB.From<T>().Where(where).ToSingle();
+            return DB.From<T>().Where(where).ToSingle() ?? default(T);
         }
 
         /// <summary>
