@@ -33,9 +33,17 @@ namespace Shop.DAL
                     {
                         if (_db == null)
                         {
-                            string conStr = string.Format(ConfigurationManager.ConnectionStrings["MssqlConn"].ConnectionString, HttpRuntime.AppDomainAppPath);
-                            DbProvider provider = ProviderFactory.CreateDbProvider(ProviderType.SQLite, conStr);
-                            _db = new DbSession(provider);
+                            var dbtype = ConfigurationManager.AppSettings["ConnectionType"];
+                            if (dbtype.ToUpper().Equals("SQL"))
+                            {
+                                _db = new DbSession("SQLConn");
+                            }
+                            else if (dbtype.ToUpper().Equals("SQLITE"))
+                            {
+                                string conStr = string.Format(ConfigurationManager.ConnectionStrings["SQLiteConn"].ConnectionString, HttpRuntime.AppDomainAppPath);
+                                DbProvider provider = ProviderFactory.CreateDbProvider(ProviderType.SQLite, conStr);
+                                _db = new DbSession(provider);
+                            }
                         }
                     }
                 }

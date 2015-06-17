@@ -9,7 +9,7 @@
             var json = eval("(" + response + ")");
             if (json.status == 1) {
                 alertMsg.correct(json.msg);
-                $('#Tag_ImagePath').val(json.data.thumbnailFileName);
+                $('#Menu_ImgPath').val(json.data.thumbnailFileName);
                 $('#imgTag').attr('src', json.data.thumbnailFileName);
             }
             else {
