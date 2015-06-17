@@ -53,7 +53,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         /// <returns></returns>
         public ActionResult Create(int id = 0)
         {
-            Model.Menu model = bll.GetModel(id);
+            Model.Menu model = bll.GetModel(id) ?? new Menu();
             if (id > 0)
             {
             }
