@@ -41,6 +41,7 @@ textarea:focus {
   font-weight: 400;
   margin-bottom: 0;
   border-radius: 3px;
+  cursor: pointer;
 }
 .btn-block {
   display: inline-block;
@@ -53,6 +54,7 @@ textarea:focus {
   font-weight: 400;
   margin-bottom: 0;
   border-radius: 3px;
+  cursor: pointer;
   width: 100%;
   margin: 10px;
 }
@@ -165,11 +167,11 @@ a:active {
   border-radius: 3px;
 }
 .home {
-  background: url("../images/bg.jpg") no-repeat 50% 0%;
-  padding: 15px 10px;
+  background: url("../images/bg.jpg") no-repeat 50% 0 / cover;
+  padding: 10px;
 }
 .home .logo img {
-  height: 85px;
+  height: 65px;
 }
 .home .s-link a {
   display: block;
@@ -181,6 +183,9 @@ a:active {
   text-align: left;
   -webkit-border-radius: 3px;
   border-radius: 3px;
+}
+.home .cat {
+  overflow: hidden;
 }
 .home .cat a {
   margin-top: 10px;
@@ -554,7 +559,7 @@ header.s form {
   margin: 5px 0;
   position: relative;
   height: 2.75em;
-  text-shadow: 0 1px  #fff;
+  text-shadow: 0 1px #fff;
 }
 .intro h3 span {
   position: absolute;
@@ -675,4 +680,33 @@ header.s form {
 }
 .footer .nav a.on {
   color: #ea2f53;
+}
+@media screen and (max-width: 320px) {
+  .pro .pro-sub-cat li {
+    width: 50%;
+  }
+  .pro .pro-sub-cat li a img {
+    height: 85px;
+  }
+}
+@media screen and (min-width: 760px) {
+  body,
+  .header,
+  .footer,
+  .error,
+  .footer {
+    max-width: 1000px;
+  }
+  .pro .pro-cat {
+    width: 10em;
+  }
+  .pro .pro-sub-cat {
+    margin-left: 10em;
+  }
+  .pro .pro-sub-cat li {
+    width: 25%;
+  }
+  .pro .pro-sub-cat li a img {
+    height: 150px;
+  }
 }
