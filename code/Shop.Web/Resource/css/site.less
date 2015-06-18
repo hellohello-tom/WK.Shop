@@ -640,20 +640,19 @@ header.s {
     }
 }
 
-.withlogo{
-    img{
+.withlogo {
+    img {
         height: 30px;
         margin-top: 7px;
     }
-    .bigword{
+    .bigword {
         line-height: 1;
         margin-top: 8px;
-        p{
+        p {
             color: #eee;
         }
     }
 }
-
 
 @fs-color: #ff7400;
 hr {
@@ -713,25 +712,25 @@ hr {
                 img {
                     width: 100%;
                 }
-                .time-wrapper{
+                .time-wrapper {
                     position: absolute;
                     left: 0;
                     bottom: 0;
                     width: 100%;
-                    background: rgba(0,0,0,.35);
+                    background: rgba(0, 0, 0, .35);
                     color: #fff;
                     font-size: 14px;
                     padding: 3px 10px;
-                    i{
+                    i {
                         margin-right: 5px;
                     }
                 }
             }
         }
-        .slogan{
-            background: #f5f5f5;
+        .slogan {
+            background: #f2f2f2;
             padding: 5px 10px;
-            .discount{
+            .discount {
                 color: @fs-color;
             }
         }
@@ -852,7 +851,7 @@ hr {
         font-size: 1rem;
         margin: 8px 0;
     }
-    .img-wrapper {
+    >.img-wrapper {
         height: 180px;
         overflow: hidden;
     }
@@ -1057,5 +1056,15 @@ hr {
                 }
             }
         }
+    }
+    .guess>.img-wrapper {
+        height: 400px;
+    }
+    .pro-wrapper .pro-item a .img-wrapper {
+        height: 300px!important;
+    }
+    a .pro-info{
+        -webkit-line-clamp:1;
+        height: 1.5em !important;
     }
 }
