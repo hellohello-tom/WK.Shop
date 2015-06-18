@@ -16,6 +16,7 @@ using Shop.Model;
 using Shop.Common;
 using MySoft.Data;
 using Shop.Web;
+using System.Text.RegularExpressions;
 
 namespace Shop.Web.Areas.FlashSales.Controllers
 {
@@ -26,6 +27,8 @@ namespace Shop.Web.Areas.FlashSales.Controllers
 	{	     
 		private readonly FlashSalesBLL bll=new FlashSalesBLL();
         private readonly MenuBLL _menuBLL = new MenuBLL();
+        private readonly CommodityBLL _commodityBLL = new CommodityBLL();
+        private readonly RealtionBLL _realtionBLL = new RealtionBLL();
 		/// <summary>
         /// 分页列表
         /// </summary>
@@ -50,7 +53,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         /// <returns></returns>
         public ActionResult Create(int id=0)
         {
-            Model.FlashSales model = bll.GetModel(id);
+            Model.FlashSales model = bll.GetModel(id) ?? new Model.FlashSales();
             if (id > 0)
                 ViewBag.MenuName = _menuBLL.GetModel(model.FlashSales_MenuId).Menu_Name;
             return View(model);
@@ -71,43 +74,76 @@ namespace Shop.Web.Areas.FlashSales.Controllers
           return View(menuList);
         }
 
+
+
+        /// <summary>
+        /// 添加关系
+        /// </summary>
+        /// <param name="discount"></param>
+        /// <param name="commdityIds"></param>
+        /// <param name="flashSalesId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddRelation(decimal discount,int commdityIds, int flashSalesId)
+        {
+            DWZCallbackInfo callback = DWZMessage.Faild();
+            try
+            {
+                if(!new Regex(@"^([1-9])(\.\d{1})?$").IsMatch(discount+""))
+                {
+                     callback = DWZMessage.Faild("请输入正确的折扣，最多保留一位小数！");
+                }
+                //判断商品是否已经添加过折扣
+                else if (_realtionBLL.Exists(Realtion._.Realtion_CommodityId == commdityIds && Realtion._.Realtion_IsDel == false
+                    && Realtion._.Realtion_SaleId == flashSalesId))
+                {
+                    callback = DWZMessage.Faild("该商品已经添加过了！");
+                }
+                else
+                {
+                    var model = new Realtion
+                    {
+                        Realtion_CommodityId = commdityIds,
+                        Realtion_SaleId = flashSalesId,
+                        Realtion_CreateTime = DateTime.Now,
+                        Realtion_CreateUser = UserContext.CurUserInfo.Id,
+                        Realtion_Discount = discount,
+                        Realtion_IsDel = false,
+                        Realtion_IsTop = false
+                    };
+                    if (_realtionBLL.Add(model) > 0) {
+                        callback = DWZMessage.Success();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                callback = DWZMessage.Faild(ex.Message);
+            }
+            return Json(callback);
+        }
+
         /// <summary>
         /// 选择特价商品
         /// </summary>
         /// <param name="navigationId"></param>
         /// <returns></returns>
-        public ActionResult SelectCommdity(string commditys)
+        public ActionResult SelectCommdity(DWZPageInfo page, string name)
         {
-            //string checkModuleIds = string.Format(",{0},", commditys.Trim(','));//已选择的模块
-
-            ////----模块列表
-            //var commdityList = moduleBll.GetList(SysModule._.Enabled == 1);
-
-            //StringBuilder sbHtml = new StringBuilder();
-            //var firstModuleList = moduleList.FindAll(x => x.ParentId == 0);//第一级
-            //List<Shop.Model.SysModule> childModuleList = null;//子级 临时变量
-
-            ////第1级
-            //sbHtml.AppendFormat("<ul class='tree  expand treeCheck'>");
-            //foreach (var root in firstModuleList)
-            //{
-            //    sbHtml.AppendFormat("<li><a href='javascript:;' {0} tname='selectModule' tvalue='{{\"Id\":\"{1}\",\"Name\":\"{2}\"}}' >{2}</a>{3}</li>",
-            //                               checkModuleIds.Contains("," + root.Id + ",") ? "checked='checked'" : "",
-            //                                root.Id,
-            //                                root.Name,
-            //                                GetChildHtml(moduleList, root.Id, checkModuleIds)
-            //                           );
-            //}
-            //sbHtml.Append("</ul>");
-            //ViewBag.ModuleHtml = sbHtml.ToString();
-
-            return View();
-
-            //----导航列表
-            var menuList = _menuBLL.GetList(Menu._.Menu_IsDel == false
-                  && Menu._.Menu_Type == MenuType.FlashSalues.ToString()
-                  && Menu._.Menu_ParentId == 0, Menu._.Id.Desc);
-            return View(menuList);
+            #region 搜索条件
+            WhereClip where = Commodity._.Commodity_IsDel == false;
+            if (!string.IsNullOrEmpty(name))
+                where &= Commodity._.Commodity_Name.Like("%" + name + "%");
+            ViewBag.Name = name;
+            #endregion
+            IDataPage<IList<Commodity>> sourcePage = new DataPage<IList<Commodity>>()
+            {
+                DataSource = new List<Commodity>()
+            };
+            if(!string.IsNullOrEmpty(name))
+            sourcePage = _commodityBLL.GetPageList(page.NumPerPage, page.PageNum, where,
+                Commodity._.Commodity_CreateTime.Desc);
+            return View(sourcePage);
         }
 
         /// <summary>

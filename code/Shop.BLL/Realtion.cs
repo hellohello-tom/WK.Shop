@@ -14,6 +14,7 @@ using Shop.DAL;
 using Shop.Model;
 using Shop.Common;
 using MySoft.Data;
+using System.Data;
 
 namespace Shop.BLL {
 	/// <summary>
@@ -22,8 +23,11 @@ namespace Shop.BLL {
 	public partial class RealtionBLL : BLLBase<Realtion>
 	{	     
 		private readonly RealtionDAL dal=new RealtionDAL();
-	
-		
+
+        public DataTable GetRelationTable(WhereClip where = null, OrderByClip order = null)
+        {
+            return dal.GetRelationTable(where, order);
+        }
    
 	}
 }

@@ -32,9 +32,17 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="/FlashSales/FlashSales/Create" target="navTab" rel="FlashSales_FlashSales_Create"><span>添加</span></a></li>
+            <li>
+                <a class="add" href="/FlashSales/FlashSales/Create" target="navTab" rel="FlashSales_FlashSales_Edit">
+                    <span>添加</span>
+                </a>
+            </li>
 
-            <li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/FlashSales/FlashSales/DeleteList" class="delete"><span>批量删除</span></a></li>
+            <li>
+            <a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/FlashSales/FlashSales/DeleteList" class="delete">
+                <span>批量删除</span>
+                </a>
+            </li>
         </ul>
     </div>
     <table class="table" width="100%" layouth="112">
@@ -57,7 +65,7 @@
                     <td>@m.FlashSales_Name</td>
                     <td>@m.FlashSales_EndTime</td>
                     <td>@m.FlashSales_KeyWord</td>
-                    <td>@m.FlashSales_Discount</td>>
+                    <td>@m.FlashSales_Discount</td>
                     <td>@m.FlashSales_CreateTime</td>
                     <td>
                         <a title="编辑特卖专场信息" rel="FlashSales_FlashSales_Edit" target="navTab" href="/FlashSales/FlashSales/Create/@m.Id" class="btnEdit">编辑</a>

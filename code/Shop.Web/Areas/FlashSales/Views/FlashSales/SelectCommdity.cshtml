@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "SelectCommdity";
+}
+@model MySoft.Data.IDataPage<IList<Shop.Model.Commodity>>
+<form id="pagerForm" action="/FlashSales/FlashSales/SelectCommdity">
+    <input type="hidden" name="pageNum" value="@Model.CurrentPageIndex" />
+    <input type="hidden" name="numPerPage" value="@Model.PageSize" />
+    <input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+</form>
+
+<div class="pageHeader">
+    <form rel="pagerForm" method="post" action="/FlashSales/FlashSales/SelectCommdity" onsubmit="return dwzSearch(this, 'dialog');">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>商品名称:</label>
+                    <input class="textInput" name="name" value="@ViewBag.Name" type="text" placeholder="请输入商品关键字" >
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+
+    <table class="table" layouth="118" targettype="dialog" width="100%">
+        <thead>
+            <tr>
+                <th width="100">商品名称</th>
+                <th width="100">提醒</th>
+                <th width="100">原价</th>
+                <th width="100">折扣系数</th>
+                <th width="100">剩余数量</th>
+                <th width="80">查找带回</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.DataSource)
+            {
+                <tr target="Commodity_ids" rel="@m.Id">
+                    <td>@m.Commodity_Name</td>
+                    <td>@m.Commodity_Remind</td>
+                    <td>@m.Commodity_CostPrice</td>
+                    <td>@m.Commodity_Discount</td>
+                    <td>@m.Commodity_ResidueCount</td>
+                    <td>
+                        <a class="btnSelect" href="javascript:$.bringBack({Id:'@m.Id', name:'@m.Commodity_Name'})" title="查找带回">选择</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages">
+            <span>每页</span>
+            <select name="numPerPage" onchange="dwzPageBreak({ targetType: 'dialog', data:{ numPerPage: this.value }})">
+                @foreach (string pageSize in "10,20,50,100".Split(','))
+                {
+                    <option value="@pageSize" @{Write(Model.PageSize.ToString() == pageSize ? "selected" : "");}>@pageSize</option>
+                }
+            </select>
+            <span>条，共 @Model.RowCount 条</span>
+        </div>
+
+        <div class="pagination" targettype="dialog" totalcount="@Model.RowCount" numperpage="@Model.PageSize" pagenumshown="10" currentpage="@Model.CurrentPageIndex"></div>
+    </div>
+</div>

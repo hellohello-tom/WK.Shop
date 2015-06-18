@@ -1,36 +1,32 @@
 ﻿@model System.Data.DataTable
-    @{
-        ViewBag.Title = "Realtion_Index";
-    }
+@{
+    ViewBag.Title = "Realtion_Index";
+}
 
-    <table class="table" width="100%">
-        <thead>
+<table class="table" width="100%">
+    <thead>
+        <tr>
+            <th width="200">商品名称</th>
+            <th width="50">原价</th>
+            <th width="50">折扣率</th>
+            <th width="100">创建时间</th>
+            <th width="70">折后金额</th>
+            <th width="50">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow m in Model.Rows)
+        {
             <tr>
-                <th width="100">商品名称</th>
-                <th width="100">原价</th>
-                <th width="100">折扣率</th>
-                <th width="100">创建时间</th>
-                <th width="100">折后金额</th>
-                <th width="70">操作</th>
+                <td style="color:red">@m["Commodity_Name"]</td>
+                <td>@m["Commodity_CostPrice"] 元</td>
+                <td>@m["Realtion_Discount"] 折</td>
+                <td>@m["Realtion_CreateTime"].ToString()</td>
+                <td>@m["price"]元</td>
+                <td>
+                    <a title="确认删除?" callback="FlashSales_FlashSales_Create_DelCallBack" target="ajaxTodo" href="/FlashSales/Realtion/Delete/@m["Id"]" class="btnDel">删除</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (System.Data.DataRow dr in Model.Rows)
-            {
-                <tr target="Realtion_ids" rel="@m.Id">
-                    <td><input name="ids" value="@m.Id" type="checkbox"></td>
-                    <td>@m.Realtion_CommodityId</td>
-                    <td>@m.Realtion_SaleId</td>
-                    <td>@m.Realtion_IsTop</td>
-                    <td>@m.Realtion_CreateTime</td>
-                    <td>@m.Realtion_CreateUser</td>
-                    <td>@m.Realtion_IsDel</td>
-
-                    <td>
-                        <a title="编辑[Realtion]信息" rel="FlashSales_Realtion_Edit" target="navTab" href="/FlashSales/Realtion/Create/@m.Id" class="btnEdit">编辑</a>
-                        <a title="确认删除?" target="ajaxTodo" href="/FlashSales/Realtion/Delete/@m.Id" class="btnDel">删除</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

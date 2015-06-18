@@ -76,7 +76,8 @@ namespace Shop.Model{
 		/// <summary>
 		/// 截止时间
         /// </summary>
-        [Required(ErrorMessage = "必填")]		[RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]		
+        [Required(ErrorMessage = "必填")]
+        [RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]
         public DateTime? FlashSales_EndTime
         {
             get{ return _FlashSales_EndTime; }

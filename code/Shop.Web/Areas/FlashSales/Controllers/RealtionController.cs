@@ -22,6 +22,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
 	/// <summary>
 	/// Realtion控制器
 	/// </summary>
+    [AuthorizeType(NeedLogin = false)]
 	public class RealtionController:Controller
 	{	     
 		private readonly RealtionBLL bll=new RealtionBLL();
@@ -31,18 +32,15 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Index(DWZPageInfo page)
+        public ActionResult Index(int flashsales=0)
         {
         	#region 搜索条件
-            WhereClip where = null;
-            //if (!string.IsNullOrEmpty(name))
-            //    where &= Realtion._.Name.Like("%" + name + "%");
-            //ViewBag.Name = name;
+            WhereClip where = Realtion._.Realtion_IsDel == false && new WhereClip("Commodity.Commodity_Name is not null");
+            if (flashsales > 0)
+                where &= Realtion._.Realtion_SaleId == flashsales;
             #endregion
-            
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where);
-            
-            return View(usersPage);
+            var usersTable = bll.GetRelationTable(where, Realtion._.Realtion_CreateTime.Desc);
+            return View(usersTable);
         }
         
         #region  添加 编辑

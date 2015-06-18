@@ -59,6 +59,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
             }
             else
             {
+                model.Menu_Type = MenuType.FlashSalues.ToString();
                 model.Menu_ParentId = 0;
                 model.Menu_Sort = 1;
             }

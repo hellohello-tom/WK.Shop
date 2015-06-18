@@ -98,7 +98,7 @@ namespace Shop.Model
         /// 菜单类型
         /// </summary>
         [Required(ErrorMessage = "必填")]
-        [StringLength(10, ErrorMessage = "类型不能超过10个字符")]
+        [StringLength(20, ErrorMessage = "类型不能超过20个字符")]
         public string Menu_Type
         {
             get { return _Menu_Type; }
