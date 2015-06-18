@@ -3,11 +3,13 @@
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 
+
 <header class="tc header">
     <a href='/yaodian' class="goback"></a>
     <h2>科室找药</h2>
     <a href="/yaodian/search" class='ico-search'><i class="fa fa-search"></i></a>
 </header>
+<input type="hidden" id="nav-key" value="@(Request.QueryString["nk"]==null?"":Request.QueryString["nk"].ToString())" />
 <div class="main pro">
     @Html.Action("NavList");
 
@@ -38,9 +40,18 @@
             });
         }
         var defNavId = $('#navid').val();
-
+        var navKey = $('#nav-key').val();
         $(function () {
-            loadTagList(defNavId);
+            if (navKey == 'man') {
+                $(".nav-item[id='55']").addClass('on').siblings().removeClass('on');
+                loadTagList(55);
+            } else if (navKey == 'woman') {
+                $(".nav-item[id='53']").addClass('on').siblings().removeClass('on');
+                loadTagList(53);
+            } else {
+                loadTagList(defNavId);
+            }
+           
         });
     </script>
 }
