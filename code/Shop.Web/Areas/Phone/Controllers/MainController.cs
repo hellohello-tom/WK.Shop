@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MySoft.Data;
 using Shop.BLL;
+using Shop.Common;
+using Shop.Model;
 
 namespace Shop.Web.Areas.Phone.Controllers
 {
@@ -23,7 +26,17 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <returns></returns>
         public ActionResult FlashSalesItem()
         {
-            return View();
+              #region 搜索条件
+
+            WhereClip where = Model.FlashSales._.FlashSales_IsDel == false
+                &&Model.Realtion._.Realtion_IsDel==false
+                &&Model.Commodity._.Commodity_IsDel==false;
+            OrderByClip order = new OrderByClip("Realtion_IsTop Desc");
+
+            #endregion
+
+            var dt = FlashSalesBll.GetFlashSalesCommodityTable(where,order);
+            return View(dt);
         }
     }
 }

@@ -113,15 +113,14 @@ namespace Shop.DAL
         /// 网站首页获取闪购药品项
         /// </summary>
         /// <param name="wc"></param>
+        /// <param name="orderBy"></param>
         /// <returns></returns>
-
-        public IList<Commodity> GetFlashSalesCommodityList( WhereClip wc )
+        public DataTable GetFlashSalesCommodityList( WhereClip wc,OrderByClip orderBy )
         {
             return
-                DB.From<Commodity>()
-                    .RightJoin<Realtion>(Commodity._.Id == Realtion._.Realtion_CommodityId)
-                    .Select(Commodity._.All, Realtion._.Realtion_Discount).Where(wc)
-                    .ToList<Commodity>();
+                DB.From<FlashSales>().LeftJoin<Realtion>(FlashSales._.Id==Realtion._.Realtion_SaleId)
+                    .LeftJoin<Commodity>(Commodity._.Id == Realtion._.Realtion_CommodityId)
+                    .Select(Commodity._.All, Realtion._.Realtion_Discount, Realtion._.Realtion_SaleId, Realtion._.Realtion_IsTop).Where(wc).OrderBy(orderBy).ToTable() as DataTable;
         }
 
         /// <summary>

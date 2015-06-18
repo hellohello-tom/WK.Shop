@@ -45,6 +45,10 @@ namespace Shop.BLL {
         }
 
        // GetFlashSalesCommodities
+	    public DataTable GetFlashSalesCommodityTable(WhereClip wc,OrderByClip orderBy)
+	    {
+            return dal.GetFlashSalesCommodityList(wc, orderBy);
+	    }
 
         public DataRow GetFlashSalesCommodity( int id )
         {
