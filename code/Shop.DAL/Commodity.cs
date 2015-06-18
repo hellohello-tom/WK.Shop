@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 //引用
@@ -22,7 +23,7 @@ namespace Shop.DAL
     public partial class CommodityDAL : DALBase<Commodity>
     {
 
-        public bool Update(Commodity model, int[] imageIds)
+        public bool Update( Commodity model, int[] imageIds )
         {
             var trans = DB.BeginTrans();
             try
@@ -47,7 +48,7 @@ namespace Shop.DAL
             }
         }
 
-        public int Add(Commodity model, int[] imageIds)
+        public int Add( Commodity model, int[] imageIds )
         {
             int id = 0;
             var trans = DB.BeginTrans();
@@ -71,45 +72,99 @@ namespace Shop.DAL
             }
             return id;
         }
+        /// <summary>
+        /// 获取闪购药品详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Commodity GetFlashSalesCommodityById( int id )
+        {
+            return
+                DB.From<Commodity>()
+                    .LeftJoin<Realtion>(Commodity._.Id == Realtion._.Realtion_CommodityId).Where(Commodity._.Id == id)
+                    .Select(Commodity._.All, Realtion._.Realtion_Discount, Realtion._.Realtion_SaleId)
+                    .ToSingle<Commodity>();
+        }
 
         /// <summary>
         /// 获取折扣过后的商品分页数据
         /// 排序字段 price
         /// </summary>
-        /// <param name="where"></param>
+        /// <param name="tagId"></param>
         /// <param name="order"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where = null, OrderByClip order = null,int pageIndex=0,int pageSize=20)
+        public IList<Commodity> GetCommdityList( int tagId, string order = "asc", int pageIndex = 0, int pageSize = 20 )
         {
-            var list = DB.From<Commodity>().Select(Commodity._.All, new Field("(select b.Commodity_Discount*b.Commodity_CostPrice from Commodity b where b.Id=Commodity.Id) as [price]"))
-                .Where(where)
-                .OrderBy(order)
-                .ToListPage(pageSize, pageIndex);
-            return list;
+            string sql = string.Format(@"select top {3} * from Commodity where Id not in (select top (({2}-1)*{3}) id from commodity 
+                                where Commodity_IsDel=0 and (Commodity_Status=0 or Commodity_Status=2) and Commodity_TagId={0}
+                                order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}) 
+                                and  Commodity_IsDel=0 and (Commodity_Status=0 or Commodity_Status=2) and Commodity_TagId={0}
+                                order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}", tagId, order, pageIndex, pageSize);
+            try
+            {
+                var list = DB.FromSql(sql).ToList<Commodity>();
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        ///  获取折扣过后的闪购商品分页数据//todo 待实现
+        /// 排序字段 price
+        /// </summary>
+        /// <param name="salesId"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public DataTable GetFlashSalesCommdityPageTable( int salesId, string order = "asc", int pageIndex = 1, int pageSize = 20 )
+        {
+            string sql = string.Format(@"
+                    select top {3} * from Realtion left join Commodity on Realtion.Realtion_CommodityId=Commodity.Id and Realtion_SaleId={0} and
+                    Realtion.Realtion_CommodityId  not in(select top ({2}*{3}) r.Realtion_CommodityId from Realtion r 
+                    left join Commodity c on r.Realtion_CommodityId=c.Id and r.Realtion_IsDel=0 
+                    and c.Commodity_IsDel=0  and (c.Commodity_Status=0 or c.Commodity_Status=2)
+                    and c.Commodity_Name is not null and r.Realtion_SaleId={0} order by c.Commodity_CostPrice*r.Realtion_Discount {1}) 
+                    where  Realtion.Realtion_IsDel=0 and Commodity.Commodity_IsDel=0  
+                    and (Commodity.Commodity_Status=0 or Commodity.Commodity_Status=2) 
+                    and Commodity.Commodity_Name is not null order by Commodity.Commodity_CostPrice*Realtion.Realtion_Discount {1}", salesId, order, pageIndex - 1, pageSize);
+            try
+            {
+                var dt = DB.FromSql(sql).ToTable() as DataTable;
+                return dt;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
 
 
         /// <summary>
-        /// 根据条件获取药品列表
+        ///  根据条件获取闪购药品列表
         /// </summary>
-        /// <param name="wc"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
         /// <returns></returns>
-        public DataTable GetFlashSalesCommodityTableByCondition( WhereClip wc )
+        public IDataPage<DataTable> GetFlashSalesCommodityListByCondition( int pageSize, int pageIndex, WhereClip where = null, OrderByClip order = null )
         {
-            //QueryCreator qc = QueryCreator.NewCreator()
-            //    .From<Realtion>()
-            //    .Join<Commodity>(Realtion._.Realtion_CommodityId == Commodity._.Id)
-            //    .Join<FlashSales>(Realtion._.Realtion_SaleId == FlashSales._.Id)
-            //    .AddField(Commodity._.All)
-            //    .AddField(FlashSales._.FlashSales_Discount);
-            return DB.From<Realtion>()
-                .LeftJoin<Commodity>(Realtion._.Realtion_CommodityId == Commodity._.Id)
-                .LeftJoin<FlashSales>(Realtion._.Realtion_SaleId == FlashSales._.Id)
-                .Select(Commodity._.All, FlashSales._.FlashSales_Discount)
-                .Where(wc).OrderBy(FlashSales._.FlashSales_CreateTime.Desc).ToTable() as DataTable;
+            return DB.From<Commodity>()
+                .LeftJoin<Realtion>(Realtion._.Realtion_CommodityId == Commodity._.Id)
+                .Select(Commodity._.All, Realtion._.Realtion_Discount)
+                .Where(where).OrderBy(Realtion._.Realtion_CreateTime.Desc).OrderBy(order).ToTablePage(pageSize, pageIndex);
 
         }
+
     }
 }

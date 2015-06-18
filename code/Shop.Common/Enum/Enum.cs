@@ -26,7 +26,11 @@ namespace Shop.Common
         /// <summary>
         /// 商品
         /// </summary>
-        Commodity = 0
+        Commodity = 0,
+        /// <summary>
+        /// 闪购图
+        /// </summary>
+        FlashSales
     }
 
     /// <summary>

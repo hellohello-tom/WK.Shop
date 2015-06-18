@@ -1,6 +1,47 @@
-﻿@{
+﻿@using System.Data
+@using Shop.Model
+@model List<Shop.Model.Menu>
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<header class=" header withlogo">
+    <img src="" alt="LOGO" class="logo fl">
+    <div class="fl bigword">
+        <h4>随身药房</h4>
+        <p>首批国家食品药监局认证网上药店</p>
+    </div>
+</header>
+<div class="main pro flashsale">
+    <div class=" fs-cat ">
+        <a onclick="loadFlashSales(0)" class='on' data-menuid="0">全部</a>
+        @foreach (var menu in Model)
+        {
+            <a onclick="loadFlashSales(@menu.Id)" data-menuid="@menu.Id">@menu.Menu_Name</a>
+        }
+    </div>
+    <div class="rows">
+        <dl class='fs-list'>
+            @Html.Partial("Partial/FlashSalesItemList", ViewBag.FlashSalesDataTable as DataTable)
+        </dl>
+    </div>
+</div>
+@section Js
+{
+    <script type="text/javascript">
+
+        var loadFlashSales = function(menuId) {
+            $.ajax({
+                url: "/Phone/FlashSales/FlashSalesItemList",
+                data: { "menuId": menuId },
+                success: function(data) {
+                    if (data) {
+                        $('.fs-list').html(data);
+                    }
+                }
+            });
+        }
+
+    </script>
+}

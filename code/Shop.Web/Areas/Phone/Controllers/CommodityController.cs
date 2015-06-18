@@ -109,20 +109,19 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 where &= Commodity._.Id != notId;
             }
-            if (!string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName))
+            if (tagId!=0&&!string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //默认加载 
             {
                 order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
                 if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
                 {
-                    order = new OrderByClip("price " + pi.SortOrder);
-                    commodityList = commodityBll.GetCommdityList(where, order,pi.PageNum,pi.NumPerPage).DataSource as List<Commodity>;
+                    commodityList = commodityBll.GetCommdityList(tagId, pi.SortOrder, pi.PageNum, pi.NumPerPage) as List<Commodity>;
                 }
-                else //正常排序
+                else //其他正常排序
                 {
                     commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
                 }
             }
-            else
+            else //搜索
             {
                 commodityList = commodityBll.GetPageList(pi.NumPerPage, pi.PageNum, where, order).DataSource as List<Commodity>;
             }
@@ -175,25 +174,25 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <param name="cimg"></param>
         /// <param name="bCode">关联商品代码</param>
         /// <returns></returns>
-        public ActionResult CommodityImgList( int id, bool cimg = false, BizCode bCode = BizCode.Commodity )
-        {
-            #region 搜索条件
+        //public ActionResult CommodityImgList( int id, bool cimg = false, BizCode bCode = BizCode.Commodity )
+        //{
+        //    #region 搜索条件
 
-            WhereClip where = FileAttr._.FileAttr_IsDel == false;
+        //    WhereClip where = FileAttr._.FileAttr_IsDel == false;
 
-            if (id > 0)
-                where &= FileAttr._.FileAttr_BussinessId == id;
-            where &= FileAttr._.FileAttr_BussinessCode == bCode.ToString();
-            OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
+        //    if (id > 0)
+        //        where &= FileAttr._.FileAttr_BussinessId == id;
+        //    where &= FileAttr._.FileAttr_BussinessCode == bCode.ToString();
+        //    OrderByClip order = new OrderByClip("FileAttr_CreateTime Desc");
 
-            #endregion
+        //    #endregion
 
-            var imgList = fileAttrBll.GetList(where, order);
-            if (cimg)
-            {
-                return View("Partial/CImgList", imgList);
-            }
-            return View("Partial/ImgList", imgList);
-        }
+        //    var imgList = fileAttrBll.GetList(where, order);
+        //    if (cimg)
+        //    {
+        //        return View("Partial/CImgList", imgList);
+        //    }
+        //    return View("Partial/ImgList", imgList);
+        //}
     }
 }

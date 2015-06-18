@@ -623,8 +623,15 @@
     <Content Include="Areas\FlashSales\Views\FlashSales\Create.cshtml" />
     <Content Include="Areas\FlashSales\Views\Menu\Create.cshtml" />
     <Content Include="Areas\FlashSales\Views\Realtion\Create.cshtml" />
-	 <Content Include="Areas\Phone\Views\FlashSales\Index.cshtml" />
-	  <Content Include="Areas\FlashSales\Views\FlashSales\SelectNavigation.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Index.cshtml" />
+    <Content Include="Areas\FlashSales\Views\FlashSales\SelectNavigation.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\CommodityList.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Partial\FlashSalesItemList.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Partial\CommodityItemList.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\CommodityDetail.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Partial\ImgList.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Partial\CImgList.cshtml" />
+    <Content Include="Areas\Phone\Views\Main\FlashSalesItem.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
@@ -633,6 +640,7 @@
     <Content Include="Resource\Html\index.html" />
     <Content Include="Resource\Html\pro_detail.html" />
     <Content Include="Resource\Html\search.html" />
+    <Content Include="Resource\Html\shangou.html" />
     <Content Include="Resource\Html\s_result.html" />
     <Content Include="Resource\images\bg.jpg" />
     <Content Include="Resource\images\ex1.gif" />

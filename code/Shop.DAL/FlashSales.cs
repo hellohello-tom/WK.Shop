@@ -7,6 +7,7 @@
 // ==========================================================================
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 //引用
@@ -94,17 +95,33 @@ namespace Shop.DAL
                 trans.Dispose();
             }
         }
+        /// <summary>
+        /// 根据条件获取闪购列表
         /// </summary>
         /// <param name="wc"></param>
         /// <returns></returns>
-        public List<FlashSales> GetFlashSalesListByCondition(WhereClip wc)
+        public DataTable GetFlashSalesListByCondition(WhereClip wc)
         {
             return DB.From<FlashSales>()
                  .LeftJoin<FileAttr>(FlashSales._.Id == FileAttr._.FileAttr_BussinessId)
-                 .Select(FlashSales._.All)
-                 .Where(wc).OrderBy(FlashSales._.FlashSales_CreateTime.Desc)
-                 .ToList() as List<FlashSales>;
+                 .Select(FlashSales._.All,FileAttr._.FileAttr_Path,FileAttr._.FileAttr_Name)
+                 .Where(wc).OrderBy(FlashSales._.FlashSales_CreateTime.Desc).ToTable() as DataTable;
 
+        }
+
+        /// <summary>
+        /// 网站首页获取闪购药品项
+        /// </summary>
+        /// <param name="wc"></param>
+        /// <returns></returns>
+
+        public IList<Commodity> GetFlashSalesCommodities( WhereClip wc )
+        {
+            return
+                DB.From<Commodity>()
+                    .RightJoin<Realtion>(Commodity._.Id == Realtion._.Realtion_CommodityId)
+                    .Select(Commodity._.All, Realtion._.Realtion_Discount).Where(wc)
+                    .ToList<Commodity>();
         }
     }
 }

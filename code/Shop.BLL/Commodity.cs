@@ -7,6 +7,7 @@
 // ==========================================================================
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 //引用
@@ -54,10 +55,35 @@ namespace Shop.BLL {
 	    /// <param name="pageIndex"></param>
 	    /// <param name="pageSize"></param>
 	    /// <returns></returns>
-	    public IDataPage<IList<Commodity>> GetCommdityList(WhereClip where=null ,OrderByClip order=null,int pageIndex=0,int pageSize=20)
+	    public IList<Commodity> GetCommdityList(int tagId ,string order,int pageIndex=0,int pageSize=20)
         {
-            return dal.GetCommdityList(where,order,pageIndex,pageSize);
+            return dal.GetCommdityList(tagId, order, pageIndex, pageSize);
         }
-        
+
+        /// <summary>
+        /// 获取折扣过后的闪购商品分页数据
+        /// 排序字段 price
+        /// </summary>
+        /// <param name="tagId"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public DataTable GetFlashSalesCommdityPageTable( int tagId, string order, int pageIndex = 0, int pageSize = 20 )
+        {
+            return dal.GetFlashSalesCommdityPageTable(tagId, order, pageIndex, pageSize);
+        }
+        /// <summary>
+        /// 根据条件获取闪购药品列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public IDataPage<DataTable> GetFlashSalesCommodityListByCondition( int pageSize, int pageIndex, WhereClip where = null, OrderByClip order = null )
+	    {
+            return dal.GetFlashSalesCommodityListByCondition(pageSize, pageIndex, where, order);
+	    }
 	}
 }

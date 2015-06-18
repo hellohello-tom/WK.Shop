@@ -58,6 +58,20 @@ namespace Shop.Web.Areas.Phone
             );
 
             context.MapRoute(
+                "Phone_FlashSales_Index",
+                "shangou",
+                new { Controller = "FlashSales", Action = "Index" },
+                yaodianArea
+            );
+
+            context.MapRoute(
+                "Phone_FlashSales_CommodityList",
+                "shangou/list/{Id}",
+                new { Controller = "FlashSales", Action = "CommodityList",Id=UrlParameter.Optional },
+                yaodianArea
+            );
+
+            context.MapRoute(
                 "Phone_default",
                 "Phone/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },

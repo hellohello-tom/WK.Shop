@@ -19,9 +19,9 @@ namespace Shop.Model
     /// </summary>
     public partial class FlashSales
     {
-        private string FileAttr_Path { get; set; }
+        public string FileAttr_Path { get; set; }
 
-        private string FileAttr_Name { get; set; }
+        public string FileAttr_Name { get; set; }
     }
 }
 

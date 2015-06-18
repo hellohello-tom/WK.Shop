@@ -26,7 +26,7 @@
 <input id="search-key" type="hidden" value="@ViewBag.Search" />
 <div class="main pro">
     <div class="order dis-flex tc">
-        <a onclick="searchData(this)" class="on tag-price up"><span>价格</span><i class="fa fa-long-arrow-down"></i></a>
+        <a onclick="searchData(this)" class="on tag-price down"><span>价格</span><i class="fa fa-long-arrow-down"></i></a>
         <a onclick="searchData(this)" class="tag-discount"><span>折扣</span><i class="fa fa-long-arrow-down"></i></a>
         <a onclick="searchData(this)" class="tag-sales"><span>销量</span><i class="fa fa-long-arrow-down"></i></a>
     </div>
@@ -75,10 +75,12 @@
             });
         }
 
-        var defaultTagId = $('#tag-id').val();
+        var defaultTagId = parseInt($('#tag-id').val());
         var searchKey = $('#search-key').val().trim();
-        para.tagId = defaultTagId||0;
+        para.tagId = defaultTagId || 0;
         para.search = searchKey;
+        para.sortName = 'Commodity_CostPrice';
+        para.sortOrder = 'Desc';
         $(function () {
             loadCommodityList(para);
         });
@@ -86,8 +88,9 @@
         var searchData=function(self,isLoadMore) {
             if (self) {
                 var $self = $(self);
+
                 //确定排序规则
-                if (!isLoadMore) {//加载更多
+                if (!isLoadMore) {//切换排序字段 和排序规则
                     para.pageNum = 1;
                     if ($self.hasClass('on')) {
                         if ($self.hasClass('up')) {
@@ -98,16 +101,14 @@
                             para.sortOrder = 'Asc';
                         }
                     } else {
-                        $self.addClass('on').addClass('up').siblings().removeClass('on');
+                        $self.addClass('on').addClass('up').siblings().removeClass('on').removeClass('up').addClass('down');
                         para.sortOrder = 'Asc';
                     }
-                } else {
+                } else { //加载更多
                     if ($self.hasClass('up')) {
-                        $self.removeClass('up').addClass('down');
-                        para.sortOrder = 'Desc';
-                    } else {
-                        $self.removeClass('down').addClass('up');
                         para.sortOrder = 'Asc';
+                    } else {
+                        para.sortOrder = 'Desc';
                     }
                 }
                 

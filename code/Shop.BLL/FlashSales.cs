@@ -7,6 +7,7 @@
 // ==========================================================================
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 //引用
@@ -38,7 +39,7 @@ namespace Shop.BLL {
         /// </summary>
         /// <param name="wc"></param>
         /// <returns>数据列表</returns>
-        public List<FlashSales> GetlistByCondition( WhereClip wc )
+        public DataTable GetlistByCondition( WhereClip wc )
         {
             return dal.GetFlashSalesListByCondition(wc);
         }
