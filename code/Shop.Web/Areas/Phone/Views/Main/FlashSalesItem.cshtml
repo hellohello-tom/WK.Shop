@@ -3,7 +3,7 @@
 @model DataTable
            @{
                var flashSales = ViewBag.TopActive as FlashSales;
-               var totalSeconds = (flashSales.FlashSales_EndTime - DateTime.Now).GetValueOrDefault().TotalSeconds;
+               var totalSeconds = Math.Max((flashSales.FlashSales_EndTime - DateTime.Now).GetValueOrDefault().TotalSeconds,0);
            }
 <article class="shangou row">
     <h3>

@@ -2,7 +2,7 @@
 @model System.Data.DataTable
 @foreach (DataRow sales in Model.Rows)
 {
-    var totalSeconds = (Convert.ToDateTime(sales["FlashSales_EndTime"]) - DateTime.Now).TotalSeconds;
+    var totalSeconds = Math.Max((Convert.ToDateTime(sales["FlashSales_EndTime"]) - DateTime.Now).TotalSeconds,0);
     <dd class=fl-item>
         <a href="/shangou/list/@sales["Id"]">
             <div class="img-wrapper">
