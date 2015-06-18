@@ -127,7 +127,7 @@ namespace Shop.DAL
         public DataTable GetFlashSalesCommdityPageTable( int salesId, string order = "asc", int pageIndex = 1, int pageSize = 20 )
         {
             string sql = string.Format(@"
-                    select top {3} * from Realtion left join Commodity on Realtion.Realtion_CommodityId=Commodity.Id and Realtion_SaleId={0} and
+                    select top {3} Commodity.*,Realtion.Realtion_CommodityId,Realtion.Realtion_Discount from Realtion left join Commodity on Realtion.Realtion_CommodityId=Commodity.Id and Realtion_SaleId={0} and
                     Realtion.Realtion_CommodityId  not in(select top ({2}*{3}) r.Realtion_CommodityId from Realtion r 
                     left join Commodity c on r.Realtion_CommodityId=c.Id and r.Realtion_IsDel=0 
                     and c.Commodity_IsDel=0  and (c.Commodity_Status=0 or c.Commodity_Status=2)

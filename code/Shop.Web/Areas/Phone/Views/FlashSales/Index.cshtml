@@ -15,10 +15,10 @@
 </header>
 <div class="main pro flashsale">
     <div class=" fs-cat ">
-        <a onclick="loadFlashSales(0)" class='on' data-menuid="0">全部</a>
+        <a onclick='loadFlashSales(this,@(0))' class='on' data-menuid="0">全部</a>
         @foreach (var menu in Model)
         {
-            <a onclick="loadFlashSales(@menu.Id)" data-menuid="@menu.Id">@menu.Menu_Name</a>
+            <a onclick="loadFlashSales(this,@menu.Id)" data-menuid="@menu.Id">@menu.Menu_Name</a>
         }
     </div>
     <div class="rows">
@@ -31,7 +31,9 @@
 {
     <script type="text/javascript">
 
-        var loadFlashSales = function(menuId) {
+        var loadFlashSales = function (self,menuId) {
+            var $self = $(self);
+            $self.addClass('on').siblings().removeClass('on');
             $.ajax({
                 url: "/Phone/FlashSales/FlashSalesItemList",
                 data: { "menuId": menuId },

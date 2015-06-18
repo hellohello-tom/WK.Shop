@@ -123,11 +123,11 @@ namespace Shop.Web.Areas.Phone.Controllers
             #endregion
 
 
-            //if (notId != 0)
-            //{
-            //    //返回关联药品
-            //    return View("Partial/RelatedCommodityList", commodityList);
-            //}
+            if (notId != 0)
+            {
+                //返回关联药品
+                return View("Partial/RelatedCommodityList", commodityDataTable);
+            }
             //返回该tag下的所有药品
             return View("Partial/CommodityItemList", commodityDataTable);
         }
@@ -137,8 +137,8 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <returns></returns>
         public ActionResult CommodityDetail( int id )
         {
-            var commodity = CommodityBll.GetModelByCache(id);
-            if (commodity == null)
+            var falshSalesCommodity = FlashSalesBll.GetFlashSalesCommodity(id);
+            if (falshSalesCommodity == null)
             {
                 return Redirect(string.Format("/PhoneError?title={0}&msg={1}", "未找到", "你要找的药品不存在"));
 
@@ -156,7 +156,7 @@ namespace Shop.Web.Areas.Phone.Controllers
 
             var imgList = FileAttrBll.GetList(where, order);
             ViewBag.ImgList = imgList;
-            return View(commodity);
+            return View(falshSalesCommodity);
         }
 
     }

@@ -1,0 +1,26 @@
+﻿@using System.Data
+@model System.Data.DataTable
+<div class="swiper-container-guess img-wrapper" id="guessing">
+    <ul class="pro-wrapper clearfix swiper-wrapper">
+        @{var i = 1;}
+        @foreach (DataRow comm in Model.Rows)
+        {
+            if (i == 1 || i % 3 == 1)
+            {
+                @Html.Raw("<li class='pro-item swiper-slide'>")
+            }
+            <a href="@Url.Action("CommodityDetail", new { Id = comm["Id"] })">
+                <section class='img-wrapper'><img src="@comm["Commodity_ImagePath"]" alt="@comm["Commodity_Name"]"></section>
+                <p class="pro-info">@comm["Commodity_Name"]</p>
+                <p class="this-price">
+                    <span>¥@(Convert.ToDecimal(Convert.ToDecimal(comm["Commodity_CostPrice"]) * Convert.ToDecimal(comm["Realtion_Discount"]) / 10).ToString("F"))</span>
+                </p>
+            </a>
+            if (i % 3 == 0 || i + 1 > Model.Rows.Count)
+            {
+                @Html.Raw("</li>")
+            }
+            i++;
+        }
+    </ul>
+</div>

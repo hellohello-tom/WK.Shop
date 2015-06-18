@@ -43,5 +43,12 @@ namespace Shop.BLL {
         {
             return dal.GetFlashSalesListByCondition(wc);
         }
+
+       // GetFlashSalesCommodities
+
+        public DataRow GetFlashSalesCommodity( int id )
+        {
+            return dal.GetFlashSalesCommodity(id);
+        }
 	}
 }

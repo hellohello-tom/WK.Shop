@@ -5,7 +5,7 @@
     foreach (DataRow comm in Model.Rows)
     {
         <dd class=pro-item>
-            <a href="@Url.Action("CommodityDetail", new { Id = comm["Id"] })">
+            <a href="@Url.Action("CommodityDetail", new { Id = comm["Realtion_CommodityId"] })">
                 <section class="img-wrapper">
                     <img src="@comm["Commodity_ImagePath"]" alt="@comm["Commodity_Name"]" title="@comm["Commodity_Name"]">
                 </section>

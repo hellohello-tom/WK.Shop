@@ -115,13 +115,29 @@ namespace Shop.DAL
         /// <param name="wc"></param>
         /// <returns></returns>
 
-        public IList<Commodity> GetFlashSalesCommodities( WhereClip wc )
+        public IList<Commodity> GetFlashSalesCommodityList( WhereClip wc )
         {
             return
                 DB.From<Commodity>()
                     .RightJoin<Realtion>(Commodity._.Id == Realtion._.Realtion_CommodityId)
                     .Select(Commodity._.All, Realtion._.Realtion_Discount).Where(wc)
                     .ToList<Commodity>();
+        }
+
+        /// <summary>
+        ///闪购药品详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        public DataRow GetFlashSalesCommodity( int id )
+        {
+            var dt=DB.From<Commodity>()
+                    .RightJoin<Realtion>(Commodity._.Id == Realtion._.Realtion_CommodityId)
+                    .Where(Realtion._.Realtion_CommodityId == id)
+                    .Select(Commodity._.All, Realtion._.Realtion_Discount,Realtion._.Realtion_SaleId).ToTable() as DataTable;
+            if (dt != null) return dt.Rows[0];
+            return null;
         }
     }
 }

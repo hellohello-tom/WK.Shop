@@ -632,6 +632,7 @@
     <Content Include="Areas\Phone\Views\FlashSales\Partial\ImgList.cshtml" />
     <Content Include="Areas\Phone\Views\FlashSales\Partial\CImgList.cshtml" />
     <Content Include="Areas\Phone\Views\Main\FlashSalesItem.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Partial\RelatedCommodityList.cshtml" />
 	<Content Include="Areas\FlashSales\Views\FlashSales\SelectCommdity.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
