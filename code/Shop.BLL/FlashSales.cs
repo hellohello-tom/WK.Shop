@@ -34,6 +34,19 @@ namespace Shop.BLL {
             return dal.Update(model, commdityIds);
         }
 
+
+        /// <summary>
+        /// 获取闪购页面数据
+        /// </summary>
+        /// <param name="topSize"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public DataTable GetFlashSales(int topSize, WhereClip where = null, OrderByClip order=null)
+        {
+            return dal.GetFlashSales(topSize, where, order);
+        }
+
         /// <summary>
         /// 根据条件获取数据 left SysDicType
         /// </summary>

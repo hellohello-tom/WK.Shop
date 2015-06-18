@@ -110,6 +110,25 @@ namespace Shop.DAL
         }
 
         /// <summary>
+        /// 获取闪购页面数据
+        /// </summary>
+        /// <param name="topSize"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public DataTable GetFlashSales(int topSize, WhereClip where = null, OrderByClip order = null)
+        {
+            return DB.From<FlashSales>()
+                .LeftJoin<Realtion>(Realtion._.Realtion_SaleId == FlashSales._.Id)
+                .LeftJoin<Commodity>(Commodity._.Id == Realtion._.Realtion_CommodityId)
+                .Select(Realtion._.Realtion_Discount, Commodity._.Id.As("commdityId"), Commodity._.Commodity_Name
+                , Commodity._.Commodity_ImagePath, new Field("(Realtion.Realtion_Discount*Commodity.Commodity_CostPrice) [price]"))
+                .Where(where)
+                .OrderBy(order)
+                .ToTable() as DataTable;
+        }
+
+        /// <summary>
         /// 网站首页获取闪购药品项
         /// </summary>
         /// <param name="wc"></param>

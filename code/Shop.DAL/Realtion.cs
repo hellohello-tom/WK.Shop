@@ -27,7 +27,7 @@ namespace Shop.DAL
                 .LeftJoin<Commodity>(Realtion._.Realtion_CommodityId == Commodity._.Id)
                 .Where(where).OrderBy(order)
                 .Select(Commodity._.Id.As("commodityId"), Commodity._.Commodity_Name,
-                Commodity._.Commodity_CostPrice, Realtion._.Id,Realtion._.Realtion_Discount, Realtion._.Realtion_CreateTime,
+                Commodity._.Commodity_CostPrice, Realtion._.Realtion_IsTop, Realtion._.Id, Realtion._.Realtion_Discount, Realtion._.Realtion_CreateTime,
                 new Field("(cast(Commodity.Commodity_CostPrice*Realtion.Realtion_Discount/10 as numeric(20,2))) as [price]")).ToTable()
                 as DataTable;
         }

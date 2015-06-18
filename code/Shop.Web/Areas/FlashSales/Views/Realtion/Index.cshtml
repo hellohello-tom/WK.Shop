@@ -11,20 +11,22 @@
             <th width="50">折扣率</th>
             <th width="100">创建时间</th>
             <th width="70">折后金额</th>
-            <th width="50">操作</th>
+            <th width="100">操作</th>
         </tr>
     </thead>
     <tbody>
         @foreach (System.Data.DataRow m in Model.Rows)
         {
+            var istop = m["Realtion_IsTop"].ToString() != "False";
             <tr>
-                <td style="color:red">@m["Commodity_Name"]</td>
+                <td style="@(istop?"color:red":"")">@m["Commodity_Name"]</td>
                 <td>@m["Commodity_CostPrice"] 元</td>
                 <td>@m["Realtion_Discount"] 折</td>
                 <td>@m["Realtion_CreateTime"].ToString()</td>
                 <td>@m["price"]元</td>
                 <td>
-                    <a title="确认删除?" callback="FlashSales_FlashSales_Create_DelCallBack" target="ajaxTodo" href="/FlashSales/Realtion/Delete/@m["Id"]" class="btnDel">删除</a>
+                    <a title="" callback="FlashSales_FlashSales_Create_DelCallBack" target="ajaxTodo" href="/FlashSales/Realtion/SetTop/@m["Id"]?status=@Html.Raw(istop)">@(istop ? "取消置顶" : "置顶")</a>
+                    <a title="确认删除?" callback="FlashSales_FlashSales_Create_DelCallBack" target="ajaxTodo" href="/FlashSales/Realtion/Delete/@m["Id"]">删除</a>
                 </td>
             </tr>
         }

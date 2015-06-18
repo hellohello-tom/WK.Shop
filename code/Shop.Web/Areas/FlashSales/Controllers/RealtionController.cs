@@ -59,8 +59,28 @@ namespace Shop.Web.Areas.FlashSales.Controllers
             {
                 return View();
             }
-        } 
-        
+        }
+
+        /// <summary>
+        /// 设置置顶
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SetTop(int id,bool status)
+        {
+            DWZCallbackInfo callback = null;
+            var model = bll.GetModel(id);
+            model.Realtion_IsTop = !status;
+            model.Realtion_CreateTime = DateTime.Now;
+            if (bll.Update(model))
+                callback = DWZMessage.Success("操作成功!");
+            else
+                callback = DWZMessage.Faild("操作失败!");
+
+            return Json(callback);
+        }
+
         /// <summary>
         /// 添加 编辑操作
         /// </summary>
