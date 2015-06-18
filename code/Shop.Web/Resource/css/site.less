@@ -14,6 +14,16 @@
     box-shadow+: @arguments;
 }
 
+.col3() {
+    .dis-tc();
+    width: 100%/3;
+}
+
+.col4() {
+    .dis-tc();
+    width: 25%;
+}
+
 .dis-il() {
     display: inline;
 }
@@ -27,9 +37,11 @@
 }
 
 .dis-tb() {
+    display: table;
+}
+
+.dis-tc() {
     display: table-cell;
-    width: 5555px;
-    vertical-align: middle;
 }
 
 .flex-center() {
@@ -82,6 +94,11 @@
 .usn() {
     -webkit-user-select: none;
     user-select: none;
+}
+
+.vm() {
+    .dis-tc();
+    vertical-align: middle;
 }
 
 .wthc(@c: rgba(0, 0, 0, .1)) {
@@ -215,28 +232,24 @@ img {
     margin-top: 5px;
 }
 
+.mt10 {
+    margin-top: 10px;
+}
+
 .mb5 {
     margin-bottom: 5px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
 }
 
 .p5 {
     padding: 5px;
 }
 
-.pt5 {
-    padding-top: 5px;
-}
-
-.pb5 {
-    padding-bottom: 5px;
-}
-
-.pl5 {
-    padding-left: 5px;
-}
-
-.pr5 {
-    padding-right: 5px;
+.pl0 {
+    padding: 10px;
 }
 
 .tl {
@@ -304,11 +317,12 @@ a:active {
         }
     }
     .cat {
-        overflow: hidden;
+        display: table;
+        width: 100%;
         a {
             margin-top: 10px;
             .flex();
-            float: left;
+            display: table-cell;
             width: 25%;
             padding-top: 40px;
             font-size: 1rem;
@@ -493,7 +507,7 @@ a:active {
     .pro-cat {
         position: fixed;
         top: 44px;
-        bottom: 44px;
+        bottom: 50px;
         width: 7em;
         background: #eee;
         overflow-x: hidden;
@@ -636,7 +650,7 @@ header.s {
         margin: 3px;
         color: #555;
         font-weight: 700;
-        .trans-trf(.4s, ease);
+        .trans-trf(.4s, ease-out);
     }
 }
 
@@ -1063,8 +1077,8 @@ hr {
     .pro-wrapper .pro-item a .img-wrapper {
         height: 300px!important;
     }
-    a .pro-info{
-        -webkit-line-clamp:1;
+    a .pro-info {
+        -webkit-line-clamp: 1;
         height: 1.5em !important;
     }
 }

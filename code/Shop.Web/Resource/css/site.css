@@ -112,23 +112,20 @@ img {
 .mt5 {
   margin-top: 5px;
 }
+.mt10 {
+  margin-top: 10px;
+}
 .mb5 {
   margin-bottom: 5px;
+}
+.mb10 {
+  margin-bottom: 10px;
 }
 .p5 {
   padding: 5px;
 }
-.pt5 {
-  padding-top: 5px;
-}
-.pb5 {
-  padding-bottom: 5px;
-}
-.pl5 {
-  padding-left: 5px;
-}
-.pr5 {
-  padding-right: 5px;
+.pl0 {
+  padding: 10px;
 }
 .tl {
   text-align: left;
@@ -186,13 +183,14 @@ a:active {
   border-radius: 3px;
 }
 .home .cat {
-  overflow: hidden;
+  display: table;
+  width: 100%;
 }
 .home .cat a {
   margin-top: 10px;
   -webkit-flex: 1;
   flex: 1;
-  float: left;
+  display: table-cell;
   width: 25%;
   padding-top: 40px;
   font-size: 1rem;
@@ -364,7 +362,7 @@ a:active {
 .pro .pro-cat {
   position: fixed;
   top: 44px;
-  bottom: 44px;
+  bottom: 50px;
   width: 7em;
   background: #eee;
   overflow-x: hidden;
@@ -507,8 +505,8 @@ header.s form {
   margin: 3px;
   color: #555;
   font-weight: 700;
-  -webkit-transtion: -webkit-transform 0.4s ease;
-  transition: transform 0.4s ease;
+  -webkit-transtion: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
 }
 .withlogo img {
   height: 30px;
