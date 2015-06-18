@@ -1,39 +1,48 @@
-﻿<article class="shangou row">
+﻿@using System.Data
+@using Shop.Model
+@model DataTable
+           @{
+               var flashSales = ViewBag.TopActive as FlashSales;
+               var totalSeconds = (flashSales.FlashSales_EndTime - DateTime.Now).GetValueOrDefault().TotalSeconds;
+           }
+<article class="shangou row">
     <h3>
-        <a href="javascript:;" class="angle-right">
+        <a href="@Url.RouteUrl("Phone_FlashSales_Index")" class="angle-right">
             π用药<i class="fa fa-clock-o"></i>
             <div class="time">
-                <span class=hours>135</span> :
+                @*<span class=hours>135</span> :
                 <span class=minutes>35</span> :
-                <span class=seconds>56</span>
+                <span class=seconds>56</span>*@
+                <p id="time-p" data-time="@totalSeconds"></p>
             </div>
         </a>
     </h3>
     <section class="sg-list">
-        <ul class="pro-wrapper clearfix">
-            <li class=pro-item>
-                <a href="javascript:;">
-                    <section class=img-wrapper><img src="../images/ex1.gif" alt="药品图片"></section>
-                    <p class="this-price">
-                        <span class="sales fr ft12">8.8折</span>
-                        <span>¥12.50</span>
-                    </p>
-                </a>
-                <a href="javascript:;">
-                    <section class=img-wrapper><img src="../images/ex1.gif" alt="药品图片"></section>
-                    <p class="this-price">
-                        <span class="sales fr ft12">8.8折</span>
-                        <span>¥12.50</span>
-                    </p>
-                </a>
-                <a href="javascript:;">
-                    <section class=img-wrapper><img src="../images/ex1.gif" alt="药品图片"></section>
-                    <p class="this-price">
-                        <span class="sales fr ft12">8.8折</span>
-                        <span>¥12.50</span>
-                    </p>
-                </a>
-            </li>
-        </ul>
+        <div class="swiper-container-flashsales img-wrapper" id="guessing">
+            <ul class="pro-wrapper clearfix swiper-wrapper">
+
+                @{var i = 1;}
+                @foreach (DataRow comm in Model.Rows)
+                {
+                    if (i == 1 || i % 3 == 1)
+                    {
+                        @Html.Raw("<li class='pro-item swiper-slide'>")
+                    }
+                    <a href="@Url.Action("CommodityDetail", "FlashSales", new {Id = comm["Commdity_Id"]})">
+                        <section class='img-wrapper'><img src="@comm["Commodity_ImagePath"]" alt="@comm["Commodity_Name"]"></section>
+
+                        <p class="this-price">
+                            <span class="sales fr ft12">@comm["Realtion_Discount"]折</span>
+                            <span>¥@(Convert.ToDecimal(comm["price"]).ToString("F"))</span>
+                        </p>
+                    </a>
+                    if (i % 3 == 0 || i + 1 > Model.Rows.Count)
+                    {
+                        @Html.Raw("</li>")
+                    }
+                    i++;
+                }
+            </ul>
+        </div>
     </section>
 </article>

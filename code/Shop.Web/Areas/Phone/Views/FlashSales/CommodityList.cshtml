@@ -1,23 +1,14 @@
 ﻿@using Shop.Model
 @{
-    ViewBag.Title = ViewBag.SearchTitle ?? "药品列表";
+    var flashSales = ViewBag.FalshSales as FlashSales;
+    ViewBag.Title = flashSales ==null? "药品列表":flashSales.FlashSales_Name;
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 
 <header class="tc header">
 
-    @{
-        if (ViewBag.FalshSales != null)
-        {
-            var flashSales = ViewBag.FalshSales as FlashSales;
             <a href='@Url.RouteUrl("Phone_FlashSales_Index")' class="goback"></a>
-            <h2>
-                @if (flashSales != null)
-                {
-                    @flashSales.FlashSales_KeyWord
-                }</h2>
-        }
-    }
+            <h2>@(flashSales == null ? "药品列表" : flashSales.FlashSales_Name)</h2>
 
 </header>
 <input id="tag-id" type="hidden" value="@ViewBag.FalshSalesId" />

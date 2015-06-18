@@ -2,11 +2,12 @@
 @model System.Data.DataTable
 @foreach (DataRow sales in Model.Rows)
 {
+    var totalSeconds = (Convert.ToDateTime(sales["FlashSales_EndTime"]) - DateTime.Now).TotalSeconds;
     <dd class=fl-item>
         <a href="/shangou/list/@sales["Id"]">
             <div class="img-wrapper">
                 <img src="@sales["FileAttr_Path"]" alt="@sales["FileAttr_Name"]">
-                <p class=time-wrapper><i class="fa fa-clock-o"></i>:<span class=time>@sales["FlashSales_EndTime"]</span></p>
+                <p class=time-wrapper><i class="fa fa-clock-o"></i><span class='time time-auto' id="time-p" data-time="@totalSeconds">@sales["FlashSales_EndTime"]</span></p>
             </div>
             <section class='slogan'><span class="fr discount">@(sales["FlashSales_Discount"])折起</span><span class="word">@sales["FlashSales_KeyWord"]</span></section>
         </a>

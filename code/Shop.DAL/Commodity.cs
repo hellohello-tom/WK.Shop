@@ -160,8 +160,8 @@ namespace Shop.DAL
         public IDataPage<DataTable> GetFlashSalesCommodityListByCondition( int pageSize, int pageIndex, WhereClip where = null, OrderByClip order = null )
         {
             return DB.From<Commodity>()
-                .LeftJoin<Realtion>(Realtion._.Realtion_CommodityId == Commodity._.Id)
-                .Select(Commodity._.All, Realtion._.Realtion_Discount)
+                .LeftJoin<Realtion>(Commodity._.Id==Realtion._.Realtion_CommodityId)
+                .Select(Commodity._.All, Realtion._.Realtion_Discount,Realtion._.Realtion_CommodityId)
                 .Where(where).OrderBy(Realtion._.Realtion_CreateTime.Desc).OrderBy(order).ToTablePage(pageSize, pageIndex);
 
         }

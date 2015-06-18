@@ -121,10 +121,10 @@ namespace Shop.DAL
             return DB.From<FlashSales>()
                 .LeftJoin<Realtion>(Realtion._.Realtion_SaleId == FlashSales._.Id)
                 .LeftJoin<Commodity>(Commodity._.Id == Realtion._.Realtion_CommodityId)
-                .Select(Realtion._.Realtion_Discount, Commodity._.Id.As("commdityId"), Commodity._.Commodity_Name
+                .Select(Realtion._.Realtion_Discount, Commodity._.Id.As("Commdity_Id"), Commodity._.Commodity_Name
                 , Commodity._.Commodity_ImagePath, new Field("(Realtion.Realtion_Discount*Commodity.Commodity_CostPrice) [price]"))
                 .Where(where)
-                .OrderBy(order)
+                .OrderBy(order).GetTop(topSize)
                 .ToTable() as DataTable;
         }
 

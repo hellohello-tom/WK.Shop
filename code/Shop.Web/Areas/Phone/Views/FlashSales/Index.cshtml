@@ -5,7 +5,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
-
+@section Head
+{
+    <script src="~/Scripts/Mobile/cuntdown.js"></script>
+}
 <header class=" header withlogo">
     <img src="" alt="LOGO" class="logo fl">
     <div class="fl bigword">
@@ -31,19 +34,23 @@
 {
     <script type="text/javascript">
 
-        var loadFlashSales = function (self,menuId) {
+        var loadFlashSales = function (self, menuId) {
             var $self = $(self);
             $self.addClass('on').siblings().removeClass('on');
             $.ajax({
                 url: "/Phone/FlashSales/FlashSalesItemList",
                 data: { "menuId": menuId },
-                success: function(data) {
+                success: function (data) {
                     if (data) {
                         $('.fs-list').html(data);
                     }
                 }
             });
         }
+
+        $(function () {
+            $('.time-auto').countdown();
+        });
 
     </script>
 }
