@@ -124,7 +124,7 @@
                 <dl>
                     <dt>专场图片</dt>
                     <dd>
-                        @Html.Hidden("flashSalesImagesIds",fileModel.FileAttr_Path)
+                        @Html.Hidden("flashSalesImagesIds",fileModel.Id)
                         <input id="FlashSales_FlashSales_Create_UploadImg" type="file" name="filedata"
                                uploaderoption="{
                                uploader:'/Common/Upload/SingleFile?isReOriginal=1',
