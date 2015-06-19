@@ -26,7 +26,7 @@
 <input id="search-key" type="hidden" value="@ViewBag.Search" />
 <div class="main pro">
     <div class="order dis-flex tc">
-        <a onclick="searchData(this)" class="on tag-price down"><span>价格</span><i class="fa fa-long-arrow-down"></i></a>
+        <a onclick="searchData(this)" class="on tag-price"><span>价格</span><i class="fa fa-long-arrow-down"></i></a>
         <a onclick="searchData(this)" class="tag-discount"><span>折扣</span><i class="fa fa-long-arrow-down"></i></a>
         <a onclick="searchData(this)" class="tag-sales"><span>销量</span><i class="fa fa-long-arrow-down"></i></a>
     </div>
@@ -94,14 +94,14 @@
                     para.pageNum = 1;
                     if ($self.hasClass('on')) {
                         if ($self.hasClass('up')) {
-                            $self.removeClass('up').addClass('down');
+                            $self.removeClass('up');
                             para.sortOrder = 'Desc';
                         } else {
-                            $self.removeClass('down').addClass('up');
+                            $self.addClass('up');
                             para.sortOrder = 'Asc';
                         }
                     } else {
-                        $self.addClass('on').addClass('up').siblings().removeClass('on').removeClass('up').addClass('down');
+                        $self.addClass('on').siblings().removeClass('on');
                         para.sortOrder = 'Asc';
                     }
                 } else { //加载更多

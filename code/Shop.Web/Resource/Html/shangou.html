@@ -8,17 +8,24 @@
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/site.css">
     <title>优品闪购</title>
+    <style>.fs-wrapper{
+        overflow: hidden;
+        }
+        .fs-cat{
+            overflow: auto;
+        }
+        </style>
 </head>
 
 <body data-theme='skin1'>
     <header class=" header withlogo">
-        <img src="" alt="LOGO" class="logo fl">
-        <div class="fl bigword">
-            <h4>随身药房</h4>
-            <p>首批国家食品药监局认证网上药店</p>
-        </div>
+        <a href='javascript:;' class="goback"></a>
+        <h2 class=tc>优品闪购</h2>
     </header>
     <div class="main pro flashsale">
+
+    <div class="fs-wrapper">
+    
         <div class=" fs-cat ">
             <a href="javascript:;" class=on>全部</a>
             <a href="javascript:;">医药</a>
@@ -31,6 +38,7 @@
             <a href="javascript:;">保健</a>
             <a href="javascript:;">器材</a>
             <a href="javascript:;">食品</a>
+        </div>
         </div>
         <div class="rows">
             <dl class=fs-list>
@@ -76,6 +84,12 @@
             <a href="javascript:;"><i class="fa fa-shopping-cart"></i><p>购物车</p></a>
             <a href="javascript:;"><i class="fa fa-user"></i><p>个人中心</p></a></div>
     </footer>
+
+    <script src="../scripts/iscroll.js"></script>
+    <script>
+var s1=new IScroll(".fs-wrapper")
+        
+    </script>
 </body>
 
 </html>
