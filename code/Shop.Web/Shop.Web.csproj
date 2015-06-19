@@ -42,6 +42,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySoft.Data, Version=2.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -623,9 +627,9 @@
     <Content Include="Areas\FlashSales\Views\FlashSales\Create.cshtml" />
     <Content Include="Areas\FlashSales\Views\Menu\Create.cshtml" />
     <Content Include="Areas\FlashSales\Views\Realtion\Create.cshtml" />
-	 <Content Include="Areas\Phone\Views\FlashSales\Index.cshtml" />
-	  <Content Include="Areas\FlashSales\Views\FlashSales\SelectNavigation.cshtml" />
-	   <Content Include="Areas\Phone\Views\FlashSales\CommodityList.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\Index.cshtml" />
+    <Content Include="Areas\FlashSales\Views\FlashSales\SelectNavigation.cshtml" />
+    <Content Include="Areas\Phone\Views\FlashSales\CommodityList.cshtml" />
     <Content Include="Areas\Phone\Views\FlashSales\Partial\FlashSalesItemList.cshtml" />
     <Content Include="Areas\Phone\Views\FlashSales\Partial\CommodityItemList.cshtml" />
     <Content Include="Areas\Phone\Views\FlashSales\CommodityDetail.cshtml" />
@@ -633,7 +637,8 @@
     <Content Include="Areas\Phone\Views\FlashSales\Partial\CImgList.cshtml" />
     <Content Include="Areas\Phone\Views\Main\FlashSalesItem.cshtml" />
     <Content Include="Areas\Phone\Views\FlashSales\Partial\RelatedCommodityList.cshtml" />
-	<Content Include="Areas\FlashSales\Views\FlashSales\SelectCommdity.cshtml" />
+    <Content Include="Areas\FlashSales\Views\FlashSales\SelectCommdity.cshtml" />
+    <Content Include="Content\settings\log4net.config" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />

@@ -1,6 +1,7 @@
 ﻿using Shop.Log;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -19,6 +20,8 @@ namespace Shop.Web
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //载入日志文件
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Server.MapPath("/Content/settings/log4net.config")));
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using Shop.BLL;
 using MySoft.Data;
 using Shop.Model;
 using Shop.Common;
+using Shop.Log;
 
 namespace Shop.Web.Areas.Phone.Controllers
 {
