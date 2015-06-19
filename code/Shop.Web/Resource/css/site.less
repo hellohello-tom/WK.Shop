@@ -509,22 +509,24 @@ a:active {
 .pro {
     background: #fff;
     padding: 44px 0 50px;
+    min-height: 100vh;
     .pro-cat {
         position: fixed;
         top: 44px;
-        bottom: 50px;
+        bottom: 49px;
         width: 7em;
         background: #eee;
         overflow-x: hidden;
         li {
             border: 1px solid #ddd;
-            border-width: 0 1px 1px 0;
+            border-width: 0 1px 1px 3px;
+            border-left-color: #eee;
             line-height: 1.75;
-            padding: 8px 5px 8px 10px;
+            padding: 8px 5px;
             word-break: break-all;
             &.on {
                 background: #fff;
-                border-right-color: #fff;
+                border-color: #ddd #fff #ddd @o-color;
             }
         }
     }
@@ -543,7 +545,6 @@ a:active {
                 }
                 .pro-name {
                     white-space: nowrap;
-                    margin-top: 5px;
                     overflow-y: hidden;
                 }
                 &:active,
@@ -1021,7 +1022,7 @@ hr {
                 .trf-tsl(-50%, 0);
             }
             &.on {
-                color: #ea2f53;
+                color: @o-color;
             }
         }
     }
