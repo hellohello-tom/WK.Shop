@@ -92,6 +92,15 @@ namespace Shop.BLL
             return dalBase.Delete(ids);
         }
 
+        /// <summary>
+        /// 根据条件删除制定数据
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public int Delete(WhereClip where)
+        {
+            return dalBase.Delete(where);
+        }
 
         /// <summary>
         /// 得到一个对象实体

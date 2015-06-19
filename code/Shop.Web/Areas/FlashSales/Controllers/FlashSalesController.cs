@@ -29,6 +29,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         private readonly MenuBLL _menuBLL = new MenuBLL();
         private readonly CommodityBLL _commodityBLL = new CommodityBLL();
         private readonly RealtionBLL _realtionBLL = new RealtionBLL();
+        private readonly FileAttrBLL _fileAttrBLL = new FileAttrBLL();
 		/// <summary>
         /// 分页列表
         /// </summary>
@@ -54,6 +55,12 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         public ActionResult Create(int id=0)
         {
             Model.FlashSales model = bll.GetModel(id) ?? new Model.FlashSales();
+            //获取图片信息
+            ViewBag.FileModel = _fileAttrBLL.GetModel(FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessCode == BizCode.FlashSales.ToString())
+                ?? new FileAttr
+                {
+                    FileAttr_Path = "/Content/web/images/NoPicture.png"
+                };
             if (id > 0)
                 ViewBag.MenuName = _menuBLL.GetModel(model.FlashSales_MenuId).Menu_Name;
             return View(model);
@@ -152,19 +159,36 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Model.FlashSales model, int[] commdityIds)
+        public ActionResult Create(Model.FlashSales model, int[] flashSalesImagesIds)
         {
             bool flag = false;
             DWZCallbackInfo callback = null;
             if (ModelState.IsValid)
             {
                 if (model.Id > 0)//修改
+                {
                     flag = bll.Update(model);
+                }
                 else//添加
-                    flag = bll.Add(model) > 0;
+                {
+                    model.FlashSales_IsDel = false;
+                    model.FlashSales_CreateTime = DateTime.Now;
+                    model.FlashSales_CreateUser = UserContext.CurUserInfo.Id;
+                    model.Id = bll.Add(model);
+                    flag = model.Id > 0;
+                }
+                if (flag)
+                {
+                    _fileAttrBLL.Delete(FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessCode == BizCode.FlashSales.ToString());
+                    _fileAttrBLL.Update(new Dictionary<Field, object>
+                    {
+                        {FileAttr._.FileAttr_BussinessId,model.Id},
+                        {FileAttr._.FileAttr_BussinessCode, BizCode.FlashSales.ToString()}
+                    }, FileAttr._.Id.In(flashSalesImagesIds));
+                }
             }
             if (flag)
-                callback = DWZMessage.Success();
+                callback = DWZMessage.Success(navTabId: "FlashSales_FlashSales");
             else
                 callback = DWZMessage.Faild();
 

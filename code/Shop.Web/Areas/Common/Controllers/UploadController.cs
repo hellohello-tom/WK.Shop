@@ -169,7 +169,6 @@ namespace Shop.Web.Areas.Common.Controllers
                                 FileAttr_Path = newFileName,
                                 FileAttr_Name = originalFileName,
                                 FileAttr_Size = Convert.ToInt32(fileInfo.Length),
-                                FileAttr_BussinessCode = BizCode.Commodity.ToString(),
                                 FileAttr_IsDel = false,
                                 FileAttr_User = UserContext.CurUserInfo.Id,
                                 FileAttr_Ext = Path.GetExtension(serverPath),

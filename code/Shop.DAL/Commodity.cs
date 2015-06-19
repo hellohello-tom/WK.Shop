@@ -14,6 +14,7 @@ using System.Text;
 //引用
 using Shop.Model;
 using MySoft.Data;
+using Shop.Common;
 
 namespace Shop.DAL
 {
@@ -31,7 +32,11 @@ namespace Shop.DAL
                 model.Attach();
                 if (imageIds.Length > 0)
                 {
-                    trans.Update<FileAttr>(FileAttr._.FileAttr_BussinessId, model.Id, FileAttr._.Id.In(imageIds));
+                    trans.Update<FileAttr>(new Field[]{
+                        FileAttr._.FileAttr_BussinessId,FileAttr._.FileAttr_BussinessCode},
+                        new object[]{
+                            model.Id,BizCode.Commodity.ToString()
+                        }, FileAttr._.Id.In(imageIds));
                 }
                 trans.Save(model);
                 trans.Commit();

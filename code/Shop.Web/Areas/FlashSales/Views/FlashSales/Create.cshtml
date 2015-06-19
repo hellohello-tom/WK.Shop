@@ -1,18 +1,18 @@
 ﻿@model Shop.Model.FlashSales
 @{
     ViewBag.Title = "FlashSales_Create";
+    var fileModel = ViewBag.FileModel as Shop.Model.FileAttr;
 }
 <script type="text/javascript">
     //提交表单
     function FlashSales_FlashSales_Create_SubmitForm(form) {
-        if (!$('#commdityIds').length) {
+        if (!$.trim($('#commdityIds').val()).length || $('#commdityIds').val() == "0") {
             alertMsg.error('请选择商品！');
             return false;
         } else if (!(/^([1-9])(\.\d{1})?$/).test($('#discount').val()) || !$('#discount').val().trim().length) {
             alertMsg.error('请输入正确的折扣，最多保留一位小数！');
             return false;
         }
-
         return validateCallback(form, FlashSales_FlashSales_Create_FormCallBack);
     }
 
@@ -30,106 +30,148 @@
             $('#commdityIds,#discount,#txtxCommdityName').val('');
         }
     }
+
+    //上传回调
+    function FlashSales_FlashSales_UploadComplete(event, response, status) {
+        if (status) {
+            var json = eval("(" + response + ")");
+            if (json.status == 1) {
+                $.post("/Common/Upload/AddPic", { "newFileName": json.data.newFileName, "originalFileName": json.data.originalFileName }, function (data) {
+                    if (data.statusCode == "Ok") {
+                        alertMsg.correct(json.msg);
+                        $('#FlashSales_FlashSales_imgTag').attr('src', json.data.thumbnailFileName);
+                        $('#flashSalesImagesIds').val(data.id);
+                    }
+                    else {
+                        console.log(data.msg);
+                        alertMsg.error(data.msg);
+                    }
+                });
+            }
+            else {
+                alertMsg.error(json.msg);
+            }
+        }
+    }
 </script>
 <h2 class="contentTitle">特卖专场</h2>
 <div class="pageContent">
     <div class="pageFormContent" layouth="140">
         @if (Model.Id > 0)
         {
-            <dl>
-                <dt>特卖商品</dt>
-                <dd style="width:600px;">
-                    @using (Html.BeginForm("AddRelation", "FlashSales", FormMethod.Post, new { onsubmit = "return FlashSales_FlashSales_Create_SubmitForm(this);" }))
-                    {
-                        <input type="hidden" id="flashSalesId" name="flashSalesId" value="@Model.Id">
-                        <table class="tab02" style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td>选择商品</td>
-                                    <td>
-                                        @Html.Hidden("commdityIds", "", new { dataField = "selectCommdity.Id" })
-                                        <input type="text" readonly="readonly" class="required" datafield="selectCommdity.name" id="txtxCommdityName" />
-                                        <a href="/FlashSales/FlashSales/SelectCommdity" class="btnLook" lookupgroup="selectCommdity">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        折扣率
-                                    </td>
-                                    <td>
-                                        <input type="text" name="discount" id="discount" required />
-                                    </td>
-                                    <td>
-                                        <div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    }
-                </dd>
-            </dl>
-            <dl>
-                <dt>已选商品</dt>
-                <dd style="width:600px">
-                    <div id="relationDiv" style="width:100%">
-                        @{Html.RenderAction("Index", "Realtion", new { flashsales = Model.Id });}
-                    </div>
-                </dd>
-            </dl>
-
+            <div class="panel" minh="100" defh="150">
+                <h1>特卖商品信息</h1>
+                <dl>
+                    <dt>特卖商品</dt>
+                    <dd style="width:600px;">
+                        @using (Html.BeginForm("AddRelation", "FlashSales", FormMethod.Post, new { onsubmit = "return FlashSales_FlashSales_Create_SubmitForm(this);" }))
+                        {
+                            <input type="hidden" id="flashSalesId" name="flashSalesId" value="@Model.Id">
+                            <table class="tab02" style="width:100%">
+                                <tbody>
+                                    <tr>
+                                        <td>选择商品</td>
+                                        <td>
+                                            @Html.Hidden("commdityIds", "", new { dataField = "selectCommdity.Id" })
+                                            <input type="text" readonly="readonly" class="required" datafield="selectCommdity.name" id="txtxCommdityName" />
+                                            <a href="/FlashSales/FlashSales/SelectCommdity" class="btnLook" lookupgroup="selectCommdity">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            折扣率
+                                        </td>
+                                        <td>
+                                            <input type="text" name="discount" id="discount" required />
+                                        </td>
+                                        <td>
+                                            <div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>已选商品</dt>
+                    <dd style="width:600px">
+                        <div id="relationDiv" style="width:100%">
+                            @{Html.RenderAction("Index", "Realtion", new { flashsales = Model.Id });}
+                        </div>
+                    </dd>
+                </dl>
+            </div>
         }
         @using (Html.BeginForm("Create", "FlashSales", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
         {
-            @Html.HiddenFor(x => x.Id)
-            @Html.HiddenFor(x => x.FlashSales_CreateTime)
-            @Html.HiddenFor(x => x.FlashSales_CreateUser)
-            @Html.HiddenFor(x => x.FlashSales_IsDel)
-            <dl>
-                <dt>手机导航</dt>
-                <dd>
-                    @Html.HiddenFor(m => m.FlashSales_MenuId, new { dataField = "selectMenu.Id" })
-                    <input type="text" readonly="readonly" class="required" datafield="selectMenu.MenuName" value="@ViewBag.MenuName" />
-                    <a href="/FlashSales/FlashSales/SelectNavigation" class="btnLook" lookupgroup="selectMenu">
-                        二级菜单
-                    </a>
-                    @Html.ValidationMessageFor(m => m.FlashSales_MenuId)
-                </dd>
-            </dl>
-            <dl>
-                <dt>名称</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.FlashSales_Name)
-                    @Html.ValidationMessageFor(m => m.FlashSales_Name)
-                </dd>
-            </dl>
-            <dl>
-                <dt>截止时间</dt>
-                <dd>
-                    <input type="text" name="FlashSales_EndTime" class="wdate" datefmt="yyyy-MM-dd HH:mm:ss" mindate="%y-%M-%d %H:%m:%s" value="@string.Format("{0:yyyy-MM-dd HH:mm:ss}",Model.FlashSales_EndTime)" data-val="true" data-val-required="必填" />
-                    @Html.ValidationMessageFor(m => m.FlashSales_EndTime)
-                </dd>
-            </dl>
-            <dl>
-                <dt>关键字</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.FlashSales_KeyWord)
-                    @Html.ValidationMessageFor(m => m.FlashSales_KeyWord)
-                </dd>
-            </dl>
-            <dl>
-                <dt>折扣</dt>
-                <dd>
-                    @Html.TextBoxFor(m => m.FlashSales_Discount)
-                    @Html.ValidationMessageFor(m => m.FlashSales_Discount)
-                </dd>
-            </dl>
-            <div class="formBar">
-                <ul>
-                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
-                    <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
-                </ul>
+            <div class="panel" minh="100" defh="150">
+                <h1>活动信息 @(Model.Id > 0 ? "" : "（创建活动后可添加特价商品）")</h1>
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.FlashSales_CreateTime)
+                @Html.HiddenFor(x => x.FlashSales_CreateUser)
+                @Html.HiddenFor(x => x.FlashSales_IsDel)
+                <dl>
+                    <dt>手机导航</dt>
+                    <dd>
+                        @Html.HiddenFor(m => m.FlashSales_MenuId, new { dataField = "selectMenu.Id" })
+                        <input type="text" readonly="readonly" class="required" datafield="selectMenu.MenuName" value="@ViewBag.MenuName" />
+                        <a href="/FlashSales/FlashSales/SelectNavigation" class="btnLook" lookupgroup="selectMenu">
+                            二级菜单
+                        </a>
+                        @Html.ValidationMessageFor(m => m.FlashSales_MenuId)
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>专场图片</dt>
+                    <dd>
+                        @Html.Hidden("flashSalesImagesIds",fileModel.FileAttr_Path)
+                        <input id="FlashSales_FlashSales_Create_UploadImg" type="file" name="filedata"
+                               uploaderoption="{
+                               uploader:'/Common/Upload/SingleFile?isReOriginal=1',
+                        fileSizeLimit:'@Shop.Web.BaseData.SiteConfig.AttachSize KB',
+                        fileTypeExts:'*.png;*.gif;*.jpg',
+                        auto:true,
+                        multi:false,
+                        onUploadSuccess:FlashSales_FlashSales_UploadComplete
+                        }" />
+                        <img src="@fileModel.FileAttr_Path" id="FlashSales_FlashSales_imgTag" style="width:140px;height:140px" />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>名称</dt>
+                    <dd>
+                        @Html.TextBoxFor(m => m.FlashSales_Name)
+                        @Html.ValidationMessageFor(m => m.FlashSales_Name)
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>截止时间</dt>
+                    <dd>
+                        <input type="text" name="FlashSales_EndTime" class="wdate" datefmt="yyyy-MM-dd HH:mm:ss" mindate="%y-%M-%d %H:%m:%s" value="@string.Format("{0:yyyy-MM-dd HH:mm:ss}",Model.FlashSales_EndTime)" data-val="true" data-val-required="必填" />
+                        @Html.ValidationMessageFor(m => m.FlashSales_EndTime)
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>关键字</dt>
+                    <dd>
+                        @Html.TextBoxFor(m => m.FlashSales_KeyWord)
+                        @Html.ValidationMessageFor(m => m.FlashSales_KeyWord)
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>折扣</dt>
+                    <dd>
+                        @Html.TextBoxFor(m => m.FlashSales_Discount)
+                        @Html.ValidationMessageFor(m => m.FlashSales_Discount)
+                    </dd>
+                </dl>
+                <div class="formBar">
+                    <ul>
+                        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+                        <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+                    </ul>
+                </div>
             </div>
         }
     </div>
-
-
 </div>

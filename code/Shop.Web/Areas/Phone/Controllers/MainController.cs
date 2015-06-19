@@ -29,7 +29,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         {
             WhereClip where = Model.FlashSales._.FlashSales_IsDel == false && new WhereClip("Realtion.Id is not null")
                 && Realtion._.Realtion_IsTop == true && Model.FlashSales._.FlashSales_EndTime > DateTime.Now;
-            var table = _flashSalesBLL.GetFlashSales(topSize, where, Realtion._.Realtion_Discount.Desc);
+            var table = _flashSalesBLL.GetFlashSales(topSize, where, Realtion._.Realtion_IsTop.Desc && Realtion._.Realtion_CreateTime.Desc);
             ViewBag.TopActive = _flashSalesBLL.GetTopList(1,Model.FlashSales._.FlashSales_EndTime > DateTime.Now && Model.FlashSales._.FlashSales_IsDel == false
                 , Model.FlashSales._.FlashSales_EndTime.Desc).FirstOrDefault() ?? new Model.FlashSales();
             return View(table);
