@@ -73,19 +73,42 @@
         if (self) {
             var $self = $(self);
 
+            ////确定排序规则
+            //if (!isLoadMore) {//切换排序字段 和排序规则
+            //    para.pageNum = 1;
+            //    if ($self.hasClass('on')) {
+            //        if ($self.hasClass('up')) {
+            //            $self.removeClass('up').addClass('down');
+            //            para.sortOrder = 'Desc';
+            //        } else {
+            //            $self.removeClass('down').addClass('up');
+            //            para.sortOrder = 'Asc';
+            //        }
+            //    } else {
+            //        $self.addClass('on').addClass('up').siblings().removeClass('on').removeClass('up').addClass('down');
+            //        para.sortOrder = 'Asc';
+            //    }
+            //} else { //加载更多
+            //    if ($self.hasClass('up')) {
+            //        para.sortOrder = 'Asc';
+            //    } else {
+            //        para.sortOrder = 'Desc';
+            //    }
+            //}
+
             //确定排序规则
             if (!isLoadMore) {//切换排序字段 和排序规则
                 para.pageNum = 1;
                 if ($self.hasClass('on')) {
                     if ($self.hasClass('up')) {
-                        $self.removeClass('up').addClass('down');
+                        $self.removeClass('up');
                         para.sortOrder = 'Desc';
                     } else {
-                        $self.removeClass('down').addClass('up');
+                        $self.addClass('up');
                         para.sortOrder = 'Asc';
                     }
                 } else {
-                    $self.addClass('on').addClass('up').siblings().removeClass('on').removeClass('up').addClass('down');
+                    $self.addClass('on').siblings().removeClass('on');
                     para.sortOrder = 'Asc';
                 }
             } else { //加载更多

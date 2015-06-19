@@ -103,7 +103,11 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 where &= Commodity._.Id != notId;
             }
-            if (salesId != 0 && !string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //默认加载 
+            if (string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //有排序字段
+            {
+                order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
+            }
+            if (salesId != 0) //默认加载 
             {
                 order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
                 if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
