@@ -311,7 +311,7 @@ a:active {
   color: #f66;
 }
 .shangou .sg-list .img-wrapper {
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .shangou .pro-wrapper {
   padding: 0;
