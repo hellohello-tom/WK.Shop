@@ -33,8 +33,10 @@
         $(document).ready(function () {
             var mySwiper = new Swiper('.swiper-container-flashsales', {
                 preloadImages: false,
-                autoplay: 2000,
-                preventLinksPropagation: false
+                speed: 2500,
+                autoplayDisableOnInteraction: false,
+                loop: true,
+                autoplay: 2000
             });
 
             $(function () {
