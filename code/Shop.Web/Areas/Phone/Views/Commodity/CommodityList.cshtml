@@ -102,7 +102,11 @@
                         }
                     } else {
                         $self.addClass('on').siblings().removeClass('on');
-                        para.sortOrder = 'Asc';
+                        if ($self.hasClass('up')) {
+                            para.sortOrder = 'Asc';
+                        } else {
+                            para.sortOrder = 'Desc';
+                        }
                     }
                 } else { //加载更多
                     if ($self.hasClass('up')) {

@@ -103,7 +103,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 where &= Commodity._.Id != notId;
             }
-            if (string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //有排序字段
+            if (!string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //有排序字段
             {
                 order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
             }
