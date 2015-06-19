@@ -109,7 +109,6 @@ namespace Shop.Web.Areas.Phone.Controllers
             }
             if (salesId != 0) //默认加载 
             {
-                order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
                 if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
                 {
                     commodityDataTable = CommodityBll.GetFlashSalesCommdityPageTable(salesId, pi.SortOrder, pi.PageNum, pi.NumPerPage);
