@@ -6,7 +6,7 @@
     <a href='@Url.RouteUrl("Phone_yaodian")' class="goback"></a>
     @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post,new{@class=""}))
     {
-        <div class="search-box dis-flex">
+        <div class="search-box">
             <div class="s-section">
                 <input type="hidden" name="tagId" value="0">
                 <input type="text" class='ipt-s' name="search" id="keywords" placeholder="输入药品名称/疾病名称搜索" required>

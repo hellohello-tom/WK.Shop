@@ -11,7 +11,7 @@
 </header>
 <input type="hidden" id="nav-key" value="@(Request.QueryString["nk"]==null?"":Request.QueryString["nk"].ToString())" />
 <div class="main pro">
-    @Html.Action("NavList");
+    @Html.Action("NavList")
 
     <article class='pro-sub-cat clearfix tc'>
         <ul class="tag-list">
