@@ -38,14 +38,17 @@
 
         var loadFlashSales = function (self, menuId) {
             var $self = $(self);
+            var $panel = $('.fs-list');
             $self.addClass('on').siblings().removeClass('on');
             $.ajax({
                 url: "/Phone/FlashSales/FlashSalesItemList",
                 data: { "menuId": menuId },
                 success: function (data) {
                     if (data) {
-                        $('.fs-list').html(data);
+                        $panel.html(data);
+                        $('.time-auto',$panel).countdown();
                     }
+                    else $panel.html('');
                 }
             });
         }

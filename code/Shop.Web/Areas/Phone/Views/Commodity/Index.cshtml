@@ -25,11 +25,12 @@
 
     <script type="text/javascript">
         var loadTagList = function (navId, self) {
-            if (self) {
+            if(arguments.length>1){
                 var $self = $(self);
                 $self.addClass('on').siblings().removeClass('on');
             } else {
-                $('.nav-item li').eq(0).addClass('on');
+                $(document.querySelector('.nav-item li[id="' + navId + '"]')).addClass('on');
+                //$('.nav-item li').find('[id=' + navId + ']').addClass('on');
             }
             $.ajax({
                 url: '/phone/Commodity/TagList',
@@ -42,11 +43,12 @@
         var defNavId = $('#navid').val();
         var navKey = $('#nav-key').val();
         $(function () {
+            $("ul.nav-item").find('li').removeClass('on');
             if (navKey == 'man') {
-                $(".nav-item[id='55']").addClass('on').siblings().removeClass('on');
+                //$(".nav-item[id='55']").addClass('on').siblings().removeClass('on');
                 loadTagList(55);
             } else if (navKey == 'woman') {
-                $(".nav-item[id='53']").addClass('on').siblings().removeClass('on');
+                //$(".nav-item[id='53']").addClass('on').siblings().removeClass('on');
                 loadTagList(53);
             } else {
                 loadTagList(defNavId);
