@@ -101,6 +101,13 @@
     vertical-align: middle;
 }
 
+.w33(){
+  width: 100%/3;
+}
+
+.w25(){
+  width: 25%;
+}
 .wthc(@c: rgba(0, 0, 0, .1)) {
     -webkit-tap-highlight-color: @c;
 }
@@ -489,8 +496,8 @@ a:active {
                 }
                 &:before {
                     border-style: solid;
-                    border-color: @o-color @o-color transparent transparent;
-                    border-width: 17px;
+                    border-width: 0 35px 35px 0;
+                    border-color: rgba(0,0,0,0) #ea2f53;
                 }
                 &:after {
                     content: "HOT";
