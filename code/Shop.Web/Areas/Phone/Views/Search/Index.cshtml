@@ -2,7 +2,7 @@
     ViewBag.Title = "查找药品";
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
-<header class="tc header s">
+<header class=" header s">
     <a href='@Url.RouteUrl("Phone_yaodian")' class="goback"></a>
     @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post,new{@class=""}))
     {
