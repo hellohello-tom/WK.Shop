@@ -409,7 +409,7 @@ a:active {
 }
 header.s form {
   width: 100%;
-  padding: 0  70px 0 50px;
+  padding: 0 70px 0 50px;
 }
 .search-box {
   z-index: 23;
@@ -515,6 +515,7 @@ hr {
   overflow-y: hidden;
   font-size: 0;
   border-bottom: 1px solid #ddd;
+  -webkit-overflow-scroll: touch;
 }
 .fs-cat a {
   display: inline-block;

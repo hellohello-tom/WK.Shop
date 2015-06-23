@@ -3,7 +3,7 @@
     Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
 }
 <header class=" header s">
-    <a href='@Url.RouteUrl("Phone_yaodian")' class="goback"></a>
+    <a href='@Url.RouteUrl("Phone_yaodian")' class="goback tc"></a>
     @using (Html.BeginForm("CommodityList", "Commodity", FormMethod.Post,new{@class=""}))
     {
         <div class="search-box">
