@@ -1,1 +1,1 @@
-# Shopgooglegit
+# A web project about online shopping.
