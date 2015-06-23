@@ -23,16 +23,9 @@
         });
 
         var searchBox = $("[name=search]");
-        searchBox.on("click", function () {
-            setTimeout(function () {
-                showSearchTips();
-            }, 300);
-        })
-        searchBox.on("keyup", function () {
-            setTimeout(function () {
-                showSearchTips();
-            }, 300);
-        })
+        searchBox.on("tap keyup", function () {
+            setTimeout(showSearchTips, 300);
+        });
 
         function showSearchTips() {
             var search = $.trim(searchBox.val());
