@@ -74,8 +74,8 @@
             <dl>
                 <dt>显示状态</dt>
                 <dd>
-                    <label>@Html.RadioButton("Tag_Status", (int)Status.Show, (int)Status.Show == Model.Menu_Status) 显示</label>
-                    <label>@Html.RadioButton("Tag_Status", (int)Status.Hide, (int)Status.Hide == Model.Menu_Status) 隐藏</label>
+                    <label>@Html.RadioButton("Menu_Status", (int)Status.Show, (int)Status.Show == Model.Menu_Status) 显示</label>
+                    <label>@Html.RadioButton("Menu_Status", (int)Status.Hide, (int)Status.Hide == Model.Menu_Status) 隐藏</label>
                     @Html.ValidationMessageFor(m => m.Menu_Status)
                 </dd>
             </dl>

@@ -26,7 +26,7 @@ namespace Shop.Web
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            if (!HttpContext.Current.IsCustomErrorEnabled) return;
+            //if (!HttpContext.Current.IsCustomErrorEnabled) return;
             //记录异常
             var ex = Server.GetLastError();
             var httpEx = ex as HttpException;

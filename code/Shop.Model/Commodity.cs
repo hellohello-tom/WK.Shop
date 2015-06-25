@@ -217,9 +217,6 @@ namespace Shop.Model
         /// <summary>
         /// 创建时间
         /// </summary>
-
-        [Required(ErrorMessage = "*")]
-
         [RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]
         public DateTime? Commodity_CreateTime
         {
