@@ -31,6 +31,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
 		/// <summary>
         /// 分页列表
         /// </summary>
+        /// 
         /// <param name="page"></param>
         /// <returns></returns>
         public ActionResult Index(DWZPageInfo page,string name="",int tagId=0)
@@ -45,7 +46,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             ViewBag.Name = name;
             #endregion
             var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where,
-                Commodity._.Commodity_CreateTime.Desc);
+                Commodity._.Id.Desc);
             return View(usersPage);
         }
         

@@ -126,7 +126,7 @@
                     @Html.HiddenFor(m => m.Commodity_TagId, new { dataField = "selectTag.Id" })
                     <input type="text" readonly="readonly" class="required" datafield="selectTag.TagName" value="@ViewBag.TagName" />
                     <a href="/SiteConfig/Commodity/SelectTag" class="btnLook" lookupgroup="selectTag">
-                        选择评定内容
+                        选择标签
                     </a>
                     @Html.ValidationMessageFor(m => m.Commodity_TagId)
                 </dd>

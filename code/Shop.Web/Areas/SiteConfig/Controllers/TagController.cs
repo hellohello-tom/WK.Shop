@@ -46,7 +46,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             ViewBag.Name = tagName;
             ViewBag.NavigationId = navigationId;
             #endregion
-            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Menu._.Menu_Sort.Desc);
+            var usersPage = bll.GetPageList(page.NumPerPage, page.PageNum, where, Menu._.Menu_CreateTime.Desc);
             return View(usersPage);
         }
 
@@ -80,6 +80,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             }
             else
             {
+                model.Menu_ParentId = 0;
                 model.Menu_Status = (int)Status.Show;
                 model.Menu_Sort = 1;
                 model.Menu_ImgPath = "/Content/web/images/NoPicture.png";

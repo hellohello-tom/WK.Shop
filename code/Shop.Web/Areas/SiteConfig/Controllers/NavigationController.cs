@@ -52,7 +52,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <returns></returns>
         public ActionResult Create(int id=0)
         {
-            Model.Navigation model = bll.GetModel(id);
+            Model.Navigation model = bll.GetModel(id) ?? new Navigation();
             if (id > 0)
             {
                 return View(model);
@@ -61,7 +61,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             {
                 model.Navigation_Sort = 1;
                 model.Navigation_Status = 0;
-                return View();
+                return View(model);
             }
         } 
         
