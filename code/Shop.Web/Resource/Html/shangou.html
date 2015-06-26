@@ -8,13 +8,22 @@
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/site.css">
     <title>优品闪购</title>
-    <style>.fs-wrapper{
-        overflow: hidden;
-        }
-        .fs-cat{
-            overflow: auto;
+
+        <!--[if lte IE 8]>
+            <script>
+            var newEles=['header','nav','aside','nav','footer','article','section'],l=newEles.length;
+            for(i=0;i<l;i++){
+                document.createElement(newEles[i]);
+            }
+        </script>
+
+        <style>
+        header,nav,aside,nav,footer,article,section{
+    display: block;
         }
         </style>
+        <![endif]-->
+        
 </head>
 
 <body data-theme='skin1'>

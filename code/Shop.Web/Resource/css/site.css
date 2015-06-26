@@ -368,6 +368,70 @@ a:active {
   font-weight: 700;
   letter-spacing: 1px;
 }
+.frequence-disease {
+  padding-bottom: 60px;
+}
+.frequence-disease h3 {
+  padding: 8px 10px;
+}
+.frequence-disease .fd-list {
+  position: relative;
+  height: 100px;
+  padding: 0 10px 0 100px;
+}
+.frequence-disease .fd-list .fd-cat {
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  bottom: 0;
+  width: 95px;
+}
+.frequence-disease .fd-list .fd-cat a {
+  display: block;
+  position: relative;
+  height: 100%;
+}
+.frequence-disease .fd-list .fd-cat a .img-wrapper {
+  height: 100%;
+}
+.frequence-disease .fd-list .fd-cat a .img-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+.frequence-disease .fd-list .fd-cat a .fd-cat-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  font-size: 1.25em;
+  line-height: 1.75;
+  margin-top: -0.875em;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  color: #f66;
+  text-align: center;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+.frequence-disease .fd-list .fd-subcat {
+  height: 100%;
+  overflow: hidden;
+}
+.frequence-disease .fd-list .fd-subcat li {
+  float: left;
+  width: 50%;
+  line-height: 40px;
+  padding: 10px 0 0 10px;
+  text-align: center;
+}
+.frequence-disease .fd-list .fd-subcat li a {
+  display: block;
+  padding: 0 2px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  background: #f9f0db;
+  color: #e06e1b;
+}
 .pro {
   background: #fff;
   padding: 44px 0 50px;
@@ -466,6 +530,37 @@ header.s form {
   right: 10px;
   -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
+}
+.validity-best,
+.validity-better,
+.validity-good,
+.validity-bad {
+  position: relative;
+}
+.validity-best:after,
+.validity-better:after,
+.validity-good:after,
+.validity-bad:after {
+  content: "\f111";
+  font-family: fontawesome;
+  font-size: 16px;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: #0f0;
+}
+.validity-better:after {
+  color: #00f;
+}
+.validity-good:after {
+  color: #ff0;
+}
+.validity-bad:after {
+  color: #f00;
+}
+.expire-date {
+  padding-top: 5px;
+  color: #91a;
 }
 .loadmore {
   width: 80%;
@@ -692,7 +787,7 @@ hr {
   color: #f66;
 }
 .pd-info .price {
-  margin-top: 8px;
+  margin-top: 5px;
 }
 .pd-info .remain {
   margin-right: 10px;
