@@ -32,7 +32,7 @@
         </div>
         <section class="pd-info">
             <h2 class="name">@commodity["Commodity_Name"]</h2>
-            <p class="declare">@commodity["Commodity_Remind"]</p>
+            <p class="declare">@Html.Raw(commodity["Commodity_Remind"])</p>
             <p class="price">
                 <span class="fr remain">剩余：<span class="this-price">@commodity["Commodity_ResidueCount"]</span>件</span>
                 抢购价：<span class="this-price">¥@(Convert.ToDecimal(Convert.ToDecimal(commodity["Commodity_CostPrice"]) * Convert.ToDecimal(commodity["Realtion_Discount"]) / 10).ToString("F"))</span>
@@ -40,7 +40,7 @@
             </p>
         </section>
         <ul class=pd-come>
-            <li>@commodity["Commodity_Remark"]</li>
+            <li>@Html.Raw(commodity["Commodity_Remark"])</li>
             <li>联系电话：<a href="tel:@ApplicationConfigs.GetConfigInfo.Tel">@ApplicationConfigs.GetConfigInfo.Tel</a></li>
             <li>联系微信：<span>@ApplicationConfigs.GetConfigInfo.WeiXin</span></li>
         </ul>
