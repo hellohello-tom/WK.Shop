@@ -454,6 +454,7 @@
     <Content Include="Content\login\images\dot-def.png" />
     <Content Include="Content\login\images\login-btn.png" />
     <Content Include="Content\login\images\login.png" />
+    <Content Include="Content\login\images\login2.png" />
     <Content Include="Content\login\images\logo.gif" />
     <Content Include="Content\login\images\login.jpg" />
     <Content Include="Content\login\images\Phone\logo.png" />
@@ -462,6 +463,7 @@
     <Content Include="Content\login\images\Phone\wx2_index_07.png" />
     <Content Include="Content\login\images\Phone\wx2_index_08.png" />
     <Content Include="Content\login\images\Phone\new-index-logo_03.png" />
+    <Content Include="Content\login\images\润之林商标第2个.jpg" />
     <Content Include="Content\login\jquery.SuperSlide.js" />
     <Content Include="Content\login\login.css" />
     <Content Include="Content\login\login_new.css" />
@@ -650,6 +652,8 @@
     <Content Include="Resource\Html\shangou.html" />
     <Content Include="Resource\Html\s_result.html" />
     <Content Include="Resource\images\bg.jpg" />
+    <Content Include="Resource\images\bg2.png" />
+    <Content Include="Resource\images\bg3.jpg" />
     <Content Include="Resource\images\ex1.gif" />
     <Content Include="Resource\images\logo.png" />
     <Content Include="Resource\images\man.png" />

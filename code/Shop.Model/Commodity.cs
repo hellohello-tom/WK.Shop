@@ -3,7 +3,7 @@
 //
 //  名    称：Commodity Model
 //  作    者：cat
-//  添加时间：2015-06-16 10:33:24
+//  添加时间：2015-06-26 09:22:52
 // ==========================================================================
 using System;
 //引用
@@ -32,6 +32,7 @@ namespace Shop.Model
         private string _Commodity_Remark;
         private string _Commodity_ImagePath;
         private string _Commodity_Content;
+        private DateTime? _Commodity_ValidityTime;
         private int _Commodity_Status;
         private DateTime? _Commodity_CreateTime;
         private int _Commodity_User;
@@ -84,7 +85,7 @@ namespace Shop.Model
         }
 
         /// <summary>
-        /// 商品销量
+        /// Commodity_Sales
         /// </summary>
 
         [RegularExpression("-?\\d+", ErrorMessage = "*")]
@@ -100,7 +101,7 @@ namespace Shop.Model
 
         /// <summary>
         /// 提醒
-        /// </summary>		
+        /// </summary>	
         [StringLength(200, ErrorMessage = "字符不能超过200个")]
         public string Commodity_Remind
         {
@@ -115,10 +116,10 @@ namespace Shop.Model
         /// <summary>
         /// 原价
         /// </summary>
+
         [Required(ErrorMessage = "必填")]
         [Range(0.02, 100000.00, ErrorMessage = "价格范围0.02元~10万元")]
         [RegularExpression(@"^(([1-9]+[0-9]*)|0)(\.\d{1,2})?$", ErrorMessage = "请输入正确价格，最多保留两位小数")]
-        
         public decimal Commodity_CostPrice
         {
             get { return _Commodity_CostPrice; }
@@ -132,20 +133,22 @@ namespace Shop.Model
         /// <summary>
         /// 折扣系数
         /// </summary>
+
         [RegularExpression(@"^([1-9])(\.\d{1})?$", ErrorMessage = "请输入正确的折扣，最多保留一位小数")]
-        public decimal? Commodity_Discount
+        public decimal Commodity_Discount
         {
             get { return _Commodity_Discount; }
             set
             {
                 OnPropertyValueChange(_.Commodity_Discount, _Commodity_Discount, value);
-                _Commodity_Discount = value.Value;
+                _Commodity_Discount = value;
             }
         }
 
         /// <summary>
         /// 剩余数量
         /// </summary>
+
         [Required(ErrorMessage = "必填")]
         [Range(0, 100000, ErrorMessage = "0~100000之间")]
         [RegularExpression(@"^\d+$", ErrorMessage = "请输入正整数")]
@@ -201,6 +204,20 @@ namespace Shop.Model
             }
         }
 
+        /// <summary>
+        /// 过期时间
+        /// </summary>
+        [Required(ErrorMessage = "必填")]
+        [RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]
+        public DateTime? Commodity_ValidityTime
+        {
+            get { return _Commodity_ValidityTime; }
+            set
+            {
+                OnPropertyValueChange(_.Commodity_ValidityTime, _Commodity_ValidityTime, value);
+                _Commodity_ValidityTime = value;
+            }
+        }
         /// <summary>
         /// 商品状态，0，上架，1，下架，2，展示
         /// </summary>
@@ -302,6 +319,7 @@ namespace Shop.Model
 								_.Commodity_Remark,
 								_.Commodity_ImagePath,
 								_.Commodity_Content,
+								_.Commodity_ValidityTime,
 								_.Commodity_Status,
 								_.Commodity_CreateTime,
 								_.Commodity_User,
@@ -325,6 +343,7 @@ namespace Shop.Model
 								_Commodity_Remark,
 								_Commodity_ImagePath,
 								_Commodity_Content,
+								_Commodity_ValidityTime,
 								_Commodity_Status,
 								_Commodity_CreateTime,
 								_Commodity_User,
@@ -390,6 +409,11 @@ namespace Shop.Model
             if ((false == reader.IsDBNull(_.Commodity_Content)))
             {
                 this._Commodity_Content = reader.GetString(_.Commodity_Content);
+            }
+
+            if ((false == reader.IsDBNull(_.Commodity_ValidityTime)))
+            {
+                this._Commodity_ValidityTime = reader.GetDateTime(_.Commodity_ValidityTime);
             }
 
             if ((false == reader.IsDBNull(_.Commodity_Status)))
@@ -492,6 +516,11 @@ namespace Shop.Model
             /// 图文详情 -  数据类型:string
             /// </summary>
             public static Field Commodity_Content = new Field<Commodity>("Commodity_Content");
+
+            /// <summary>
+            /// 字段名:Commodity_ValidityTime -  数据类型:DateTime
+            /// </summary>
+            public static Field Commodity_ValidityTime = new Field<Commodity>("Commodity_ValidityTime");
 
             /// <summary>
             /// 字段名:Commodity_Status -  数据类型:int
