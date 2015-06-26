@@ -7,6 +7,7 @@
 // ==========================================================================
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 //引用
@@ -22,8 +23,16 @@ namespace Shop.BLL {
 	public partial class MenuBLL : BLLBase<Menu>
 	{	     
 		private readonly MenuDAL dal=new MenuDAL();
-	
-		
+
+	    /// <summary>
+	    ///  获取常见疾病的科室和Menu
+	    /// </summary>
+	    /// <param name="showCount">每个科室下Menu数量</param>
+	    /// <returns></returns>
+	    public DataTable GetCommonDiseasesTable(int showCount)
+	    {
+	       return dal.GetCommonDiseasesTable(showCount);
+	    }
    
 	}
 }

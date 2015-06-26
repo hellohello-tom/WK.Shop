@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +17,7 @@ namespace Shop.Web.Areas.Phone.Controllers
     {
         private static readonly FlashSalesBLL _flashSalesBLL = new FlashSalesBLL();
         private static readonly RealtionBLL _realtionBLL = new RealtionBLL();
+        private static  readonly  MenuBLL _menuBll=new MenuBLL();
         public ActionResult Index()
         {
             return View();
@@ -34,6 +36,25 @@ namespace Shop.Web.Areas.Phone.Controllers
             ViewBag.TopActive = _flashSalesBLL.GetTopList(1,Model.FlashSales._.FlashSales_EndTime > DateTime.Now && Model.FlashSales._.FlashSales_IsDel == false
                 , Model.FlashSales._.FlashSales_EndTime.Desc).FirstOrDefault() ?? new Model.FlashSales();
             return View(table);
+        }
+
+        /// <summary>
+        /// 网站首页 常见疾病分类导航
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CommonDiseases( int menuCount = 4 )
+        {
+            var table=_menuBll.GetCommonDiseasesTable(menuCount);
+            var query = from q in table.AsEnumerable()
+                        group q by new { Id = q.Field<int>("Navigation_Id"), Name = q.Field<int>("Navigation_Name") }
+                into g
+                select new
+                {
+                    Navigation_Id = g.Key.Id,
+                    Navigation_Name = g.Key.Name,
+                    MenuRows=g.ToList()
+                };
+            return View(query);
         }
     }
 }

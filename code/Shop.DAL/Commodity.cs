@@ -92,7 +92,7 @@ namespace Shop.DAL
         }
 
         /// <summary>
-        /// 获取折扣过后的商品分页数据
+        /// 根据tag获取折扣过后的商品分页数据
         /// 排序字段 price
         /// </summary>
         /// <param name="tagId"></param>
@@ -100,7 +100,7 @@ namespace Shop.DAL
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IList<Commodity> GetCommdityList( int tagId, string order = "asc", int pageIndex = 0, int pageSize = 20 )
+        public IList<Commodity> GetCommdityListByTag( int tagId, string order = "asc", int pageIndex = 0, int pageSize = 20 )
         {
             string sql = string.Format(@"select top {3} * from Commodity where Id not in (select top (({2}-1)*{3}) id from commodity 
                                 where Commodity_IsDel=0 and (Commodity_Status=0 or Commodity_Status=2) and Commodity_TagId={0}
@@ -153,6 +153,56 @@ namespace Shop.DAL
 
         }
 
+
+        /// <summary>
+        /// 根据导航Navigation获取折扣过后的商品分页数据
+        /// 排序字段 price
+        /// </summary>
+        /// <param name="navId"></param>
+        /// <param name="order"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public IList<Commodity> GetCommdityListByNav( int navId, string order = "asc", int pageIndex = 0, int pageSize = 20 )
+        {
+            string sql = string.Format(@"select top {3} Commodity.* from Commodity left join Menu on Commodity.Commodity_TagId=Menu.Id 
+        where Commodity.Id not in (select top (({2}-1)*{3}) Commodity.id from commodity left join Menu on Commodity.Commodity_TagId=Menu.Id 
+        where Commodity.Commodity_IsDel=0 and (Commodity.Commodity_Status=0 or Commodity.Commodity_Status=2) and Menu.Menu_IsDel=0
+        and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and Menu.Menu_NavigationId={0} order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}) 
+        and  Commodity.Commodity_IsDel=0 and (Commodity.Commodity_Status=0 or Commodity.Commodity_Status=2) and Menu.Menu_IsDel=0 
+        and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and Menu.Menu_NavigationId={0} order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}", navId, order, pageIndex, pageSize);
+            try
+            {
+                var list = DB.FromSql(sql).ToList<Commodity>();
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        ///  根据导航Navigation获取折扣过后的商品分页数据
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public IList<Commodity> GetCommdityListByNav( int pageSize, int pageIndex, WhereClip where = null, OrderByClip order = null )
+        {
+            return
+                DB.From<Commodity>()
+                    .LeftJoin<Menu>(Commodity._.Commodity_TagId == Menu._.Id)
+                    .Select(Commodity._.All)
+                    .Where(where)
+                    .OrderBy(order)
+                    .ToList<Commodity>();
+
+        }
 
         /// <summary>
         ///  根据条件获取闪购药品列表

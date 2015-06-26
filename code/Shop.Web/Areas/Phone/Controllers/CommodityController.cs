@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -117,7 +118,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
                 {
-                    commodityList = commodityBll.GetCommdityList(tagId, pi.SortOrder, pi.PageNum, pi.NumPerPage) as List<Commodity>;
+                    commodityList = commodityBll.GetCommdityListByTag(tagId, pi.SortOrder, pi.PageNum, pi.NumPerPage) as List<Commodity>;
                 }
                 else //其他正常排序
                 {
@@ -168,6 +169,67 @@ namespace Shop.Web.Areas.Phone.Controllers
             var imgList = fileAttrBll.GetList(where, order);
             ViewBag.ImgList = imgList;
             return View(commodity);
+        }
+
+        /// <summary>
+        /// 科室——该科室下的药品列表页
+        /// </summary>
+        /// <param name="navId"></param>
+        /// <returns></returns>
+        public ActionResult NavCommodityList(int navId)
+        {
+            if (navId > 0)
+            {
+                ViewBag.NavId = navId;
+                ViewBag.Nav = navigationBLL.GetModel(navId);
+            }
+            return View("NavCommodityList");
+        }
+
+        /// <summary>
+        /// 药品列表项
+        /// </summary>
+        /// <param name="navId"></param>
+        /// <param name="pi"></param>
+        /// <returns></returns>
+        public ActionResult NavCommodityItemList( int navId, DWZPageInfo pi)
+        {
+            List<Commodity> commodityList;
+            #region 搜索条件
+
+            WhereClip where = Commodity._.Commodity_IsDel == false &&
+                WhereClip.Bracket(Commodity._.Commodity_Status == (int)Status.Show || Commodity._.Commodity_Status == (int)Status.View)&&
+                Menu._.Menu_IsDel==false&&WhereClip.Bracket(Menu._.Menu_Status == (int)Status.Show || Menu._.Menu_Status == (int)Status.View);
+            if (navId > 0)
+            {
+                where &= Menu._.Menu_NavigationId == navId;
+            }
+
+            OrderByClip order = new OrderByClip("Commodity_CreateTime Desc");
+            if (!string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //有排序字段
+            {
+                order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
+            }
+            if (navId != 0) //默认加载 
+            {
+                if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
+                {
+                    commodityList = commodityBll.GetCommdityListByNav(navId, pi.SortOrder, pi.PageNum, pi.NumPerPage) as List<Commodity>;
+                }
+                else //其他正常排序
+                {
+                    commodityList = commodityBll.GetCommdityListByNav(pi.NumPerPage, pi.PageNum, where, order) as List<Commodity>;
+                }
+            }
+            else //搜索
+            {
+                commodityList = commodityBll.GetCommdityListByNav(pi.NumPerPage, pi.PageNum, where, order) as List<Commodity>;
+            }
+
+            #endregion
+
+            //返回该nav下的所有药品
+            return View("Partial/CommodityItemList", commodityList);
         }
 
         /// <summary>

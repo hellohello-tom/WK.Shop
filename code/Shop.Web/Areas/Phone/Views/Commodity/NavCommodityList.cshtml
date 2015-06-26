@@ -1,0 +1,127 @@
+﻿@using Shop.Model
+
+@{
+    var nav = ViewBag.Nav as Navigation;
+    ViewBag.Title = nav==null ?"药品列表":nav.Navigation_Name;
+    Layout = "~/Areas/Phone/Views/Shared/_Layout.cshtml";
+}
+
+<header class="tc header">
+            <a href='@Url.RouteUrl("Phone_commodity")' class="goback"></a>
+            <h2>@nav.Navigation_Name</h2>
+    }
+
+</header>
+<input id="nav-id" type="hidden" value="@ViewBag.NavId" />
+<div class="main pro">
+    <div class="order dis-flex tc">
+        <a onclick="searchData(this)" class="on tag-price"><span>价格</span><i class="fa fa-long-arrow-down"></i></a>
+        <a onclick="searchData(this)" class="tag-discount"><span>折扣</span><i class="fa fa-long-arrow-down"></i></a>
+        <a onclick="searchData(this)" class="tag-sales"><span>销量</span><i class="fa fa-long-arrow-down"></i></a>
+    </div>
+    <div class="rows">
+        <dl class="pro-wrapper clearfix commodity-list">
+            
+        </dl>
+    </div>
+</div>
+@section Js
+    {
+    <script type="text/javascript">
+        var para = {};
+        para.pageNum = 1, para.numPerPage = 20, para.sortName = '', para.sortOrder = '', para.search = '';
+        var loadCommodityList = function (para,isloadMore) {
+            $.ajax({
+                url: "/Phone/Commodity/NavCommodityItemList",
+                data: para,
+                success: function (data) {
+                    if (isloadMore) {
+                        if (data) {//有数据
+                            //加载更多 就追加
+                            $('.loadmoreDiv').remove();
+                            $('.commodity-list').append(data).show(500);
+                        } else {//没有数据
+                            $('.loadmoreDiv').remove();
+                            $('.commodity-list').append('<div class="tc loadmoreDiv"><a href="javascript:void(0);" class="btn loadmore">已加载全部数据</a></div>');
+                            setTimeout(function() {
+                                $('.loadmoreDiv').hide();
+                            }, 1500);
+                            
+                        }
+                      
+                      
+                    } else {
+                        if (data) {
+                            //搜索
+                            $('.commodity-list').html(data).show(500);
+                        } else {
+                            window.location.href = "/PhoneError?title=" + escape("未找到") + "&msg=" + escape("暂时未找到药品");
+                        }
+                       
+                    }
+                    
+                }
+            });
+        }
+
+        var defaultNavId = parseInt($('#nav-id').val());
+        para.navId = defaultNavId || 0;
+        para.sortName = 'Commodity_CostPrice';
+        para.sortOrder = 'Desc';
+        $(function () {
+            loadCommodityList(para);
+        });
+
+        var searchData=function(self,isLoadMore) {
+            if (self) {
+                var $self = $(self);
+
+                //确定排序规则
+                if (!isLoadMore) {//切换排序字段 和排序规则
+                    para.pageNum = 1;
+                    if ($self.hasClass('on')) {
+                        if ($self.hasClass('up')) {
+                            $self.removeClass('up');
+                            para.sortOrder = 'Desc';
+                        } else {
+                            $self.addClass('up');
+                            para.sortOrder = 'Asc';
+                        }
+                    } else {
+                        $self.addClass('on').siblings().removeClass('on');
+                        if ($self.hasClass('up')) {
+                            para.sortOrder = 'Asc';
+                        } else {
+                            para.sortOrder = 'Desc';
+                        }
+                    }
+                } else { //加载更多
+                    if ($self.hasClass('up')) {
+                        para.sortOrder = 'Asc';
+                    } else {
+                        para.sortOrder = 'Desc';
+                    }
+                }
+                
+                //确定排序字段
+                if ($self.hasClass('tag-price')) {
+                    para.sortName = 'Commodity_CostPrice';
+                } else if ($self.hasClass('tag-discount')) {
+                    para.sortName = 'Commodity_Discount';
+                } else if ($self.hasClass('tag-sales')) {
+                    para.sortName = 'Commodity_Sales';
+                }
+
+                loadCommodityList(para,isLoadMore);
+
+            }
+        }
+
+        var loadMore=function() {
+            var self = $('.order').find('.on');
+            para.pageNum += 1;
+            searchData(self, true);
+        }
+
+    </script>
+}

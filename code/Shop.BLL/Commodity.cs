@@ -47,7 +47,7 @@ namespace Shop.BLL {
         }
 
 	    /// <summary>
-	    /// 获取折扣过后的商品分页数据
+	    ///根据Tag 获取折扣过后的商品分页数据
 	    /// 排序字段 price
 	    /// </summary>
 	    /// <param name="where"></param>
@@ -55,11 +55,38 @@ namespace Shop.BLL {
 	    /// <param name="pageIndex"></param>
 	    /// <param name="pageSize"></param>
 	    /// <returns></returns>
-	    public IList<Commodity> GetCommdityList(int tagId ,string order,int pageIndex=0,int pageSize=20)
+	    public IList<Commodity> GetCommdityListByTag(int tagId ,string order,int pageIndex=0,int pageSize=20)
         {
-            return dal.GetCommdityList(tagId, order, pageIndex, pageSize);
+            return dal.GetCommdityListByTag(tagId, order, pageIndex, pageSize);
         }
 
+	    ///  <summary>
+	    /// 根据nav 获取折扣过后的商品分页数据
+	    ///  排序字段 price
+	    ///  </summary>
+	    /// <param name="navId"></param>
+	    /// <param name="order"></param>
+	    ///  <param name="pageIndex"></param>
+	    ///  <param name="pageSize"></param>
+	    ///  <returns></returns>
+	    public IList<Commodity> GetCommdityListByNav( int navId, string order, int pageIndex = 0, int pageSize = 20 )
+        {
+            return dal.GetCommdityListByNav(navId, order, pageIndex, pageSize);
+        }
+
+
+        /// <summary>
+        /// 根据nav 获取折扣过后的商品分页数据 非price字段
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        public IList<Commodity> GetCommdityListByNav( int pageSize, int pageIndex, WhereClip where = null, OrderByClip order = null )
+        {
+            return dal.GetCommdityListByNav(pageSize, pageIndex, where, order);
+        }
         /// <summary>
         /// 获取折扣过后的闪购商品分页数据
         /// 排序字段 price

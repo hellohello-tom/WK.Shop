@@ -641,6 +641,8 @@
     <Content Include="Areas\Phone\Views\FlashSales\Partial\RelatedCommodityList.cshtml" />
     <Content Include="Areas\FlashSales\Views\FlashSales\SelectCommdity.cshtml" />
     <Content Include="Content\settings\log4net.config" />
+    <Content Include="Areas\Phone\Views\Commodity\NavCommodityList.cshtml" />
+    <Content Include="Areas\Phone\Views\Main\CommonDiseases.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
