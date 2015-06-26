@@ -67,7 +67,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             if (tagId > 0)
             {
                 ViewBag.TagId = tagId;
-                ViewBag.Tag = menuBLL.GetModelByCache(tagId);
+                ViewBag.Tag = menuBLL.GetModel(tagId);
             }
 
             if (!string.IsNullOrWhiteSpace(search))
@@ -148,7 +148,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// <returns></returns>
         public ActionResult CommodityDeatil( int id )
         {
-            var commodity = commodityBll.GetModelByCache(id);
+            var commodity = commodityBll.GetModel(id);
             if (commodity == null)
             {
                 return Redirect(string.Format("/PhoneError?title={0}&msg={1}", "未找到", "你要找的药品不存在"));

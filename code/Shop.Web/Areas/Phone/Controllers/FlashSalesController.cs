@@ -67,7 +67,7 @@ namespace Shop.Web.Areas.Phone.Controllers
             if (Id > 0)
             {
                 ViewBag.FalshSalesId = Id;
-                ViewBag.FalshSales = FlashSalesBll.GetModelByCache(Id);
+                ViewBag.FalshSales = FlashSalesBll.GetModel(Id);
             }
             return View();
         }
