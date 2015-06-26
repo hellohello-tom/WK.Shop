@@ -3,12 +3,13 @@
 //
 //  名    称：Navigation Model
 //  作    者：cat
-//  添加时间：2015-06-16 10:33:24
+//  添加时间：2015-06-26 14:47:22
 // ==========================================================================
 using System;
 //引用
 using MySoft.Data;
 using System.ComponentModel.DataAnnotations;
+using Shop.Model;
 
 namespace Shop.Model
 {
@@ -26,6 +27,8 @@ namespace Shop.Model
         private int _Navigation_Sort;
         private int _Navigation_Type;
         private int _Navigation_Status;
+        private string _Navigation_ImagePath;
+        private int _Navigation_IsUse;
         private DateTime? _Navigation_CreateTime;
         private int _Navigation_User;
         private bool _Navigation_IsDel;
@@ -108,10 +111,38 @@ namespace Shop.Model
         }
 
         /// <summary>
-        /// Navigation_CreateTime
+        /// 图片路径
+        /// </summary>
+
+        [StringLength(500, ErrorMessage = "*")]
+        public string Navigation_ImagePath
+        {
+            get { return _Navigation_ImagePath; }
+            set
+            {
+                OnPropertyValueChange(_.Navigation_ImagePath, _Navigation_ImagePath, value);
+                _Navigation_ImagePath = value;
+            }
+        }
+
+        /// <summary>
+        /// 是否为常用导航
         /// </summary>
 
         [Required(ErrorMessage = "*")]
+        public int? Navigation_IsUse
+        {
+            get { return _Navigation_IsUse; }
+            set
+            {
+                OnPropertyValueChange(_.Navigation_IsUse, _Navigation_IsUse, value);
+                _Navigation_IsUse = value.Value;
+            }
+        }
+
+        /// <summary>
+        /// Navigation_CreateTime
+        /// </summary>
 
         [RegularExpression("^\\d{4}(\\-|\\/|\\.)\\d{1,2}\\1\\d{1,2}(\\s\\d{1,2}:\\d{1,2}:\\d{1,2})?$", ErrorMessage = "*")]
         public DateTime? Navigation_CreateTime
@@ -192,6 +223,8 @@ namespace Shop.Model
 								_.Navigation_Sort,
 								_.Navigation_Type,
 								_.Navigation_Status,
+								_.Navigation_ImagePath,
+								_.Navigation_IsUse,
 								_.Navigation_CreateTime,
 								_.Navigation_User,
 								_.Navigation_IsDel};
@@ -208,6 +241,8 @@ namespace Shop.Model
 								_Navigation_Sort,
 								_Navigation_Type,
 								_Navigation_Status,
+								_Navigation_ImagePath,
+								_Navigation_IsUse,
 								_Navigation_CreateTime,
 								_Navigation_User,
 								_Navigation_IsDel};
@@ -242,6 +277,16 @@ namespace Shop.Model
             if ((false == reader.IsDBNull(_.Navigation_Status)))
             {
                 this._Navigation_Status = reader.GetInt32(_.Navigation_Status);
+            }
+
+            if ((false == reader.IsDBNull(_.Navigation_IsUse)))
+            {
+                this.Navigation_IsUse = reader.GetInt32(_.Navigation_IsUse);
+            }
+
+            if ((false == reader.IsDBNull(_.Navigation_ImagePath)))
+            {
+                this._Navigation_ImagePath = reader.GetString(_.Navigation_ImagePath);
             }
 
             if ((false == reader.IsDBNull(_.Navigation_CreateTime)))
@@ -309,6 +354,16 @@ namespace Shop.Model
             /// 字段名:Navigation_Status -  数据类型:int
             /// </summary>
             public static Field Navigation_Status = new Field<Navigation>("Navigation_Status");
+
+            /// <summary>
+            /// 字段名:Navigation_ImagePath -  数据类型:string
+            /// </summary>
+            public static Field Navigation_ImagePath = new Field<Navigation>("Navigation_ImagePath");
+
+            /// <summary>
+            /// 字段名:Navigation_IsUse -  数据类型:bool
+            /// </summary>
+            public static Field Navigation_IsUse = new Field<Navigation>("Navigation_IsUse");
 
             /// <summary>
             /// 字段名:Navigation_CreateTime -  数据类型:DateTime

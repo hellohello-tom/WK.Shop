@@ -100,7 +100,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             DWZCallbackInfo callback = DWZMessage.Faild();
             if (ModelState.IsValid)
             {
-                if (imageIds.Length <= 0)
+                if (imageIds == null || imageIds.Length <= 0)
                 {
                     model.Commodity_ImagePath = "/Content/web/images/NoPicture.png";
                 }

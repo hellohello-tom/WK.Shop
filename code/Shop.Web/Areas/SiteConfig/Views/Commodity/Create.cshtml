@@ -186,8 +186,8 @@
             <dl>
                 <dt>有效期截止时间</dt>
                 <dd>
-                    <input type="text" name="Commodity_ResidueCount" class="wdate" datefmt="yyyy-MM-dd HH:mm:ss" mindate="%y-%M-%d %H:%m:%s" value="@string.Format("{0:yyyy-MM-dd HH:mm:ss}", Model.Commodity_ResidueCount)" data-val="true" data-val-required="必填" />
-                    @Html.ValidationMessageFor(m => m.Commodity_ResidueCount)
+                    <input type="text" name="Commodity_ValidityTime" class="wdate" datefmt="yyyy-MM-dd" mindate="%y-%M-%d" value="@string.Format("{0:yyyy-MM-dd}", Model.Commodity_ValidityTime)" data-val="true" data-val-required="必填" />
+                    @Html.ValidationMessageFor(m => m.Commodity_ValidityTime)
                 </dd>
             </dl>
             <dl>

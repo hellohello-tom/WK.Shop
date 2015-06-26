@@ -52,7 +52,7 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
         /// <returns></returns>
         public ActionResult Create(int id=0)
         {
-            Model.Navigation model = bll.GetModel(id) ?? new Navigation();
+            Model.Navigation model = bll.GetModel(Navigation._.Id==id) ?? new Navigation();
             if (id > 0)
             {
                 return View(model);
@@ -60,6 +60,8 @@ namespace Shop.Web.Areas.SiteConfig.Controllers
             else
             {
                 model.Navigation_Sort = 1;
+                model.Navigation_ImagePath = "/Content/web/images/NoPicture.png";
+                model.Navigation_IsUse = 1;
                 model.Navigation_Status = 0;
                 return View(model);
             }

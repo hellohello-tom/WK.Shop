@@ -45,7 +45,7 @@
 				<th width="100">原价</th>
 				<th width="100">折扣系数</th>
 				<th width="100">剩余数量</th>
-				<th width="100">备注</th>
+				<th width="100">有效期截止日期</th>
 				<th width="100">创建时间</th>
 				<th width="70">操作</th>
 			</tr>
@@ -60,7 +60,7 @@
 					<td>@m.Commodity_CostPrice</td>
 					<td>@m.Commodity_Discount</td>
 					<td>@m.Commodity_ResidueCount</td>
-					<td>@m.Commodity_Remark</td>
+					<td style="color:red">@string.Format("{0:yyyy年MM月dd日}",m.Commodity_ValidityTime)</td>
 					<td>@m.Commodity_CreateTime</td>
 					
 					<td>

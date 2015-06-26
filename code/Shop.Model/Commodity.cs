@@ -165,7 +165,6 @@ namespace Shop.Model
         /// <summary>
         /// 备注
         /// </summary>		
-        [StringLength(500, ErrorMessage = "不能超过500个字符")]
         public string Commodity_Remark
         {
             get { return _Commodity_Remark; }

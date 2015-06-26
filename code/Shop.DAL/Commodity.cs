@@ -30,7 +30,7 @@ namespace Shop.DAL
             try
             {
                 model.Attach();
-                if (imageIds.Length > 0)
+                if (imageIds != null && imageIds.Length > 0)
                 {
                     trans.Update<FileAttr>(new Field[]{
                         FileAttr._.FileAttr_BussinessId,FileAttr._.FileAttr_BussinessCode},
