@@ -61,5 +61,6 @@ gulp.task("browser-sync",function(){
       server:{
          baseDir:"./"
       }
+      // ,port:2015
    });
 })

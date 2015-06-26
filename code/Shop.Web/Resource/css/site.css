@@ -173,7 +173,7 @@ a:active {
   border-radius: 3px;
 }
 .home {
-  background: url("../images/bg.jpg") no-repeat 50% 0;
+  background: url("../images/home_top_bg.jpg") no-repeat 50% 0;
   -webkit-background-size: cover;
   background-size: cover;
   padding: 10px;
