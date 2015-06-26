@@ -657,6 +657,7 @@
     <Content Include="Resource\images\bg2.png" />
     <Content Include="Resource\images\bg3.jpg" />
     <Content Include="Resource\images\ex1.gif" />
+    <Content Include="Resource\images\home_top_bg.jpg" />
     <Content Include="Resource\images\logo.png" />
     <Content Include="Resource\images\man.png" />
     <Content Include="Resource\images\s.png" />
