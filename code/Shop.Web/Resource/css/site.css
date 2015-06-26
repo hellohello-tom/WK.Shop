@@ -136,6 +136,14 @@ img {
 .tc {
   text-align: center;
 }
+header,
+footer,
+aside,
+nav,
+article,
+section {
+  display: block;
+}
 html {
   font-size: 100%;
 }
@@ -165,7 +173,9 @@ a:active {
   border-radius: 3px;
 }
 .home {
-  background: url("../images/bg2.png") no-repeat 50% 0 / cover;
+  background: url("../images/bg.jpg") no-repeat 50% 0;
+  -webkit-background-size: cover;
+  background-size: cover;
   padding: 10px;
 }
 .home .logo img {
@@ -334,7 +344,7 @@ a:active {
   padding: 5px;
 }
 .shangou .pro-wrapper .pro-item a .img-wrapper {
-  height: 100px;
+  height: 110px;
 }
 .shangou .pro-wrapper .pro-item a:before,
 .shangou .pro-wrapper .pro-item a:after {
@@ -346,7 +356,7 @@ a:active {
 .shangou .pro-wrapper .pro-item a:before {
   border-style: solid;
   border-width: 0 35px 35px 0;
-  border-color: rgba(0, 0, 0, 0) #ea2f53;
+  border-color: transparent #ea2f53;
 }
 .shangou .pro-wrapper .pro-item a:after {
   content: "HOT";
@@ -420,7 +430,6 @@ header.s form {
 }
 .search-box .s-section .ipt-s {
   background: #ffffff url("../images/s.png") no-repeat 5px;
-  padding-left: 20px;
   width: 100%;
   padding: 5px;
   padding-left: 25px;
@@ -860,9 +869,8 @@ hr {
   position: absolute;
   top: 5px;
   left: 50%;
-  font-size: 1.25rem;
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
+  font-size: 19px;
+  margin-left: -7px;
 }
 .footer .nav a.on {
   color: #ea2f53;

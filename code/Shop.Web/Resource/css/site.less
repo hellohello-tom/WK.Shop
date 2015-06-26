@@ -271,6 +271,10 @@ img {
     text-align: center;
 }
 
+header,footer,aside,nav,article,section{
+    display: block;
+}
+
 html {
     font-size: 100%;
 }
@@ -304,7 +308,9 @@ a:active {
 }
 
 .home {
-    background: url("@{imgpath}/bg.jpg") no-repeat 50% 0/cover;
+    background: url("@{imgpath}/bg.jpg") no-repeat 50% 0;
+    -webkit-background-size: cover;
+    background-size: cover;
     padding: 10px;
     .logo {
         img {
@@ -485,7 +491,7 @@ a:active {
                     padding: 5px;
                 }
                 .img-wrapper {
-                    height: 100px;
+                    height: 110px;
                 }
                 &:before,
                 &:after {
@@ -497,7 +503,7 @@ a:active {
                 &:before {
                     border-style: solid;
                     border-width: 0 35px 35px 0;
-                    border-color: rgba(0,0,0,0) #ea2f53;
+                    border-color: transparent #ea2f53;
                 }
                 &:after {
                     content: "HOT";
@@ -577,7 +583,6 @@ header.s {
         width: 100%;
         .ipt-s {
             background: #fff url("@{imgpath}/s.png") no-repeat 5px;
-            padding-left: 20px;
             width: 100%;
             padding: 5px;
             padding-left: 25px;
@@ -1026,8 +1031,8 @@ hr {
                 position: absolute;
                 top: 5px;
                 left: 50%;
-                font-size: 1.25rem;
-                .trf-tsl(-50%, 0);
+                font-size: 19px;
+                margin-left: -7px;
             }
             &.on {
                 color: @o-color;

@@ -8,11 +8,19 @@
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/site.css">
     <title>搜索页</title>
+    <!--[if lte IE 8]>
+        <script>
+            var newEles=['article','aside','footer','header','nav','section'],nl=newEles.length;
+            for(i=0;i<nl;i++){
+                document.createElement(newEles[i])
+            }
+        </script>
+    <![endif]-->
 </head>
 
 <body data-theme='skin1'>
     <header class="header s">
-        <a href='javascript:;' class="goback"></a>
+        <a href='javascript:history.go(-1)' class="goback tc"></a>
         <form action="">
             <div class="search-box">
                 <div class="s-section">
