@@ -3,9 +3,30 @@
 {//有数据
     foreach (var comm in Model)
     {
+        var classType = "img-wrapper ";
+        if (comm.Commodity_ValidityTime.HasValue)
+        {
+            TimeSpan ts = comm.Commodity_ValidityTime.Value - DateTime.Now;
+            if (ts.TotalDays >= 365)
+            {
+                classType += "validity-best";
+            }
+            else if (ts.TotalDays < 365 && ts.TotalDays >= 180)
+            {
+                classType += "validity-better";
+            }
+            else if (ts.TotalDays < 180 && ts.TotalDays >= 90)
+            {
+                classType += "validity-good";
+            }
+            else
+            {
+                classType += "validity-bad";
+            }
+        }
         <dd class=pro-item>
             <a href="@Url.Action("CommodityDeatil", new {Id = comm.Id})">
-                <section class="img-wrapper">
+                <section class="@classType">
                 <img src="@comm.Commodity_ImagePath" alt="@comm.Commodity_Name" title="@comm.Commodity_Name"></section>
                 <p class="pro-info">@comm.Commodity_Name</p>
                 <p class="that-price color-light ft12">
