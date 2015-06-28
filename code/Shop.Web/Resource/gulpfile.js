@@ -19,7 +19,7 @@ gulp.task('build',['minify','minifycss'],function(){
    console.log("Good Job!")
 });
 
-gulp.task("default",['browser-sync','coffee'],function(){
+gulp.task("default",['bs','coffee'],function(){
 	// gulp.start('minify','minifycss')
    console.log("Enjoy!")
 });
@@ -64,9 +64,9 @@ gulp.task('watch',function(){
    gulp.watch("./coffee/**.coffee",['coffee'])
 });
 
-gulp.task("browser-sync",function(){
+gulp.task("bs",function(){
    browserSync({
-      files:["**",'!**.less'],
+      files:["**",'!**.less','!**.coffee'],
       server:{
          baseDir:"./"
       }
