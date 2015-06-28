@@ -31,6 +31,13 @@
         }
     }
 
+    function FlashSales_FlashSales_Create_MainFormCallBack(json) {
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok) {
+            navTab.reload("/FlashSales/FlashSales/Create", { data: { id: json.data.id }, navTabId: "FlashSales_FlashSales_Edit" });
+        }
+    }
+
     //上传回调
     function FlashSales_FlashSales_UploadComplete(event, response, status) {
         if (status) {
@@ -102,7 +109,7 @@
                 </dl>
             </div>
         }
-        @using (Html.BeginForm("Create", "FlashSales", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,navTabAjaxDone);" } }))
+        @using (Html.BeginForm("Create", "FlashSales", FormMethod.Post, new Dictionary<string, object>() { { "class", "" }, { "onsubmit", "return validateCallback(this,FlashSales_FlashSales_Create_MainFormCallBack);" } }))
         {
             <div class="panel" minh="100" defh="150">
                 <h1>活动信息 @(Model.Id > 0 ? "" : "（创建活动后可添加特价商品）")</h1>

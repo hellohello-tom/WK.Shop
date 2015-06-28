@@ -63,7 +63,10 @@ namespace Shop.DAL
                 trans.Excute(ic, out id);
                 if (imageIds.Length > 0)
                 {
-                    trans.Update<FileAttr>(FileAttr._.FileAttr_BussinessId, id, FileAttr._.Id.In(imageIds));
+                    trans.Update<FileAttr>(new Field[]{
+                        FileAttr._.FileAttr_BussinessId,FileAttr._.FileAttr_BussinessCode}, new object[]{
+                            id,BizCode.Commodity.ToString()
+                        }, FileAttr._.Id.In(imageIds));
                 }
                 trans.Commit();
             }

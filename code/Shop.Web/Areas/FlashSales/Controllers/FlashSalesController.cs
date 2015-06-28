@@ -188,7 +188,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
                 }
             }
             if (flag)
-                callback = DWZMessage.Success(navTabId: "FlashSales_FlashSales");
+                callback = DWZMessage.Success(navTabId: "FlashSales_FlashSales_Edit", data: new { id = model.Id });
             else
                 callback = DWZMessage.Faild();
 

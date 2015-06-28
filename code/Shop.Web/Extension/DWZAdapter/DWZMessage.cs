@@ -22,12 +22,13 @@ namespace Shop.Web
         /// <param name="navTabId"> 要刷新的navtabid,DWZForm表单的callback需为navTabAjaxDone或dialogAjaxDone</param>
         /// <param name="isCloseCurrent">是否关闭当前tab或dialog DWZForm表单的callback需为navTabAjaxDone或dialogAjaxDone</param>
         /// <returns></returns>
-        public static DWZCallbackInfo Success(string msg = "操作成功!",string navTabId="",bool isCloseCurrent=false)
+        public static DWZCallbackInfo Success(string msg = "操作成功!",string navTabId="",bool isCloseCurrent=false,object data=null)
         {
             var callback = new DWZCallbackInfo();
             callback.statusCode = DWZStatusCode.Ok;
             callback.message = msg;
             callback.navTabId = navTabId;
+            callback.data = data;
             if(isCloseCurrent)
                 callback.callbackType = "closeCurrent";
             

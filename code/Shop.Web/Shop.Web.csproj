@@ -644,8 +644,10 @@
     <Content Include="Areas\Phone\Views\Commodity\NavCommodityList.cshtml" />
     <Content Include="Areas\Phone\Views\Main\CommonDiseases.cshtml" />
     <None Include="Properties\PublishProfiles\shop.pubxml" />
+    <Content Include="Resource\package.json" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Resource\css\site.css" />
+    <Content Include="Resource\gulpfile.js" />
     <Content Include="Resource\Html\default.html" />
     <Content Include="Resource\Html\error.html" />
     <Content Include="Resource\Html\index.html" />
@@ -665,6 +667,7 @@
     <Content Include="Resource\images\woman.png" />
     <Content Include="Resource\images\yao.png" />
     <Content Include="Resource\images\zhao.png" />
+    <Content Include="Resource\index.html" />
     <Content Include="Scripts\bootstrap\typeahead\bootstrap-typeahead.js" />
     <Content Include="Scripts\bootstrap\typeahead\css\typeahead.js-bootstrap.css" />
     <Content Include="Scripts\DatePicker\calendar.js" />
