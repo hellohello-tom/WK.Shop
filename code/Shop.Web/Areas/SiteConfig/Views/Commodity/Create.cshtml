@@ -193,7 +193,7 @@
             <dl>
                 <dt>备注</dt>
                 <dd>
-                    @Html.TextAreaFor(m => m.Commodity_Remark, new { rows = "16", cols = "100", @class = "editor", tools = "Cut,Copy,|,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,|,Align,List,Outdent,Indent,|,Fullscreen,Emot,Table,Hr" })
+                    @Html.TextAreaFor(m => m.Commodity_Remark, new { rows = "16", cols = "100", @class = "editor" })
                     @Html.ValidationMessageFor(m => m.Commodity_Remark)
                 </dd>
             </dl>
@@ -201,7 +201,7 @@
                 <dt>图文详情</dt>
                 <dd>
                     <div class="unit">
-                        @Html.TextAreaFor(m => m.Commodity_Content, new { rows = "50", cols = "100", @class = "editor", tools = "Cut,Copy,|,Blocktag,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,SelectAll,Removeformat,|,Align,List,Outdent,Indent,|,Fullscreen,Emot,Table,Hr" })
+                        @Html.TextAreaFor(m => m.Commodity_Content, new { rows = "50", cols = "100", @class = "editor" })
                     </div>
 
                 </dd>

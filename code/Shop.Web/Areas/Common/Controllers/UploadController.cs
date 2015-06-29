@@ -121,25 +121,19 @@ namespace Shop.Web.Areas.Common.Controllers
         {
             DWZCallbackInfo callback = null;
             var fileModel = _fileAttrBLL.GetModel(id);
-            if (fileModel.FileAttr_User == UserContext.CurUserInfo.Id)
+
+            if (_fileAttrBLL.Delete(id))
             {
-                if (_fileAttrBLL.Delete(id))
+                callback = DWZMessage.Success("删除成功!");
+                if (fileModel.FileAttr_Path.IndexOf("http://") < 0)
                 {
-                    callback = DWZMessage.Success("删除成功!");
-                    if (fileModel.FileAttr_Path.IndexOf("http://") < 0)
-                    {
-                        var serverPath = Server.MapPath(fileModel.FileAttr_Path);
-                        if (System.IO.File.Exists(serverPath))
-                            System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
-                    }
+                    var serverPath = Server.MapPath(fileModel.FileAttr_Path);
+                    if (System.IO.File.Exists(serverPath))
+                        System.IO.File.Delete(Server.MapPath(fileModel.FileAttr_Path));
                 }
-                else
-                    callback = DWZMessage.Faild("删除失败!");
             }
             else
-            {
-                callback = DWZMessage.Faild("您没有权限删除他人文件!");
-            }
+                callback = DWZMessage.Faild("删除失败!");
             return Json(callback);
         }
 

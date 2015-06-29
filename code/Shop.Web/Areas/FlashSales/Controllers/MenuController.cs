@@ -25,7 +25,8 @@ namespace Shop.Web.Areas.FlashSales.Controllers
     public class MenuController : Controller
     {
         private readonly MenuBLL bll = new MenuBLL();
-
+        private readonly FileAttr _fileAttrBLL = new FileAttr();
+        private readonly FlashSalesBLL _flashSalesBLL = new FlashSalesBLL();
         /// <summary>
         /// 分页列表
         /// </summary>
@@ -111,7 +112,10 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         {
             DWZCallbackInfo callback = null;
             if (bll.Update(new Dictionary<Field, object> { { Menu._.Menu_IsDel, true } }, Menu._.Id == id))
+            {
+                _flashSalesBLL.Delete(Model.FlashSales._.FlashSales_MenuId == id);
                 callback = DWZMessage.Success("删除成功!");
+            }
             else
                 callback = DWZMessage.Faild("删除失败!");
             return Json(callback);
@@ -129,6 +133,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
 
             if (bll.Update(new Dictionary<Field, object> { { Menu._.Menu_IsDel, true } }, Menu._.Id.In(ids)))
             {
+                _flashSalesBLL.Delete(Model.FlashSales._.FlashSales_MenuId.In(ids));
                 callback = DWZMessage.Success(string.Format("删除成功！共删除{0}条！", ids.Length));
             }
             else

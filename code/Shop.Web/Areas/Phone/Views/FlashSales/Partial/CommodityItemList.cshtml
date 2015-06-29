@@ -5,26 +5,28 @@
     foreach (DataRow comm in Model.Rows)
     {
         var classType = "img-wrapper ";
-        //if (comm.Commodity_ValidityTime.HasValue)
-        //{
-        //    TimeSpan ts = comm.Commodity_ValidityTime.Value - DateTime.Now;
-        //    if (ts.TotalDays >= 365)
-        //    {
-        //        classType += "validity-best";
-        //    }
-        //    else if (ts.TotalDays < 365 && ts.TotalDays >= 180)
-        //    {
-        //        classType += "validity-better";
-        //    }
-        //    else if (ts.TotalDays < 180 && ts.TotalDays >= 90)
-        //    {
-        //        classType += "validity-good";
-        //    }
-        //    else
-        //    {
-        //        classType += "validity-bad";
-        //    }
-        //}
+        DateTime time;
+        DateTime.TryParse(comm["Commodity_ValidityTime"].ToString(), out time);
+        if (time.Year > 2000)
+        {
+            TimeSpan ts = time - DateTime.Now;
+            if (ts.TotalDays >= 365)
+            {
+                classType += "validity-best";
+            }
+            else if (ts.TotalDays < 365 && ts.TotalDays >= 180)
+            {
+                classType += "validity-better";
+            }
+            else if (ts.TotalDays < 180 && ts.TotalDays >= 90)
+            {
+                classType += "validity-good";
+            }
+            else
+            {
+                classType += "validity-bad";
+            }
+        }
         <dd class=pro-item>
             <a href="@Url.Action("CommodityDetail", new { Id = comm["Realtion_CommodityId"] })">
                 <section class="@classType">
@@ -36,7 +38,7 @@
                 </p>
                 <p class="this-price ">
                     <span class="sales fr ft12">@(comm["Realtion_Discount"])折</span>
-                    <span class="this-price">¥@(Convert.ToDecimal(Convert.ToDecimal(comm["Commodity_CostPrice"]) * Convert.ToDecimal(comm["Commodity_Discount"]) / 10).ToString("F"))</span>
+                    <span class="this-price">¥@(Convert.ToDecimal(Convert.ToDecimal(comm["Commodity_CostPrice"]) * Convert.ToDecimal(comm["Realtion_Discount"]) / 10).ToString("F"))</span>
                 </p>
             </a>
         </dd>

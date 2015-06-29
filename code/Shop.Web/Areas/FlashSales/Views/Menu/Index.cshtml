@@ -34,7 +34,7 @@
         <ul class="toolBar">
             <li><a class="add" href="/FlashSales/Menu/Create" target="navTab" rel="FlashSales_Menu_Create"><span>添加</span></a></li>
 
-            <li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="/FlashSales/Menu/DeleteList" class="delete"><span>批量删除</span></a></li>
+            <li><a title="删除后将同时删除二级菜单下的所有活动信息，确认继续?" target="selectedTodo" rel="ids" href="/FlashSales/Menu/DeleteList" class="delete"><span>批量删除</span></a></li>
         </ul>
     </div>
     <table class="table" width="100%" layouth="112">
@@ -57,7 +57,7 @@
                     <td>@m.Menu_CreateTime</td>
                     <td>
                         <a title="编辑菜单信息" rel="FlashSales_Menu_Create" target="navTab" href="/FlashSales/Menu/Create/@m.Id" class="btnEdit">编辑</a>
-                        <a title="确认删除?" target="ajaxTodo" href="/FlashSales/Menu/Delete/@m.Id" class="btnDel">删除</a>
+                        <a title="删除后将同时删除二级菜单下的所有活动信息，确认继续?" target="ajaxTodo" href="/FlashSales/Menu/Delete/@m.Id" class="btnDel">删除</a>
                     </td>
                 </tr>
             }

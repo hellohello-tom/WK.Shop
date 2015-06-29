@@ -38,7 +38,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
         public ActionResult Index(DWZPageInfo page,string name="")
         {
         	#region 搜索条件
-            WhereClip where = null;
+            WhereClip where = Model.FlashSales._.FlashSales_IsDel == false;
             if (!string.IsNullOrEmpty(name))
                 where &= Model.FlashSales._.FlashSales_Name.Contains(name);
             ViewBag.Name = name;
@@ -179,7 +179,8 @@ namespace Shop.Web.Areas.FlashSales.Controllers
                 }
                 if (flag)
                 {
-                    _fileAttrBLL.Delete(FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessCode == BizCode.FlashSales.ToString());
+                    _fileAttrBLL.Delete(FileAttr._.FileAttr_BussinessId == model.Id && FileAttr._.FileAttr_BussinessCode == BizCode.FlashSales.ToString()
+                        && new WhereClip("FileAttr.Id not in (" + String.Join(",", flashSalesImagesIds) + ")"));
                     _fileAttrBLL.Update(new Dictionary<Field, object>
                     {
                         {FileAttr._.FileAttr_BussinessId,model.Id},
@@ -188,7 +189,7 @@ namespace Shop.Web.Areas.FlashSales.Controllers
                 }
             }
             if (flag)
-                callback = DWZMessage.Success(navTabId: "FlashSales_FlashSales_Edit", data: new { id = model.Id });
+                callback = DWZMessage.Success(navTabId: "FlashSales_FlashSales", data: new { id = model.Id });
             else
                 callback = DWZMessage.Faild();
 
