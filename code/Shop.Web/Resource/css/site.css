@@ -447,15 +447,17 @@ a:active {
 }
 .pro .pro-cat li {
   border: 1px solid #ddd;
-  border-width: 0 1px 1px 3px;
-  border-left-color: #eee;
+  border-width: 0 0 1px 0;
+  cursor: pointer;
+  font-size: 1rem;
   line-height: 1.75;
   padding: 8px 5px;
   word-break: break-all;
 }
 .pro .pro-cat li.on {
   background: #fff;
-  border-color: #dddddd #ffffff #dddddd #ea2f53;
+  border-left: 2px solid #ea2f53;
+  padding-left: 2px;
 }
 .pro .pro-sub-cat {
   margin-left: 7em;
