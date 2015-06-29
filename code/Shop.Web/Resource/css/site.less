@@ -603,16 +603,14 @@ a:active {
         overflow-x: hidden;
         li {
             border: 1px solid #ddd;
-            border-width: 0 0 1px 0;
-            cursor: pointer;
-            font-size: 1rem;
+            border-width: 0 1px 1px 3px;
+            border-left-color: #eee;
             line-height: 1.75;
             padding: 8px 5px;
             word-break: break-all;
             &.on {
                 background: #fff;
-                border-left: 2px solid @o-color;
-                padding-left: 2px;
+                border-color: #ddd #fff #ddd @o-color;
             }
         }
     }
