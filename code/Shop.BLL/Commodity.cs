@@ -65,13 +65,14 @@ namespace Shop.BLL {
 	    ///  排序字段 price
 	    ///  </summary>
 	    /// <param name="navId"></param>
+	    /// <param name="menuId"></param>
 	    /// <param name="order"></param>
 	    ///  <param name="pageIndex"></param>
 	    ///  <param name="pageSize"></param>
 	    ///  <returns></returns>
-	    public IList<Commodity> GetCommdityListByNav( int navId, string order, int pageIndex = 0, int pageSize = 20 )
+	    public IList<Commodity> GetCommdityListByNav( int navId = 0, int menuId = 0, string order = "asc", int pageIndex = 0, int pageSize = 20 )
         {
-            return dal.GetCommdityListByNav(navId, order, pageIndex, pageSize);
+            return dal.GetCommdityListByNav(navId,menuId, order, pageIndex, pageSize);
         }
 
 

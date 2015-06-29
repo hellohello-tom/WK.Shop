@@ -158,22 +158,23 @@ namespace Shop.DAL
 
 
         /// <summary>
-        /// 根据导航Navigation获取折扣过后的商品分页数据
+        /// 根据导航NavId 和 MenuId获取折扣过后的商品分页数据
         /// 排序字段 price
         /// </summary>
         /// <param name="navId"></param>
+        /// <param name="menuId"></param>
         /// <param name="order"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IList<Commodity> GetCommdityListByNav( int navId, string order = "asc", int pageIndex = 0, int pageSize = 20 )
+        public IList<Commodity> GetCommdityListByNav( int navId=0,int menuId=0, string order = "asc", int pageIndex = 0, int pageSize = 20 )
         {
             string sql = string.Format(@"select top {3} Commodity.* from Commodity left join Menu on Commodity.Commodity_TagId=Menu.Id 
         where Commodity.Id not in (select top (({2}-1)*{3}) Commodity.id from commodity left join Menu on Commodity.Commodity_TagId=Menu.Id 
         where Commodity.Commodity_IsDel=0 and (Commodity.Commodity_Status=0 or Commodity.Commodity_Status=2) and Menu.Menu_IsDel=0
-        and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and Menu.Menu_NavigationId={0} order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}) 
+        and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and {0} order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}) 
         and  Commodity.Commodity_IsDel=0 and (Commodity.Commodity_Status=0 or Commodity.Commodity_Status=2) and Menu.Menu_IsDel=0 
-        and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and Menu.Menu_NavigationId={0} order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}", navId, order, pageIndex, pageSize);
+        and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and {0} order by Commodity.Commodity_Discount*(Commodity.Commodity_CostPrice/10) {1}", menuId == 0 ? string.Format(" Menu.Menu_NavigationId={0}", navId) : string.Format(" Menu.Menu_NavigationId={0} and Menu.Id={1}",navId, menuId), order, pageIndex, pageSize);
             try
             {
                 var list = DB.FromSql(sql).ToList<Commodity>();

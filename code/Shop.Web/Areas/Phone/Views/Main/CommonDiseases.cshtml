@@ -1,1 +1,32 @@
-﻿
+﻿@using Shop.Model
+@model Dictionary<Shop.Model.Navigation, List<System.Data.DataRow>>
+
+
+<article class="frequence-disease row">
+    <h3>常见疾病</h3>
+    <div class="fd-box">
+
+        @foreach (var group in Model)
+        {
+            var nav=@group.Key;
+            <dl class=fd-list>
+            <dt class=fd-cat>
+                <a href="@Url.RouteUrl("Phone_commonDiseasesList",new{navId=@nav.Id})">
+                    <div class="img-wrapper"><img src="@nav.Navigation_ImagePath" alt="分类图">
+                    </div>
+                    <p class="fd-cat-title">@nav.Navigation_Name</p>
+                </a>
+            </dt>
+            <dd class=fd-subcat>
+                <ul>
+                    @foreach (var menu in group.Value)
+                    {
+                        <li><a href="@Url.RouteUrl("Phone_commonDiseasesList",new{navId=@nav.Id,menuId=@menu["Id"]})">@menu["Menu_Name"]</a></li>
+                    }
+                </ul>
+            </dd>
+        </dl>
+        }
+
+    </div>
+</article>

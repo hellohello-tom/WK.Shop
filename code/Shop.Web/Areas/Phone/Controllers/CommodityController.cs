@@ -175,13 +175,21 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// 科室——该科室下的药品列表页
         /// </summary>
         /// <param name="navId"></param>
+        /// <param name="menuId"></param>
         /// <returns></returns>
-        public ActionResult NavCommodityList(int navId)
+        public ActionResult NavCommodityList(int navId,int menuId)
         {
-            if (navId > 0)
+            if (navId > 0&&menuId==0)
             {
                 ViewBag.NavId = navId;
                 ViewBag.Nav = navigationBLL.GetModel(navId);
+            }
+            if (menuId>0)
+            {
+                ViewBag.NavId = navId;
+                ViewBag.Nav = navigationBLL.GetModel(navId);
+                ViewBag.MenuId = menuId;
+                ViewBag.Menu = menuBLL.GetModel(menuId);
             }
             return View("NavCommodityList");
         }
@@ -190,9 +198,10 @@ namespace Shop.Web.Areas.Phone.Controllers
         /// 药品列表项
         /// </summary>
         /// <param name="navId"></param>
+        /// <param name="menuId"></param>
         /// <param name="pi"></param>
         /// <returns></returns>
-        public ActionResult NavCommodityItemList( int navId, DWZPageInfo pi)
+        public ActionResult NavCommodityItemList( int navId,int menuId, DWZPageInfo pi)
         {
             List<Commodity> commodityList;
             #region 搜索条件
@@ -204,27 +213,24 @@ namespace Shop.Web.Areas.Phone.Controllers
             {
                 where &= Menu._.Menu_NavigationId == navId;
             }
+            if (menuId>0)
+            {
+                where &= Menu._.Id == menuId;
+            }
 
             OrderByClip order = new OrderByClip("Commodity_CreateTime Desc");
             if (!string.IsNullOrEmpty(pi.SortOrder) && !string.IsNullOrEmpty(pi.SortName)) //有排序字段
             {
                 order = new OrderByClip(pi.SortName + " " + pi.SortOrder);
             }
-            if (navId != 0) //默认加载 
-            {
                 if (pi.SortName.Equals("Commodity_CostPrice", StringComparison.OrdinalIgnoreCase))//如果是价格排序 要按照折后价进行排序
                 {
-                    commodityList = commodityBll.GetCommdityListByNav(navId, pi.SortOrder, pi.PageNum, pi.NumPerPage) as List<Commodity>;
+                    commodityList = commodityBll.GetCommdityListByNav(navId,menuId, pi.SortOrder, pi.PageNum, pi.NumPerPage) as List<Commodity>;
                 }
                 else //其他正常排序
                 {
                     commodityList = commodityBll.GetCommdityListByNav(pi.NumPerPage, pi.PageNum, where, order) as List<Commodity>;
                 }
-            }
-            else //搜索
-            {
-                commodityList = commodityBll.GetCommdityListByNav(pi.NumPerPage, pi.PageNum, where, order) as List<Commodity>;
-            }
 
             #endregion
 

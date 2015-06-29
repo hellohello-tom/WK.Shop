@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -46,15 +47,17 @@ namespace Shop.Web.Areas.Phone.Controllers
         {
             var table=_menuBll.GetCommonDiseasesTable(menuCount);
             var query = from q in table.AsEnumerable()
-                        group q by new { Id = q.Field<int>("Navigation_Id"), Name = q.Field<int>("Navigation_Name") }
+                        group q by new { Id = q.Field<int>("Navigation_Id"), Name = q.Field<string>("Navigation_Name"), Image = q.Field<string>("Navigation_ImagePath") }
                 into g
                 select new
                 {
                     Navigation_Id = g.Key.Id,
                     Navigation_Name = g.Key.Name,
+                    Navigation_Image=g.Key.Image,
                     MenuRows=g.ToList()
                 };
-            return View(query);
+            Dictionary<Navigation, List<DataRow>> dic = query.ToDictionary(q => new Navigation { Id = q.Navigation_Id, Navigation_Name = q.Navigation_Name, Navigation_ImagePath = q.Navigation_Image}, q => q.MenuRows);
+            return View(dic);
         }
     }
 }

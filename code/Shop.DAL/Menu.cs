@@ -28,14 +28,14 @@ namespace Shop.DAL
 	    /// <returns></returns>
 	    public DataTable GetCommonDiseasesTable(int showCount )
         {
-            string sql = string.Format(@"select T.Id,T.Menu_Name,T.Menu_Sort,T.Navigation_Id,T.Navigation_Name,T.Navigation_Sort,T.Mid
+            string sql = string.Format(@"select T.Id,T.Menu_Name,T.Menu_Sort,T.Navigation_Id,T.Navigation_Name,T.Navigation_ImagePath,T.Navigation_Sort,T.Mid
                     from(
-                    select Menu.Id,Navigation_Name,Menu_Name,Navigation_Sort,Menu_Sort,Navigation.Id as Navigation_Id
+                    select Menu.Id,Navigation_Name,Navigation_ImagePath,Menu_Name,Navigation_Sort,Menu_Sort,Navigation.Id as Navigation_Id
                     ,ROW_NUMBER() over(partition by Navigation.Navigation_sort order by Navigation.Navigation_sort desc) Mid
                     from Navigation left join Menu on Navigation.Id=Menu.Menu_NavigationId and Menu.Menu_Type='Tag'
                         where Navigation_IsUse =1 and Menu_Name is not null  and Menu.Menu_IsDel=0 and (Menu.Menu_Status=0 or Menu.Menu_Status=2) and Navigation_Name like '%科'
                     ) T
-                    Group by T.Navigation_Name,T.Id,T.Menu_Name,T.Navigation_Sort,T.Mid,T.Menu_Sort,T.Navigation_Id
+                    Group by T.Navigation_Name,T.Id,T.Menu_Name,T.Navigation_Sort,T.Mid,T.Menu_Sort,T.Navigation_Id,T.Navigation_ImagePath
                     having Mid<={0} order by T.Navigation_Sort Desc;", showCount);
             try
             {

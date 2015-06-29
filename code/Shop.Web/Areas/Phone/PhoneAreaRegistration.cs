@@ -35,6 +35,13 @@ namespace Shop.Web.Areas.Phone
                 new { Controller = "Commodity", action = "CommodityList", tagId = 0 },
                 yaodianArea
             );
+            //常见疾病列表
+            context.MapRoute(
+                "Phone_commonDiseasesList",
+                "yaodian/diseases/{navId}/{menuId}",
+                new { Controller = "Commodity", action = "NavCommodityList", navId = 0,menuId=0 },
+                yaodianArea
+            );
 
             context.MapRoute(
                 "Phone_yaoDeatil",
