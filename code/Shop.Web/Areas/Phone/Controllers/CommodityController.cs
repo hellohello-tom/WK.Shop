@@ -33,7 +33,7 @@ namespace Shop.Web.Areas.Phone.Controllers
         public ActionResult NavList()
         {
             var navList = navigationBLL.GetList(Navigation._.Navigation_IsDel == false && Navigation._.Navigation_Status == (int)Status.Show
-                , Navigation._.Navigation_Sort.Asc && Navigation._.Navigation_CreateTime.Desc);
+                , Navigation._.Navigation_Sort.Desc);
             var firstOrDefault = navList.FirstOrDefault();
             if (firstOrDefault != null) ViewBag.NavId = firstOrDefault.Id;
             return View("Partial/NavList", navList);
@@ -52,7 +52,8 @@ namespace Shop.Web.Areas.Phone.Controllers
                 where &= Menu._.Menu_NavigationId == navId;
             ViewBag.NavId = navId;
             #endregion
-            var tagList = menuBLL.GetPageList(pi.NumPerPage, pi.PageNum, where).DataSource as List<Menu>;
+
+            var tagList = menuBLL.GetPageList(pi.NumPerPage, pi.PageNum, where,Menu._.Menu_Sort.Desc).DataSource as List<Menu>;
 
             return View("Partial/TagList", tagList);
         }
