@@ -21,7 +21,7 @@
 		<p><span class="this-price" id="sec">10</span>秒后将自动返回首页</p>
 		<script>
 		var s=document.getElementById("sec"),_start=9;
-		setInterval(function(){s.innerText=_start--},1e3)
+		var st=setInterval(function(){s.innerText=_start--;_start==0&&(clearTimeout(st))},1e3);
 		</script>
 		<p class="am"></p>
 		<p>
