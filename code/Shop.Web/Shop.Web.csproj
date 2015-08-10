@@ -1034,19 +1034,6 @@
     <Content Include="Scripts\xheditor\xheditor_skin\vista\img\wordimg.gif" />
     <Content Include="Scripts\xheditor\xheditor_skin\vista\ui.css" />
     <Content Include="Scripts\zepto\zepto.min.js" />
-    <Content Include="upload\20150625\0feae160-fd1e-451b-98a6-67f680b63154.jpg" />
-    <Content Include="upload\20150629\27eeebf9-8af6-40e9-92cd-4a41e4f29b22.png" />
-    <Content Include="upload\20150629\2f0b3eae-f22c-4657-b7dc-b5efb598adb7.png" />
-    <Content Include="upload\20150629\314f237b-4b53-423a-9871-b9fa7dfd095a.png" />
-    <Content Include="upload\20150629\34ce3687-37d4-4dc5-9371-b90d1b06a2fa.png" />
-    <Content Include="upload\20150629\46d0dda9-aa1e-421f-8238-4a74aad5f151.png" />
-    <Content Include="upload\20150629\750dc232-14a8-4e80-9dc9-513df3fcd280.png" />
-    <Content Include="upload\20150629\8c2233c4-d82c-4076-8c06-4ba1a4100ea1.png" />
-    <Content Include="upload\20150629\92571066-4abe-460f-8e32-e0494859c19d.png" />
-    <Content Include="upload\20150629\c73ca5e0-39d6-44e5-b907-e14cf90bd973.png" />
-    <Content Include="upload\20150629\e4479c32-1adb-4b0e-9f8a-8f240324e4b2.png" />
-    <Content Include="upload\20150629\e774d62a-4071-4d52-8724-887b95b7b778.png" />
-    <Content Include="upload\20150629\e8e58289-f082-4765-8b73-e40abc869de9.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

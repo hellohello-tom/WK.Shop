@@ -1,9 +1,25 @@
 ﻿@{
     var navigationList = ViewBag.TagList as List<Shop.Model.Menu>;
 }
+<script type="text/javascript">
+    $("#txtTagkeywords").keyup(function () {
+        $("#treeTag li").hide();
+        $("#treeTag li:contains('" + $(this).val() + "')").show();
+    });
+</script>
+<div class="pageHeader">
+    <div class="searchBar">
+        <ul class="searchContent">
+            <li>
+                <label>标签名称:</label>
+                <input type="text" id="txtTagkeywords" placeholder="请输入关键字：" />
+            </li>
+        </ul>
+    </div>
+</div>
 <div class="pageContent">
     <div class="pageFormContent" layouth="58">
-        <ul class='tree  expand'>
+        <ul class='tree  expand' id="treeTag">
             @foreach (var m in navigationList)
             {
                 <li><a href="javascript:;" onclick="$.bringBack({Id:'@m.Id', TagName:'@m.Menu_Name'});">@m.Menu_Name</a></li>
